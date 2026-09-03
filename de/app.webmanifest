@@ -1,0 +1,99 @@
+{
+  "id": "/Lord/de/",
+  "name": "Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus",
+  "short_name": "Kostbares Blut",
+  "description": "Das zwölfjährige Gebet zum kostbarsten Blute, der Weiheakt, das Gebet der hl. Gertrud, der Goldene Pfeil, die Schulterwunde und das eucharistische Herz Jesu.",
+  "lang": "de",
+  "dir": "ltr",
+  "start_url": "/Lord/de/",
+  "scope": "/Lord/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#0a0304",
+  "theme_color": "#0a0304",
+  "orientation": "any",
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "/Lord/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Die Andacht zum heiligen Blute Gottes",
+      "short_name": "Zwölfjähriges Gebet",
+      "url": "/Lord/de/#devotion",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Akt der persönlichen Weihe an das kostbarste Blut Jesu Christi",
+      "short_name": "Weihe",
+      "url": "/Lord/de/#consecration",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Das Gebet der hl. Gertrud der Großen",
+      "short_name": "Hl. Gertrud",
+      "url": "/Lord/de/#gertrude",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Der Anbetungsakt „Der Goldene Pfeil“",
+      "short_name": "Goldener Pfeil",
+      "url": "/Lord/de/#golden-arrow",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

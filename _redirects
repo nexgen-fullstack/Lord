@@ -1,0 +1,3 @@
+# Static-host fallback (Netlify / Cloudflare Pages).
+# Country-aware routing lives in /functions/_middleware.js on Cloudflare Pages.
+/  /uk/  302

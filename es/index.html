@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>La Preciosísima Sangre de Jesucristo — Oraciones</title>
+  <meta name="description" content="La oración de doce años a la Preciosísima Sangre, el acto de consagración, la oración de santa Gertrudis, la Flecha de Oro y el Corazón Eucarístico de Jesús.">
+  <meta name="keywords" content="Preciosísima Sangre, devoción a la Preciosísima Sangre, oración de doce años, oración de santa Gertrudis la Magna, Flecha de Oro, santa Llaga del Hombro, Corazón Eucarístico de Jesús, oraciones católicas, almas del purgatorio">
+  <meta name="author" content="Sanguis Christi">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0304">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Runs before the stylesheets: a prayer always opens at its beginning. -->
+  <script>
+  (function () {
+    var html = document.documentElement;
+
+    /* Suspends `scroll-behavior: smooth` for the opening moments. Without it
+       the very first jump is animated: the app appears to sail down into a
+       prayer on its own before the reader has touched anything. */
+    html.className += (html.className ? ' ' : '') + 'js-boot';
+
+    var fresh = true;
+    try {
+      fresh = !sessionStorage.getItem('pb.session');
+      sessionStorage.setItem('pb.session', '1');
+    } catch (e) { /* private mode — treat every load as fresh */ }
+
+    if (fresh) {
+      /* Only for this first load: left on 'manual' it would also stop Back
+         from returning the reader to where they were. */
+      try {
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      } catch (e) {}
+
+      var standalone = false;
+      try {
+        standalone = matchMedia('(display-mode: standalone)').matches ||
+                     matchMedia('(display-mode: minimal-ui)').matches ||
+                     matchMedia('(display-mode: fullscreen)').matches ||
+                     navigator.standalone === true;
+      } catch (e) {}
+
+      /* Inside the installed app there are no inbound deep links, so a
+         fragment on a cold start can only be last session's leftover. */
+      if (standalone && location.hash && location.hash !== '#hero') {
+        try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+      }
+    }
+
+    /* The browser's own fragment jump happens before the artwork and the fonts
+       have settled, so it lands short and the reader arrives above the prayer
+       they asked for. Land again once everything has its final height —
+       explicitly instant, never animated. */
+    function land() {
+      var id = location.hash ? decodeURIComponent(location.hash.slice(1)) : '';
+      var target = id && document.getElementById(id);
+      if (target) {
+        try { target.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+        catch (e) { target.scrollIntoView(true); }
+      } else if (fresh) {
+        try { scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
+        catch (e) { scrollTo(0, 0); }
+      }
+    }
+
+    addEventListener('load', function () {
+      land();
+      /* A late font swap or a decoded image can still move the target; one
+         more pass a beat later is what makes the landing reliable. */
+      requestAnimationFrame(land);
+      setTimeout(function () {
+        land();
+        html.className = html.className.replace(/(^|\s)js-boot(\s|$)/, '$1').trim();
+        try { history.scrollRestoration = 'auto'; } catch (e) {}
+      }, 250);
+    }, { once: true });
+  })();
+  </script>
+
+  <!-- Canonical + language targeting -->
+  <link rel="canonical" href="https://nexgen-fullstack.github.io/Lord/es/">
+  <link rel="alternate" hreflang="uk" href="https://nexgen-fullstack.github.io/Lord/uk/">
+  <link rel="alternate" hreflang="en" href="https://nexgen-fullstack.github.io/Lord/en/">
+  <link rel="alternate" hreflang="de" href="https://nexgen-fullstack.github.io/Lord/de/">
+  <link rel="alternate" hreflang="it" href="https://nexgen-fullstack.github.io/Lord/it/">
+  <link rel="alternate" hreflang="pt" href="https://nexgen-fullstack.github.io/Lord/pt/">
+  <link rel="alternate" hreflang="es" href="https://nexgen-fullstack.github.io/Lord/es/">
+  <link rel="alternate" hreflang="x-default" href="https://nexgen-fullstack.github.io/Lord/uk/">
+  <meta http-equiv="content-language" content="es">
+  <meta name="language" content="Español">
+
+  <!-- Geo targeting (Cloudflare country routing lives in /functions/_middleware.js) -->
+  <meta name="geo.region" content="ES">
+  <meta name="geo.placename" content="España">
+  <meta name="geo.country" content="ES">
+  <meta name="distribution" content="global">
+  <meta name="coverage" content="Worldwide">
+  <meta name="target" content="all">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="uk_UA">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="it_IT">
+  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:title" content="La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo">
+  <meta property="og:description" content="La oración de doce años a la Preciosísima Sangre, el acto de consagración, la oración de santa Gertrudis, la Flecha de Oro y el Corazón Eucarístico de Jesús.">
+  <meta property="og:url" content="https://nexgen-fullstack.github.io/Lord/es/">
+  <meta property="og:image" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
+  <meta property="og:image:secure_url" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="832">
+  <meta property="og:image:height" content="1263">
+  <meta property="og:image:alt" content="Jesucristo en la Cruz; los ángeles recogen la Preciosísima Sangre en cálices de oro">
+  <meta property="article:section" content="Devoción católica">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo">
+  <meta name="twitter:description" content="La oración de doce años a la Preciosísima Sangre, el acto de consagración, la oración de santa Gertrudis, la Flecha de Oro y el Corazón Eucarístico de Jesús.">
+  <meta name="twitter:image" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
+  <meta name="twitter:image:alt" content="Jesucristo en la Cruz; los ángeles recogen la Preciosísima Sangre en cálices de oro">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0304'/%3E%3Cpath d='M13.6 3h4.8v6.6H25v4.8h-6.6V29h-4.8V14.4H7V9.6h6.6z' fill='%23d4af37'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="../assets/icons/icon-512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+
+  <!-- Installable app. One manifest per locale, so launching the installed
+       icon opens this language directly instead of bouncing through "/". -->
+  <link rel="manifest" href="./app.webmanifest">
+  <meta name="application-name" content="Preciosísima Sangre">
+  <meta name="apple-mobile-web-app-title" content="Preciosísima Sangre">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Self-hosted fonts. No third-party stylesheet in the critical path, and
+       the faces are ordinary same-origin files, so they cache for offline. -->
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/cormorant-garamond-400-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-latin.woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+
+  <link rel="preload" as="image" href="../assets/img/Jesus.jpeg" fetchpriority="high">
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://nexgen-fullstack.github.io/Lord/#organization",
+      "name": "Sanguis Christi",
+      "legalName": "Sanguis Christi — Devotion to the Most Precious Blood",
+      "url": "https://nexgen-fullstack.github.io/Lord/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+        "width": 832,
+        "height": 1263
+      },
+      "description": "La oración de doce años a la Preciosísima Sangre, el acto de consagración, la oración de santa Gertrudis, la Flecha de Oro y el Corazón Eucarístico de Jesús.",
+      "knowsLanguage": [
+        "uk",
+        "en",
+        "de",
+        "it",
+        "pt",
+        "es"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "Worldwide"
+      },
+      "availableLanguage": [
+        {
+          "@type": "Language",
+          "name": "Українська",
+          "alternateName": "uk"
+        },
+        {
+          "@type": "Language",
+          "name": "English",
+          "alternateName": "en"
+        },
+        {
+          "@type": "Language",
+          "name": "Deutsch",
+          "alternateName": "de"
+        },
+        {
+          "@type": "Language",
+          "name": "Italiano",
+          "alternateName": "it"
+        },
+        {
+          "@type": "Language",
+          "name": "Português",
+          "alternateName": "pt"
+        },
+        {
+          "@type": "Language",
+          "name": "Español",
+          "alternateName": "es"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nexgen-fullstack.github.io/Lord/#website",
+      "url": "https://nexgen-fullstack.github.io/Lord/",
+      "name": "La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo",
+      "alternateName": "Sanguis Christi",
+      "description": "La oración de doce años a la Preciosísima Sangre, el acto de consagración, la oración de santa Gertrudis, la Flecha de Oro y el Corazón Eucarístico de Jesús.",
+      "inLanguage": [
+        "uk",
+        "en",
+        "de",
+        "it",
+        "pt",
+        "es"
+      ],
+      "publisher": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "copyrightHolder": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://nexgen-fullstack.github.io/Lord/#app",
+      "name": "La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo",
+      "alternateName": "Preciosísima Sangre",
+      "url": "https://nexgen-fullstack.github.io/Lord/es/",
+      "applicationCategory": "LifestyleApplication",
+      "applicationSubCategory": "Prayer",
+      "operatingSystem": "Android, iOS, Windows, macOS, Linux",
+      "browserRequirements": "Requires JavaScript. Works offline once opened.",
+      "inLanguage": [
+        "uk",
+        "en",
+        "de",
+        "it",
+        "pt",
+        "es"
+      ],
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "featureList": [
+        "El libro de oraciones en el móvil",
+        "Todas las oraciones guardadas — puedes rezar sin conexión.",
+        "Oración con voz",
+        "Camino de los 33 días"
+      ],
+      "screenshot": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+      "softwareHelp": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/es/#webpage"
+      },
+      "publisher": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://nexgen-fullstack.github.io/Lord/es/#webpage",
+      "url": "https://nexgen-fullstack.github.io/Lord/es/",
+      "name": "La Preciosísima Sangre de Jesucristo — Oraciones",
+      "description": "La oración de doce años a la Preciosísima Sangre, el acto de consagración, la oración de santa Gertrudis, la Flecha de Oro y el Corazón Eucarístico de Jesús.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#website"
+      },
+      "about": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/es/#devotion"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+        "width": 832,
+        "height": 1263,
+        "caption": "Jesucristo en la Cruz; los ángeles recogen la Preciosísima Sangre en cálices de oro"
+      },
+      "breadcrumb": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/es/#breadcrumb"
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://nexgen-fullstack.github.io/Lord/es/"
+        ]
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".section-title",
+          ".prayer-text"
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://nexgen-fullstack.github.io/Lord/es/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo",
+          "item": "https://nexgen-fullstack.github.io/Lord/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Español",
+          "item": "https://nexgen-fullstack.github.io/Lord/es/"
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://nexgen-fullstack.github.io/Lord/es/#devotion",
+      "headline": "La Preciosísima Sangre de Jesucristo — Oraciones",
+      "alternativeHeadline": "La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo",
+      "description": "La oración de doce años a la Preciosísima Sangre, el acto de consagración, la oración de santa Gertrudis, la Flecha de Oro y el Corazón Eucarístico de Jesús.",
+      "articleSection": "Devoción católica",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/es/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/es/#webpage"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+        "width": 832,
+        "height": 1263
+      },
+      "publisher": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "author": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "keywords": "Preciosísima Sangre, devoción a la Preciosísima Sangre, oración de doce años, oración de santa Gertrudis la Magna, Flecha de Oro, santa Llaga del Hombro, Corazón Eucarístico de Jesús, oraciones católicas, almas del purgatorio",
+      "genre": "Oración",
+      "datePublished": "2026-01-01",
+      "dateModified": "2026-09-03",
+      "isAccessibleForFree": true,
+      "hasPart": [
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/es/#devotion",
+          "name": "La devoción a la santa Sangre de Dios",
+          "alternateName": "La oración que se reza cada día durante doce años",
+          "position": 1,
+          "inLanguage": "es",
+          "genre": "Oración",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/es/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/es/#devotion"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/es/#consecration",
+          "name": "Acto de consagración personal a la Preciosísima Sangre de Jesucristo",
+          "position": 2,
+          "inLanguage": "es",
+          "genre": "Oración",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/es/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/es/#consecration"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/es/#gertrude",
+          "name": "La oración de santa Gertrudis la Magna",
+          "alternateName": "Para la liberación de las almas del Purgatorio",
+          "position": 3,
+          "inLanguage": "es",
+          "genre": "Oración",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/es/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/es/#gertrude"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/es/#golden-arrow",
+          "name": "El acto de adoración «La Flecha de Oro»",
+          "alternateName": "En alabanza del santísimo Nombre de Dios",
+          "position": 4,
+          "inLanguage": "es",
+          "genre": "Oración",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/es/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/es/#golden-arrow"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/es/#shoulder-wound",
+          "name": "Oración a la santa Llaga del Hombro de Cristo",
+          "position": 5,
+          "inLanguage": "es",
+          "genre": "Oración",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/es/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/es/#shoulder-wound"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/es/#eucharistic-heart",
+          "name": "Oración al Corazón Eucarístico de Jesús",
+          "alternateName": "La devoción de los treinta y tres días",
+          "position": 6,
+          "inLanguage": "es",
+          "genre": "Oración",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/es/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/es/#eucharistic-heart"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body data-lang="es">
+
+  <a class="skip-link" href="#devotion">Ir a las oraciones</a>
+
+  <canvas id="bloodCanvas" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div class="print-header" aria-hidden="true">
+    <strong>La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo</strong>
+    <span>nexgen-fullstack.github.io/Lord/es/</span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <a class="brand" href="#hero">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg>
+          <span class="brand-text">Preciosísima Sangre</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Secciones de las oraciones">
+          <ul>
+            <li><a href="#hero" data-nav-link>Inicio</a></li>
+            <li><a href="#devotion" data-nav-link>Oración de 12 años</a></li>
+            <li><a href="#consecration" data-nav-link>Consagración</a></li>
+            <li><a href="#gertrude" data-nav-link>Sta. Gertrudis</a></li>
+            <li><a href="#golden-arrow" data-nav-link>Flecha de Oro</a></li>
+            <li><a href="#shoulder-wound" data-nav-link>Llaga del Hombro</a></li>
+            <li><a href="#eucharistic-heart" data-nav-link>Corazón Eucarístico</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-tools">
+          <button type="button" class="btn btn-icon" data-audio-toggle
+                  aria-pressed="false" aria-label="Activar la música devocional" title="Activar la música devocional">
+            <span data-audio-icon><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m16 9.5 5 5m0-5-5 5"/></svg></span>
+          </button>
+          <div class="voice" data-voice>
+          <button type="button" class="btn btn-icon" data-voice-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="voicePanel"
+                  aria-label="Leer las oraciones en voz alta" title="Leer las oraciones en voz alta">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 3.4a2.6 2.6 0 0 1 2.6 2.6v5a2.6 2.6 0 0 1-5.2 0V6A2.6 2.6 0 0 1 12 3.4Z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6.6 11a5.4 5.4 0 0 0 10.8 0M12 16.4V20.6M9.2 20.6h5.6"/></svg>
+          </button>
+          <div class="voice-panel" id="voicePanel" role="dialog"
+               aria-label="Oración con voz" hidden>
+            <p class="voice-panel-title">Oración con voz</p>
+
+            <div class="voice-field">
+              <span class="voice-legend" id="voiceGenderLegend">Voz</span>
+              <div class="voice-genders" role="radiogroup" aria-labelledby="voiceGenderLegend">
+                <button type="button" class="voice-gender" role="radio" aria-checked="true"
+                        data-gender="female">Femenina</button>
+                <button type="button" class="voice-gender" role="radio" aria-checked="false"
+                        data-gender="male">Masculina</button>
+              </div>
+            </div>
+
+            <div class="voice-actions">
+              <button type="button" class="btn btn-ghost" data-voice-play>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.2v13.6L19 12z"/></svg><span data-voice-play-label>Leer</span>
+              </button>
+              <button type="button" class="btn btn-ghost" data-voice-pause disabled>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 5h3.4v14H7zm6.6 0H17v14h-3.4z"/></svg><span>Pausa</span>
+              </button>
+              <button type="button" class="btn btn-ghost" data-voice-stop disabled>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.6" fill="currentColor"/></svg><span>Parar</span>
+              </button>
+            </div>
+
+            <p class="voice-status" data-voice-status role="status" aria-live="polite">Elige una voz y pulsa «Leer».</p>
+          </div>
+        </div>
+          <div class="install" data-install-wrap hidden>
+          <button type="button" class="btn btn-icon" data-install-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="installPanel"
+                  aria-label="Instalar la aplicación" title="Instalar la aplicación">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="2.6" width="12" height="18.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 7.4v6.4m0 0 2.4-2.4M12 13.8l-2.4-2.4M10.4 18h3.2"/></svg>
+          </button>
+          <div class="install-panel" id="installPanel" role="dialog"
+               aria-label="El libro de oraciones en el móvil" hidden>
+            <p class="install-title">El libro de oraciones en el móvil</p>
+            <p class="install-body">Instala la aplicación y todas las oraciones se quedan contigo, con o sin red.</p>
+            <p class="install-ios" data-install-ios hidden>En Safari, toca «Compartir» y luego «Añadir a pantalla de inicio».</p>
+            <button type="button" class="btn btn-primary install-go" data-install-go hidden>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="2.6" width="12" height="18.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 7.4v6.4m0 0 2.4-2.4M12 13.8l-2.4-2.4M10.4 18h3.2"/></svg><span>Instalar</span>
+            </button>
+          </div>
+        </div>
+          <button type="button" class="btn btn-icon" data-print
+                  aria-label="Imprimir las oraciones" title="Imprimir las oraciones"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M7 9V3h10v6M7 19H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 15h10v6H7z"/></svg></button>
+          <div class="lang-switch" data-lang-switch>
+          <button type="button" class="btn btn-lang" data-lang-toggle
+                  aria-expanded="false" aria-haspopup="true" aria-controls="langMenu"
+                  aria-label="Elegir idioma: Español">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 0c-2.6 2.3-4 5.3-4 9s1.4 6.7 4 9c2.6-2.3 4-5.3 4-9s-1.4-6.7-4-9ZM3.5 9h17M3.5 15h17"/></svg>
+            <span class="flag" aria-hidden="true">🇪🇸</span>
+            <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <ul class="lang-menu" id="langMenu" role="menu" aria-label="Elegir idioma" hidden>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../uk/" hreflang="uk" lang="uk"
+                 data-lang="uk">
+                <span class="flag" aria-hidden="true">🇺🇦</span>
+                <span class="lang-name">Українська</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../en/" hreflang="en" lang="en"
+                 data-lang="en">
+                <span class="flag" aria-hidden="true">🇬🇧</span>
+                <span class="lang-name">English</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../de/" hreflang="de" lang="de"
+                 data-lang="de">
+                <span class="flag" aria-hidden="true">🇩🇪</span>
+                <span class="lang-name">Deutsch</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../it/" hreflang="it" lang="it"
+                 data-lang="it">
+                <span class="flag" aria-hidden="true">🇮🇹</span>
+                <span class="lang-name">Italiano</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../pt/" hreflang="pt" lang="pt"
+                 data-lang="pt">
+                <span class="flag" aria-hidden="true">🇵🇹</span>
+                <span class="lang-name">Português</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option is-current"
+                 href="../es/" hreflang="es" lang="es"
+                 data-lang="es" aria-current="true">
+                <span class="flag" aria-hidden="true">🇪🇸</span>
+                <span class="lang-name">Español</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+          <button type="button" class="btn btn-icon menu-btn" data-menu-toggle
+                  aria-expanded="false" aria-controls="mobileDrawer"
+                  aria-label="Abrir el menú"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        </div>
+      </div>
+      <div class="read-progress" aria-hidden="true"><span data-read-progress></span></div>
+    </header>
+
+    <div class="drawer" id="mobileDrawer" hidden>
+      <div class="drawer-backdrop" data-menu-close></div>
+      <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Secciones de las oraciones">
+        <button type="button" class="btn btn-icon drawer-close" data-menu-close
+                aria-label="Cerrar el menú"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <nav class="drawer-nav" aria-label="Secciones de las oraciones">
+          <ul>
+            <li><a href="#hero" data-nav-link>Inicio</a></li>
+            <li><a href="#devotion" data-nav-link>Oración de 12 años</a></li>
+            <li><a href="#consecration" data-nav-link>Consagración</a></li>
+            <li><a href="#gertrude" data-nav-link>Sta. Gertrudis</a></li>
+            <li><a href="#golden-arrow" data-nav-link>Flecha de Oro</a></li>
+            <li><a href="#shoulder-wound" data-nav-link>Llaga del Hombro</a></li>
+            <li><a href="#eucharistic-heart" data-nav-link>Corazón Eucarístico</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+  <main id="main">
+    <div class="container">
+      <section id="hero" class="hero" aria-labelledby="heroTitle">
+          <div class="hero-body">
+            <h1 class="hero-title" id="heroTitle">La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo</h1>
+            <blockquote class="hero-quote">
+              <p>«Tú me has redimido, oh Señor, con Tu Preciosísima Sangre de toda tribu, lengua, pueblo y nación.»</p>
+              <cite>Apocalipsis 5, 9</cite>
+            </blockquote>
+
+            <figure class="crucifix-frame">
+              <img class="crucifix-img" src="../assets/img/Jesus.jpeg"
+                   alt="Jesucristo en la Cruz; los ángeles recogen la Preciosísima Sangre en cálices de oro"
+                   width="832" height="1263"
+                   fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+
+          <a class="scroll-cue no-print" href="#devotion">
+            <span>A las oraciones</span>
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+          </a>
+        </section>
+
+      <section id="devotion" class="section-card reveal" aria-labelledby="devotion-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">01</p>
+          <h2 class="section-title" id="devotion-title">La devoción a la santa Sangre de Dios</h2>
+          <p class="section-subtitle">La oración que se reza cada día durante doce años</p>
+        </header>
+        <div class="prayer-text">
+          <p class="chant">Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison.</p>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Oh Cristo,</span> <span class="litany-response">óyeme.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Cristo,</span> <span class="litany-response">escúchame.</span></li>
+            <li class="litany-item"><span class="litany-call">Dios Padre celestial,</span> <span class="litany-response">ten piedad de mí.</span></li>
+            <li class="litany-item"><span class="litany-call">Dios Hijo, Redentor del mundo,</span> <span class="litany-response">ten piedad de mí.</span></li>
+            <li class="litany-item"><span class="litany-call">Dios Espíritu Santo,</span> <span class="litany-response">ten piedad de mí.</span></li>
+            <li class="litany-item"><span class="litany-call">Santísima Trinidad, un solo Dios,</span> <span class="litany-response">ten piedad de mí.</span></li>
+            <li class="litany-item"><span class="litany-call">Santa María,</span> <span class="litany-response">ruega por mí.</span></li>
+            <li class="litany-item"><span class="litany-call">Madre del Salvador que padece,</span> <span class="litany-response">ruega por mí.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada en la circuncisión,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada en la flagelación,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada bajo la corona de espinas,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada en el camino de la Cruz,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada al ser clavadas en la Cruz Tus santísimas manos,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada al ser clavados en la Cruz Tus santísimos pies,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada de Tu santísimo Corazón traspasado por la lanza,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada por mí, indigno pecador,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada hasta la última gota por mí y por mis pecados,</span> <span class="litany-response">ten piedad de mí.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Oh Jesús, por Tu Preciosísima Sangre derramada por mí en la Cruz,</span> <span class="litany-response">te doy gracias.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Jesús, por Tu Preciosísima Sangre ultrajada en el Gólgota,</span> <span class="litany-response">te pido perdón.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Jesús, por toda profanación de Tu Preciosísima Sangre en la santa Misa mediante comuniones indignas,</span> <span class="litany-response">te pido perdón.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Yo, pecador, te ruego, oh Dios:</span> <span class="litany-response">sálvame con Tu Preciosísima Sangre.</span></li>
+            <li class="litany-item"><span class="litany-call">Yo, pecador, te ruego, oh Dios:</span> <span class="litany-response">protégeme con Tu Preciosísima Sangre.</span></li>
+            <li class="litany-item"><span class="litany-call">Yo, pecador, te ruego, oh Dios:</span> <span class="litany-response">sáciame con Tu Preciosísima Sangre.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Cordero de Dios, que quitas los pecados del mundo,</span> <span class="litany-response">escúchame, oh Señor.</span></li>
+            <li class="litany-item"><span class="litany-call">Cordero de Dios, que quitas los pecados del mundo,</span> <span class="litany-response">perdóname, oh Señor.</span></li>
+            <li class="litany-item"><span class="litany-call">Cordero de Dios, que quitas los pecados del mundo,</span> <span class="litany-response">ten piedad de mí, oh Señor.</span></li>
+          </ul>
+          <p class="chant">Kyrie eleison, Christe eleison (tres veces)</p>
+          <p class="lead">Oh Preciosísima Sangre de Nuestro Señor Jesucristo, sé exaltada y glorificada por todos nosotros, ahora y siempre y por los siglos de los siglos. Amén.</p>
+          <hr class="sacred-rule" aria-hidden="true">
+          <p>Dios omnipotente, Salvador mío, con una sola gota de Tu Preciosísima Sangre habrías podido redimir millones de mundos. Sin embargo, por Tu amor sin límites hacia mí, pecador, derramaste la última gota de Tu Preciosísima Sangre, ofreciéndola a Dios Padre por mis pecados.</p>
+          <p>Oh Jesús, Tú la ofreces cada día también en los altares del mundo entero en cada santa Misa. Derramas Tu Sangre bajo las especies del vino y la ofreces por mi redención. La derramaste para alimentar mi alma para la vida eterna.</p>
+          <p>Yo, pecador, caigo con humildad ante Tu majestad y te suplico, por Tu misericordia sin límites: ten piedad de mí, pecador. Oh Salvador, te ruego que hagas volver a los pecadores endurecidos, para que cuanto antes se conviertan de aquel estado terrible. Renueva la santa fe en todos los pueblos, para que regresen a la unidad.</p>
+          <p>Señor, este es nuestro gran deseo: que todos los hombres del mundo te sirvan solo a Ti y glorifiquen Tu Preciosísima Sangre.</p>
+          <p>Oh Dios, ten piedad de las almas del purgatorio, porque aguardan Tu perdón.</p>
+          <p>Que Tu Preciosísima Sangre, derramada por nuestros pecados, les alcance el perdón del Padre celestial y las conduzca a la felicidad eterna. Amén.</p>
+          <hr class="sacred-rule" aria-hidden="true">
+          <p>Señor Jesucristo, Salvador mío, guárdame de las asechanzas de las tentaciones diabólicas por Tu Preciosísima Sangre.</p>
+          <p>Señor Jesucristo, Salvador mío, ayúdame por Tu Preciosísima Sangre a vencer las tentaciones.</p>
+          <p>Señor Jesucristo, Salvador mío, protégeme y llévame en pos de Ti por Tu Preciosísima Sangre.</p>
+          <p>Señor Jesucristo, Salvador mío, guarda de todo peligro al Santo Padre con todo el clero y a la santa Iglesia por Tu Preciosísima Sangre. Amén.</p>
+          <aside class="instruction-box"><h3 class="box-title">La regla de oración</h3><p><strong>Padre nuestro…</strong> (7 veces) · <strong>Ave María…</strong> (7 veces) · <strong>Gloria al Padre…</strong> (7 veces)</p><p>La oración se reza <strong>cada día durante doce años</strong>, sin interrupción.</p></aside>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Las promesas divinas</span></h3><p>Quien rece esta oración cada día durante doce años, orando sin interrupción, no pasará por el purgatorio.</p><p>Quien haya comenzado a rezarla y muera al cabo de medio año recibirá igualmente todas estas grandes gracias: cinco almas de su familia recibirán la vocación al estado religioso, y hasta la cuarta generación nadie de su familia estará en el infierno.</p><p>Esta oración de doce años tiene el poder de purificar el alma de todas sus iniquidades. <em>¡Señor, da Tu bendición!</em></p></aside>
+        </div>
+      </section>
+
+      <section id="consecration" class="section-card reveal" aria-labelledby="consecration-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">02</p>
+          <h2 class="section-title" id="consecration-title">Acto de consagración personal a la Preciosísima Sangre de Jesucristo</h2>
+          
+        </header>
+        <div class="prayer-text">
+          <p>Con plena conciencia de mi nada y, al mismo tiempo, de Tu grandeza, oh misericordioso Salvador, me postro a Tus pies y te doy gracias por las innumerables pruebas de gracia que me has concedido a mí, criatura ingrata, y sobre todo por haberme librado, mediante Tu Preciosísima Sangre, del poder corruptor de satanás. En presencia de mi amada Madre María, de mi Ángel de la Guarda, de mis santos Patronos y de toda la corte celestial, me consagro, oh dulcísimo Jesús, con toda la sinceridad del corazón y del modo más libre, a Tu Preciosísima Sangre, con la cual redimiste al mundo entero del pecado, de la muerte y del infierno.</p>
+          <p>Yo, <span class="user-name">(nombre)</span>, te prometo, confiando en la ayuda de Tu gracia, despertar y difundir con todas mis fuerzas y según todas mis posibilidades la devoción a Tu Preciosísima Sangre, Precio de nuestra Redención, para que Tu Sangre, digna de la más alta veneración, sea honrada y amada por todos.</p>
+          <p>De este modo deseo reparar mi infidelidad hacia Tu Preciosísima Sangre y hacia Tu Amor, y darte satisfacción por las innumerables profanaciones y ultrajes que los hombres infligen a ese Precio carísimo de nuestra salvación. ¡Oh, si mis propios pecados, mi tibieza y todos los ultrajes con los que alguna vez te he deshonrado, oh Preciosísima Sangre, pudieran ser reducidos a la nada!</p>
+          <p>He aquí, dulcísimo Jesús, que te ofrezco también el amor, el honor y la adoración que Tu santísima Madre, Tus fieles discípulos y todos los santos han rendido a Tu Preciosísima Sangre. Te ruego: no recuerdes más mi antigua infidelidad y tibieza, y dígnate perdonar a todos los que te ultrajan. Rocíame, oh divino Salvador, con Tu Preciosísima Sangre, y con ella a todos los hombres, para que te amemos desde ahora con todo el corazón, oh Amor crucificado, y podamos honrar dignamente para siempre el Precio de nuestra Redención. Amén.</p>
+        </div>
+      </section>
+
+      <section id="gertrude" class="section-card reveal" aria-labelledby="gertrude-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">03</p>
+          <h2 class="section-title" id="gertrude-title">La oración de santa Gertrudis la Magna</h2>
+          <p class="section-subtitle">Para la liberación de las almas del Purgatorio</p>
+        </header>
+        <div class="prayer-text">
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>La promesa de Nuestro Señor Jesús</span></h3><p>Nuestro Señor Jesús reveló a santa Gertrudis la Magna que una sola recitación de esta oración libera <strong>mil almas del Purgatorio</strong>.</p></aside>
+          <p class="lead">«Padre Eterno, te ofrezco la Preciosísima Sangre de Tu divino Hijo, Nuestro Señor Jesucristo, en unión con todas las Misas que hoy se celebran en el mundo entero: por las almas del purgatorio, por los moribundos, por los pecadores del mundo, por los pecadores de la Iglesia universal, por los pecadores de mi familia y de mi casa. Amén.»</p>
+          <p class="note">(Indulgencia de 500 días.)</p>
+        </div>
+      </section>
+
+      <section id="golden-arrow" class="section-card reveal" aria-labelledby="golden-arrow-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">04</p>
+          <h2 class="section-title" id="golden-arrow-title">El acto de adoración «La Flecha de Oro»</h2>
+          <p class="section-subtitle">En alabanza del santísimo Nombre de Dios</p>
+        </header>
+        <div class="prayer-text">
+          <p class="poem">Sea por siempre alabado,<br>Bendecido, amado,<br>Adorado y glorificado<br>El santísimo, sacratísimo,<br>Adorabilísimo, incomprensible<br>E inefable Nombre de Dios<br>En el cielo, en la tierra y en los abismos,<br>Por todas las criaturas<br>Salidas de las manos de Dios,<br>Y por el santísimo Corazón de Nuestro Señor Jesucristo<br>En el Santísimo Sacramento del altar. Amén.</p>
+          <p class="note">(Este acto de adoración pertenece a la cofradía de la Santa Faz de Jesús.)</p>
+        </div>
+      </section>
+
+      <section id="shoulder-wound" class="section-card reveal" aria-labelledby="shoulder-wound-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">05</p>
+          <h2 class="section-title" id="shoulder-wound-title">Oración a la santa Llaga del Hombro de Cristo</h2>
+          
+        </header>
+        <div class="prayer-text">
+          <p>Oh amabilísimo Jesús, mansísimo Cordero de Dios mío. Yo, pobre pecador, saludo y adoro esa santísima Llaga Tuya, que te causó un dolor tan intenso cuando llevaste la pesada Cruz sobre Tu divino Hombro. Aquel dolor fue más grave y más amargo que las demás Llagas de Tu santo Cuerpo. Te amo, te doy honor y me postro ante Ti desde lo profundo del corazón.</p>
+          <p>Te doy gracias por esa profundísima Llaga de Tu Hombro. Humildemente te ruego, en nombre del sufrimiento que padeciste por la Llaga del Hombro y en nombre de Tu pesada Cruz, que llevaste sobre esa santa Llaga: ten misericordia de mí, indigno pecador. Perdóname todos mis pecados y concédeme que, caminando sobre Tus huellas ensangrentadas, alcance la bienaventurada eternidad. Amén.</p>
+          <aside class="instruction-box"><h3 class="box-title">La regla de oración</h3><p><strong>Padre nuestro…</strong> (3 veces) · <strong>Ave María…</strong> (3 veces)</p><p><em>Bendito seas, oh Señor, escondido en el Santísimo Sacramento.</em> (3 veces)</p></aside>
+          <p class="lead">Oh Preciosísima Sangre que brotas de la sagrada Cabeza de Nuestro Señor Jesucristo, Templo de la divina Sabiduría y Morada de Dios, de la ciencia, de la luz del cielo y de la tierra: guárdame ahora y por los siglos de los siglos. Amén.</p>
+        </div>
+      </section>
+
+      <section id="eucharistic-heart" class="section-card reveal" aria-labelledby="eucharistic-heart-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">06</p>
+          <h2 class="section-title" id="eucharistic-heart-title">Oración al Corazón Eucarístico de Jesús</h2>
+          <p class="section-subtitle">La devoción de los treinta y tres días</p>
+        </header>
+        <div class="prayer-text">
+          <p class="lead">«Jesús, María, os amo — salvad las almas. Oh Sangre y Agua, que brotasteis del santísimo Corazón de Cristo como Fuente de Misericordia para nosotros, en Ti confiamos. Jesús, en Ti confiamos y en Ti ponemos toda nuestra esperanza.»</p>
+          <p class="refrain">Corazón Eucarístico de Jesús, confío en Ti.</p>
+          <ol class="litany-group litany-numbered">
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, ardiente de Amor,</span> <span class="litany-response">enciende de amor nuestros corazones.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús,</span> <span class="litany-response">acrecienta en nosotros la fe y el amor.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Fuente de la recta voluntad,</span> <span class="litany-response">danos una voluntad recta.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Creador del mundo, que sostienes el mundo en Tu Mano,</span> <span class="litany-response">no nos dejes salir de Tu amparo.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Médico de Dios, que llevaste la muerte en Cristo,</span> <span class="litany-response">sana las heridas de nuestros pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, en memoria de Tu amarga Pasión,</span> <span class="litany-response">danos verdadero dolor y el perdón de los pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Espejo de la Luz eterna,</span> <span class="litany-response">concédenos contemplarte en la eternidad.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús,</span> <span class="litany-response">muéstrate misericordioso con nosotros en la hora de nuestra muerte.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús,</span> <span class="litany-response">apaga en nosotros por completo el ardor de las codicias del mundo.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Bondad de los corazones,</span> <span class="litany-response">por Tu Preciosísima Sangre ven a nosotros en la hora de nuestra muerte.</span></li>
+          </ol>
+          <p class="refrain">Corazón Eucarístico de Jesús, confío en Ti.</p>
+          <hr class="sacred-rule" aria-hidden="true">
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, fuente inagotable de vida y de santidad,</span> <span class="litany-response">santifícame con Tu Preciosísima Sangre.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, hoguera de amor inextinguible,</span> <span class="litany-response">enciende mi corazón en amor por Ti.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, que nos aguardas con paciencia en el sagrario,</span> <span class="litany-response">enséñame la fidelidad.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, ultrajado por comuniones indignas,</span> <span class="litany-response">acepta mi reparación.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Pan de los ángeles y alimento de las almas,</span> <span class="litany-response">sacia mi pobreza.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, consuelo de los afligidos y fuerza de los débiles,</span> <span class="litany-response">sostenme en el camino.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, refugio de los pecadores,</span> <span class="litany-response">no me rechaces.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, consuelo de las almas del purgatorio,</span> <span class="litany-response">líbralas con Tu Preciosísima Sangre.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Viático de los moribundos,</span> <span class="litany-response">asísteme en mi última hora.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, lleno de misericordia para con nosotros,</span> <span class="litany-response">ten piedad de mí.</span></li>
+          </ul>
+          <p>Oh Corazón Eucarístico de Jesús, que por amor a nosotros has permanecido con nosotros bajo las especies del pan y del vino hasta el fin de los siglos, acoge esta pobre oración mía. Creo que estás aquí presente, verdadera, real y sustancialmente; espero en Tu misericordia y te amo sobre todas las cosas. Por todos los ultrajes que recibes en el Santísimo Sacramento, te ofrezco la Preciosísima Sangre que derramaste por mí en la Cruz. Amén.</p>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>La promesa de los 33 días</span></h3><p>Quien durante <strong>treinta y tres días</strong> — en memoria de los treinta y tres años de la vida terrena del Salvador — rece cada día y sin interrupción esta oración al Corazón Eucarístico de Jesús, obtendrá la <strong>completa remisión de la pena y de la culpa</strong>.</p><p><em>Se reza en estado de gracia santificante, habiéndose acercado a la santa Confesión y a la Comunión.</em></p></aside>
+          <div class="tracker no-print" data-tracker="33d" data-total="33">
+            <h3 class="tracker-title">Camino de los 33 días</h3>
+            <p class="tracker-lead">Marca cada día en que hayas rezado esta oración.</p>
+            <div class="tracker-bar" role="progressbar" aria-valuemin="0" aria-valuemax="33"
+                 aria-valuenow="0" aria-label="Camino de los 33 días">
+              <span class="tracker-fill" data-fill></span>
+            </div>
+            <p class="tracker-status" data-status role="status" aria-live="polite"></p>
+            <div class="tracker-dots" data-dots aria-hidden="true"></div>
+            <div class="tracker-actions">
+              <button type="button" class="btn btn-primary" data-mark><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7"/></svg><span>Marcar hoy</span></button>
+              <button type="button" class="btn btn-ghost" data-reset><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 5v5h5M4.6 14a7.5 7.5 0 1 0 1.3-5.4"/></svg><span>Reiniciar</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+      <div class="container">
+        <p class="footer-motto">¡Oh Preciosísima Sangre de Nuestro Señor Jesucristo, sálvame!</p>
+        <nav class="footer-langs no-print" aria-label="Elegir idioma">
+            <a href="../uk/" hreflang="uk" lang="uk">🇺🇦 Українська</a>
+            <a href="../en/" hreflang="en" lang="en">🇬🇧 English</a>
+            <a href="../de/" hreflang="de" lang="de">🇩🇪 Deutsch</a>
+            <a href="../it/" hreflang="it" lang="it">🇮🇹 Italiano</a>
+            <a href="../pt/" hreflang="pt" lang="pt">🇵🇹 Português</a>
+            <a href="../es/" hreflang="es" lang="es" aria-current="true">🇪🇸 Español</a>
+        </nav>
+        <p class="footer-note">Devoción privada. Las promesas ligadas a estas oraciones proceden de revelaciones privadas y no son artículos de fe.</p>
+
+        <!-- Filled by app.js from the service worker's own count. Hidden until
+             there is something true to say — an unregistered worker must not
+             leave a promise of offline access standing on the page. -->
+        <p class="footer-offline no-print" data-offline-status role="status" hidden></p>
+
+        <p class="footer-copy">&copy; 2026 Devoción a la Preciosísima Sangre de Cristo</p>
+      </div>
+    </footer>
+
+    <button type="button" class="to-top no-print" data-to-top
+            aria-label="Volver arriba" title="Volver arriba"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m6 15 6-6 6 6"/></svg></button>
+
+  <div class="app-toast no-print" data-toast role="status" aria-live="polite" hidden>
+      <span class="app-toast-icon" data-toast-icon aria-hidden="true"></span>
+      <span class="app-toast-text" data-toast-text></span>
+      <button type="button" class="app-toast-action" data-toast-action hidden></button>
+      <button type="button" class="app-toast-close" data-toast-close
+              aria-label="Cerrar" title="Cerrar"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+
+  <script type="application/json" id="uiStrings">
+{
+  "audioOn": "Activar la música devocional",
+  "audioOff": "Desactivar la música devocional",
+  "statusIdle": "Aún no has comenzado — marca tu primer día.",
+  "statusDay33": "Día {n} de {total} · {pct}%",
+  "statusMarked": "marcado hoy, vuelve mañana",
+  "statusDone33": "33 días cumplidos. ¡Alabado sea Jesucristo!",
+  "confirmReset": "¿Reiniciar todo el camino registrado?",
+  "iconSound": "\u003csvg class=\"ico\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"currentColor\" d=\"M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z\"/\u003e\u003cpath class=\"wave\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" d=\"M15.6 8.6a4.6 4.6 0 0 1 0 6.8M18.4 6a8.2 8.2 0 0 1 0 12\"/\u003e\u003c/svg\u003e",
+  "iconMute": "\u003csvg class=\"ico\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"currentColor\" d=\"M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z\"/\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" d=\"m16 9.5 5 5m0-5-5 5\"/\u003e\u003c/svg\u003e",
+  "speechLang": "es-ES",
+  "voiceMale": "Masculina",
+  "voiceFemale": "Femenina",
+  "voicePlay": "Leer",
+  "voiceResume": "Continuar",
+  "voiceIdle": "Elige una voz y pulsa «Leer».",
+  "voiceReading": "Leyendo: {section}",
+  "voicePaused": "Lectura en pausa.",
+  "voiceDone": "Lectura terminada.",
+  "voiceNoGender": "No hay voz {gender} disponible para el español en tu navegador — se usa la existente.",
+  "voiceNoVoice": "Tu navegador no tiene una voz española instalada. Añade un paquete de idioma en el sistema.",
+  "voiceUnsupported": "Tu navegador no admite la síntesis de voz.",
+  "installLabel": "Instalar la aplicación",
+  "installAction": "Instalar",
+  "installedNote": "La aplicación está instalada. Las oraciones están disponibles sin conexión.",
+  "offlineReady": "Todas las oraciones guardadas — puedes rezar sin conexión.",
+  "offlineStored": "Guardado en este dispositivo: {done} de {total}",
+  "offlineComplete": "Todas las oraciones están guardadas en este dispositivo — la aplicación funciona sin conexión.",
+  "offlineNow": "Estás sin conexión — las oraciones siguen aquí.",
+  "backOnline": "Conexión restablecida.",
+  "updateReady": "Hay un libro de oraciones actualizado.",
+  "updateAction": "Actualizar",
+  "iconOffline": "\u003csvg class=\"ico ico-sm\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" d=\"M4 4l16 16M7.8 8.2A5.6 5.6 0 0 0 6.4 19h10.2M8.6 5.4A6.4 6.4 0 0 1 18.4 11a4 4 0 0 1 2.2 6.6\"/\u003e\u003c/svg\u003e",
+  "iconCheck": "\u003csvg class=\"ico ico-sm\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m5 12.5 4.5 4.5L19 7\"/\u003e\u003c/svg\u003e"
+}
+  </script>
+  <script src="../assets/js/app.js" defer></script>
+</body>
+</html>

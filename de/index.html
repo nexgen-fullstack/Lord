@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Das kostbarste Blut Jesu Christi — Gebete &amp; Andacht</title>
+  <meta name="description" content="Das zwölfjährige Gebet zum kostbarsten Blute, der Weiheakt, das Gebet der hl. Gertrud, der Goldene Pfeil, die Schulterwunde und das eucharistische Herz Jesu.">
+  <meta name="keywords" content="Kostbares Blut, Kostbarstes Blut Jesu, zwölfjähriges Gebet, Andacht zum kostbaren Blut, hl. Gertrud die Große Gebet, Goldener Pfeil, heilige Schulterwunde, eucharistisches Herz Jesu, katholische Gebete, Arme Seelen">
+  <meta name="author" content="Sanguis Christi">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0304">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Runs before the stylesheets: a prayer always opens at its beginning. -->
+  <script>
+  (function () {
+    var html = document.documentElement;
+
+    /* Suspends `scroll-behavior: smooth` for the opening moments. Without it
+       the very first jump is animated: the app appears to sail down into a
+       prayer on its own before the reader has touched anything. */
+    html.className += (html.className ? ' ' : '') + 'js-boot';
+
+    var fresh = true;
+    try {
+      fresh = !sessionStorage.getItem('pb.session');
+      sessionStorage.setItem('pb.session', '1');
+    } catch (e) { /* private mode — treat every load as fresh */ }
+
+    if (fresh) {
+      /* Only for this first load: left on 'manual' it would also stop Back
+         from returning the reader to where they were. */
+      try {
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      } catch (e) {}
+
+      var standalone = false;
+      try {
+        standalone = matchMedia('(display-mode: standalone)').matches ||
+                     matchMedia('(display-mode: minimal-ui)').matches ||
+                     matchMedia('(display-mode: fullscreen)').matches ||
+                     navigator.standalone === true;
+      } catch (e) {}
+
+      /* Inside the installed app there are no inbound deep links, so a
+         fragment on a cold start can only be last session's leftover. */
+      if (standalone && location.hash && location.hash !== '#hero') {
+        try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+      }
+    }
+
+    /* The browser's own fragment jump happens before the artwork and the fonts
+       have settled, so it lands short and the reader arrives above the prayer
+       they asked for. Land again once everything has its final height —
+       explicitly instant, never animated. */
+    function land() {
+      var id = location.hash ? decodeURIComponent(location.hash.slice(1)) : '';
+      var target = id && document.getElementById(id);
+      if (target) {
+        try { target.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+        catch (e) { target.scrollIntoView(true); }
+      } else if (fresh) {
+        try { scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
+        catch (e) { scrollTo(0, 0); }
+      }
+    }
+
+    addEventListener('load', function () {
+      land();
+      /* A late font swap or a decoded image can still move the target; one
+         more pass a beat later is what makes the landing reliable. */
+      requestAnimationFrame(land);
+      setTimeout(function () {
+        land();
+        html.className = html.className.replace(/(^|\s)js-boot(\s|$)/, '$1').trim();
+        try { history.scrollRestoration = 'auto'; } catch (e) {}
+      }, 250);
+    }, { once: true });
+  })();
+  </script>
+
+  <!-- Canonical + language targeting -->
+  <link rel="canonical" href="https://nexgen-fullstack.github.io/Lord/de/">
+  <link rel="alternate" hreflang="uk" href="https://nexgen-fullstack.github.io/Lord/uk/">
+  <link rel="alternate" hreflang="en" href="https://nexgen-fullstack.github.io/Lord/en/">
+  <link rel="alternate" hreflang="de" href="https://nexgen-fullstack.github.io/Lord/de/">
+  <link rel="alternate" hreflang="it" href="https://nexgen-fullstack.github.io/Lord/it/">
+  <link rel="alternate" hreflang="pt" href="https://nexgen-fullstack.github.io/Lord/pt/">
+  <link rel="alternate" hreflang="es" href="https://nexgen-fullstack.github.io/Lord/es/">
+  <link rel="alternate" hreflang="x-default" href="https://nexgen-fullstack.github.io/Lord/uk/">
+  <meta http-equiv="content-language" content="de">
+  <meta name="language" content="Deutsch">
+
+  <!-- Geo targeting (Cloudflare country routing lives in /functions/_middleware.js) -->
+  <meta name="geo.region" content="DE">
+  <meta name="geo.placename" content="Deutschland">
+  <meta name="geo.country" content="DE">
+  <meta name="distribution" content="global">
+  <meta name="coverage" content="Worldwide">
+  <meta name="target" content="all">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:locale:alternate" content="uk_UA">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="it_IT">
+  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:title" content="Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus">
+  <meta property="og:description" content="Das zwölfjährige Gebet zum kostbarsten Blute, der Weiheakt, das Gebet der hl. Gertrud, der Goldene Pfeil, die Schulterwunde und das eucharistische Herz Jesu.">
+  <meta property="og:url" content="https://nexgen-fullstack.github.io/Lord/de/">
+  <meta property="og:image" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
+  <meta property="og:image:secure_url" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="832">
+  <meta property="og:image:height" content="1263">
+  <meta property="og:image:alt" content="Jesus Christus am Kreuz; Engel sammeln das kostbarste Blut in goldenen Kelchen">
+  <meta property="article:section" content="Katholische Andacht">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus">
+  <meta name="twitter:description" content="Das zwölfjährige Gebet zum kostbarsten Blute, der Weiheakt, das Gebet der hl. Gertrud, der Goldene Pfeil, die Schulterwunde und das eucharistische Herz Jesu.">
+  <meta name="twitter:image" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
+  <meta name="twitter:image:alt" content="Jesus Christus am Kreuz; Engel sammeln das kostbarste Blut in goldenen Kelchen">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0304'/%3E%3Cpath d='M13.6 3h4.8v6.6H25v4.8h-6.6V29h-4.8V14.4H7V9.6h6.6z' fill='%23d4af37'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="../assets/icons/icon-512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+
+  <!-- Installable app. One manifest per locale, so launching the installed
+       icon opens this language directly instead of bouncing through "/". -->
+  <link rel="manifest" href="./app.webmanifest">
+  <meta name="application-name" content="Kostbares Blut">
+  <meta name="apple-mobile-web-app-title" content="Kostbares Blut">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Self-hosted fonts. No third-party stylesheet in the critical path, and
+       the faces are ordinary same-origin files, so they cache for offline. -->
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/cormorant-garamond-400-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-latin.woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+
+  <link rel="preload" as="image" href="../assets/img/Jesus.jpeg" fetchpriority="high">
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://nexgen-fullstack.github.io/Lord/#organization",
+      "name": "Sanguis Christi",
+      "legalName": "Sanguis Christi — Devotion to the Most Precious Blood",
+      "url": "https://nexgen-fullstack.github.io/Lord/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+        "width": 832,
+        "height": 1263
+      },
+      "description": "Das zwölfjährige Gebet zum kostbarsten Blute, der Weiheakt, das Gebet der hl. Gertrud, der Goldene Pfeil, die Schulterwunde und das eucharistische Herz Jesu.",
+      "knowsLanguage": [
+        "uk",
+        "en",
+        "de",
+        "it",
+        "pt",
+        "es"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "Worldwide"
+      },
+      "availableLanguage": [
+        {
+          "@type": "Language",
+          "name": "Українська",
+          "alternateName": "uk"
+        },
+        {
+          "@type": "Language",
+          "name": "English",
+          "alternateName": "en"
+        },
+        {
+          "@type": "Language",
+          "name": "Deutsch",
+          "alternateName": "de"
+        },
+        {
+          "@type": "Language",
+          "name": "Italiano",
+          "alternateName": "it"
+        },
+        {
+          "@type": "Language",
+          "name": "Português",
+          "alternateName": "pt"
+        },
+        {
+          "@type": "Language",
+          "name": "Español",
+          "alternateName": "es"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nexgen-fullstack.github.io/Lord/#website",
+      "url": "https://nexgen-fullstack.github.io/Lord/",
+      "name": "Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus",
+      "alternateName": "Sanguis Christi",
+      "description": "Das zwölfjährige Gebet zum kostbarsten Blute, der Weiheakt, das Gebet der hl. Gertrud, der Goldene Pfeil, die Schulterwunde und das eucharistische Herz Jesu.",
+      "inLanguage": [
+        "uk",
+        "en",
+        "de",
+        "it",
+        "pt",
+        "es"
+      ],
+      "publisher": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "copyrightHolder": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://nexgen-fullstack.github.io/Lord/#app",
+      "name": "Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus",
+      "alternateName": "Kostbares Blut",
+      "url": "https://nexgen-fullstack.github.io/Lord/de/",
+      "applicationCategory": "LifestyleApplication",
+      "applicationSubCategory": "Prayer",
+      "operatingSystem": "Android, iOS, Windows, macOS, Linux",
+      "browserRequirements": "Requires JavaScript. Works offline once opened.",
+      "inLanguage": [
+        "uk",
+        "en",
+        "de",
+        "it",
+        "pt",
+        "es"
+      ],
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "featureList": [
+        "Das Gebetbuch auf dem Telefon",
+        "Alle Gebete gespeichert — Sie können ohne Netz beten.",
+        "Gebet mit Stimme",
+        "Fortschritt der 33 Tage"
+      ],
+      "screenshot": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+      "softwareHelp": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/de/#webpage"
+      },
+      "publisher": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://nexgen-fullstack.github.io/Lord/de/#webpage",
+      "url": "https://nexgen-fullstack.github.io/Lord/de/",
+      "name": "Das kostbarste Blut Jesu Christi — Gebete \u0026 Andacht",
+      "description": "Das zwölfjährige Gebet zum kostbarsten Blute, der Weiheakt, das Gebet der hl. Gertrud, der Goldene Pfeil, die Schulterwunde und das eucharistische Herz Jesu.",
+      "inLanguage": "de",
+      "isPartOf": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#website"
+      },
+      "about": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/de/#devotion"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+        "width": 832,
+        "height": 1263,
+        "caption": "Jesus Christus am Kreuz; Engel sammeln das kostbarste Blut in goldenen Kelchen"
+      },
+      "breadcrumb": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/de/#breadcrumb"
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://nexgen-fullstack.github.io/Lord/de/"
+        ]
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".section-title",
+          ".prayer-text"
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://nexgen-fullstack.github.io/Lord/de/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus",
+          "item": "https://nexgen-fullstack.github.io/Lord/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Deutsch",
+          "item": "https://nexgen-fullstack.github.io/Lord/de/"
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://nexgen-fullstack.github.io/Lord/de/#devotion",
+      "headline": "Das kostbarste Blut Jesu Christi — Gebete \u0026 Andacht",
+      "alternativeHeadline": "Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus",
+      "description": "Das zwölfjährige Gebet zum kostbarsten Blute, der Weiheakt, das Gebet der hl. Gertrud, der Goldene Pfeil, die Schulterwunde und das eucharistische Herz Jesu.",
+      "articleSection": "Katholische Andacht",
+      "inLanguage": "de",
+      "isPartOf": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/de/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/de/#webpage"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+        "width": 832,
+        "height": 1263
+      },
+      "publisher": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "author": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "keywords": "Kostbares Blut, Kostbarstes Blut Jesu, zwölfjähriges Gebet, Andacht zum kostbaren Blut, hl. Gertrud die Große Gebet, Goldener Pfeil, heilige Schulterwunde, eucharistisches Herz Jesu, katholische Gebete, Arme Seelen",
+      "genre": "Gebet",
+      "datePublished": "2026-01-01",
+      "dateModified": "2026-09-03",
+      "isAccessibleForFree": true,
+      "hasPart": [
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/de/#devotion",
+          "name": "Die Andacht zum heiligen Blute Gottes",
+          "alternateName": "Das Gebet, das zwölf Jahre lang täglich gebetet wird",
+          "position": 1,
+          "inLanguage": "de",
+          "genre": "Gebet",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/de/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/de/#devotion"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/de/#consecration",
+          "name": "Akt der persönlichen Weihe an das kostbarste Blut Jesu Christi",
+          "position": 2,
+          "inLanguage": "de",
+          "genre": "Gebet",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/de/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/de/#consecration"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/de/#gertrude",
+          "name": "Das Gebet der hl. Gertrud der Großen",
+          "alternateName": "Zur Erlösung der Seelen aus dem Fegefeuer",
+          "position": 3,
+          "inLanguage": "de",
+          "genre": "Gebet",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/de/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/de/#gertrude"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/de/#golden-arrow",
+          "name": "Der Anbetungsakt „Der Goldene Pfeil“",
+          "alternateName": "Zum Lobe des heiligsten Namens Gottes",
+          "position": 4,
+          "inLanguage": "de",
+          "genre": "Gebet",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/de/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/de/#golden-arrow"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/de/#shoulder-wound",
+          "name": "Gebet zur heiligen Schulterwunde Christi",
+          "position": 5,
+          "inLanguage": "de",
+          "genre": "Gebet",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/de/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/de/#shoulder-wound"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/de/#eucharistic-heart",
+          "name": "Gebet zum eucharistischen Herzen Jesu",
+          "alternateName": "Die Andacht der dreiunddreißig Tage",
+          "position": 6,
+          "inLanguage": "de",
+          "genre": "Gebet",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/de/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/de/#eucharistic-heart"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body data-lang="de">
+
+  <a class="skip-link" href="#devotion">Zu den Gebeten springen</a>
+
+  <canvas id="bloodCanvas" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div class="print-header" aria-hidden="true">
+    <strong>Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus</strong>
+    <span>nexgen-fullstack.github.io/Lord/de/</span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <a class="brand" href="#hero">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg>
+          <span class="brand-text">Kostbares Blut</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Gebetsabschnitte">
+          <ul>
+            <li><a href="#hero" data-nav-link>Startseite</a></li>
+            <li><a href="#devotion" data-nav-link>Zwölfjähriges Gebet</a></li>
+            <li><a href="#consecration" data-nav-link>Weihe</a></li>
+            <li><a href="#gertrude" data-nav-link>Hl. Gertrud</a></li>
+            <li><a href="#golden-arrow" data-nav-link>Goldener Pfeil</a></li>
+            <li><a href="#shoulder-wound" data-nav-link>Schulterwunde</a></li>
+            <li><a href="#eucharistic-heart" data-nav-link>Eucharistisches Herz</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-tools">
+          <button type="button" class="btn btn-icon" data-audio-toggle
+                  aria-pressed="false" aria-label="Leise Andachtsmusik einschalten" title="Leise Andachtsmusik einschalten">
+            <span data-audio-icon><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m16 9.5 5 5m0-5-5 5"/></svg></span>
+          </button>
+          <div class="voice" data-voice>
+          <button type="button" class="btn btn-icon" data-voice-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="voicePanel"
+                  aria-label="Die Gebete laut vorlesen" title="Die Gebete laut vorlesen">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 3.4a2.6 2.6 0 0 1 2.6 2.6v5a2.6 2.6 0 0 1-5.2 0V6A2.6 2.6 0 0 1 12 3.4Z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6.6 11a5.4 5.4 0 0 0 10.8 0M12 16.4V20.6M9.2 20.6h5.6"/></svg>
+          </button>
+          <div class="voice-panel" id="voicePanel" role="dialog"
+               aria-label="Gebet mit Stimme" hidden>
+            <p class="voice-panel-title">Gebet mit Stimme</p>
+
+            <div class="voice-field">
+              <span class="voice-legend" id="voiceGenderLegend">Stimme</span>
+              <div class="voice-genders" role="radiogroup" aria-labelledby="voiceGenderLegend">
+                <button type="button" class="voice-gender" role="radio" aria-checked="true"
+                        data-gender="female">Weiblich</button>
+                <button type="button" class="voice-gender" role="radio" aria-checked="false"
+                        data-gender="male">Männlich</button>
+              </div>
+            </div>
+
+            <div class="voice-actions">
+              <button type="button" class="btn btn-ghost" data-voice-play>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.2v13.6L19 12z"/></svg><span data-voice-play-label>Vorlesen</span>
+              </button>
+              <button type="button" class="btn btn-ghost" data-voice-pause disabled>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 5h3.4v14H7zm6.6 0H17v14h-3.4z"/></svg><span>Pause</span>
+              </button>
+              <button type="button" class="btn btn-ghost" data-voice-stop disabled>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.6" fill="currentColor"/></svg><span>Stopp</span>
+              </button>
+            </div>
+
+            <p class="voice-status" data-voice-status role="status" aria-live="polite">Wählen Sie eine Stimme und drücken Sie „Vorlesen“.</p>
+          </div>
+        </div>
+          <div class="install" data-install-wrap hidden>
+          <button type="button" class="btn btn-icon" data-install-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="installPanel"
+                  aria-label="App installieren" title="App installieren">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="2.6" width="12" height="18.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 7.4v6.4m0 0 2.4-2.4M12 13.8l-2.4-2.4M10.4 18h3.2"/></svg>
+          </button>
+          <div class="install-panel" id="installPanel" role="dialog"
+               aria-label="Das Gebetbuch auf dem Telefon" hidden>
+            <p class="install-title">Das Gebetbuch auf dem Telefon</p>
+            <p class="install-body">Installieren Sie die App, und alle Gebete bleiben bei Ihnen — mit oder ohne Netz.</p>
+            <p class="install-ios" data-install-ios hidden>In Safari auf „Teilen“ tippen, dann auf „Zum Home-Bildschirm“.</p>
+            <button type="button" class="btn btn-primary install-go" data-install-go hidden>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="2.6" width="12" height="18.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 7.4v6.4m0 0 2.4-2.4M12 13.8l-2.4-2.4M10.4 18h3.2"/></svg><span>Installieren</span>
+            </button>
+          </div>
+        </div>
+          <button type="button" class="btn btn-icon" data-print
+                  aria-label="Gebete drucken" title="Gebete drucken"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M7 9V3h10v6M7 19H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 15h10v6H7z"/></svg></button>
+          <div class="lang-switch" data-lang-switch>
+          <button type="button" class="btn btn-lang" data-lang-toggle
+                  aria-expanded="false" aria-haspopup="true" aria-controls="langMenu"
+                  aria-label="Sprache wählen: Deutsch">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 0c-2.6 2.3-4 5.3-4 9s1.4 6.7 4 9c2.6-2.3 4-5.3 4-9s-1.4-6.7-4-9ZM3.5 9h17M3.5 15h17"/></svg>
+            <span class="flag" aria-hidden="true">🇩🇪</span>
+            <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <ul class="lang-menu" id="langMenu" role="menu" aria-label="Sprache wählen" hidden>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../uk/" hreflang="uk" lang="uk"
+                 data-lang="uk">
+                <span class="flag" aria-hidden="true">🇺🇦</span>
+                <span class="lang-name">Українська</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../en/" hreflang="en" lang="en"
+                 data-lang="en">
+                <span class="flag" aria-hidden="true">🇬🇧</span>
+                <span class="lang-name">English</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option is-current"
+                 href="../de/" hreflang="de" lang="de"
+                 data-lang="de" aria-current="true">
+                <span class="flag" aria-hidden="true">🇩🇪</span>
+                <span class="lang-name">Deutsch</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../it/" hreflang="it" lang="it"
+                 data-lang="it">
+                <span class="flag" aria-hidden="true">🇮🇹</span>
+                <span class="lang-name">Italiano</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../pt/" hreflang="pt" lang="pt"
+                 data-lang="pt">
+                <span class="flag" aria-hidden="true">🇵🇹</span>
+                <span class="lang-name">Português</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../es/" hreflang="es" lang="es"
+                 data-lang="es">
+                <span class="flag" aria-hidden="true">🇪🇸</span>
+                <span class="lang-name">Español</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+          <button type="button" class="btn btn-icon menu-btn" data-menu-toggle
+                  aria-expanded="false" aria-controls="mobileDrawer"
+                  aria-label="Menü öffnen"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        </div>
+      </div>
+      <div class="read-progress" aria-hidden="true"><span data-read-progress></span></div>
+    </header>
+
+    <div class="drawer" id="mobileDrawer" hidden>
+      <div class="drawer-backdrop" data-menu-close></div>
+      <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Gebetsabschnitte">
+        <button type="button" class="btn btn-icon drawer-close" data-menu-close
+                aria-label="Menü schließen"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <nav class="drawer-nav" aria-label="Gebetsabschnitte">
+          <ul>
+            <li><a href="#hero" data-nav-link>Startseite</a></li>
+            <li><a href="#devotion" data-nav-link>Zwölfjähriges Gebet</a></li>
+            <li><a href="#consecration" data-nav-link>Weihe</a></li>
+            <li><a href="#gertrude" data-nav-link>Hl. Gertrud</a></li>
+            <li><a href="#golden-arrow" data-nav-link>Goldener Pfeil</a></li>
+            <li><a href="#shoulder-wound" data-nav-link>Schulterwunde</a></li>
+            <li><a href="#eucharistic-heart" data-nav-link>Eucharistisches Herz</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+  <main id="main">
+    <div class="container">
+      <section id="hero" class="hero" aria-labelledby="heroTitle">
+          <div class="hero-body">
+            <h1 class="hero-title" id="heroTitle">Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus</h1>
+            <blockquote class="hero-quote">
+              <p>„Du hast mich, o Herr, durch dein kostbarstes Blut erkauft aus jedem Stamm und jeder Sprache, aus jedem Volk und jeder Nation.“</p>
+              <cite>Offenbarung 5, 9</cite>
+            </blockquote>
+
+            <figure class="crucifix-frame">
+              <img class="crucifix-img" src="../assets/img/Jesus.jpeg"
+                   alt="Jesus Christus am Kreuz; Engel sammeln das kostbarste Blut in goldenen Kelchen"
+                   width="832" height="1263"
+                   fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+
+          <a class="scroll-cue no-print" href="#devotion">
+            <span>Zu den Gebeten</span>
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+          </a>
+        </section>
+
+      <section id="devotion" class="section-card reveal" aria-labelledby="devotion-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">01</p>
+          <h2 class="section-title" id="devotion-title">Die Andacht zum heiligen Blute Gottes</h2>
+          <p class="section-subtitle">Das Gebet, das zwölf Jahre lang täglich gebetet wird</p>
+        </header>
+        <div class="prayer-text">
+          <p class="chant">Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison.</p>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">O Christus,</span> <span class="litany-response">höre mich.</span></li>
+            <li class="litany-item"><span class="litany-call">O Christus,</span> <span class="litany-response">erhöre mich.</span></li>
+            <li class="litany-item"><span class="litany-call">Gott Vater vom Himmel,</span> <span class="litany-response">erbarme dich meiner.</span></li>
+            <li class="litany-item"><span class="litany-call">Gott Sohn, Erlöser der Welt,</span> <span class="litany-response">erbarme dich meiner.</span></li>
+            <li class="litany-item"><span class="litany-call">Gott Heiliger Geist,</span> <span class="litany-response">erbarme dich meiner.</span></li>
+            <li class="litany-item"><span class="litany-call">Heilige Dreifaltigkeit, ein einiger Gott,</span> <span class="litany-response">erbarme dich meiner.</span></li>
+            <li class="litany-item"><span class="litany-call">Heilige Maria,</span> <span class="litany-response">bitte für mich.</span></li>
+            <li class="litany-item"><span class="litany-call">Mutter des leidenden Erlösers,</span> <span class="litany-response">bitte für mich.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bei der Beschneidung vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bei der Geißelung vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, unter der Dornenkrone vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, auf dem Kreuzweg vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bei der Annagelung deiner heiligsten Hände an das Kreuz vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bei der Annagelung deiner heiligsten Füße an das Kreuz vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, aus deinem von der Lanze durchbohrten heiligsten Herzen vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, für mich unwürdigen Sünder vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bis zum letzten Tropfen für mich und meine Sünden vergossen,</span> <span class="litany-response">erbarme dich meiner.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">O Jesus, für dein kostbarstes Blut, das du für mich am Kreuze vergossen hast,</span> <span class="litany-response">danke ich dir.</span></li>
+            <li class="litany-item"><span class="litany-call">O Jesus, für dein kostbarstes Blut, das auf Golgotha geschmäht wurde,</span> <span class="litany-response">bitte ich dich um Verzeihung.</span></li>
+            <li class="litany-item"><span class="litany-call">O Jesus, für jede Schmähung deines kostbarsten Blutes in der heiligen Messe durch unwürdige Kommunionen,</span> <span class="litany-response">bitte ich dich um Verzeihung.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Ich, ein Sünder, bitte dich, o Gott:</span> <span class="litany-response">rette mich durch dein kostbarstes Blut.</span></li>
+            <li class="litany-item"><span class="litany-call">Ich, ein Sünder, bitte dich, o Gott:</span> <span class="litany-response">birg mich in deinem kostbarsten Blute.</span></li>
+            <li class="litany-item"><span class="litany-call">Ich, ein Sünder, bitte dich, o Gott:</span> <span class="litany-response">tränke mich mit deinem kostbarsten Blute.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Lamm Gottes, du nimmst hinweg die Sünden der Welt,</span> <span class="litany-response">erhöre mich, o Herr.</span></li>
+            <li class="litany-item"><span class="litany-call">Lamm Gottes, du nimmst hinweg die Sünden der Welt,</span> <span class="litany-response">verzeihe mir, o Herr.</span></li>
+            <li class="litany-item"><span class="litany-call">Lamm Gottes, du nimmst hinweg die Sünden der Welt,</span> <span class="litany-response">erbarme dich meiner, o Herr.</span></li>
+          </ul>
+          <p class="chant">Kyrie eleison, Christe eleison (dreimal)</p>
+          <p class="lead">O kostbarstes Blut unseres Herrn Jesus Christus, sei erhoben und verherrlicht von uns allen, jetzt und immerdar und in alle Ewigkeit. Amen.</p>
+          <hr class="sacred-rule" aria-hidden="true">
+          <p>Allmächtiger Gott, mein Erlöser! Mit einem einzigen Tropfen deines kostbarsten Blutes hättest du Millionen von Welten erlösen können. Doch aus deiner grenzenlosen Liebe zu mir Sünder hast du den letzten Tropfen deines kostbarsten Blutes vergossen und ihn Gott dem Vater für meine Sünden aufgeopfert.</p>
+          <p>O Jesus, du opferst es täglich auch auf den Altären der ganzen Welt in jeder heiligen Messe. Du gießt dein Blut unter der Gestalt des Weines aus und opferst es für meine Erlösung. Du hast es vergossen zur Speise meiner Seele für das ewige Leben.</p>
+          <p>Ich, ein Sünder, falle in Demut vor deiner Majestät nieder und flehe dich an um deiner grenzenlosen Barmherzigkeit willen: erbarme dich meiner, des Sünders. Erlöser, ich bitte dich, die verstockten Sünder umzuwenden, damit sie sich möglichst bald aus jenem schrecklichen Zustand bekehren. Erneuere den heiligen Glauben in allen Völkern, damit sie zur Einheit zurückkehren.</p>
+          <p>Herr, dies ist unser großes Verlangen: dass alle Menschen der Welt dir allein dienen und dein kostbarstes Blut verherrlichen.</p>
+          <p>O Gott, erbarme dich der Seelen im Fegefeuer, denn sie harren deiner Begnadigung.</p>
+          <p>Möge dein kostbarstes Blut, für unsere Sünden vergossen, ihnen beim himmlischen Vater Verzeihung erwirken und sie zur ewigen Seligkeit führen. Amen.</p>
+          <hr class="sacred-rule" aria-hidden="true">
+          <p>Herr Jesus Christus, mein Erlöser, bewahre mich durch dein kostbarstes Blut vor den Nachstellungen teuflischer Versuchungen.</p>
+          <p>Herr Jesus Christus, mein Erlöser, hilf mir durch dein kostbarstes Blut, die Versuchungen zu überwinden.</p>
+          <p>Herr Jesus Christus, mein Erlöser, behüte mich und führe mich dir nach um deines kostbarsten Blutes willen.</p>
+          <p>Herr Jesus Christus, mein Erlöser, bewahre uns den Heiligen Vater mit der ganzen Geistlichkeit und der heiligen Kirche vor allen Gefahren um deines kostbarsten Blutes willen. Amen.</p>
+          <aside class="instruction-box"><h3 class="box-title">Die Gebetsregel</h3><p><strong>Vater unser…</strong> (7 mal) · <strong>Gegrüßet seist du, Maria…</strong> (7 mal) · <strong>Ehre sei dem Vater…</strong> (7 mal)</p><p>Das Gebet wird <strong>täglich zwölf Jahre lang</strong> ohne Unterbrechung verrichtet.</p></aside>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Die göttlichen Verheißungen</span></h3><p>Wer dieses Gebet zwölf Jahre lang täglich und ohne Unterbrechung verrichtet, wird nicht durch das Fegefeuer gehen.</p><p>Wer zu beten begonnen hat und nach einem halben Jahr stirbt, empfängt dennoch all diese großen Gnaden: fünf Seelen aus seiner Familie erhalten den Ruf zum geistlichen Stand, und bis in die vierte Generation wird niemand aus seiner Familie in der Hölle sein.</p><p>Dieses zwölfjährige Gebet hat die Kraft, die Seele von allen Ungerechtigkeiten zu reinigen. <em>Herr, gib deinen Segen!</em></p></aside>
+        </div>
+      </section>
+
+      <section id="consecration" class="section-card reveal" aria-labelledby="consecration-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">02</p>
+          <h2 class="section-title" id="consecration-title">Akt der persönlichen Weihe an das kostbarste Blut Jesu Christi</h2>
+          
+        </header>
+        <div class="prayer-text">
+          <p>In vollem Bewusstsein meiner Nichtigkeit und zugleich deiner Größe, o barmherziger Erlöser, falle ich zu deinen Füßen nieder und danke dir für die zahllosen Beweise der Gnade, die du mir, dem undankbaren Geschöpf, erwiesen hast, und vor allem dafür, dass du mich durch dein kostbarstes Blut von der verderbenden Macht Satans befreit hast. In Gegenwart meiner geliebten Mutter Maria, meines Schutzengels, meiner heiligen Patrone und des ganzen himmlischen Hofes weihe ich mich, o liebster Jesus, mit ganzer Aufrichtigkeit des Herzens und aus freiestem Willen deinem kostbarsten Blute, durch das du die ganze Welt von Sünde, Tod und Hölle erlöst hast.</p>
+          <p>Ich, <span class="user-name">(Name)</span>, verspreche dir, auf die Hilfe deiner Gnade vertrauend, mit allen meinen Kräften und nach allen meinen Möglichkeiten die Andacht zu deinem kostbarsten Blute, dem Preis unserer Erlösung, zu wecken und zu verbreiten, damit dein Blut, der höchsten Verehrung würdig, von allen geehrt und geliebt werde.</p>
+          <p>Auf diese Weise will ich meine Untreue gegen dein kostbarstes Blut und deine Liebe wiedergutmachen und dir Genugtuung leisten für die zahllosen Entweihungen und Schmähungen, welche die Menschen jenem kostbarsten Preis unseres Heiles zufügen. Oh, könnten doch meine eigenen Sünden, meine Lauheit und alle Schmähungen, mit denen ich dich, o kostbarstes Blut, jemals entehrt habe, ins Nichts zurückgenommen werden!</p>
+          <p>Siehe, liebster Jesus, ich opfere dir auch die Liebe, die Ehre und die Anbetung auf, welche deine heiligste Mutter, deine treuen Jünger und alle Heiligen deinem kostbarsten Blute dargebracht haben. Ich bitte dich: gedenke nicht mehr meiner früheren Untreue und Lauheit, und verzeihe allen, die dich schmähen. Besprenge mich, o göttlicher Erlöser, mit deinem kostbarsten Blute, und mit ihm alle Menschen, damit wir dich, gekreuzigte Liebe, sogleich von ganzem Herzen lieben und den Preis unserer Erlösung allezeit aufs würdigste verehren können. Amen.</p>
+        </div>
+      </section>
+
+      <section id="gertrude" class="section-card reveal" aria-labelledby="gertrude-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">03</p>
+          <h2 class="section-title" id="gertrude-title">Das Gebet der hl. Gertrud der Großen</h2>
+          <p class="section-subtitle">Zur Erlösung der Seelen aus dem Fegefeuer</p>
+        </header>
+        <div class="prayer-text">
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Die Verheißung unseres Herrn Jesus</span></h3><p>Unser Herr Jesus offenbarte der hl. Gertrud der Großen, dass ein einziges Beten dieses Gebetes <strong>tausend Seelen aus dem Fegefeuer</strong> befreit.</p></aside>
+          <p class="lead">„Ewiger Vater, ich opfere dir das kostbarste Blut deines göttlichen Sohnes, unseres Herrn Jesus Christus, in Vereinigung mit allen heiligen Messen, die heute auf der ganzen Welt gefeiert werden, auf: für alle armen Seelen im Fegefeuer, für die Sterbenden, für die Sünder in der ganzen Welt, für die Sünder in der Weltkirche, für die Sünder in meiner Familie und in meinem Hause. Amen.“</p>
+          <p class="note">(Ein Ablass von 500 Tagen.)</p>
+        </div>
+      </section>
+
+      <section id="golden-arrow" class="section-card reveal" aria-labelledby="golden-arrow-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">04</p>
+          <h2 class="section-title" id="golden-arrow-title">Der Anbetungsakt „Der Goldene Pfeil“</h2>
+          <p class="section-subtitle">Zum Lobe des heiligsten Namens Gottes</p>
+        </header>
+        <div class="prayer-text">
+          <p class="poem">Gepriesen, gelobt, verehrt,<br>Angebetet und verherrlicht<br>Sei in Ewigkeit<br>Der allerheiligste, hochheiligste,<br>Anbetungswürdigste, unbegreifliche<br>Und unaussprechliche Name Gottes<br>Im Himmel, auf Erden und in den Abgründen,<br>Durch alle Geschöpfe,<br>Die aus den Händen Gottes hervorgegangen sind,<br>Und durch das heiligste Herz unseres Herrn Jesus Christus<br>Im allerheiligsten Sakrament des Altares. Amen.</p>
+          <p class="note">(Dieser Anbetungsakt gehört zur Bruderschaft vom heiligsten Antlitz Jesu.)</p>
+        </div>
+      </section>
+
+      <section id="shoulder-wound" class="section-card reveal" aria-labelledby="shoulder-wound-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">05</p>
+          <h2 class="section-title" id="shoulder-wound-title">Gebet zur heiligen Schulterwunde Christi</h2>
+          
+        </header>
+        <div class="prayer-text">
+          <p>O liebreichster Jesus, du mein sanftestes Lamm Gottes! Ich, ein armer Sünder, grüße und verehre jene deine heiligste Wunde, die dir einen überaus heftigen Schmerz bereitete, als du das schwere Kreuz auf deiner göttlichen Schulter trugst. Dieser Schmerz war schwerer und bitterer als die übrigen Wunden an deinem heiligen Leibe. Ich liebe dich, ich gebe dir Ehre und beuge mich vor dir aus der Tiefe meines Herzens.</p>
+          <p>Ich danke dir für jene tiefste Wunde deiner Schulter. Demütig bitte ich dich im Namen des Leidens, das du durch die Wunde deiner Schulter ertragen hast, und im Namen deines schweren Kreuzes, das du auf jener heiligen Wunde getragen hast: erbarme dich meiner, des unwürdigen Sünders. Vergib mir alle meine Sünden und gewähre, dass ich, in deinen blutigen Spuren wandelnd, die selige Ewigkeit erlange. Amen.</p>
+          <aside class="instruction-box"><h3 class="box-title">Die Gebetsregel</h3><p><strong>Vater unser…</strong> (3 mal) · <strong>Gegrüßet seist du, Maria…</strong> (3 mal)</p><p><em>Gelobt seist du, o Herr, im allerheiligsten Sakramente verborgen.</em> (3 mal)</p></aside>
+          <p class="lead">O kostbarstes Blut, das aus dem heiligen Haupte unseres Herrn Jesus Christus fließt, dem Tempel der göttlichen Weisheit und der Wohnung Gottes, der Erkenntnis, des himmlischen und des irdischen Lichtes: bewahre mich jetzt und in alle Ewigkeit. Amen.</p>
+        </div>
+      </section>
+
+      <section id="eucharistic-heart" class="section-card reveal" aria-labelledby="eucharistic-heart-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">06</p>
+          <h2 class="section-title" id="eucharistic-heart-title">Gebet zum eucharistischen Herzen Jesu</h2>
+          <p class="section-subtitle">Die Andacht der dreiunddreißig Tage</p>
+        </header>
+        <div class="prayer-text">
+          <p class="lead">„Jesus, Maria, ich liebe euch — rettet die Seelen. O Blut und Wasser, das aus dem heiligsten Herzen Christi als Quell der Barmherzigkeit für uns hervorgeströmt ist, wir vertrauen auf dich. Jesus, wir vertrauen auf dich und setzen alle unsere Hoffnung auf dich.“</p>
+          <p class="refrain">Eucharistisches Herz Jesu, ich vertraue dir.</p>
+          <ol class="litany-group litany-numbered">
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, das du in Liebe brennst,</span> <span class="litany-response">entzünde unsere Herzen in Liebe.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">mehre in uns Glaube und Liebe.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Quell des rechten Willens,</span> <span class="litany-response">gib uns einen rechten Willen.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Schöpfer der Welt, der du die Welt in deiner Hand hältst,</span> <span class="litany-response">lass uns niemals aus deinem Schutze fallen.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Arzt Gottes, der du in Christus den Tod getragen hast,</span> <span class="litany-response">heile die Wunden unserer Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, zum Gedächtnis deines bitteren Leidens,</span> <span class="litany-response">gib uns wahre Reue und die Vergebung der Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Spiegel des ewigen Lichtes,</span> <span class="litany-response">lass uns dich in der Ewigkeit schauen.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">erweise dich uns barmherzig in der Stunde unseres Todes.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">lösche in uns gänzlich die Glut der weltlichen Begierden.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Güte der Herzen,</span> <span class="litany-response">komm durch dein kostbarstes Blut zu uns in der Stunde unseres Todes.</span></li>
+          </ol>
+          <p class="refrain">Eucharistisches Herz Jesu, ich vertraue dir.</p>
+          <hr class="sacred-rule" aria-hidden="true">
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, unerschöpflicher Quell des Lebens und der Heiligkeit,</span> <span class="litany-response">heilige mich durch dein kostbarstes Blut.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Feuerherd unauslöschlicher Liebe,</span> <span class="litany-response">entzünde mein Herz in Liebe zu dir.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, das du uns geduldig im Tabernakel erwartest,</span> <span class="litany-response">lehre mich die Treue.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, durch unwürdige Kommunionen geschmäht,</span> <span class="litany-response">nimm meine Sühne an.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Brot der Engel und Speise der Seelen,</span> <span class="litany-response">sättige meine Armut.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Trost der Betrübten und Stärke der Schwachen,</span> <span class="litany-response">stütze mich auf meinem Wege.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Zuflucht der Sünder,</span> <span class="litany-response">verwirf mich nicht.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Trost der Seelen im Fegefeuer,</span> <span class="litany-response">befreie sie durch dein kostbarstes Blut.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Wegzehrung der Sterbenden,</span> <span class="litany-response">sei bei mir in meiner letzten Stunde.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, voll der Barmherzigkeit gegen uns,</span> <span class="litany-response">erbarme dich meiner.</span></li>
+          </ul>
+          <p>O eucharistisches Herz Jesu, das du aus Liebe zu uns unter den Gestalten von Brot und Wein bis ans Ende der Zeiten bei uns geblieben bist, nimm dieses mein armes Gebet an. Ich glaube, dass du hier wahrhaft, wirklich und wesentlich gegenwärtig bist; ich hoffe auf deine Barmherzigkeit und liebe dich über alles. Für alle Schmähungen, die du im allerheiligsten Sakramente empfängst, bringe ich dir das kostbarste Blut dar, das du für mich am Kreuze vergossen hast. Amen.</p>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Die Verheißung der 33 Tage</span></h3><p>Wer <strong>dreiunddreißig Tage</strong> hindurch — zum Gedächtnis der dreiunddreißig Jahre des irdischen Lebens des Erlösers — dieses Gebet zum eucharistischen Herzen Jesu täglich und ohne Unterbrechung verrichtet, erlangt den <strong>vollkommenen Nachlass von Strafe und Schuld</strong>.</p><p><em>Es wird im Stande der heiligmachenden Gnade gebetet, nach Empfang der heiligen Beichte und Kommunion.</em></p></aside>
+          <div class="tracker no-print" data-tracker="33d" data-total="33">
+            <h3 class="tracker-title">Fortschritt der 33 Tage</h3>
+            <p class="tracker-lead">Markieren Sie jeden Tag, an dem Sie dieses Gebet verrichtet haben.</p>
+            <div class="tracker-bar" role="progressbar" aria-valuemin="0" aria-valuemax="33"
+                 aria-valuenow="0" aria-label="Fortschritt der 33 Tage">
+              <span class="tracker-fill" data-fill></span>
+            </div>
+            <p class="tracker-status" data-status role="status" aria-live="polite"></p>
+            <div class="tracker-dots" data-dots aria-hidden="true"></div>
+            <div class="tracker-actions">
+              <button type="button" class="btn btn-primary" data-mark><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7"/></svg><span>Heute markieren</span></button>
+              <button type="button" class="btn btn-ghost" data-reset><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 5v5h5M4.6 14a7.5 7.5 0 1 0 1.3-5.4"/></svg><span>Zurücksetzen</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+      <div class="container">
+        <p class="footer-motto">O kostbarstes Blut unseres Herrn Jesus Christus, rette mich!</p>
+        <nav class="footer-langs no-print" aria-label="Sprache wählen">
+            <a href="../uk/" hreflang="uk" lang="uk">🇺🇦 Українська</a>
+            <a href="../en/" hreflang="en" lang="en">🇬🇧 English</a>
+            <a href="../de/" hreflang="de" lang="de" aria-current="true">🇩🇪 Deutsch</a>
+            <a href="../it/" hreflang="it" lang="it">🇮🇹 Italiano</a>
+            <a href="../pt/" hreflang="pt" lang="pt">🇵🇹 Português</a>
+            <a href="../es/" hreflang="es" lang="es">🇪🇸 Español</a>
+        </nav>
+        <p class="footer-note">Eine private Andacht. Die mit diesen Gebeten verbundenen Verheißungen stammen aus Privatoffenbarungen und sind keine Glaubenssätze.</p>
+
+        <!-- Filled by app.js from the service worker's own count. Hidden until
+             there is something true to say — an unregistered worker must not
+             leave a promise of offline access standing on the page. -->
+        <p class="footer-offline no-print" data-offline-status role="status" hidden></p>
+
+        <p class="footer-copy">&copy; 2026 Andacht zum kostbarsten Blute Christi</p>
+      </div>
+    </footer>
+
+    <button type="button" class="to-top no-print" data-to-top
+            aria-label="Nach oben" title="Nach oben"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m6 15 6-6 6 6"/></svg></button>
+
+  <div class="app-toast no-print" data-toast role="status" aria-live="polite" hidden>
+      <span class="app-toast-icon" data-toast-icon aria-hidden="true"></span>
+      <span class="app-toast-text" data-toast-text></span>
+      <button type="button" class="app-toast-action" data-toast-action hidden></button>
+      <button type="button" class="app-toast-close" data-toast-close
+              aria-label="Schließen" title="Schließen"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+
+  <script type="application/json" id="uiStrings">
+{
+  "audioOn": "Leise Andachtsmusik einschalten",
+  "audioOff": "Andachtsmusik ausschalten",
+  "statusIdle": "Noch nicht begonnen — markieren Sie Ihren ersten Tag.",
+  "statusDay33": "Tag {n} von {total} · {pct}%",
+  "statusMarked": "heute markiert, kehren Sie morgen zurück",
+  "statusDone33": "33 Tage vollendet. Gelobt sei Jesus Christus!",
+  "confirmReset": "Den gesamten aufgezeichneten Fortschritt zurücksetzen?",
+  "iconSound": "\u003csvg class=\"ico\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"currentColor\" d=\"M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z\"/\u003e\u003cpath class=\"wave\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" d=\"M15.6 8.6a4.6 4.6 0 0 1 0 6.8M18.4 6a8.2 8.2 0 0 1 0 12\"/\u003e\u003c/svg\u003e",
+  "iconMute": "\u003csvg class=\"ico\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"currentColor\" d=\"M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z\"/\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" d=\"m16 9.5 5 5m0-5-5 5\"/\u003e\u003c/svg\u003e",
+  "speechLang": "de-DE",
+  "voiceMale": "Männlich",
+  "voiceFemale": "Weiblich",
+  "voicePlay": "Vorlesen",
+  "voiceResume": "Weiter",
+  "voiceIdle": "Wählen Sie eine Stimme und drücken Sie „Vorlesen“.",
+  "voiceReading": "Es wird gelesen: {section}",
+  "voicePaused": "Vorlesen angehalten.",
+  "voiceDone": "Vorlesen beendet.",
+  "voiceNoGender": "Keine {gender} Stimme für Deutsch in Ihrem Browser verfügbar — es wird die vorhandene verwendet.",
+  "voiceNoVoice": "In Ihrem Browser ist keine deutsche Stimme installiert. Bitte fügen Sie ein Sprachpaket hinzu.",
+  "voiceUnsupported": "Ihr Browser unterstützt keine Sprachsynthese.",
+  "installLabel": "App installieren",
+  "installAction": "Installieren",
+  "installedNote": "Die App ist installiert. Die Gebete sind offline verfügbar.",
+  "offlineReady": "Alle Gebete gespeichert — Sie können ohne Netz beten.",
+  "offlineStored": "Auf diesem Gerät gespeichert: {done} von {total}",
+  "offlineComplete": "Alle Gebete sind auf diesem Gerät gespeichert — die App funktioniert ohne Verbindung.",
+  "offlineNow": "Keine Verbindung — die Gebete sind weiterhin da.",
+  "backOnline": "Verbindung wiederhergestellt.",
+  "updateReady": "Ein aktualisiertes Gebetbuch ist bereit.",
+  "updateAction": "Aktualisieren",
+  "iconOffline": "\u003csvg class=\"ico ico-sm\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" d=\"M4 4l16 16M7.8 8.2A5.6 5.6 0 0 0 6.4 19h10.2M8.6 5.4A6.4 6.4 0 0 1 18.4 11a4 4 0 0 1 2.2 6.6\"/\u003e\u003c/svg\u003e",
+  "iconCheck": "\u003csvg class=\"ico ico-sm\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m5 12.5 4.5 4.5L19 7\"/\u003e\u003c/svg\u003e"
+}
+  </script>
+  <script src="../assets/js/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{
+  "id": "/Lord/it/",
+  "name": "L’Esaltazione del Preziosissimo Sangue di Nostro Signore Gesù Cristo",
+  "short_name": "Preziosissimo Sangue",
+  "description": "La preghiera dodicennale al Preziosissimo Sangue, l’atto di consacrazione, la preghiera di santa Geltrude, la Freccia d’Oro e il Cuore Eucaristico di Gesù.",
+  "lang": "it",
+  "dir": "ltr",
+  "start_url": "/Lord/it/",
+  "scope": "/Lord/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#0a0304",
+  "theme_color": "#0a0304",
+  "orientation": "any",
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "/Lord/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "La devozione al santo Sangue di Dio",
+      "short_name": "Preghiera dodicennale",
+      "url": "/Lord/it/#devotion",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Atto di consacrazione personale al Preziosissimo Sangue di Gesù Cristo",
+      "short_name": "Consacrazione",
+      "url": "/Lord/it/#consecration",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "La preghiera di santa Geltrude la Grande",
+      "short_name": "S. Geltrude",
+      "url": "/Lord/it/#gertrude",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "L’atto di adorazione «La Freccia d’Oro»",
+      "short_name": "Freccia d’Oro",
+      "url": "/Lord/it/#golden-arrow",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "id": "/Lord/en/",
+  "name": "The Exaltation of the Most Precious Blood of Our Lord Jesus Christ",
+  "short_name": "The Precious Blood",
+  "description": "The 12-year prayer to the Most Precious Blood, the Act of Consecration, St Gertrude’s prayer, the Golden Arrow, the Shoulder Wound and the Eucharistic Heart.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/Lord/en/",
+  "scope": "/Lord/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#0a0304",
+  "theme_color": "#0a0304",
+  "orientation": "any",
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "/Lord/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "The Devotion to the Holy Blood of God",
+      "short_name": "Twelve-year prayer",
+      "url": "/Lord/en/#devotion",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Act of Personal Consecration to the Most Precious Blood of Jesus Christ",
+      "short_name": "Consecration",
+      "url": "/Lord/en/#consecration",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "The Prayer of St Gertrude the Great",
+      "short_name": "St Gertrude",
+      "url": "/Lord/en/#gertrude",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "The Act of Adoration “The Golden Arrow”",
+      "short_name": "The Golden Arrow",
+      "url": "/Lord/en/#golden-arrow",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

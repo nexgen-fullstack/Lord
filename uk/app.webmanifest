@@ -1,0 +1,99 @@
+{
+  "id": "/Lord/uk/",
+  "name": "Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа",
+  "short_name": "Найсвятіша Кров",
+  "description": "12-річна молитва до Найсвятішої Крові, акт посвячення, молитва св. Ґертруди, «Золота стріла», молитва до св. Рани Рамена та Євхаристійного Серця Ісуса.",
+  "lang": "uk",
+  "dir": "ltr",
+  "start_url": "/Lord/uk/",
+  "scope": "/Lord/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#0a0304",
+  "theme_color": "#0a0304",
+  "orientation": "any",
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "/Lord/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Lord/assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Набожество до Святої Божої Крові",
+      "short_name": "12-річна молитва",
+      "url": "/Lord/uk/#devotion",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Акт особистого посвячення себе Найсвятішій Крові Ісуса Христа",
+      "short_name": "Посвячення",
+      "url": "/Lord/uk/#consecration",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Молитва св. Ґертруди Великої",
+      "short_name": "св. Ґертруда",
+      "url": "/Lord/uk/#gertrude",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Акт поклоніння «Золота стріла»",
+      "short_name": "Золота Стріла",
+      "url": "/Lord/uk/#golden-arrow",
+      "icons": [
+        {
+          "src": "/Lord/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
