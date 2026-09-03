@@ -1,0 +1,6 @@
+# The built site IS the deployable artefact and is committed on purpose:
+# GitHub Pages serves this repo as-is, with no build step of its own.
+node_modules/
+npm-debug.log*
+.DS_Store
+Thumbs.db

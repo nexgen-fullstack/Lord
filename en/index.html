@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Most Precious Blood of Jesus Christ — Prayers</title>
+  <meta name="description" content="The 12-year prayer to the Most Precious Blood, the Act of Consecration, St Gertrude’s prayer, the Golden Arrow, the Shoulder Wound and the Eucharistic Heart.">
+  <meta name="keywords" content="Most Precious Blood, Precious Blood devotion, twelve year prayer, 12 year prayer, St Gertrude the Great prayer, Golden Arrow prayer, Holy Shoulder Wound, Eucharistic Heart of Jesus, Catholic prayers, souls in purgatory">
+  <meta name="author" content="Sanguis Christi">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0304">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Runs before the stylesheets: a prayer always opens at its beginning. -->
+  <script>
+  (function () {
+    var html = document.documentElement;
+
+    /* Suspends `scroll-behavior: smooth` for the opening moments. Without it
+       the very first jump is animated: the app appears to sail down into a
+       prayer on its own before the reader has touched anything. */
+    html.className += (html.className ? ' ' : '') + 'js-boot';
+
+    var fresh = true;
+    try {
+      fresh = !sessionStorage.getItem('pb.session');
+      sessionStorage.setItem('pb.session', '1');
+    } catch (e) { /* private mode — treat every load as fresh */ }
+
+    if (fresh) {
+      /* Only for this first load: left on 'manual' it would also stop Back
+         from returning the reader to where they were. */
+      try {
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      } catch (e) {}
+
+      var standalone = false;
+      try {
+        standalone = matchMedia('(display-mode: standalone)').matches ||
+                     matchMedia('(display-mode: minimal-ui)').matches ||
+                     matchMedia('(display-mode: fullscreen)').matches ||
+                     navigator.standalone === true;
+      } catch (e) {}
+
+      /* Inside the installed app there are no inbound deep links, so a
+         fragment on a cold start can only be last session's leftover. */
+      if (standalone && location.hash && location.hash !== '#hero') {
+        try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+      }
+    }
+
+    /* The browser's own fragment jump happens before the artwork and the fonts
+       have settled, so it lands short and the reader arrives above the prayer
+       they asked for. Land again once everything has its final height —
+       explicitly instant, never animated. */
+    function land() {
+      var id = location.hash ? decodeURIComponent(location.hash.slice(1)) : '';
+      var target = id && document.getElementById(id);
+      if (target) {
+        try { target.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+        catch (e) { target.scrollIntoView(true); }
+      } else if (fresh) {
+        try { scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
+        catch (e) { scrollTo(0, 0); }
+      }
+    }
+
+    addEventListener('load', function () {
+      land();
+      /* A late font swap or a decoded image can still move the target; one
+         more pass a beat later is what makes the landing reliable. */
+      requestAnimationFrame(land);
+      setTimeout(function () {
+        land();
+        html.className = html.className.replace(/(^|\s)js-boot(\s|$)/, '$1').trim();
+        try { history.scrollRestoration = 'auto'; } catch (e) {}
+      }, 250);
+    }, { once: true });
+  })();
+  </script>
+
+  <!-- Canonical + language targeting -->
+  <link rel="canonical" href="https://nexgen-fullstack.github.io/Lord/en/">
+  <link rel="alternate" hreflang="uk" href="https://nexgen-fullstack.github.io/Lord/uk/">
+  <link rel="alternate" hreflang="en" href="https://nexgen-fullstack.github.io/Lord/en/">
+  <link rel="alternate" hreflang="de" href="https://nexgen-fullstack.github.io/Lord/de/">
+  <link rel="alternate" hreflang="it" href="https://nexgen-fullstack.github.io/Lord/it/">
+  <link rel="alternate" hreflang="pt" href="https://nexgen-fullstack.github.io/Lord/pt/">
+  <link rel="alternate" hreflang="es" href="https://nexgen-fullstack.github.io/Lord/es/">
+  <link rel="alternate" hreflang="x-default" href="https://nexgen-fullstack.github.io/Lord/uk/">
+  <meta http-equiv="content-language" content="en">
+  <meta name="language" content="English">
+
+  <!-- Geo targeting (Cloudflare country routing lives in /functions/_middleware.js) -->
+  <meta name="geo.region" content="US">
+  <meta name="geo.placename" content="United States">
+  <meta name="geo.country" content="US">
+  <meta name="distribution" content="global">
+  <meta name="coverage" content="Worldwide">
+  <meta name="target" content="all">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Exaltation of the Most Precious Blood of Our Lord Jesus Christ">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="uk_UA">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="it_IT">
+  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:title" content="The Exaltation of the Most Precious Blood of Our Lord Jesus Christ">
+  <meta property="og:description" content="The 12-year prayer to the Most Precious Blood, the Act of Consecration, St Gertrude’s prayer, the Golden Arrow, the Shoulder Wound and the Eucharistic Heart.">
+  <meta property="og:url" content="https://nexgen-fullstack.github.io/Lord/en/">
+  <meta property="og:image" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
+  <meta property="og:image:secure_url" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="832">
+  <meta property="og:image:height" content="1263">
+  <meta property="og:image:alt" content="Jesus Christ upon the Cross, angels gathering the Most Precious Blood into golden chalices">
+  <meta property="article:section" content="Catholic devotion">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Exaltation of the Most Precious Blood of Our Lord Jesus Christ">
+  <meta name="twitter:description" content="The 12-year prayer to the Most Precious Blood, the Act of Consecration, St Gertrude’s prayer, the Golden Arrow, the Shoulder Wound and the Eucharistic Heart.">
+  <meta name="twitter:image" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
+  <meta name="twitter:image:alt" content="Jesus Christ upon the Cross, angels gathering the Most Precious Blood into golden chalices">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0304'/%3E%3Cpath d='M13.6 3h4.8v6.6H25v4.8h-6.6V29h-4.8V14.4H7V9.6h6.6z' fill='%23d4af37'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="../assets/icons/icon-512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+
+  <!-- Installable app. One manifest per locale, so launching the installed
+       icon opens this language directly instead of bouncing through "/". -->
+  <link rel="manifest" href="./app.webmanifest">
+  <meta name="application-name" content="The Precious Blood">
+  <meta name="apple-mobile-web-app-title" content="The Precious Blood">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Self-hosted fonts. No third-party stylesheet in the critical path, and
+       the faces are ordinary same-origin files, so they cache for offline. -->
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/cormorant-garamond-400-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-latin.woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+
+  <link rel="preload" as="image" href="../assets/img/Jesus.jpeg" fetchpriority="high">
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://nexgen-fullstack.github.io/Lord/#organization",
+      "name": "Sanguis Christi",
+      "legalName": "Sanguis Christi — Devotion to the Most Precious Blood",
+      "url": "https://nexgen-fullstack.github.io/Lord/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+        "width": 832,
+        "height": 1263
+      },
+      "description": "The 12-year prayer to the Most Precious Blood, the Act of Consecration, St Gertrude’s prayer, the Golden Arrow, the Shoulder Wound and the Eucharistic Heart.",
+      "knowsLanguage": [
+        "uk",
+        "en",
+        "de",
+        "it",
+        "pt",
+        "es"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "Worldwide"
+      },
+      "availableLanguage": [
+        {
+          "@type": "Language",
+          "name": "Українська",
+          "alternateName": "uk"
+        },
+        {
+          "@type": "Language",
+          "name": "English",
+          "alternateName": "en"
+        },
+        {
+          "@type": "Language",
+          "name": "Deutsch",
+          "alternateName": "de"
+        },
+        {
+          "@type": "Language",
+          "name": "Italiano",
+          "alternateName": "it"
+        },
+        {
+          "@type": "Language",
+          "name": "Português",
+          "alternateName": "pt"
+        },
+        {
+          "@type": "Language",
+          "name": "Español",
+          "alternateName": "es"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nexgen-fullstack.github.io/Lord/#website",
+      "url": "https://nexgen-fullstack.github.io/Lord/",
+      "name": "The Exaltation of the Most Precious Blood of Our Lord Jesus Christ",
+      "alternateName": "Sanguis Christi",
+      "description": "The 12-year prayer to the Most Precious Blood, the Act of Consecration, St Gertrude’s prayer, the Golden Arrow, the Shoulder Wound and the Eucharistic Heart.",
+      "inLanguage": [
+        "uk",
+        "en",
+        "de",
+        "it",
+        "pt",
+        "es"
+      ],
+      "publisher": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "copyrightHolder": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://nexgen-fullstack.github.io/Lord/#app",
+      "name": "The Exaltation of the Most Precious Blood of Our Lord Jesus Christ",
+      "alternateName": "The Precious Blood",
+      "url": "https://nexgen-fullstack.github.io/Lord/en/",
+      "applicationCategory": "LifestyleApplication",
+      "applicationSubCategory": "Prayer",
+      "operatingSystem": "Android, iOS, Windows, macOS, Linux",
+      "browserRequirements": "Requires JavaScript. Works offline once opened.",
+      "inLanguage": [
+        "uk",
+        "en",
+        "de",
+        "it",
+        "pt",
+        "es"
+      ],
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "featureList": [
+        "The prayer book on your phone",
+        "All prayers saved — you can pray offline.",
+        "Voice prayer",
+        "Thirty-three day progress"
+      ],
+      "screenshot": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+      "softwareHelp": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/en/#webpage"
+      },
+      "publisher": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://nexgen-fullstack.github.io/Lord/en/#webpage",
+      "url": "https://nexgen-fullstack.github.io/Lord/en/",
+      "name": "The Most Precious Blood of Jesus Christ — Prayers",
+      "description": "The 12-year prayer to the Most Precious Blood, the Act of Consecration, St Gertrude’s prayer, the Golden Arrow, the Shoulder Wound and the Eucharistic Heart.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#website"
+      },
+      "about": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/en/#devotion"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+        "width": 832,
+        "height": 1263,
+        "caption": "Jesus Christ upon the Cross, angels gathering the Most Precious Blood into golden chalices"
+      },
+      "breadcrumb": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/en/#breadcrumb"
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://nexgen-fullstack.github.io/Lord/en/"
+        ]
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".section-title",
+          ".prayer-text"
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://nexgen-fullstack.github.io/Lord/en/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "The Exaltation of the Most Precious Blood of Our Lord Jesus Christ",
+          "item": "https://nexgen-fullstack.github.io/Lord/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "English",
+          "item": "https://nexgen-fullstack.github.io/Lord/en/"
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://nexgen-fullstack.github.io/Lord/en/#devotion",
+      "headline": "The Most Precious Blood of Jesus Christ — Prayers",
+      "alternativeHeadline": "The Exaltation of the Most Precious Blood of Our Lord Jesus Christ",
+      "description": "The 12-year prayer to the Most Precious Blood, the Act of Consecration, St Gertrude’s prayer, the Golden Arrow, the Shoulder Wound and the Eucharistic Heart.",
+      "articleSection": "Catholic devotion",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/en/#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/en/#webpage"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg",
+        "width": 832,
+        "height": 1263
+      },
+      "publisher": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "author": {
+        "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
+      },
+      "keywords": "Most Precious Blood, Precious Blood devotion, twelve year prayer, 12 year prayer, St Gertrude the Great prayer, Golden Arrow prayer, Holy Shoulder Wound, Eucharistic Heart of Jesus, Catholic prayers, souls in purgatory",
+      "genre": "Prayer",
+      "datePublished": "2026-01-01",
+      "dateModified": "2026-09-03",
+      "isAccessibleForFree": true,
+      "hasPart": [
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/en/#devotion",
+          "name": "The Devotion to the Holy Blood of God",
+          "alternateName": "The prayer said every day for twelve years",
+          "position": 1,
+          "inLanguage": "en",
+          "genre": "Prayer",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/en/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/en/#devotion"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/en/#consecration",
+          "name": "Act of Personal Consecration to the Most Precious Blood of Jesus Christ",
+          "position": 2,
+          "inLanguage": "en",
+          "genre": "Prayer",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/en/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/en/#consecration"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/en/#gertrude",
+          "name": "The Prayer of St Gertrude the Great",
+          "alternateName": "For the release of the souls in Purgatory",
+          "position": 3,
+          "inLanguage": "en",
+          "genre": "Prayer",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/en/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/en/#gertrude"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/en/#golden-arrow",
+          "name": "The Act of Adoration “The Golden Arrow”",
+          "alternateName": "In praise of the Most Holy Name of God",
+          "position": 4,
+          "inLanguage": "en",
+          "genre": "Prayer",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/en/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/en/#golden-arrow"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/en/#shoulder-wound",
+          "name": "Prayer to the Holy Shoulder Wound of Christ",
+          "position": 5,
+          "inLanguage": "en",
+          "genre": "Prayer",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/en/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/en/#shoulder-wound"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://nexgen-fullstack.github.io/Lord/en/#eucharistic-heart",
+          "name": "Prayer to the Eucharistic Heart of Jesus",
+          "alternateName": "The devotion of thirty-three days",
+          "position": 6,
+          "inLanguage": "en",
+          "genre": "Prayer",
+          "isPartOf": {
+            "@id": "https://nexgen-fullstack.github.io/Lord/en/#devotion"
+          },
+          "isAccessibleForFree": true,
+          "url": "https://nexgen-fullstack.github.io/Lord/en/#eucharistic-heart"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body data-lang="en">
+
+  <a class="skip-link" href="#devotion">Skip to the prayers</a>
+
+  <canvas id="bloodCanvas" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div class="print-header" aria-hidden="true">
+    <strong>The Exaltation of the Most Precious Blood of Our Lord Jesus Christ</strong>
+    <span>nexgen-fullstack.github.io/Lord/en/</span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <a class="brand" href="#hero">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg>
+          <span class="brand-text">The Precious Blood</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Prayer sections">
+          <ul>
+            <li><a href="#hero" data-nav-link>Home</a></li>
+            <li><a href="#devotion" data-nav-link>Twelve-year prayer</a></li>
+            <li><a href="#consecration" data-nav-link>Consecration</a></li>
+            <li><a href="#gertrude" data-nav-link>St Gertrude</a></li>
+            <li><a href="#golden-arrow" data-nav-link>The Golden Arrow</a></li>
+            <li><a href="#shoulder-wound" data-nav-link>Shoulder Wound</a></li>
+            <li><a href="#eucharistic-heart" data-nav-link>Eucharistic Heart</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-tools">
+          <button type="button" class="btn btn-icon" data-audio-toggle
+                  aria-pressed="false" aria-label="Play quiet devotional music" title="Play quiet devotional music">
+            <span data-audio-icon><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m16 9.5 5 5m0-5-5 5"/></svg></span>
+          </button>
+          <div class="voice" data-voice>
+          <button type="button" class="btn btn-icon" data-voice-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="voicePanel"
+                  aria-label="Read the prayers aloud" title="Read the prayers aloud">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 3.4a2.6 2.6 0 0 1 2.6 2.6v5a2.6 2.6 0 0 1-5.2 0V6A2.6 2.6 0 0 1 12 3.4Z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6.6 11a5.4 5.4 0 0 0 10.8 0M12 16.4V20.6M9.2 20.6h5.6"/></svg>
+          </button>
+          <div class="voice-panel" id="voicePanel" role="dialog"
+               aria-label="Voice prayer" hidden>
+            <p class="voice-panel-title">Voice prayer</p>
+
+            <div class="voice-field">
+              <span class="voice-legend" id="voiceGenderLegend">Voice</span>
+              <div class="voice-genders" role="radiogroup" aria-labelledby="voiceGenderLegend">
+                <button type="button" class="voice-gender" role="radio" aria-checked="true"
+                        data-gender="female">Female</button>
+                <button type="button" class="voice-gender" role="radio" aria-checked="false"
+                        data-gender="male">Male</button>
+              </div>
+            </div>
+
+            <div class="voice-actions">
+              <button type="button" class="btn btn-ghost" data-voice-play>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.2v13.6L19 12z"/></svg><span data-voice-play-label>Read</span>
+              </button>
+              <button type="button" class="btn btn-ghost" data-voice-pause disabled>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 5h3.4v14H7zm6.6 0H17v14h-3.4z"/></svg><span>Pause</span>
+              </button>
+              <button type="button" class="btn btn-ghost" data-voice-stop disabled>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.6" fill="currentColor"/></svg><span>Stop</span>
+              </button>
+            </div>
+
+            <p class="voice-status" data-voice-status role="status" aria-live="polite">Choose a voice and press “Read”.</p>
+          </div>
+        </div>
+          <div class="install" data-install-wrap hidden>
+          <button type="button" class="btn btn-icon" data-install-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="installPanel"
+                  aria-label="Install the app" title="Install the app">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="2.6" width="12" height="18.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 7.4v6.4m0 0 2.4-2.4M12 13.8l-2.4-2.4M10.4 18h3.2"/></svg>
+          </button>
+          <div class="install-panel" id="installPanel" role="dialog"
+               aria-label="The prayer book on your phone" hidden>
+            <p class="install-title">The prayer book on your phone</p>
+            <p class="install-body">Install the app and every prayer stays with you, with or without a signal.</p>
+            <p class="install-ios" data-install-ios hidden>In Safari, tap Share, then “Add to Home Screen”.</p>
+            <button type="button" class="btn btn-primary install-go" data-install-go hidden>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="2.6" width="12" height="18.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 7.4v6.4m0 0 2.4-2.4M12 13.8l-2.4-2.4M10.4 18h3.2"/></svg><span>Install</span>
+            </button>
+          </div>
+        </div>
+          <button type="button" class="btn btn-icon" data-print
+                  aria-label="Print the prayers" title="Print the prayers"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M7 9V3h10v6M7 19H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 15h10v6H7z"/></svg></button>
+          <div class="lang-switch" data-lang-switch>
+          <button type="button" class="btn btn-lang" data-lang-toggle
+                  aria-expanded="false" aria-haspopup="true" aria-controls="langMenu"
+                  aria-label="Choose language: English">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 0c-2.6 2.3-4 5.3-4 9s1.4 6.7 4 9c2.6-2.3 4-5.3 4-9s-1.4-6.7-4-9ZM3.5 9h17M3.5 15h17"/></svg>
+            <span class="flag" aria-hidden="true">🇬🇧</span>
+            <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <ul class="lang-menu" id="langMenu" role="menu" aria-label="Choose language" hidden>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../uk/" hreflang="uk" lang="uk"
+                 data-lang="uk">
+                <span class="flag" aria-hidden="true">🇺🇦</span>
+                <span class="lang-name">Українська</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option is-current"
+                 href="../en/" hreflang="en" lang="en"
+                 data-lang="en" aria-current="true">
+                <span class="flag" aria-hidden="true">🇬🇧</span>
+                <span class="lang-name">English</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../de/" hreflang="de" lang="de"
+                 data-lang="de">
+                <span class="flag" aria-hidden="true">🇩🇪</span>
+                <span class="lang-name">Deutsch</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../it/" hreflang="it" lang="it"
+                 data-lang="it">
+                <span class="flag" aria-hidden="true">🇮🇹</span>
+                <span class="lang-name">Italiano</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../pt/" hreflang="pt" lang="pt"
+                 data-lang="pt">
+                <span class="flag" aria-hidden="true">🇵🇹</span>
+                <span class="lang-name">Português</span>
+              </a>
+            </li>
+            <li role="none">
+              <a role="menuitem" class="lang-option"
+                 href="../es/" hreflang="es" lang="es"
+                 data-lang="es">
+                <span class="flag" aria-hidden="true">🇪🇸</span>
+                <span class="lang-name">Español</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+          <button type="button" class="btn btn-icon menu-btn" data-menu-toggle
+                  aria-expanded="false" aria-controls="mobileDrawer"
+                  aria-label="Open menu"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        </div>
+      </div>
+      <div class="read-progress" aria-hidden="true"><span data-read-progress></span></div>
+    </header>
+
+    <div class="drawer" id="mobileDrawer" hidden>
+      <div class="drawer-backdrop" data-menu-close></div>
+      <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Prayer sections">
+        <button type="button" class="btn btn-icon drawer-close" data-menu-close
+                aria-label="Close menu"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <nav class="drawer-nav" aria-label="Prayer sections">
+          <ul>
+            <li><a href="#hero" data-nav-link>Home</a></li>
+            <li><a href="#devotion" data-nav-link>Twelve-year prayer</a></li>
+            <li><a href="#consecration" data-nav-link>Consecration</a></li>
+            <li><a href="#gertrude" data-nav-link>St Gertrude</a></li>
+            <li><a href="#golden-arrow" data-nav-link>The Golden Arrow</a></li>
+            <li><a href="#shoulder-wound" data-nav-link>Shoulder Wound</a></li>
+            <li><a href="#eucharistic-heart" data-nav-link>Eucharistic Heart</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+  <main id="main">
+    <div class="container">
+      <section id="hero" class="hero" aria-labelledby="heroTitle">
+          <div class="hero-body">
+            <h1 class="hero-title" id="heroTitle">The Exaltation of the Most Precious Blood of Our Lord Jesus Christ</h1>
+            <blockquote class="hero-quote">
+              <p>“Thou hast redeemed me, O Lord, by Thy Most Precious Blood, out of every tribe and tongue and people and nation.”</p>
+              <cite>Revelation 5:9</cite>
+            </blockquote>
+
+            <figure class="crucifix-frame">
+              <img class="crucifix-img" src="../assets/img/Jesus.jpeg"
+                   alt="Jesus Christ upon the Cross, angels gathering the Most Precious Blood into golden chalices"
+                   width="832" height="1263"
+                   fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+
+          <a class="scroll-cue no-print" href="#devotion">
+            <span>To the prayers</span>
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+          </a>
+        </section>
+
+      <section id="devotion" class="section-card reveal" aria-labelledby="devotion-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">01</p>
+          <h2 class="section-title" id="devotion-title">The Devotion to the Holy Blood of God</h2>
+          <p class="section-subtitle">The prayer said every day for twelve years</p>
+        </header>
+        <div class="prayer-text">
+          <p class="chant">Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison.</p>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">O Christ,</span> <span class="litany-response">hear me.</span></li>
+            <li class="litany-item"><span class="litany-call">O Christ,</span> <span class="litany-response">graciously hear me.</span></li>
+            <li class="litany-item"><span class="litany-call">God the Father of Heaven,</span> <span class="litany-response">have mercy on me.</span></li>
+            <li class="litany-item"><span class="litany-call">God the Son, Redeemer of the world,</span> <span class="litany-response">have mercy on me.</span></li>
+            <li class="litany-item"><span class="litany-call">God the Holy Spirit,</span> <span class="litany-response">have mercy on me.</span></li>
+            <li class="litany-item"><span class="litany-call">Holy Trinity, one God,</span> <span class="litany-response">have mercy on me.</span></li>
+            <li class="litany-item"><span class="litany-call">Holy Mary,</span> <span class="litany-response">pray for me.</span></li>
+            <li class="litany-item"><span class="litany-call">Mother of the suffering Saviour,</span> <span class="litany-response">pray for me.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed at His circumcision,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed in the scourging,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed beneath the crown of thorns,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed upon the way of the Cross,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed at the nailing of Thy most holy hands to the Cross,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed at the nailing of Thy most holy feet to the Cross,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed from Thy most Sacred Heart pierced by the lance,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed for me, an unworthy sinner,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed to the last drop for me and for my sins,</span> <span class="litany-response">have mercy on me.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">O Jesus, for Thy Most Precious Blood poured out for me upon the Cross,</span> <span class="litany-response">I give Thee thanks.</span></li>
+            <li class="litany-item"><span class="litany-call">O Jesus, for Thy Most Precious Blood dishonoured upon Golgotha,</span> <span class="litany-response">I beg Thy pardon.</span></li>
+            <li class="litany-item"><span class="litany-call">O Jesus, for every profanation of Thy Most Precious Blood at Holy Mass by unworthy Communions,</span> <span class="litany-response">I beg Thy pardon.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">I, a sinner, beseech Thee, O God:</span> <span class="litany-response">save me by Thy Most Precious Blood.</span></li>
+            <li class="litany-item"><span class="litany-call">I, a sinner, beseech Thee, O God:</span> <span class="litany-response">shelter me by Thy Most Precious Blood.</span></li>
+            <li class="litany-item"><span class="litany-call">I, a sinner, beseech Thee, O God:</span> <span class="litany-response">give me to drink of Thy Most Precious Blood.</span></li>
+          </ul>
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Lamb of God, who takest away the sins of the world,</span> <span class="litany-response">graciously hear me, O Lord.</span></li>
+            <li class="litany-item"><span class="litany-call">Lamb of God, who takest away the sins of the world,</span> <span class="litany-response">forgive me, O Lord.</span></li>
+            <li class="litany-item"><span class="litany-call">Lamb of God, who takest away the sins of the world,</span> <span class="litany-response">have mercy on me, O Lord.</span></li>
+          </ul>
+          <p class="chant">Kyrie eleison, Christe eleison (three times)</p>
+          <p class="lead">O Most Precious Blood of our Lord Jesus Christ, be exalted and glorified by us all, now and always and unto the ages of ages. Amen.</p>
+          <hr class="sacred-rule" aria-hidden="true">
+          <p>Almighty God, my Saviour: with one single drop of Thy Most Precious Blood Thou couldst have redeemed a million worlds. Yet out of Thy boundless love for me, a sinner, Thou didst pour out the very last drop of Thy Most Precious Blood, offering it to God the Father for my sins.</p>
+          <p>O Jesus, Thou dost offer it daily upon the altars of the whole world at every Holy Mass. Thou dost pour out Thy Blood under the appearance of wine and offer it for my redemption. Thou hast shed it to nourish my soul unto everlasting life.</p>
+          <p>I, a sinner, fall down in humility before Thy majesty and implore Thee, for the sake of Thy boundless mercy: have mercy on me, a sinner. O Saviour, I beg Thee to turn back hardened sinners, that they may be converted with all speed from that dreadful state. Renew the holy faith among all nations, that they may return to unity.</p>
+          <p>O Lord, this is our great desire: that all the peoples of the world should serve Thee alone and glorify Thy Most Precious Blood.</p>
+          <p>O God, have mercy upon the souls in purgatory, for they await Thy pardon.</p>
+          <p>May Thy Most Precious Blood, poured out for our sins, obtain their forgiveness from the Heavenly Father and lead them into everlasting happiness. Amen.</p>
+          <hr class="sacred-rule" aria-hidden="true">
+          <p>Lord Jesus Christ, my Saviour, shelter me from the snares of diabolical temptation by Thy Most Precious Blood.</p>
+          <p>Lord Jesus Christ, my Saviour, help me by Thy Most Precious Blood to overcome temptation.</p>
+          <p>Lord Jesus Christ, my Saviour, guard me and lead me after Thee for the sake of Thy Most Precious Blood.</p>
+          <p>Lord Jesus Christ, my Saviour, guard for us from every danger the Holy Father with all the clergy and Holy Church, for the sake of Thy Most Precious Blood. Amen.</p>
+          <aside class="instruction-box"><h3 class="box-title">The rule of prayer</h3><p><strong>Our Father…</strong> (7 times) · <strong>Hail Mary…</strong> (7 times) · <strong>Glory be to the Father…</strong> (7 times)</p><p>The prayer is said <strong>every day for twelve years</strong>, without interruption.</p></aside>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>The divine promises</span></h3><p>Whoever says this prayer every day for twelve years, praying without interruption, shall not pass through purgatory.</p><p>Whoever has begun to pray it and dies after half a year shall receive all these great graces: five souls of that family will receive a vocation to the religious state, and to the fourth generation none of that family will be in hell.</p><p>This twelve-year prayer has power to cleanse the soul of all its iniquities. <em>Lord, give Thy blessing!</em></p></aside>
+        </div>
+      </section>
+
+      <section id="consecration" class="section-card reveal" aria-labelledby="consecration-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">02</p>
+          <h2 class="section-title" id="consecration-title">Act of Personal Consecration to the Most Precious Blood of Jesus Christ</h2>
+          
+        </header>
+        <div class="prayer-text">
+          <p>In full awareness of my own nothingness and of Thy greatness, O merciful Saviour, I fall down at Thy feet and thank Thee for the countless proofs of grace which Thou hast shown to me, an ungrateful creature, and above all that Thou hast freed me by Thy Most Precious Blood from the corrupting power of Satan. In the presence of my beloved Mother Mary, of my Guardian Angel, of my holy Patrons and of the whole Court of Heaven, I consecrate myself, O most loving Jesus, with all the sincerity of my heart and most freely, to Thy Most Precious Blood, by which Thou hast redeemed the whole world from sin, from death and from hell.</p>
+          <p>I, <span class="user-name">(name)</span>, promise Thee, trusting in the help of Thy grace, to awaken and to spread with all my strength and according to all my means the devotion to Thy Most Precious Blood, the Price of our Redemption, so that Thy Blood, worthy of the highest veneration, may be honoured and loved by all.</p>
+          <p>In this way I wish to make amends for my own unfaithfulness towards Thy Most Precious Blood and Thy Love, and to make satisfaction to Thee for the countless profanations and outrages which men inflict upon that Most Precious Price of our salvation. Oh, if only my own sins, my lukewarmness and every outrage by which I have ever dishonoured Thee, O Most Precious Blood, could be returned to nothingness!</p>
+          <p>Behold, dearest Jesus, I offer Thee also the love, the honour and the adoration which Thy most holy Mother, Thy faithful disciples and all the saints have rendered to Thy Most Precious Blood. I beseech Thee, deign to think no more upon my former unfaithfulness and lukewarmness, and deign to forgive all who dishonour Thee. Sprinkle me, O Divine Saviour, with Thy Most Precious Blood, and with it all mankind, that we may love Thee at once with our whole heart, O crucified Love, and may honour most worthily for all time the Price of our Redemption. Amen.</p>
+        </div>
+      </section>
+
+      <section id="gertrude" class="section-card reveal" aria-labelledby="gertrude-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">03</p>
+          <h2 class="section-title" id="gertrude-title">The Prayer of St Gertrude the Great</h2>
+          <p class="section-subtitle">For the release of the souls in Purgatory</p>
+        </header>
+        <div class="prayer-text">
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>The promise of Our Lord Jesus</span></h3><p>Our Lord Jesus revealed to St Gertrude the Great that a single recitation of this prayer releases <strong>one thousand souls from Purgatory</strong>.</p></aside>
+          <p class="lead">“Eternal Father, I offer Thee the Most Precious Blood of Thy Divine Son, Jesus, in union with all the Masses said throughout the world this day, for all the holy souls in Purgatory, for sinners everywhere, for sinners in the Universal Church, for those in my own home and within my family. Amen.”</p>
+          <p class="note">(An indulgence of 500 days.)</p>
+        </div>
+      </section>
+
+      <section id="golden-arrow" class="section-card reveal" aria-labelledby="golden-arrow-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">04</p>
+          <h2 class="section-title" id="golden-arrow-title">The Act of Adoration “The Golden Arrow”</h2>
+          <p class="section-subtitle">In praise of the Most Holy Name of God</p>
+        </header>
+        <div class="prayer-text">
+          <p class="poem">May the most holy,<br>Most sacred, most adorable,<br>Most incomprehensible and ineffable<br>Name of God be for ever<br>Praised, blessed, loved,<br>Adored and glorified<br>In Heaven, on earth and in the depths below,<br>By all the creatures of God<br>And by the Sacred Heart<br>Of Our Lord Jesus Christ<br>In the Most Holy Sacrament of the Altar. Amen.</p>
+          <p class="note">(This act of adoration belongs to the Confraternity of the Holy Face of Jesus.)</p>
+        </div>
+      </section>
+
+      <section id="shoulder-wound" class="section-card reveal" aria-labelledby="shoulder-wound-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">05</p>
+          <h2 class="section-title" id="shoulder-wound-title">Prayer to the Holy Shoulder Wound of Christ</h2>
+          
+        </header>
+        <div class="prayer-text">
+          <p>O most loving Jesus, my most gentle Lamb of God! I, a poor sinner, salute and adore that most holy Wound of Thine which caused Thee so exceeding great a pain when Thou didst bear the heavy Cross upon Thy divine Shoulder. That pain was heavier and more bitter than all the other Wounds of Thy holy Body. I love Thee, I give Thee honour and I bow down before Thee from the depths of my heart.</p>
+          <p>I thank Thee for that deepest Wound of Thy Shoulder. Humbly I beseech Thee, in the name of the suffering Thou didst endure through the Wound of Thy Shoulder, and in the name of Thy heavy Cross which Thou didst carry upon that holy Wound: have mercy upon me, an unworthy sinner. Forgive me all my sins, and grant that, walking in Thy blood-stained footsteps, I may attain to a blessed eternity. Amen.</p>
+          <aside class="instruction-box"><h3 class="box-title">The rule of prayer</h3><p><strong>Our Father…</strong> (3 times) · <strong>Hail Mary…</strong> (3 times)</p><p><em>Blessed be Thou, O Lord, hidden in the Most Holy Sacrament.</em> (3 times)</p></aside>
+          <p class="lead">O Most Precious Blood, flowing from the sacred Head of our Lord Jesus Christ, Temple of Divine Wisdom and Tabernacle of God, of knowledge, of the light of Heaven and of earth: preserve me now and for ever and ever. Amen.</p>
+        </div>
+      </section>
+
+      <section id="eucharistic-heart" class="section-card reveal" aria-labelledby="eucharistic-heart-title">
+        <header class="section-header">
+          <p class="section-index" aria-hidden="true">06</p>
+          <h2 class="section-title" id="eucharistic-heart-title">Prayer to the Eucharistic Heart of Jesus</h2>
+          <p class="section-subtitle">The devotion of thirty-three days</p>
+        </header>
+        <div class="prayer-text">
+          <p class="lead">“Jesus, Mary, I love You — save souls. O Blood and Water, which gushed forth from the Most Sacred Heart of Christ as a Fount of Mercy for us, we trust in Thee. Jesus, we trust in Thee, and in Thee we place all our hope.”</p>
+          <p class="refrain">Eucharistic Heart of Jesus, I trust in Thee.</p>
+          <ol class="litany-group litany-numbered">
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, burning with Love,</span> <span class="litany-response">kindle our hearts with love.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus,</span> <span class="litany-response">increase in us faith and love.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Fount of the true will,</span> <span class="litany-response">grant us a right will.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Creator of the world, who holdest the world in Thy Hand,</span> <span class="litany-response">let us never fall away from Thy protection.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Physician of God, who didst bear death in Christ,</span> <span class="litany-response">heal the wounds of our sins.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, in memory of Thy bitter Passion,</span> <span class="litany-response">grant us true sorrow and the forgiveness of our sins.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Mirror of the Eternal Light,</span> <span class="litany-response">grant that we may behold Thee in eternity.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus,</span> <span class="litany-response">show Thyself merciful to us in the hour of our death.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus,</span> <span class="litany-response">quench in us utterly the fever of worldly desires.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Goodness of hearts,</span> <span class="litany-response">through Thy Most Precious Blood come to us in the hour of our death.</span></li>
+          </ol>
+          <p class="refrain">Eucharistic Heart of Jesus, I trust in Thee.</p>
+          <hr class="sacred-rule" aria-hidden="true">
+          <ul class="litany-group">
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, inexhaustible fountain of life and holiness,</span> <span class="litany-response">sanctify me by Thy Most Precious Blood.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, furnace of unquenchable love,</span> <span class="litany-response">set my heart on fire with love of Thee.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, patiently awaiting us in the tabernacle,</span> <span class="litany-response">teach me faithfulness.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, dishonoured by unworthy Communions,</span> <span class="litany-response">accept my reparation.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Bread of Angels and food of souls,</span> <span class="litany-response">satisfy my poverty.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, comfort of the sorrowful and strength of the weak,</span> <span class="litany-response">sustain me upon my way.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, refuge of sinners,</span> <span class="litany-response">cast me not away.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, consolation of the souls in purgatory,</span> <span class="litany-response">deliver them by Thy Most Precious Blood.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Viaticum of the dying,</span> <span class="litany-response">be with me in my last hour.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, full of mercy towards us,</span> <span class="litany-response">have mercy upon me.</span></li>
+          </ul>
+          <p>O Eucharistic Heart of Jesus, who out of love for us hast remained with us under the appearances of bread and wine until the end of the ages, receive this poor prayer of mine. I believe that Thou art here present, truly, really and substantially; I hope in Thy mercy and I love Thee above all things. For all the outrages Thou dost receive in the Most Holy Sacrament, I offer Thee the Most Precious Blood which Thou didst shed for me upon the Cross. Amen.</p>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>The promise of thirty-three days</span></h3><p>Whoever, for <strong>thirty-three days</strong> — in memory of the thirty-three years of the Saviour’s earthly life — shall say this prayer to the Eucharistic Heart of Jesus daily and without interruption, shall obtain the <strong>complete remission of both punishment and guilt</strong>.</p><p><em>It is to be said in the state of sanctifying grace, having approached holy Confession and Communion.</em></p></aside>
+          <div class="tracker no-print" data-tracker="33d" data-total="33">
+            <h3 class="tracker-title">Thirty-three day progress</h3>
+            <p class="tracker-lead">Mark each day on which you have said this prayer.</p>
+            <div class="tracker-bar" role="progressbar" aria-valuemin="0" aria-valuemax="33"
+                 aria-valuenow="0" aria-label="Thirty-three day progress">
+              <span class="tracker-fill" data-fill></span>
+            </div>
+            <p class="tracker-status" data-status role="status" aria-live="polite"></p>
+            <div class="tracker-dots" data-dots aria-hidden="true"></div>
+            <div class="tracker-actions">
+              <button type="button" class="btn btn-primary" data-mark><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7"/></svg><span>Mark today</span></button>
+              <button type="button" class="btn btn-ghost" data-reset><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 5v5h5M4.6 14a7.5 7.5 0 1 0 1.3-5.4"/></svg><span>Reset</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+      <div class="container">
+        <p class="footer-motto">O Most Precious Blood of our Lord Jesus Christ, save me!</p>
+        <nav class="footer-langs no-print" aria-label="Choose language">
+            <a href="../uk/" hreflang="uk" lang="uk">🇺🇦 Українська</a>
+            <a href="../en/" hreflang="en" lang="en" aria-current="true">🇬🇧 English</a>
+            <a href="../de/" hreflang="de" lang="de">🇩🇪 Deutsch</a>
+            <a href="../it/" hreflang="it" lang="it">🇮🇹 Italiano</a>
+            <a href="../pt/" hreflang="pt" lang="pt">🇵🇹 Português</a>
+            <a href="../es/" hreflang="es" lang="es">🇪🇸 Español</a>
+        </nav>
+        <p class="footer-note">A private devotion. The promises attached to these prayers come from private revelations and are not articles of faith.</p>
+
+        <!-- Filled by app.js from the service worker's own count. Hidden until
+             there is something true to say — an unregistered worker must not
+             leave a promise of offline access standing on the page. -->
+        <p class="footer-offline no-print" data-offline-status role="status" hidden></p>
+
+        <p class="footer-copy">&copy; 2026 Devotion to the Most Precious Blood of Christ</p>
+      </div>
+    </footer>
+
+    <button type="button" class="to-top no-print" data-to-top
+            aria-label="Back to top" title="Back to top"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m6 15 6-6 6 6"/></svg></button>
+
+  <div class="app-toast no-print" data-toast role="status" aria-live="polite" hidden>
+      <span class="app-toast-icon" data-toast-icon aria-hidden="true"></span>
+      <span class="app-toast-text" data-toast-text></span>
+      <button type="button" class="app-toast-action" data-toast-action hidden></button>
+      <button type="button" class="app-toast-close" data-toast-close
+              aria-label="Close" title="Close"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+
+  <script type="application/json" id="uiStrings">
+{
+  "audioOn": "Play quiet devotional music",
+  "audioOff": "Stop the devotional music",
+  "statusIdle": "Not yet begun — mark your first day.",
+  "statusDay33": "Day {n} of {total} · {pct}%",
+  "statusMarked": "marked today, return tomorrow",
+  "statusDone33": "33 days completed. Glory be to Jesus Christ!",
+  "confirmReset": "Reset all recorded progress?",
+  "iconSound": "\u003csvg class=\"ico\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"currentColor\" d=\"M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z\"/\u003e\u003cpath class=\"wave\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" d=\"M15.6 8.6a4.6 4.6 0 0 1 0 6.8M18.4 6a8.2 8.2 0 0 1 0 12\"/\u003e\u003c/svg\u003e",
+  "iconMute": "\u003csvg class=\"ico\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"currentColor\" d=\"M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z\"/\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" d=\"m16 9.5 5 5m0-5-5 5\"/\u003e\u003c/svg\u003e",
+  "speechLang": "en-US",
+  "voiceMale": "Male",
+  "voiceFemale": "Female",
+  "voicePlay": "Read",
+  "voiceResume": "Resume",
+  "voiceIdle": "Choose a voice and press “Read”.",
+  "voiceReading": "Reading: {section}",
+  "voicePaused": "Reading paused.",
+  "voiceDone": "Reading complete.",
+  "voiceNoGender": "No {gender} voice is available for English in your browser — using the one that is.",
+  "voiceNoVoice": "Your browser has no English voice installed. Add a language pack in your system settings.",
+  "voiceUnsupported": "Your browser does not support speech synthesis.",
+  "installLabel": "Install the app",
+  "installAction": "Install",
+  "installedNote": "The app is installed. The prayers are available offline.",
+  "offlineReady": "All prayers saved — you can pray offline.",
+  "offlineStored": "Stored on this device: {done} of {total}",
+  "offlineComplete": "Every prayer is stored on this device — the app works with no connection.",
+  "offlineNow": "You are offline — the prayers are still here.",
+  "backOnline": "Connection restored.",
+  "updateReady": "An updated prayer book is ready.",
+  "updateAction": "Refresh",
+  "iconOffline": "\u003csvg class=\"ico ico-sm\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" d=\"M4 4l16 16M7.8 8.2A5.6 5.6 0 0 0 6.4 19h10.2M8.6 5.4A6.4 6.4 0 0 1 18.4 11a4 4 0 0 1 2.2 6.6\"/\u003e\u003c/svg\u003e",
+  "iconCheck": "\u003csvg class=\"ico ico-sm\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m5 12.5 4.5 4.5L19 7\"/\u003e\u003c/svg\u003e"
+}
+  </script>
+  <script src="../assets/js/app.js" defer></script>
+</body>
+</html>

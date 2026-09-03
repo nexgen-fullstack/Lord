@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Nothing here is generated per-visitor, so nothing needs to be hidden.
+# The manifests and the service worker are crawlable on purpose: Google reads
+# the manifest to confirm the site is installable.
+
+Sitemap: https://nexgen-fullstack.github.io/Lord/sitemap.xml
