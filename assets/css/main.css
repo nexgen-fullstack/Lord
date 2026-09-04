@@ -51,11 +51,19 @@
   --speed: 0.28s;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
+  /* Two knobs, so the prayers can be set large without the chrome swelling
+     with them. `--read-scale` moves every word the reader actually reads;
+     `--ui-scale` moves the menu, the buttons and the labels, and is kept far
+     more modest because the header rail has a finite width to fit seven
+     translated links into. 1 on both is the original scale. */
+  --read-scale: 1.5;
+  --ui-scale:   1.12;
+
   /* Fluid type scale */
-  --fs-body:    clamp(1.02rem, 0.93rem + 0.42vw, 1.32rem);
-  --fs-lead:    clamp(1.12rem, 0.99rem + 0.6vw,  1.5rem);
-  --fs-section: clamp(1.35rem, 1.05rem + 1.35vw, 2.15rem);
-  --fs-ui:      clamp(0.74rem, 0.7rem + 0.16vw,  0.86rem);
+  --fs-body:    calc(clamp(1.02rem, 0.93rem + 0.42vw, 1.32rem) * var(--read-scale));
+  --fs-lead:    calc(clamp(1.12rem, 0.99rem + 0.6vw,  1.5rem)  * var(--read-scale));
+  --fs-section: calc(clamp(1.35rem, 1.05rem + 1.35vw, 2.15rem) * var(--read-scale));
+  --fs-ui:      calc(clamp(0.74rem, 0.7rem + 0.16vw,  0.86rem) * var(--ui-scale));
 }
 
 /* ───────────────────────────── 2. RESET ───────────────────────────── */
@@ -769,7 +777,7 @@ body.is-offline .site-header { box-shadow: inset 0 2px 0 0 var(--accent-crimson)
 }
 .section-subtitle {
   margin-top: 9px;
-  font-size: clamp(0.9rem, 0.84rem + 0.3vw, 1.12rem);
+  font-size: calc(clamp(0.9rem, 0.84rem + 0.3vw, 1.12rem) * var(--read-scale));
   font-weight: 600;
   letter-spacing: 0.4px;
   color: var(--accent-rose);
@@ -814,7 +822,7 @@ body.is-offline .site-header { box-shadow: inset 0 2px 0 0 var(--accent-crimson)
   color: var(--text-primary);
 }
 .note {
-  font-size: 0.92rem;
+  font-size: calc(0.92rem * var(--read-scale));
   font-style: italic;
   color: var(--text-muted);
 }
@@ -881,7 +889,7 @@ body.is-offline .site-header { box-shadow: inset 0 2px 0 0 var(--accent-crimson)
   margin-inline: auto;
   padding: 0.55em 1.2em;
   font-family: 'Cinzel', serif;
-  font-size: clamp(0.95rem, 0.88rem + 0.32vw, 1.2rem);
+  font-size: calc(clamp(0.95rem, 0.88rem + 0.32vw, 1.2rem) * var(--read-scale));
   font-weight: 600;
   letter-spacing: 0.6px;
   line-height: 1.5;
@@ -922,7 +930,7 @@ body.is-offline .site-header { box-shadow: inset 0 2px 0 0 var(--accent-crimson)
   gap: 9px;
   margin-bottom: 0.7em;
   font-family: 'Cinzel', serif;
-  font-size: clamp(0.95rem, 0.88rem + 0.3vw, 1.16rem);
+  font-size: calc(clamp(0.95rem, 0.88rem + 0.3vw, 1.16rem) * var(--read-scale));
   font-weight: 700;
   letter-spacing: 1px;
   color: var(--accent-gold-bright);
@@ -957,13 +965,13 @@ body.is-offline .site-header { box-shadow: inset 0 2px 0 0 var(--accent-crimson)
 }
 .tracker-title {
   font-family: 'Cinzel', serif;
-  font-size: clamp(1rem, 0.92rem + 0.36vw, 1.24rem);
+  font-size: calc(clamp(1rem, 0.92rem + 0.36vw, 1.24rem) * var(--read-scale));
   letter-spacing: 1px;
   color: var(--accent-gold);
 }
 .tracker-lead {
   margin-top: 7px;
-  font-size: 0.98rem;
+  font-size: calc(0.98rem * var(--read-scale));
   color: var(--text-secondary);
   text-indent: 0;
   text-align: center;
@@ -988,7 +996,7 @@ body.is-offline .site-header { box-shadow: inset 0 2px 0 0 var(--accent-crimson)
 }
 .tracker-status {
   font-family: 'Montserrat', system-ui, sans-serif;
-  font-size: 0.82rem;
+  font-size: calc(0.82rem * var(--ui-scale));
   letter-spacing: 1.1px;
   color: var(--accent-gold-bright);
   text-indent: 0;
@@ -1058,7 +1066,7 @@ body.is-offline .site-header { box-shadow: inset 0 2px 0 0 var(--accent-crimson)
 }
 .footer-langs a:hover { color: var(--accent-gold); }
 .footer-langs a[aria-current="true"] { color: var(--accent-gold-bright); }
-.footer-note { font-size: 0.95rem; font-style: italic; color: var(--text-muted); max-width: 62ch; margin-inline: auto; }
+.footer-note { font-size: calc(0.95rem * var(--read-scale)); font-style: italic; color: var(--text-muted); max-width: 62ch; margin-inline: auto; }
 /* Offline status. Reads as a quiet fact, not a badge — it is only ever gold
    once the whole devotion is genuinely on the device. */
 .footer-offline {
@@ -1214,7 +1222,7 @@ body.is-offline .site-header { box-shadow: inset 0 2px 0 0 var(--accent-crimson)
 }
 @media (min-width: 2200px) {
   :root { --maxw: 1320px; }
-  body { font-size: clamp(1.3rem, 0.6vw + 1rem, 1.5rem); }
+  body { font-size: calc(clamp(1.3rem, 0.6vw + 1rem, 1.5rem) * var(--read-scale)); }
 }
 
 /* ─────────────────────────── 13. PRINT ─────────────────────────── */

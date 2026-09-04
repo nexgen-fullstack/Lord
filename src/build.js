@@ -321,10 +321,24 @@ const OPTIONAL = []
 /* The cache name is derived from the bytes actually being shipped, so a
    deploy that changes one prayer invalidates the old cache, and a rebuild
    that changes nothing leaves installed readers undisturbed. */
+/* Served paths carry BASE_PATH; on disk the files sit under the repo root, so
+   it has to come back off before reading them. Skipping this step is not a
+   cosmetic slip: every read fails, the hash falls back to the URL list, and
+   the version then stops moving when the content does — installed readers
+   would never be offered an update again. */
+const unbase = (url) => (BASE_PATH && url.indexOf(BASE_PATH) === 0) ? url.slice(BASE_PATH.length) : url;
+
 const hash = crypto.createHash('sha256');
+let hashed = 0;
 for (const rel of CRITICAL.concat(OPTIONAL)) {
-  const file = path.join(ROOT, rel.replace(/^\//, '').replace(/\/$/, '/index.html') || 'index.html');
-  try { hash.update(fs.readFileSync(file)); } catch (e) { hash.update(rel); }
+  const bare = unbase(rel).replace(/^\//, '') || 'index.html';
+  const file = path.join(ROOT, bare.endsWith('/') ? bare + 'index.html' : bare);
+  try { hash.update(fs.readFileSync(file)); hashed++; }
+  catch (e) { hash.update(rel); }
+}
+if (hashed !== CRITICAL.length + OPTIONAL.length) {
+  throw new Error(`cache version read ${hashed}/${CRITICAL.length + OPTIONAL.length} files — ` +
+    'the version would stop tracking the content; check BASE_PATH');
 }
 const SW_VERSION = hash.digest('hex').slice(0, 12);
 

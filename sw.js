@@ -17,7 +17,7 @@
 
 'use strict';
 
-const VERSION = "e654753f5694";
+const VERSION = "71be22c86b72";
 const CACHE = 'sanguis-' + VERSION;
 
 /* Must all cache for the install to count as successful — this is the set that
