@@ -356,9 +356,6 @@
     });
 
     options.forEach(function (a, i) {
-      a.addEventListener('click', function () {
-        store.set('pb.lang', a.getAttribute('data-lang'));
-      });
       a.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
           e.preventDefault();
@@ -375,8 +372,19 @@
       if (e.key === 'Escape' && !menu.hidden) { close(); toggle.focus(); }
     });
 
-    /* Remember the language actually being read. */
-    store.set('pb.lang', LANG);
+    /* Only a language the reader picks — here or in the footer — is
+       remembered, and the root then opens in it. Merely landing on another
+       locale (a shared link, a search result) is not a choice: the root keeps
+       opening in Ukrainian. The cookie is the same choice for the Cloudflare
+       edge router, which cannot read localStorage. */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('.lang-menu a, .footer-langs a');
+      if (!a) return;
+      var code = a.getAttribute('data-lang') || a.getAttribute('hreflang');
+      if (!code) return;
+      store.set('pb.langChoice', code);
+      try { document.cookie = 'pb_lang=' + code + '; Path=/; Max-Age=31536000; SameSite=Lax'; } catch (err) {}
+    });
   }
 
   /* ═══════════════════════════ 4b. TEXT SIZE ═══════════════════════════ */

@@ -120,8 +120,11 @@ ${hreflangs}
   </style>
   <noscript><meta http-equiv="refresh" content="0; url=./${DEFAULT_LANG}/"></noscript>
   <script>
-    /* Client-side language negotiation. Edge routing (Cloudflare Pages) lives in
-       /functions/_middleware.js and takes precedence when deployed there.
+    /* The root always opens in Ukrainian, the site's own language, whatever
+       language the phone or browser happens to be set to. Another language
+       only when the reader has picked one in the switcher (remembered as
+       pb.langChoice), or when the link says so with ?lang=xx. Edge routing
+       (Cloudflare Pages) in /functions/_middleware.js follows the same rule.
        Visit /?choose to reach the language chooser below instead.
 
        The redirect deliberately drops any fragment. A hash arriving at the bare
@@ -143,21 +146,10 @@ ${hreflangs}
           return go(String(forced).toLowerCase().split('-')[0]);
         }
 
-        var saved = null;
-        try { saved = localStorage.getItem('pb.lang'); } catch (e) {}
-        if (saved && supported[saved]) return go(saved);
-
-        /* The site's own language wins whenever the reader understands it at
-           all, wherever it sits in their preference list. */
-        var browser = navigator.languages || [navigator.language || ''];
-        for (var i = 0; i < browser.length; i++) {
-          if (String(browser[i] || '').toLowerCase().split('-')[0] === primary) return go(primary);
-        }
-        for (var j = 0; j < browser.length; j++) {
-          var code = String(browser[j] || '').toLowerCase().split('-')[0];
-          if (supported[code]) return go(code);
-        }
-      } catch (e) { /* negotiation failed — fall through to x-default */ }
+        var chosen = null;
+        try { chosen = localStorage.getItem('pb.langChoice'); } catch (e) {}
+        if (chosen && supported[chosen]) return go(chosen);
+      } catch (e) { /* no storage or no URLSearchParams — Ukrainian */ }
       go(primary);
     })();
   </script>
@@ -172,6 +164,14 @@ ${gateCards}
     </nav>
     <p class="gate-note">${esc(ORG.name)}</p>
   </main>
+  <script>
+    /* Picking a language here is a choice, and the root remembers it. */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('.gate-card');
+      if (!a) return;
+      try { localStorage.setItem('pb.langChoice', a.getAttribute('hreflang')); } catch (err) {}
+    });
+  </script>
 </body>
 </html>
 `);
@@ -399,26 +399,20 @@ write('_headers', `/*
 /* ─────────────────── Netlify / static-host redirects ─────────────────── */
 
 write('_redirects', `# Static-host fallback (Netlify / Cloudflare Pages).
-# Country-aware routing lives in /functions/_middleware.js on Cloudflare Pages.
+# Language routing on Cloudflare Pages lives in /functions/_middleware.js.
 /  /${DEFAULT_LANG}/  302
 `);
 
 /* ──────────────── Cloudflare Pages edge middleware ──────────────── */
 
 /* Generated from site.config.js for the same reason sw.js is: the language
-   matrix used to be duplicated by hand in functions/_middleware.js, so
+   list used to be duplicated by hand in functions/_middleware.js, so
    changing the default language here left the edge still redirecting to the
    old one — a drift no test would have caught. */
-const countryLang = {};
-for (const l of LANGS) {
-  for (const cc of l.countries || []) countryLang[cc] = l.code;
-}
-
 write(path.join('functions', '_middleware.js'),
   fs.readFileSync(path.join(__dirname, 'middleware.js'), 'utf8')
     .replace('__LANGS__', JSON.stringify(LANGS.map((l) => l.code)))
-    .replace("'__PRIMARY__'", JSON.stringify(DEFAULT_LANG))
-    .replace('__COUNTRY_LANG__', JSON.stringify(countryLang, null, 2)));
+    .replace("'__PRIMARY__'", JSON.stringify(DEFAULT_LANG)));
 
 console.log('────────────────────────────────────────────');
 console.log(`  ${LANGS.length} locales · ${SITE_URL}`);

@@ -283,5 +283,13 @@ function walk(dir, ext) {
 
   const kb = (fs.statSync(apk).size / 1024).toFixed(0);
   console.log('────────────────────────────────────────────');
-  console.log(`  ✓ android/dist/${path.basename(apk)}  ${kb} kB  signed and verified\n`);
+  console.log(`  ✓ android/dist/${path.basename(apk)}  ${kb} kB  signed and verified`);
+
+  /* --publish: put the release APK on the website itself, at
+     /downloads/SanguisChristi.apk, so a phone can fetch it with one link. */
+  if (process.argv.indexOf('--publish') > -1 && !DEBUG) {
+    copy(apk, path.join(ROOT, 'downloads', APK_NAME));
+    console.log(`  ✓ downloads/${APK_NAME}  published with the site`);
+  }
+  console.log('');
 })();

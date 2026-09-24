@@ -52,7 +52,7 @@ You only need it when a family, weight or language changes.
                          and the Android app's speech bridge
 /assets/img/Jesus.jpeg   the crucifixion image
 /assets/audio/           drop chant.mp3 here (see “Ambient chant” below)
-/functions/_middleware.js  Cloudflare Pages country routing            (generated)
+/functions/_middleware.js  Cloudflare Pages language routing           (generated)
 /android/                the Android app (see “Android app” below)
   build.js               ► builds and signs the APK from the built site
   src/…/MainActivity.java  the web view, the asset server, the speech bridge
@@ -99,7 +99,7 @@ Also in that file:
 
 | Host | What to do |
 | --- | --- |
-| **Cloudflare Pages** *(recommended)* | Deploy the repo root. `functions/_middleware.js` is picked up automatically and gives country-aware routing on `/`. |
+| **Cloudflare Pages** *(recommended)* | Deploy the repo root. `functions/_middleware.js` is picked up automatically and routes `/` at the edge. |
 | **Netlify / any static host** | Deploy the repo root. `_redirects` sends `/` → `/uk/`; the root page's own JS still negotiates the visitor's language. |
 | **Plain Apache/nginx** | Serve the directory as-is. Everything works from the filesystem; even `file://` works for local reading. |
 | **GitHub Pages** | Deploy from the branch, folder `/ (root)` — the repo *is* the built site. Set `BASE_PATH` (see below). `_headers`, `_redirects` and `functions/` are inert here; the root page's own JS still negotiates the language. |
@@ -161,9 +161,11 @@ entry. The bare `/` is deliberately absent: it answers 302 everywhere, and a red
 sitemap is a Search Console warning, never an indexable target.
 
 **Language routing precedence** (`functions/_middleware.js`, generated from `src/middleware.js`):
-`?lang=` → `pb_lang` cookie → **Ukrainian if the browser lists it at all** → `CF-IPCountry` →
-`Accept-Language` → `uk`. Ukrainian is the site's own language, so a Ukrainian speaker abroad
-reaches it ahead of whatever country their IP resolves to. Only the bare `/` is ever redirected,
+`?lang=` → a language the reader **picked** in the switcher → **Ukrainian**. The root always opens
+in Ukrainian, the site's own language, whatever the phone, the browser or the visitor's country
+is set to; landing on another locale through a shared link is not a choice and changes nothing.
+The root gateway (`localStorage` `pb.langChoice`) and the edge (`pb_lang` cookie) follow the same
+rule, and so does the Android app, which starts at the gateway. Only the bare `/` is ever redirected,
 so every localized URL stays stable and indexable exactly as its canonical declares.
 
 Neither the edge nor the root gateway forwards a fragment. A hash arriving at `/` is always a
@@ -441,9 +443,13 @@ script finds both on its own; `ANDROID_HOME` / `JAVA_HOME` override). No Gradle 
 it runs `aapt2`, `javac`, `d8`, `zipalign` and `apksigner` directly.
 
 ```bash
-npm run apk                     # release APK
-node android/build.js --debug   # page inspectable from chrome://inspect
+npm run apk                       # release APK
+node android/build.js --publish   # … and copy it to downloads/ for the website
+node android/build.js --debug     # page inspectable from chrome://inspect
 ```
+
+The published APK is served with the site at `/downloads/SanguisChristi.apk`, so a phone can
+fetch it with one link.
 
 **The signing key** is created on the first build in `android/keystore/` (ignored by git). Back
 that folder up: Android installs an update over an existing app only when it carries the same
@@ -463,8 +469,8 @@ On iPhone, the site itself is the app: Safari → Share → *На екран «�
    `ui.install*` / `ui.offline*` strings the offline app speaks in and the text-size labels (`ui.textSizeLabel`, `textSmaller`, `textLarger`, `textSizeHint`).
 2. Add an entry to `LANGS` in `src/site.config.js` (code, hreflang, og locale, flag, geo,
    countries, `speechLang`, `fontSubset`).
-3. List the countries in that entry's `countries` array — `build.js` compiles them into the
-   edge router's `COUNTRY_LANG` map.
+3. Fill in that entry's `countries` array for the record. Routing no longer uses it: the root
+   opens in Ukrainian unless the reader has picked a language.
 4. If the language needs glyphs outside `latin`/`cyrillic`, add its subset to `KEEP_SUBSETS` in
    `src/fetch-fonts.js` and run `npm run fonts`.
 5. `npm run build && npm run check`.

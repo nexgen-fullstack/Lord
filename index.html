@@ -60,8 +60,11 @@
   </style>
   <noscript><meta http-equiv="refresh" content="0; url=./uk/"></noscript>
   <script>
-    /* Client-side language negotiation. Edge routing (Cloudflare Pages) lives in
-       /functions/_middleware.js and takes precedence when deployed there.
+    /* The root always opens in Ukrainian, the site's own language, whatever
+       language the phone or browser happens to be set to. Another language
+       only when the reader has picked one in the switcher (remembered as
+       pb.langChoice), or when the link says so with ?lang=xx. Edge routing
+       (Cloudflare Pages) in /functions/_middleware.js follows the same rule.
        Visit /?choose to reach the language chooser below instead.
 
        The redirect deliberately drops any fragment. A hash arriving at the bare
@@ -83,21 +86,10 @@
           return go(String(forced).toLowerCase().split('-')[0]);
         }
 
-        var saved = null;
-        try { saved = localStorage.getItem('pb.lang'); } catch (e) {}
-        if (saved && supported[saved]) return go(saved);
-
-        /* The site's own language wins whenever the reader understands it at
-           all, wherever it sits in their preference list. */
-        var browser = navigator.languages || [navigator.language || ''];
-        for (var i = 0; i < browser.length; i++) {
-          if (String(browser[i] || '').toLowerCase().split('-')[0] === primary) return go(primary);
-        }
-        for (var j = 0; j < browser.length; j++) {
-          var code = String(browser[j] || '').toLowerCase().split('-')[0];
-          if (supported[code]) return go(code);
-        }
-      } catch (e) { /* negotiation failed — fall through to x-default */ }
+        var chosen = null;
+        try { chosen = localStorage.getItem('pb.langChoice'); } catch (e) {}
+        if (chosen && supported[chosen]) return go(chosen);
+      } catch (e) { /* no storage or no URLSearchParams — Ukrainian */ }
       go(primary);
     })();
   </script>
@@ -141,5 +133,13 @@
     </nav>
     <p class="gate-note">Sanguis Christi</p>
   </main>
+  <script>
+    /* Picking a language here is a choice, and the root remembers it. */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('.gate-card');
+      if (!a) return;
+      try { localStorage.setItem('pb.langChoice', a.getAttribute('hreflang')); } catch (err) {}
+    });
+  </script>
 </body>
 </html>

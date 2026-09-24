@@ -1,43 +1,29 @@
 /* ============================================================================
-   Cloudflare Pages Function — country- and header-aware language routing.
-   SOURCE FILE. `npm run build` stamps the language matrix in and writes
+   Cloudflare Pages Function — language routing for the bare root.
+
+   SOURCE FILE. `npm run build` stamps the language list in and writes
    /functions/_middleware.js, which Cloudflare Pages picks up automatically.
    Edit this file, never the generated one.
 
+   The root always opens in Ukrainian, the site's own language — not in
+   whatever language the browser or the visitor's country suggests.
    Precedence:
-     1. ?lang=xx           explicit override in the URL
-     2. pb_lang cookie     the visitor's remembered choice
-     3. PRIMARY            the site's own language, if the browser lists it
-     4. CF-IPCountry       the country Cloudflare resolved from the IP
-     5. Accept-Language    the browser's own preference list
-     6. PRIMARY            the x-default target
+
+     1. ?lang=xx           explicit override in the URL (and remembered)
+     2. pb_lang cookie     a language the reader picked in the switcher
+     3. PRIMARY            Ukrainian
+
    Only the bare root path "/" is redirected, so every localized URL stays
    stable and indexable exactly as its canonical + hreflang tags declare.
    ========================================================================== */
 
 const LANGS = __LANGS__;
 const PRIMARY = '__PRIMARY__';
-const COUNTRY_LANG = __COUNTRY_LANG__;
-
 const ONE_YEAR = 60 * 60 * 24 * 365;
-
-function acceptedCodes(header) {
-  if (!header) return [];
-  return header
-    .split(',')
-    .map((part) => {
-      const [tag, ...params] = part.trim().split(';');
-      const q = params.find((p) => p.trim().startsWith('q='));
-      return { code: tag.toLowerCase().split('-')[0], q: q ? parseFloat(q.split('=')[1]) : 1 };
-    })
-    .filter((entry) => entry.code && !Number.isNaN(entry.q))
-    .sort((a, b) => b.q - a.q)
-    .map((entry) => entry.code);
-}
 
 function readCookie(header, name) {
   if (!header) return null;
-  const match = header.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]+)'));
+  const match = header.match(new RegExp('(?:^|;\s*)' + name + '=([^;]+)'));
   return match ? decodeURIComponent(match[1]) : null;
 }
 
@@ -46,23 +32,15 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const path = url.pathname;
 
-  /* Remember an explicit choice on any localized page. */
   const segment = path.split('/')[1];
   if (LANGS.includes(segment)) {
     const response = await next();
     const headers = new Headers(response.headers);
     headers.set('Content-Language', segment);
-    /* No Vary here on purpose. A localized URL serves one language to
-       everybody — the path decides it, not the request headers — so varying
-       on Accept-Language and CF-IPCountry would fragment the edge cache into
-       a copy per header combination without ever changing the bytes. Only
-       the bare "/", which really does negotiate, sets Vary (see below). */
-    if (readCookie(request.headers.get('Cookie'), 'pb_lang') !== segment) {
-      headers.append(
-        'Set-Cookie',
-        `pb_lang=${segment}; Path=/; Max-Age=${ONE_YEAR}; SameSite=Lax; Secure`
-      );
-    }
+    /* No Vary and no cookie here on purpose. A localized URL serves one
+       language to everybody, and landing on one — a shared link, a search
+       result — is not a choice of language for the root; only the switcher
+       sets pb_lang. */
     return new Response(response.body, { status: response.status, headers });
   }
 
@@ -74,30 +52,18 @@ export async function onRequest(context) {
 
   const forced = url.searchParams.get('lang');
   const cookie = readCookie(request.headers.get('Cookie'), 'pb_lang');
-  const country = (request.headers.get('CF-IPCountry') || (request.cf && request.cf.country) || '').toUpperCase();
-  const accepted = acceptedCodes(request.headers.get('Accept-Language'));
-
-  const lang =
-    (forced && LANGS.includes(forced) && forced) ||
-    (cookie && LANGS.includes(cookie) && cookie) ||
-    /* The site's own language wins whenever the reader understands it at all,
-       ahead of the IP's country — a Ukrainian abroad gets Ukrainian. */
-    (accepted.includes(PRIMARY) && PRIMARY) ||
-    COUNTRY_LANG[country] ||
-    accepted.find((code) => LANGS.includes(code)) ||
-    PRIMARY;
+  const explicit = forced && LANGS.includes(forced) ? forced : null;
+  const lang = explicit || (cookie && LANGS.includes(cookie) && cookie) || PRIMARY;
 
   /* No fragment is forwarded — the server never receives one anyway, and a
      stale hash is exactly what used to reopen the app mid-prayer. */
-  const target = new URL(`/${lang}/`, url);
-
-  return new Response(null, {
-    status: 302,
-    headers: {
-      Location: target.toString(),
-      'Cache-Control': 'private, no-store',
-      Vary: 'Accept-Language, CF-IPCountry, Cookie',
-      'Set-Cookie': `pb_lang=${lang}; Path=/; Max-Age=${ONE_YEAR}; SameSite=Lax; Secure`
-    }
-  });
+  const headers = {
+    Location: new URL(`/${lang}/`, url).toString(),
+    'Cache-Control': 'private, no-store',
+    Vary: 'Cookie'
+  };
+  if (explicit) {
+    headers['Set-Cookie'] = `pb_lang=${explicit}; Path=/; Max-Age=${ONE_YEAR}; SameSite=Lax; Secure`;
+  }
+  return new Response(null, { status: 302, headers });
 }
