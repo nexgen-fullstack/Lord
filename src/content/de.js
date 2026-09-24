@@ -26,6 +26,11 @@ module.exports = {
     audioOff: 'Andachtsmusik ausschalten',
     toTop: 'Nach oben',
 
+    textSizeLabel: 'Schriftgröße',
+    textSmaller:   'Schrift verkleinern',
+    textLarger:    'Schrift vergrößern',
+    textSizeHint:  'Ihre Wahl wird auf diesem Gerät gespeichert.',
+
     /* Offline app — install prompt, cache state, update notice. */
     installLabel:  'App installieren',
     installTitle:  'Das Gebetbuch auf dem Telefon',
@@ -55,7 +60,7 @@ module.exports = {
     voiceReading: 'Es wird gelesen: {section}',
     voicePaused: 'Vorlesen angehalten.',
     voiceDone: 'Vorlesen beendet.',
-    voiceNoGender: 'Keine {gender} Stimme für Deutsch in Ihrem Browser verfügbar — es wird die vorhandene verwendet.',
+    voiceNoGender: 'Die Stimme „{gender}“ ist für Deutsch auf Ihrem Gerät nicht verfügbar — es wird die vorhandene verwendet.',
     voiceNoVoice: 'In Ihrem Browser ist keine deutsche Stimme installiert. Bitte fügen Sie ein Sprachpaket hinzu.',
     voiceUnsupported: 'Ihr Browser unterstützt keine Sprachsynthese.',
 
@@ -75,7 +80,7 @@ module.exports = {
 
   hero: {
     title: 'Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus',
-    quote: '„Du hast mich, o Herr, durch dein kostbarstes Blut erkauft aus jedem Stamm und jeder Sprache, aus jedem Volk und jeder Nation.“',
+    quote: '„Du hast uns, o Herr, durch dein kostbarstes Blut erkauft aus jedem Stamm und jeder Sprache, aus jedem Volk und jeder Nation.“',
     quoteRef: 'Offenbarung 5, 9',
     imageAlt: 'Jesus Christus am Kreuz; Engel sammeln das kostbarste Blut in goldenen Kelchen',
     cta: 'Zu den Gebeten'
@@ -111,9 +116,9 @@ module.exports = {
           ['O kostbarstes Blut des Herrn, bei der Geißelung vergossen,', 'reinige mich von meinen Sünden.'],
           ['O kostbarstes Blut des Herrn, unter der Dornenkrone vergossen,', 'reinige mich von meinen Sünden.'],
           ['O kostbarstes Blut des Herrn, auf dem Kreuzweg vergossen,', 'reinige mich von meinen Sünden.'],
-          ['O kostbarstes Blut des Herrn, bei der Annagelung deiner heiligsten Hände an das Kreuz vergossen,', 'reinige mich von meinen Sünden.'],
-          ['O kostbarstes Blut des Herrn, bei der Annagelung deiner heiligsten Füße an das Kreuz vergossen,', 'reinige mich von meinen Sünden.'],
-          ['O kostbarstes Blut des Herrn, aus deinem von der Lanze durchbohrten heiligsten Herzen vergossen,', 'reinige mich von meinen Sünden.'],
+          ['O kostbarstes Blut des Herrn, bei der Annagelung seiner heiligsten Hände an das Kreuz vergossen,', 'reinige mich von meinen Sünden.'],
+          ['O kostbarstes Blut des Herrn, bei der Annagelung seiner heiligsten Füße an das Kreuz vergossen,', 'reinige mich von meinen Sünden.'],
+          ['O kostbarstes Blut des Herrn, aus seinem von der Lanze durchbohrten heiligsten Herzen vergossen,', 'reinige mich von meinen Sünden.'],
           ['O kostbarstes Blut des Herrn, für mich unwürdigen Sünder vergossen,', 'reinige mich von meinen Sünden.'],
           ['O kostbarstes Blut des Herrn, bis zum letzten Tropfen für mich und meine Sünden vergossen,', 'erbarme dich meiner.']
         ] },
@@ -144,7 +149,7 @@ module.exports = {
 
         { t: 'p', x: 'Allmächtiger Gott, mein Erlöser! Mit einem einzigen Tropfen deines kostbarsten Blutes hättest du Millionen von Welten erlösen können. Doch aus deiner grenzenlosen Liebe zu mir Sünder hast du den letzten Tropfen deines kostbarsten Blutes vergossen und ihn Gott dem Vater für meine Sünden aufgeopfert.' },
         { t: 'p', x: 'O Jesus, du opferst es täglich auch auf den Altären der ganzen Welt in jeder heiligen Messe. Du gießt dein Blut unter der Gestalt des Weines aus und opferst es für meine Erlösung. Du hast es vergossen zur Speise meiner Seele für das ewige Leben.' },
-        { t: 'p', x: 'Ich, ein Sünder, falle in Demut vor deiner Majestät nieder und flehe dich an um deiner grenzenlosen Barmherzigkeit willen: erbarme dich meiner, des Sünders. Erlöser, ich bitte dich, die verstockten Sünder umzuwenden, damit sie sich möglichst bald aus jenem schrecklichen Zustand bekehren. Erneuere den heiligen Glauben in allen Völkern, damit sie zur Einheit zurückkehren.' },
+        { t: 'p', x: 'Ich, ein Sünder, falle in Demut vor deiner Majestät nieder und flehe dich an um deiner grenzenlosen Barmherzigkeit willen: erbarme dich meiner, des Sünders. Erlöser, ich bitte dich, die verstockten Sünder zur Umkehr zu führen, damit sie sich möglichst bald aus jenem schrecklichen Zustand bekehren. Erneuere den heiligen Glauben in allen Völkern, damit sie zur Einheit zurückkehren.' },
         { t: 'p', x: 'Herr, dies ist unser großes Verlangen: dass alle Menschen der Welt dir allein dienen und dein kostbarstes Blut verherrlichen.' },
         { t: 'p', x: 'O Gott, erbarme dich der Seelen im Fegefeuer, denn sie harren deiner Begnadigung.' },
         { t: 'p', x: 'Möge dein kostbarstes Blut, für unsere Sünden vergossen, ihnen beim himmlischen Vater Verzeihung erwirken und sie zur ewigen Seligkeit führen. Amen.' },
@@ -157,7 +162,7 @@ module.exports = {
         { t: 'p', x: 'Herr Jesus Christus, mein Erlöser, bewahre uns den Heiligen Vater mit der ganzen Geistlichkeit und der heiligen Kirche vor allen Gefahren um deines kostbarsten Blutes willen. Amen.' },
 
         { t: 'box', title: 'Die Gebetsregel', x: [
-          '**Vater unser…** (7 mal) · **Gegrüßet seist du, Maria…** (7 mal) · **Ehre sei dem Vater…** (7 mal)',
+          '**Vater unser…** (7-mal) · **Gegrüßet seist du, Maria…** (7-mal) · **Ehre sei dem Vater…** (7-mal)',
           'Das Gebet wird **täglich zwölf Jahre lang** ohne Unterbrechung verrichtet.'
         ] },
 
@@ -181,7 +186,7 @@ module.exports = {
 
         { t: 'p', x: 'Auf diese Weise will ich meine Untreue gegen dein kostbarstes Blut und deine Liebe wiedergutmachen und dir Genugtuung leisten für die zahllosen Entweihungen und Schmähungen, welche die Menschen jenem kostbarsten Preis unseres Heiles zufügen. Oh, könnten doch meine eigenen Sünden, meine Lauheit und alle Schmähungen, mit denen ich dich, o kostbarstes Blut, jemals entehrt habe, ins Nichts zurückgenommen werden!' },
 
-        { t: 'p', x: 'Siehe, liebster Jesus, ich opfere dir auch die Liebe, die Ehre und die Anbetung auf, welche deine heiligste Mutter, deine treuen Jünger und alle Heiligen deinem kostbarsten Blute dargebracht haben. Ich bitte dich: gedenke nicht mehr meiner früheren Untreue und Lauheit, und verzeihe allen, die dich schmähen. Besprenge mich, o göttlicher Erlöser, mit deinem kostbarsten Blute, und mit ihm alle Menschen, damit wir dich, gekreuzigte Liebe, sogleich von ganzem Herzen lieben und den Preis unserer Erlösung allezeit aufs würdigste verehren können. Amen.' }
+        { t: 'p', x: 'Siehe, liebster Jesus, ich opfere dir auch die Liebe, die Ehre und die Anbetung auf, welche deine heiligste Mutter, deine treuen Jünger und alle Heiligen deinem kostbarsten Blute dargebracht haben. Ich bitte dich: gedenke nicht mehr meiner früheren Untreue und Lauheit, und verzeihe allen, die dich schmähen. Besprenge mich, o göttlicher Erlöser, mit deinem kostbarsten Blute, und mit ihm alle Menschen, damit wir dich, gekreuzigte Liebe, fortan von ganzem Herzen lieben und den Preis unserer Erlösung allezeit aufs würdigste verehren können. Amen.' }
       ]
     },
 
@@ -236,8 +241,8 @@ module.exports = {
         { t: 'p', x: 'Ich danke dir für jene tiefste Wunde deiner Schulter. Demütig bitte ich dich im Namen des Leidens, das du durch die Wunde deiner Schulter ertragen hast, und im Namen deines schweren Kreuzes, das du auf jener heiligen Wunde getragen hast: erbarme dich meiner, des unwürdigen Sünders. Vergib mir alle meine Sünden und gewähre, dass ich, in deinen blutigen Spuren wandelnd, die selige Ewigkeit erlange. Amen.' },
 
         { t: 'box', title: 'Die Gebetsregel', x: [
-          '**Vater unser…** (3 mal) · **Gegrüßet seist du, Maria…** (3 mal)',
-          '_Gelobt seist du, o Herr, im allerheiligsten Sakramente verborgen._ (3 mal)'
+          '**Vater unser…** (3-mal) · **Gegrüßet seist du, Maria…** (3-mal)',
+          '_Gelobt seist du, o Herr, im allerheiligsten Sakramente verborgen._ (3-mal)'
         ] },
 
         { t: 'lead', x: 'O kostbarstes Blut, das aus dem heiligen Haupte unseres Herrn Jesus Christus fließt, dem Tempel der göttlichen Weisheit und der Wohnung Gottes, der Erkenntnis, des himmlischen und des irdischen Lichtes: bewahre mich jetzt und in alle Ewigkeit. Amen.' }
@@ -256,10 +261,10 @@ module.exports = {
 
         { t: 'litany', ordered: true, items: [
           ['Eucharistisches Herz Jesu, das du in Liebe brennst,', 'entzünde unsere Herzen in Liebe.'],
-          ['Eucharistisches Herz Jesu,', 'mehre in uns Glaube und Liebe.'],
+          ['Eucharistisches Herz Jesu,', 'mehre in uns Glauben und Liebe.'],
           ['Eucharistisches Herz Jesu, Quell des rechten Willens,', 'gib uns einen rechten Willen.'],
           ['Eucharistisches Herz Jesu, Schöpfer der Welt, der du die Welt in deiner Hand hältst,', 'lass uns niemals aus deinem Schutze fallen.'],
-          ['Eucharistisches Herz Jesu, Arzt Gottes, der du in Christus den Tod getragen hast,', 'heile die Wunden unserer Sünden.'],
+          ['Eucharistisches Herz Jesu, Arzt Gottes, der du am Kreuz den Tod erlitten hast,', 'heile die Wunden unserer Sünden.'],
           ['Eucharistisches Herz Jesu, zum Gedächtnis deines bitteren Leidens,', 'gib uns wahre Reue und die Vergebung der Sünden.'],
           ['Eucharistisches Herz Jesu, Spiegel des ewigen Lichtes,', 'lass uns dich in der Ewigkeit schauen.'],
           ['Eucharistisches Herz Jesu,', 'erweise dich uns barmherzig in der Stunde unseres Todes.'],

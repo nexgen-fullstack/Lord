@@ -17,7 +17,7 @@
 
 'use strict';
 
-const VERSION = "71be22c86b72";
+const VERSION = "97ec7281a39b";
 const CACHE = 'sanguis-' + VERSION;
 
 /* Must all cache for the install to count as successful — this is the set that
@@ -52,25 +52,13 @@ const OPTIONAL = [
   "/Lord/assets/icons/icon-maskable-192.png",
   "/Lord/assets/icons/icon-maskable-512.png",
   "/Lord/assets/icons/apple-touch-icon.png",
-  "/Lord/assets/fonts/cinzel-400-latin.woff2",
-  "/Lord/assets/fonts/cinzel-600-latin.woff2",
-  "/Lord/assets/fonts/cinzel-700-latin.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-400-cyrillic.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-400-italic-cyrillic.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-400-italic-latin.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-400-latin.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-600-cyrillic.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-600-italic-cyrillic.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-600-italic-latin.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-600-latin.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-700-cyrillic.woff2",
-  "/Lord/assets/fonts/cormorant-garamond-700-latin.woff2",
-  "/Lord/assets/fonts/montserrat-400-cyrillic.woff2",
-  "/Lord/assets/fonts/montserrat-400-latin.woff2",
-  "/Lord/assets/fonts/montserrat-500-cyrillic.woff2",
-  "/Lord/assets/fonts/montserrat-500-latin.woff2",
-  "/Lord/assets/fonts/montserrat-600-cyrillic.woff2",
-  "/Lord/assets/fonts/montserrat-600-latin.woff2"
+  "/Lord/assets/fonts/cinzel-400-700-latin.woff2",
+  "/Lord/assets/fonts/lora-400-700-cyrillic.woff2",
+  "/Lord/assets/fonts/lora-400-700-italic-cyrillic.woff2",
+  "/Lord/assets/fonts/lora-400-700-italic-latin.woff2",
+  "/Lord/assets/fonts/lora-400-700-latin.woff2",
+  "/Lord/assets/fonts/montserrat-400-700-cyrillic.woff2",
+  "/Lord/assets/fonts/montserrat-400-700-latin.woff2"
 ];
 
 /* Served when an uncached page is requested with no network. */

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark from the first frame: the launch splash, the bars and the page
+         behind the web view are all the page's own obsidian, so opening the
+         app never flashes white. -->
+    <style name="AppTheme" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/ink</item>
+        <item name="android:statusBarColor">@color/ink</item>
+        <item name="android:navigationBarColor">@color/ink</item>
+        <item name="android:colorAccent">@color/gold</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Sanguis Christi for Android. versionCode / versionName / SDK levels are
+     stamped in by android/build.js (aapt2 link), not written here.
+
+     No INTERNET permission, on purpose: every prayer ships inside the APK and
+     the app never needs the network. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="org.sanguischristi.prayers">
+
+    <!-- From Android 11 an app must declare which services it looks for;
+         without this the device's text-to-speech engine is invisible and the
+         "read aloud" button would have no voice. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
+    <application
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/AppTheme"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true">
+
+        <!-- configChanges: turning the phone or changing the system font size
+             must not reload the page and lose the reader's place. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation|uiMode|density|fontScale|locale|layoutDirection">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

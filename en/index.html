@@ -22,6 +22,22 @@
        prayer on its own before the reader has touched anything. */
     html.className += (html.className ? ' ' : '') + 'js-boot';
 
+    /* The Android app identifies itself in its user agent. Marked here, before
+       the stylesheet, so its print and install controls never flash up. */
+    if (/SanguisApp/.test(navigator.userAgent)) html.className += ' is-app';
+
+    /* The reader's own text size, restored before the first paint — applied
+       any later and every prayer would visibly jump to its new size. */
+    try {
+      var zoom = parseFloat(localStorage.getItem('pb.textZoom'));
+      /* No choice made yet: inside the Android app, start from the font size
+         set in the phone's own accessibility settings. */
+      if (!(zoom > 0) && window.SanguisApp && SanguisApp.fontScale) {
+        zoom = Math.min(1.75, Math.max(1, Math.round(SanguisApp.fontScale() * 20) / 20));
+      }
+      if (zoom >= 0.8 && zoom <= 2) html.style.setProperty('--zoom', String(zoom));
+    } catch (e) { /* storage blocked — the default large print stands */ }
+
     var fresh = true;
     try {
       fresh = !sessionStorage.getItem('pb.session');
@@ -143,8 +159,8 @@
 
   <!-- Self-hosted fonts. No third-party stylesheet in the critical path, and
        the faces are ordinary same-origin files, so they cache for offline. -->
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/cormorant-garamond-400-latin.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/lora-400-700-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-700-latin.woff2" crossorigin>
   <link rel="stylesheet" href="../assets/css/fonts.css">
 
   <link rel="preload" as="image" href="../assets/img/Jesus.jpeg" fetchpriority="high">
@@ -359,7 +375,7 @@
       "keywords": "Most Precious Blood, Precious Blood devotion, twelve year prayer, 12 year prayer, St Gertrude the Great prayer, Golden Arrow prayer, Holy Shoulder Wound, Eucharistic Heart of Jesus, Catholic prayers, souls in purgatory",
       "genre": "Prayer",
       "datePublished": "2026-01-01",
-      "dateModified": "2026-09-04",
+      "dateModified": "2026-09-24",
       "isAccessibleForFree": true,
       "hasPart": [
         {
@@ -482,6 +498,25 @@
         </nav>
 
         <div class="header-tools">
+          <div class="textsize" data-textsize>
+          <button type="button" class="btn btn-icon" data-textsize-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="textsizePanel"
+                  aria-label="Text size" title="Text size">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2.5 19 8 5l5.5 14M4.5 14h7M14 19l3.8-9.5L21.6 19M15.3 15.8h5"/></svg>
+          </button>
+          <div class="textsize-panel" id="textsizePanel" role="dialog"
+               aria-label="Text size" hidden>
+            <p class="voice-panel-title">Text size</p>
+            <div class="textsize-row">
+              <button type="button" class="btn textsize-step" data-textsize-step="-1"
+                      aria-label="Smaller text" title="Smaller text">A−</button>
+              <output class="textsize-value" data-textsize-value aria-live="polite">100%</output>
+              <button type="button" class="btn textsize-step" data-textsize-step="1"
+                      aria-label="Larger text" title="Larger text">A+</button>
+            </div>
+            <p class="textsize-hint">Your choice is remembered on this device.</p>
+          </div>
+        </div>
           <button type="button" class="btn btn-icon" data-audio-toggle
                   aria-pressed="false" aria-label="Play quiet devotional music" title="Play quiet devotional music">
             <span data-audio-icon><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m16 9.5 5 5m0-5-5 5"/></svg></span>
@@ -631,7 +666,7 @@
           <div class="hero-body">
             <h1 class="hero-title" id="heroTitle">The Exaltation of the Most Precious Blood of Our Lord Jesus Christ</h1>
             <blockquote class="hero-quote">
-              <p>“Thou hast redeemed me, O Lord, by Thy Most Precious Blood, out of every tribe and tongue and people and nation.”</p>
+              <p>“Thou hast redeemed us, O Lord, by Thy Most Precious Blood, out of every tribe and tongue and people and nation.”</p>
               <cite>Revelation 5:9</cite>
             </blockquote>
 
@@ -656,7 +691,9 @@
           <p class="section-subtitle">The prayer said every day for twelve years</p>
         </header>
         <div class="prayer-text">
-          <p class="chant">Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison.</p>
+          <p class="chant"><span class="line">Kyrie eleison, Christe eleison,</span>
+<span class="line">Kyrie eleison, Christe eleison,</span>
+<span class="line">Kyrie eleison, Christe eleison.</span></p>
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">O Christ,</span> <span class="litany-response">hear me.</span></li>
             <li class="litany-item"><span class="litany-call">O Christ,</span> <span class="litany-response">graciously hear me.</span></li>
@@ -672,9 +709,9 @@
             <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed in the scourging,</span> <span class="litany-response">cleanse me of my sins.</span></li>
             <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed beneath the crown of thorns,</span> <span class="litany-response">cleanse me of my sins.</span></li>
             <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed upon the way of the Cross,</span> <span class="litany-response">cleanse me of my sins.</span></li>
-            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed at the nailing of Thy most holy hands to the Cross,</span> <span class="litany-response">cleanse me of my sins.</span></li>
-            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed at the nailing of Thy most holy feet to the Cross,</span> <span class="litany-response">cleanse me of my sins.</span></li>
-            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed from Thy most Sacred Heart pierced by the lance,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed at the nailing of His most holy hands to the Cross,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed at the nailing of His most holy feet to the Cross,</span> <span class="litany-response">cleanse me of my sins.</span></li>
+            <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed from His most Sacred Heart pierced by the lance,</span> <span class="litany-response">cleanse me of my sins.</span></li>
             <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed for me, an unworthy sinner,</span> <span class="litany-response">cleanse me of my sins.</span></li>
             <li class="litany-item"><span class="litany-call">O Most Precious Blood of the Lord, shed to the last drop for me and for my sins,</span> <span class="litany-response">have mercy on me.</span></li>
           </ul>
@@ -693,7 +730,7 @@
             <li class="litany-item"><span class="litany-call">Lamb of God, who takest away the sins of the world,</span> <span class="litany-response">forgive me, O Lord.</span></li>
             <li class="litany-item"><span class="litany-call">Lamb of God, who takest away the sins of the world,</span> <span class="litany-response">have mercy on me, O Lord.</span></li>
           </ul>
-          <p class="chant">Kyrie eleison, Christe eleison (three times)</p>
+          <p class="chant"><span class="line">Kyrie eleison, Christe eleison (three times)</span></p>
           <p class="lead">O Most Precious Blood of our Lord Jesus Christ, be exalted and glorified by us all, now and always and unto the ages of ages. Amen.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <p>Almighty God, my Saviour: with one single drop of Thy Most Precious Blood Thou couldst have redeemed a million worlds. Yet out of Thy boundless love for me, a sinner, Thou didst pour out the very last drop of Thy Most Precious Blood, offering it to God the Father for my sins.</p>
@@ -722,7 +759,7 @@
           <p>In full awareness of my own nothingness and of Thy greatness, O merciful Saviour, I fall down at Thy feet and thank Thee for the countless proofs of grace which Thou hast shown to me, an ungrateful creature, and above all that Thou hast freed me by Thy Most Precious Blood from the corrupting power of Satan. In the presence of my beloved Mother Mary, of my Guardian Angel, of my holy Patrons and of the whole Court of Heaven, I consecrate myself, O most loving Jesus, with all the sincerity of my heart and most freely, to Thy Most Precious Blood, by which Thou hast redeemed the whole world from sin, from death and from hell.</p>
           <p>I, <span class="user-name">(name)</span>, promise Thee, trusting in the help of Thy grace, to awaken and to spread with all my strength and according to all my means the devotion to Thy Most Precious Blood, the Price of our Redemption, so that Thy Blood, worthy of the highest veneration, may be honoured and loved by all.</p>
           <p>In this way I wish to make amends for my own unfaithfulness towards Thy Most Precious Blood and Thy Love, and to make satisfaction to Thee for the countless profanations and outrages which men inflict upon that Most Precious Price of our salvation. Oh, if only my own sins, my lukewarmness and every outrage by which I have ever dishonoured Thee, O Most Precious Blood, could be returned to nothingness!</p>
-          <p>Behold, dearest Jesus, I offer Thee also the love, the honour and the adoration which Thy most holy Mother, Thy faithful disciples and all the saints have rendered to Thy Most Precious Blood. I beseech Thee, deign to think no more upon my former unfaithfulness and lukewarmness, and deign to forgive all who dishonour Thee. Sprinkle me, O Divine Saviour, with Thy Most Precious Blood, and with it all mankind, that we may love Thee at once with our whole heart, O crucified Love, and may honour most worthily for all time the Price of our Redemption. Amen.</p>
+          <p>Behold, dearest Jesus, I offer Thee also the love, the honour and the adoration which Thy most holy Mother, Thy faithful disciples and all the saints have rendered to Thy Most Precious Blood. I beseech Thee, deign to think no more upon my former unfaithfulness and lukewarmness, and deign to forgive all who dishonour Thee. Sprinkle me, O Divine Saviour, with Thy Most Precious Blood, and with it all mankind, that we may henceforth love Thee with our whole heart, O crucified Love, and may honour most worthily for all time the Price of our Redemption. Amen.</p>
         </div>
       </section>
 
@@ -746,7 +783,17 @@
           <p class="section-subtitle">In praise of the Most Holy Name of God</p>
         </header>
         <div class="prayer-text">
-          <p class="poem">May the most holy,<br>Most sacred, most adorable,<br>Most incomprehensible and ineffable<br>Name of God be for ever<br>Praised, blessed, loved,<br>Adored and glorified<br>In Heaven, on earth and in the depths below,<br>By all the creatures of God<br>And by the Sacred Heart<br>Of Our Lord Jesus Christ<br>In the Most Holy Sacrament of the Altar. Amen.</p>
+          <p class="poem"><span class="line">May the most holy,</span>
+<span class="line">Most sacred, most adorable,</span>
+<span class="line">Most incomprehensible and ineffable</span>
+<span class="line">Name of God be for ever</span>
+<span class="line">Praised, blessed, loved,</span>
+<span class="line">Adored and glorified</span>
+<span class="line">In Heaven, on earth and in the depths below,</span>
+<span class="line">By all the creatures of God</span>
+<span class="line">And by the Sacred Heart</span>
+<span class="line">Of Our Lord Jesus Christ</span>
+<span class="line">In the Most Holy Sacrament of the Altar. Amen.</span></p>
           <p class="note">(This act of adoration belongs to the Confraternity of the Holy Face of Jesus.)</p>
         </div>
       </section>
@@ -779,7 +826,7 @@
             <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus,</span> <span class="litany-response">increase in us faith and love.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Fount of the true will,</span> <span class="litany-response">grant us a right will.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Creator of the world, who holdest the world in Thy Hand,</span> <span class="litany-response">let us never fall away from Thy protection.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Physician of God, who didst bear death in Christ,</span> <span class="litany-response">heal the wounds of our sins.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Physician of God, who didst suffer death upon the Cross,</span> <span class="litany-response">heal the wounds of our sins.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, in memory of Thy bitter Passion,</span> <span class="litany-response">grant us true sorrow and the forgiveness of our sins.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus, Mirror of the Eternal Light,</span> <span class="litany-response">grant that we may behold Thee in eternity.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistic Heart of Jesus,</span> <span class="litany-response">show Thyself merciful to us in the hour of our death.</span></li>
@@ -874,7 +921,7 @@
   "voiceReading": "Reading: {section}",
   "voicePaused": "Reading paused.",
   "voiceDone": "Reading complete.",
-  "voiceNoGender": "No {gender} voice is available for English in your browser — using the one that is.",
+  "voiceNoGender": "The “{gender}” voice is not available for English on your device — using the one that is.",
   "voiceNoVoice": "Your browser has no English voice installed. Add a language pack in your system settings.",
   "voiceUnsupported": "Your browser does not support speech synthesis.",
   "installLabel": "Install the app",

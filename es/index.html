@@ -22,6 +22,22 @@
        prayer on its own before the reader has touched anything. */
     html.className += (html.className ? ' ' : '') + 'js-boot';
 
+    /* The Android app identifies itself in its user agent. Marked here, before
+       the stylesheet, so its print and install controls never flash up. */
+    if (/SanguisApp/.test(navigator.userAgent)) html.className += ' is-app';
+
+    /* The reader's own text size, restored before the first paint — applied
+       any later and every prayer would visibly jump to its new size. */
+    try {
+      var zoom = parseFloat(localStorage.getItem('pb.textZoom'));
+      /* No choice made yet: inside the Android app, start from the font size
+         set in the phone's own accessibility settings. */
+      if (!(zoom > 0) && window.SanguisApp && SanguisApp.fontScale) {
+        zoom = Math.min(1.75, Math.max(1, Math.round(SanguisApp.fontScale() * 20) / 20));
+      }
+      if (zoom >= 0.8 && zoom <= 2) html.style.setProperty('--zoom', String(zoom));
+    } catch (e) { /* storage blocked — the default large print stands */ }
+
     var fresh = true;
     try {
       fresh = !sessionStorage.getItem('pb.session');
@@ -143,8 +159,8 @@
 
   <!-- Self-hosted fonts. No third-party stylesheet in the critical path, and
        the faces are ordinary same-origin files, so they cache for offline. -->
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/cormorant-garamond-400-latin.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/lora-400-700-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-700-latin.woff2" crossorigin>
   <link rel="stylesheet" href="../assets/css/fonts.css">
 
   <link rel="preload" as="image" href="../assets/img/Jesus.jpeg" fetchpriority="high">
@@ -359,7 +375,7 @@
       "keywords": "Preciosísima Sangre, devoción a la Preciosísima Sangre, oración de doce años, oración de santa Gertrudis la Magna, Flecha de Oro, santa Llaga del Hombro, Corazón Eucarístico de Jesús, oraciones católicas, almas del purgatorio",
       "genre": "Oración",
       "datePublished": "2026-01-01",
-      "dateModified": "2026-09-04",
+      "dateModified": "2026-09-24",
       "isAccessibleForFree": true,
       "hasPart": [
         {
@@ -482,6 +498,25 @@
         </nav>
 
         <div class="header-tools">
+          <div class="textsize" data-textsize>
+          <button type="button" class="btn btn-icon" data-textsize-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="textsizePanel"
+                  aria-label="Tamaño del texto" title="Tamaño del texto">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2.5 19 8 5l5.5 14M4.5 14h7M14 19l3.8-9.5L21.6 19M15.3 15.8h5"/></svg>
+          </button>
+          <div class="textsize-panel" id="textsizePanel" role="dialog"
+               aria-label="Tamaño del texto" hidden>
+            <p class="voice-panel-title">Tamaño del texto</p>
+            <div class="textsize-row">
+              <button type="button" class="btn textsize-step" data-textsize-step="-1"
+                      aria-label="Texto más pequeño" title="Texto más pequeño">A−</button>
+              <output class="textsize-value" data-textsize-value aria-live="polite">100%</output>
+              <button type="button" class="btn textsize-step" data-textsize-step="1"
+                      aria-label="Texto más grande" title="Texto más grande">A+</button>
+            </div>
+            <p class="textsize-hint">Tu elección se recuerda en este dispositivo.</p>
+          </div>
+        </div>
           <button type="button" class="btn btn-icon" data-audio-toggle
                   aria-pressed="false" aria-label="Activar la música devocional" title="Activar la música devocional">
             <span data-audio-icon><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m16 9.5 5 5m0-5-5 5"/></svg></span>
@@ -631,7 +666,7 @@
           <div class="hero-body">
             <h1 class="hero-title" id="heroTitle">La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo</h1>
             <blockquote class="hero-quote">
-              <p>«Tú me has redimido, oh Señor, con Tu Preciosísima Sangre de toda tribu, lengua, pueblo y nación.»</p>
+              <p>«Tú nos has redimido, oh Señor, con Tu Preciosísima Sangre, de toda tribu, lengua, pueblo y nación.»</p>
               <cite>Apocalipsis 5, 9</cite>
             </blockquote>
 
@@ -656,7 +691,9 @@
           <p class="section-subtitle">La oración que se reza cada día durante doce años</p>
         </header>
         <div class="prayer-text">
-          <p class="chant">Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison.</p>
+          <p class="chant"><span class="line">Kyrie eleison, Christe eleison,</span>
+<span class="line">Kyrie eleison, Christe eleison,</span>
+<span class="line">Kyrie eleison, Christe eleison.</span></p>
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">Oh Cristo,</span> <span class="litany-response">óyeme.</span></li>
             <li class="litany-item"><span class="litany-call">Oh Cristo,</span> <span class="litany-response">escúchame.</span></li>
@@ -672,9 +709,9 @@
             <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada en la flagelación,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
             <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada bajo la corona de espinas,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
             <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada en el camino de la Cruz,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
-            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada al ser clavadas en la Cruz Tus santísimas manos,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
-            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada al ser clavados en la Cruz Tus santísimos pies,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
-            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada de Tu santísimo Corazón traspasado por la lanza,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada al ser clavadas en la Cruz Sus santísimas manos,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada al ser clavados en la Cruz Sus santísimos pies,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada de Su santísimo Corazón traspasado por la lanza,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
             <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada por mí, indigno pecador,</span> <span class="litany-response">purifícame de mis pecados.</span></li>
             <li class="litany-item"><span class="litany-call">Oh Preciosísima Sangre del Señor, derramada hasta la última gota por mí y por mis pecados,</span> <span class="litany-response">ten piedad de mí.</span></li>
           </ul>
@@ -693,7 +730,7 @@
             <li class="litany-item"><span class="litany-call">Cordero de Dios, que quitas los pecados del mundo,</span> <span class="litany-response">perdóname, oh Señor.</span></li>
             <li class="litany-item"><span class="litany-call">Cordero de Dios, que quitas los pecados del mundo,</span> <span class="litany-response">ten piedad de mí, oh Señor.</span></li>
           </ul>
-          <p class="chant">Kyrie eleison, Christe eleison (tres veces)</p>
+          <p class="chant"><span class="line">Kyrie eleison, Christe eleison (tres veces)</span></p>
           <p class="lead">Oh Preciosísima Sangre de Nuestro Señor Jesucristo, sé exaltada y glorificada por todos nosotros, ahora y siempre y por los siglos de los siglos. Amén.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <p>Dios omnipotente, Salvador mío, con una sola gota de Tu Preciosísima Sangre habrías podido redimir millones de mundos. Sin embargo, por Tu amor sin límites hacia mí, pecador, derramaste la última gota de Tu Preciosísima Sangre, ofreciéndola a Dios Padre por mis pecados.</p>
@@ -708,7 +745,7 @@
           <p>Señor Jesucristo, Salvador mío, protégeme y llévame en pos de Ti por Tu Preciosísima Sangre.</p>
           <p>Señor Jesucristo, Salvador mío, guarda de todo peligro al Santo Padre con todo el clero y a la santa Iglesia por Tu Preciosísima Sangre. Amén.</p>
           <aside class="instruction-box"><h3 class="box-title">La regla de oración</h3><p><strong>Padre nuestro…</strong> (7 veces) · <strong>Ave María…</strong> (7 veces) · <strong>Gloria al Padre…</strong> (7 veces)</p><p>La oración se reza <strong>cada día durante doce años</strong>, sin interrupción.</p></aside>
-          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Las promesas divinas</span></h3><p>Quien rece esta oración cada día durante doce años, orando sin interrupción, no pasará por el purgatorio.</p><p>Quien haya comenzado a rezarla y muera al cabo de medio año recibirá igualmente todas estas grandes gracias: cinco almas de su familia recibirán la vocación al estado religioso, y hasta la cuarta generación nadie de su familia estará en el infierno.</p><p>Esta oración de doce años tiene el poder de purificar el alma de todas sus iniquidades. <em>¡Señor, da Tu bendición!</em></p></aside>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Las promesas divinas</span></h3><p>Quien rece esta oración cada día durante doce años, orando sin interrupción, no pasará por el purgatorio.</p><p>Quien haya comenzado a rezarla y muera al cabo de seis meses recibirá igualmente todas estas grandes gracias: cinco almas de su familia recibirán la vocación al estado religioso, y hasta la cuarta generación nadie de su familia estará en el infierno.</p><p>Esta oración de doce años tiene el poder de purificar el alma de todas sus iniquidades. <em>¡Señor, da Tu bendición!</em></p></aside>
         </div>
       </section>
 
@@ -746,7 +783,17 @@
           <p class="section-subtitle">En alabanza del santísimo Nombre de Dios</p>
         </header>
         <div class="prayer-text">
-          <p class="poem">Sea por siempre alabado,<br>Bendecido, amado,<br>Adorado y glorificado<br>El santísimo, sacratísimo,<br>Adorabilísimo, incomprensible<br>E inefable Nombre de Dios<br>En el cielo, en la tierra y en los abismos,<br>Por todas las criaturas<br>Salidas de las manos de Dios,<br>Y por el santísimo Corazón de Nuestro Señor Jesucristo<br>En el Santísimo Sacramento del altar. Amén.</p>
+          <p class="poem"><span class="line">Sea por siempre alabado,</span>
+<span class="line">Bendecido, amado,</span>
+<span class="line">Adorado y glorificado</span>
+<span class="line">El santísimo, sacratísimo,</span>
+<span class="line">Adorabilísimo, incomprensible</span>
+<span class="line">E inefable Nombre de Dios</span>
+<span class="line">En el cielo, en la tierra y en los abismos,</span>
+<span class="line">Por todas las criaturas</span>
+<span class="line">Salidas de las manos de Dios,</span>
+<span class="line">Y por el santísimo Corazón de Nuestro Señor Jesucristo</span>
+<span class="line">En el Santísimo Sacramento del altar. Amén.</span></p>
           <p class="note">(Este acto de adoración pertenece a la cofradía de la Santa Faz de Jesús.)</p>
         </div>
       </section>
@@ -758,7 +805,7 @@
           
         </header>
         <div class="prayer-text">
-          <p>Oh amabilísimo Jesús, mansísimo Cordero de Dios mío. Yo, pobre pecador, saludo y adoro esa santísima Llaga Tuya, que te causó un dolor tan intenso cuando llevaste la pesada Cruz sobre Tu divino Hombro. Aquel dolor fue más grave y más amargo que las demás Llagas de Tu santo Cuerpo. Te amo, te doy honor y me postro ante Ti desde lo profundo del corazón.</p>
+          <p>¡Oh amabilísimo Jesús, mansísimo Cordero de Dios mío! Yo, pobre pecador, saludo y adoro esa santísima Llaga Tuya, que te causó un dolor tan intenso cuando llevaste la pesada Cruz sobre Tu divino Hombro. Aquel dolor fue más grave y más amargo que las demás Llagas de Tu santo Cuerpo. Te amo, te doy honor y me postro ante Ti desde lo profundo del corazón.</p>
           <p>Te doy gracias por esa profundísima Llaga de Tu Hombro. Humildemente te ruego, en nombre del sufrimiento que padeciste por la Llaga del Hombro y en nombre de Tu pesada Cruz, que llevaste sobre esa santa Llaga: ten misericordia de mí, indigno pecador. Perdóname todos mis pecados y concédeme que, caminando sobre Tus huellas ensangrentadas, alcance la bienaventurada eternidad. Amén.</p>
           <aside class="instruction-box"><h3 class="box-title">La regla de oración</h3><p><strong>Padre nuestro…</strong> (3 veces) · <strong>Ave María…</strong> (3 veces)</p><p><em>Bendito seas, oh Señor, escondido en el Santísimo Sacramento.</em> (3 veces)</p></aside>
           <p class="lead">Oh Preciosísima Sangre que brotas de la sagrada Cabeza de Nuestro Señor Jesucristo, Templo de la divina Sabiduría y Morada de Dios, de la ciencia, de la luz del cielo y de la tierra: guárdame ahora y por los siglos de los siglos. Amén.</p>
@@ -772,14 +819,14 @@
           <p class="section-subtitle">La devoción de los treinta y tres días</p>
         </header>
         <div class="prayer-text">
-          <p class="lead">«Jesús, María, os amo — salvad las almas. Oh Sangre y Agua, que brotasteis del santísimo Corazón de Cristo como Fuente de Misericordia para nosotros, en Ti confiamos. Jesús, en Ti confiamos y en Ti ponemos toda nuestra esperanza.»</p>
+          <p class="lead">«Jesús, María, os amo — salvad las almas. Oh Sangre y Agua, que brotaste del santísimo Corazón de Cristo como Fuente de Misericordia para nosotros, en Ti confiamos. Jesús, en Ti confiamos y en Ti ponemos toda nuestra esperanza.»</p>
           <p class="refrain">Corazón Eucarístico de Jesús, confío en Ti.</p>
           <ol class="litany-group litany-numbered">
             <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, ardiente de Amor,</span> <span class="litany-response">enciende de amor nuestros corazones.</span></li>
             <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús,</span> <span class="litany-response">acrecienta en nosotros la fe y el amor.</span></li>
             <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Fuente de la recta voluntad,</span> <span class="litany-response">danos una voluntad recta.</span></li>
             <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Creador del mundo, que sostienes el mundo en Tu Mano,</span> <span class="litany-response">no nos dejes salir de Tu amparo.</span></li>
-            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Médico de Dios, que llevaste la muerte en Cristo,</span> <span class="litany-response">sana las heridas de nuestros pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Médico de Dios, que padeciste la muerte en la Cruz,</span> <span class="litany-response">sana las heridas de nuestros pecados.</span></li>
             <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, en memoria de Tu amarga Pasión,</span> <span class="litany-response">danos verdadero dolor y el perdón de los pecados.</span></li>
             <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús, Espejo de la Luz eterna,</span> <span class="litany-response">concédenos contemplarte en la eternidad.</span></li>
             <li class="litany-item"><span class="litany-call">Corazón Eucarístico de Jesús,</span> <span class="litany-response">muéstrate misericordioso con nosotros en la hora de nuestra muerte.</span></li>
@@ -874,7 +921,7 @@
   "voiceReading": "Leyendo: {section}",
   "voicePaused": "Lectura en pausa.",
   "voiceDone": "Lectura terminada.",
-  "voiceNoGender": "No hay voz {gender} disponible para el español en tu navegador — se usa la existente.",
+  "voiceNoGender": "La voz «{gender}» no está disponible para el español en tu dispositivo — se usa la existente.",
   "voiceNoVoice": "Tu navegador no tiene una voz española instalada. Añade un paquete de idioma en el sistema.",
   "voiceUnsupported": "Tu navegador no admite la síntesis de voz.",
   "installLabel": "Instalar la aplicación",

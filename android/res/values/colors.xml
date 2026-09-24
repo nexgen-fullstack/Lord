@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mirrors the tokens in assets/css/main.css. -->
+<resources>
+    <color name="ink">#0A0304</color>
+    <color name="gold">#F3C64D</color>
+</resources>

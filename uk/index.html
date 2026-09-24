@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Найсвятіша Кров Ісуса Христа — молитви й набожество</title>
+  <title>Найсвятіша Кров Ісуса Христа — молитви й набоженство</title>
   <meta name="description" content="12-річна молитва до Найсвятішої Крові, акт посвячення, молитва св. Ґертруди, «Золота стріла», молитва до св. Рани Рамена та Євхаристійного Серця Ісуса.">
-  <meta name="keywords" content="Найсвятіша Кров, Пресвята Кров Христова, 12-річна молитва, набожество до Крові Христової, св. Ґертруда Велика, Золота стріла, свята Рана Рамена, Євхаристійне Серце Ісуса, католицькі молитви">
+  <meta name="keywords" content="Найсвятіша Кров, Пресвята Кров Христова, 12-річна молитва, набоженство до Крові Христової, св. Ґертруда Велика, Золота стріла, свята Рана Рамена, Євхаристійне Серце Ісуса, католицькі молитви">
   <meta name="author" content="Sanguis Christi">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#0a0304">
@@ -21,6 +21,22 @@
        the very first jump is animated: the app appears to sail down into a
        prayer on its own before the reader has touched anything. */
     html.className += (html.className ? ' ' : '') + 'js-boot';
+
+    /* The Android app identifies itself in its user agent. Marked here, before
+       the stylesheet, so its print and install controls never flash up. */
+    if (/SanguisApp/.test(navigator.userAgent)) html.className += ' is-app';
+
+    /* The reader's own text size, restored before the first paint — applied
+       any later and every prayer would visibly jump to its new size. */
+    try {
+      var zoom = parseFloat(localStorage.getItem('pb.textZoom'));
+      /* No choice made yet: inside the Android app, start from the font size
+         set in the phone's own accessibility settings. */
+      if (!(zoom > 0) && window.SanguisApp && SanguisApp.fontScale) {
+        zoom = Math.min(1.75, Math.max(1, Math.round(SanguisApp.fontScale() * 20) / 20));
+      }
+      if (zoom >= 0.8 && zoom <= 2) html.style.setProperty('--zoom', String(zoom));
+    } catch (e) { /* storage blocked — the default large print stands */ }
 
     var fresh = true;
     try {
@@ -102,14 +118,14 @@
 
   <!-- OpenGraph -->
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа">
+  <meta property="og:site_name" content="Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа">
   <meta property="og:locale" content="uk_UA">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="it_IT">
   <meta property="og:locale:alternate" content="pt_PT">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:title" content="Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа">
+  <meta property="og:title" content="Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа">
   <meta property="og:description" content="12-річна молитва до Найсвятішої Крові, акт посвячення, молитва св. Ґертруди, «Золота стріла», молитва до св. Рани Рамена та Євхаристійного Серця Ісуса.">
   <meta property="og:url" content="https://nexgen-fullstack.github.io/Lord/uk/">
   <meta property="og:image" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
@@ -122,7 +138,7 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа">
+  <meta name="twitter:title" content="Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа">
   <meta name="twitter:description" content="12-річна молитва до Найсвятішої Крові, акт посвячення, молитва св. Ґертруди, «Золота стріла», молитва до св. Рани Рамена та Євхаристійного Серця Ісуса.">
   <meta name="twitter:image" content="https://nexgen-fullstack.github.io/Lord/assets/img/Jesus.jpeg">
   <meta name="twitter:image:alt" content="Ісус Христос на Хресті; ангели збирають Найсвятішу Кров у золоті чаші">
@@ -143,8 +159,8 @@
 
   <!-- Self-hosted fonts. No third-party stylesheet in the critical path, and
        the faces are ordinary same-origin files, so they cache for offline. -->
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/cormorant-garamond-400-cyrillic.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-cyrillic.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/lora-400-700-cyrillic.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-700-cyrillic.woff2" crossorigin>
   <link rel="stylesheet" href="../assets/css/fonts.css">
 
   <link rel="preload" as="image" href="../assets/img/Jesus.jpeg" fetchpriority="high">
@@ -216,7 +232,7 @@
       "@type": "WebSite",
       "@id": "https://nexgen-fullstack.github.io/Lord/#website",
       "url": "https://nexgen-fullstack.github.io/Lord/",
-      "name": "Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа",
+      "name": "Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа",
       "alternateName": "Sanguis Christi",
       "description": "12-річна молитва до Найсвятішої Крові, акт посвячення, молитва св. Ґертруди, «Золота стріла», молитва до св. Рани Рамена та Євхаристійного Серця Ісуса.",
       "inLanguage": [
@@ -237,7 +253,7 @@
     {
       "@type": "WebApplication",
       "@id": "https://nexgen-fullstack.github.io/Lord/#app",
-      "name": "Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа",
+      "name": "Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа",
       "alternateName": "Найсвятіша Кров",
       "url": "https://nexgen-fullstack.github.io/Lord/uk/",
       "applicationCategory": "LifestyleApplication",
@@ -279,7 +295,7 @@
       "@type": "WebPage",
       "@id": "https://nexgen-fullstack.github.io/Lord/uk/#webpage",
       "url": "https://nexgen-fullstack.github.io/Lord/uk/",
-      "name": "Найсвятіша Кров Ісуса Христа — молитви й набожество",
+      "name": "Найсвятіша Кров Ісуса Христа — молитви й набоженство",
       "description": "12-річна молитва до Найсвятішої Крові, акт посвячення, молитва св. Ґертруди, «Золота стріла», молитва до св. Рани Рамена та Євхаристійного Серця Ісуса.",
       "inLanguage": "uk",
       "isPartOf": {
@@ -319,7 +335,7 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа",
+          "name": "Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа",
           "item": "https://nexgen-fullstack.github.io/Lord/"
         },
         {
@@ -333,8 +349,8 @@
     {
       "@type": "Article",
       "@id": "https://nexgen-fullstack.github.io/Lord/uk/#devotion",
-      "headline": "Найсвятіша Кров Ісуса Христа — молитви й набожество",
-      "alternativeHeadline": "Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа",
+      "headline": "Найсвятіша Кров Ісуса Христа — молитви й набоженство",
+      "alternativeHeadline": "Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа",
       "description": "12-річна молитва до Найсвятішої Крові, акт посвячення, молитва св. Ґертруди, «Золота стріла», молитва до св. Рани Рамена та Євхаристійного Серця Ісуса.",
       "articleSection": "Католицька побожність",
       "inLanguage": "uk",
@@ -356,17 +372,17 @@
       "author": {
         "@id": "https://nexgen-fullstack.github.io/Lord/#organization"
       },
-      "keywords": "Найсвятіша Кров, Пресвята Кров Христова, 12-річна молитва, набожество до Крові Христової, св. Ґертруда Велика, Золота стріла, свята Рана Рамена, Євхаристійне Серце Ісуса, католицькі молитви",
+      "keywords": "Найсвятіша Кров, Пресвята Кров Христова, 12-річна молитва, набоженство до Крові Христової, св. Ґертруда Велика, Золота стріла, свята Рана Рамена, Євхаристійне Серце Ісуса, католицькі молитви",
       "genre": "Молитва",
       "datePublished": "2026-01-01",
-      "dateModified": "2026-09-04",
+      "dateModified": "2026-09-24",
       "isAccessibleForFree": true,
       "hasPart": [
         {
           "@type": "CreativeWork",
           "@id": "https://nexgen-fullstack.github.io/Lord/uk/#devotion",
-          "name": "Набожество до Святої Божої Крові",
-          "alternateName": "Молитва, яку читають кожного дня 12 років",
+          "name": "Набоженство до Святої Божої Крові",
+          "alternateName": "Молитва, яку читають щодня протягом 12 років",
           "position": 1,
           "inLanguage": "uk",
           "genre": "Молитва",
@@ -393,7 +409,7 @@
           "@type": "CreativeWork",
           "@id": "https://nexgen-fullstack.github.io/Lord/uk/#gertrude",
           "name": "Молитва св. Ґертруди Великої",
-          "alternateName": "Для звільнення душ із Чистилища",
+          "alternateName": "Для звільнення душ із чистилища",
           "position": 3,
           "inLanguage": "uk",
           "genre": "Молитва",
@@ -434,7 +450,7 @@
           "@type": "CreativeWork",
           "@id": "https://nexgen-fullstack.github.io/Lord/uk/#eucharistic-heart",
           "name": "Молитва до Євхаристійного Серця Ісуса",
-          "alternateName": "Набожество 33 днів",
+          "alternateName": "Набоженство 33 днів",
           "position": 6,
           "inLanguage": "uk",
           "genre": "Молитва",
@@ -458,7 +474,7 @@
   <div class="vignette" aria-hidden="true"></div>
 
   <div class="print-header" aria-hidden="true">
-    <strong>Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа</strong>
+    <strong>Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа</strong>
     <span>nexgen-fullstack.github.io/Lord/uk/</span>
   </div>
 
@@ -475,13 +491,32 @@
             <li><a href="#devotion" data-nav-link>12-річна молитва</a></li>
             <li><a href="#consecration" data-nav-link>Посвячення</a></li>
             <li><a href="#gertrude" data-nav-link>св. Ґертруда</a></li>
-            <li><a href="#golden-arrow" data-nav-link>Золота Стріла</a></li>
+            <li><a href="#golden-arrow" data-nav-link>Золота стріла</a></li>
             <li><a href="#shoulder-wound" data-nav-link>Рана Рамена</a></li>
             <li><a href="#eucharistic-heart" data-nav-link>Євхаристійне Серце</a></li>
           </ul>
         </nav>
 
         <div class="header-tools">
+          <div class="textsize" data-textsize>
+          <button type="button" class="btn btn-icon" data-textsize-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="textsizePanel"
+                  aria-label="Розмір шрифту" title="Розмір шрифту">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2.5 19 8 5l5.5 14M4.5 14h7M14 19l3.8-9.5L21.6 19M15.3 15.8h5"/></svg>
+          </button>
+          <div class="textsize-panel" id="textsizePanel" role="dialog"
+               aria-label="Розмір шрифту" hidden>
+            <p class="voice-panel-title">Розмір шрифту</p>
+            <div class="textsize-row">
+              <button type="button" class="btn textsize-step" data-textsize-step="-1"
+                      aria-label="Зменшити шрифт" title="Зменшити шрифт">A−</button>
+              <output class="textsize-value" data-textsize-value aria-live="polite">100%</output>
+              <button type="button" class="btn textsize-step" data-textsize-step="1"
+                      aria-label="Збільшити шрифт" title="Збільшити шрифт">A+</button>
+            </div>
+            <p class="textsize-hint">Вибраний розмір запам’ятовується на цьому пристрої.</p>
+          </div>
+        </div>
           <button type="button" class="btn btn-icon" data-audio-toggle
                   aria-pressed="false" aria-label="Увімкнути тиху молитовну музику" title="Увімкнути тиху молитовну музику">
             <span data-audio-icon><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m16 9.5 5 5m0-5-5 5"/></svg></span>
@@ -617,7 +652,7 @@
             <li><a href="#devotion" data-nav-link>12-річна молитва</a></li>
             <li><a href="#consecration" data-nav-link>Посвячення</a></li>
             <li><a href="#gertrude" data-nav-link>св. Ґертруда</a></li>
-            <li><a href="#golden-arrow" data-nav-link>Золота Стріла</a></li>
+            <li><a href="#golden-arrow" data-nav-link>Золота стріла</a></li>
             <li><a href="#shoulder-wound" data-nav-link>Рана Рамена</a></li>
             <li><a href="#eucharistic-heart" data-nav-link>Євхаристійне Серце</a></li>
           </ul>
@@ -629,9 +664,9 @@
     <div class="container">
       <section id="hero" class="hero" aria-labelledby="heroTitle">
           <div class="hero-body">
-            <h1 class="hero-title" id="heroTitle">Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа</h1>
+            <h1 class="hero-title" id="heroTitle">Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа</h1>
             <blockquote class="hero-quote">
-              <p>«Ти відкупив мене, Господи, Своєю Найсвятішою Кров’ю з кожного коліна, і мови, і народу, і племені»</p>
+              <p>«Ти відкупив нас, Господи, Своєю Найсвятішою Кров’ю з кожного коліна, і мови, і народу, і племені».</p>
               <cite>Одкровення 5, 9</cite>
             </blockquote>
 
@@ -652,63 +687,65 @@
       <section id="devotion" class="section-card reveal" aria-labelledby="devotion-title">
         <header class="section-header">
           <p class="section-index" aria-hidden="true">01</p>
-          <h2 class="section-title" id="devotion-title">Набожество до Святої Божої Крові</h2>
-          <p class="section-subtitle">Молитва, яку читають кожного дня 12 років</p>
+          <h2 class="section-title" id="devotion-title">Набоженство до Святої Божої Крові</h2>
+          <p class="section-subtitle">Молитва, яку читають щодня протягом 12 років</p>
         </header>
         <div class="prayer-text">
-          <p class="chant">Киріє єлейсон, Христе єлейсон,<br>Киріє єлейсон, Христе єлейсон,<br>Киріє єлейсон, Христе єлейсон.</p>
+          <p class="chant"><span class="line">Киріє елейсон, Христе елейсон,</span>
+<span class="line">Киріє елейсон, Христе елейсон,</span>
+<span class="line">Киріє елейсон, Христе елейсон.</span></p>
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">Христе,</span> <span class="litany-response">послухай мене.</span></li>
             <li class="litany-item"><span class="litany-call">Христе,</span> <span class="litany-response">вислухай мене.</span></li>
             <li class="litany-item"><span class="litany-call">Отче з неба, Боже,</span> <span class="litany-response">помилуй мене.</span></li>
-            <li class="litany-item"><span class="litany-call">Сину, відкупителю світу, Боже,</span> <span class="litany-response">помилуй мене.</span></li>
+            <li class="litany-item"><span class="litany-call">Сину, Відкупителю світу, Боже,</span> <span class="litany-response">помилуй мене.</span></li>
             <li class="litany-item"><span class="litany-call">Духу Святий, Боже,</span> <span class="litany-response">помилуй мене.</span></li>
-            <li class="litany-item"><span class="litany-call">Свята Тройце, Єдиний Боже,</span> <span class="litany-response">помилуй мене.</span></li>
+            <li class="litany-item"><span class="litany-call">Свята Трійце, Єдиний Боже,</span> <span class="litany-response">помилуй мене.</span></li>
             <li class="litany-item"><span class="litany-call">Свята Маріє,</span> <span class="litany-response">молися за мене.</span></li>
-            <li class="litany-item"><span class="litany-call">Мати Спасителя Страждаючого,</span> <span class="litany-response">молися за мене.</span></li>
+            <li class="litany-item"><span class="litany-call">Мати стражденного Спасителя,</span> <span class="litany-response">молися за мене.</span></li>
           </ul>
           <ul class="litany-group">
-            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита обрізанням,</span> <span class="litany-response">очисти мої гріхи.</span></li>
+            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита при обрізанні,</span> <span class="litany-response">очисти мої гріхи.</span></li>
             <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита під час бичування,</span> <span class="litany-response">очисти мої гріхи.</span></li>
-            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита під тернем Христа,</span> <span class="litany-response">очисти мої гріхи.</span></li>
+            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита під терновим вінцем,</span> <span class="litany-response">очисти мої гріхи.</span></li>
             <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита на хресній дорозі,</span> <span class="litany-response">очисти мої гріхи.</span></li>
-            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита прибиттям Найсвятіших рук до хреста,</span> <span class="litany-response">очисти мої гріхи.</span></li>
-            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита прибиттям найсвятіших ніг до хреста,</span> <span class="litany-response">очисти мої гріхи.</span></li>
-            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита з Найсвятішого Серця, копієм пробитого,</span> <span class="litany-response">очисти мої гріхи.</span></li>
+            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита, коли прибивали до хреста Найсвятіші руки,</span> <span class="litany-response">очисти мої гріхи.</span></li>
+            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита, коли прибивали до хреста Найсвятіші ноги,</span> <span class="litany-response">очисти мої гріхи.</span></li>
+            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита з Найсвятішого Серця, пробитого списом,</span> <span class="litany-response">очисти мої гріхи.</span></li>
             <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита за мене, негідного грішника,</span> <span class="litany-response">очисти мої гріхи.</span></li>
-            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита до останньої краплі за мене, за мої гріхи,</span> <span class="litany-response">помилуй мене.</span></li>
+            <li class="litany-item"><span class="litany-call">О Найсвятіша Крове Господня, пролита до останньої краплі за мене і за мої гріхи,</span> <span class="litany-response">помилуй мене.</span></li>
           </ul>
           <ul class="litany-group">
-            <li class="litany-item"><span class="litany-call">О Ісусе, за Твою пролиту Найсвятішу Кров за мене на хресті,</span> <span class="litany-response">благодарю Тебе.</span></li>
+            <li class="litany-item"><span class="litany-call">О Ісусе, за Твою Найсвятішу Кров, пролиту за мене на хресті,</span> <span class="litany-response">дякую Тобі.</span></li>
             <li class="litany-item"><span class="litany-call">О Ісусе, за Твою Найсвятішу Кров, зневажену на Голгофі,</span> <span class="litany-response">перепрошую Тебе.</span></li>
-            <li class="litany-item"><span class="litany-call">О Ісусе, за зневаження Найсвятішої Крові на Службі Божій негідним прийманням у Святім Причастію,</span> <span class="litany-response">перепрошую Тебе.</span></li>
+            <li class="litany-item"><span class="litany-call">О Ісусе, за зневаження Найсвятішої Крові на Службі Божій негідним прийманням Святого Причастя,</span> <span class="litany-response">перепрошую Тебе.</span></li>
           </ul>
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">Я, грішний, Тебе, Бога, прошу:</span> <span class="litany-response">спаси мене Своєю Найсвятішою Кров’ю.</span></li>
             <li class="litany-item"><span class="litany-call">Я, грішний, Тебе, Бога, прошу:</span> <span class="litany-response">заховай мене Своєю Найсвятішою Кров’ю.</span></li>
-            <li class="litany-item"><span class="litany-call">Я, грішний, Тебе, Бога, прошу:</span> <span class="litany-response">напій мене Своєю Найсвятішою Кров’ю.</span></li>
+            <li class="litany-item"><span class="litany-call">Я, грішний, Тебе, Бога, прошу:</span> <span class="litany-response">напої мене Своєю Найсвятішою Кров’ю.</span></li>
           </ul>
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">Агнче Божий, що нищиш гріхи світу,</span> <span class="litany-response">вислухай мене, Господи.</span></li>
             <li class="litany-item"><span class="litany-call">Агнче Божий, що нищиш гріхи світу,</span> <span class="litany-response">прости мені, Господи.</span></li>
             <li class="litany-item"><span class="litany-call">Агнче Божий, що нищиш гріхи світу,</span> <span class="litany-response">помилуй мене, Господи.</span></li>
           </ul>
-          <p class="chant">Киріє єлейсон, Христе єлейсон (3 рази)</p>
-          <p class="lead">О Найсвятіша Крове Господа нашого Ісуса Христа, будь возвеличена і прославлена всіма нами і тепер, і завжди, і навіки вічні. Амінь.</p>
+          <p class="chant"><span class="line">Киріє елейсон, Христе елейсон (3 рази)</span></p>
+          <p class="lead">О Найсвятіша Крове Господа нашого Ісуса Христа, будь возвеличена і прославлена всіма нами і тепер, і завжди, і на віки вічні. Амінь.</p>
           <hr class="sacred-rule" aria-hidden="true">
-          <p>Всемогучий Боже, мій Спасителю. Ти міг однією краплиною Твоєї Найсвятішої Крові відкупити мільйони світів. Однак Ти зі Своєї безграничної любові до мене, грішного, пролив останню краплю Своєї Найсвятішої Крові, жертвуючи її Богові Отцеві за мої гріхи.</p>
-          <p>О Ісусе, Ти жертвуєш її щоденно також на престолах цілого світу на кожній Службі Божій. Ти виливаєш Свою Кров під видами вина і жертвуєш за моє відкуплення. Ти пролив її на прокормлення моєї душі на вічне життя.</p>
-          <p>Я, грішний, падаю в покорі перед Твоєю величністю і благаю Тебе, заради Твого безграничного милосердя: помилуй мене, грішного. Спасителю, прошу Тебе повернути затверділих грішників, щоб вони навернулися чим скоріше з того страшного стану. Віднови святу віру у всіх народів, щоб повернулися до єдності.</p>
-          <p>Господи, нашим великим бажанням є, щоби всі люди світу Тобі служили одному і прославляли Твою Пресвяту Кров.</p>
-          <p>Боже, змилуйся над душами в чистилищі, бо вони вижидають Твого помилування.</p>
-          <p>Нехай Твоя Пресвятіша Кров, пролита за наші гріхи, виєднає прощення в Небесного Отця і запровадить їх до вічного щастя. Амінь.</p>
+          <p>Всемогутній Боже, мій Спасителю! Ти міг однією краплиною Твоєї Найсвятішої Крові відкупити мільйони світів. Однак Ти зі Своєї безмежної любові до мене, грішного, пролив останню краплю Своєї Найсвятішої Крові, жертвуючи її Богові Отцеві за мої гріхи.</p>
+          <p>О Ісусе, Ти жертвуєш її щоденно також на престолах цілого світу на кожній Службі Божій. Ти виливаєш Свою Кров під видом вина і жертвуєш її за моє відкуплення. Ти пролив її, щоб живити мою душу для вічного життя.</p>
+          <p>Я, грішний, падаю в покорі перед Твоєю величністю і благаю Тебе заради Твого безмежного милосердя: помилуй мене, грішного. Спасителю, прошу Тебе: наверни затверділих грішників, щоб вони якнайшвидше вийшли з того страшного стану. Віднови святу віру в усіх народах, щоб вони повернулися до єдності.</p>
+          <p>Господи, наше велике бажання — щоби всі люди світу служили Тобі єдиному і прославляли Твою Пресвяту Кров.</p>
+          <p>Боже, змилуйся над душами в чистилищі, бо вони очікують Твого помилування.</p>
+          <p>Нехай Твоя Найсвятіша Кров, пролита за наші гріхи, випросить їм прощення в Небесного Отця і приведе їх до вічного щастя. Амінь.</p>
           <hr class="sacred-rule" aria-hidden="true">
-          <p>Господи, Ісусе Христе, Спасителю мій, заховай мене від підступів диявольських спокус Своєю Найсвятішою Кров’ю.</p>
-          <p>Господи, Ісусе Христе, Спасителю мій, поможи мені Своєю Найсвятішою Кров’ю подолати спокуси.</p>
-          <p>Господи, Ісусе Христе, Спасителю мій, захорони мене і проведи мене за Собою ради Твоєї Найсвятішої Крові.</p>
-          <p>Господи, Ісусе Христе, Спасителю мій, захорони нам від усяких небезпек Святішого Отця зі всім духовенством і Святою Церквою ради Своєї Найсвятішої Крові. Амінь.</p>
-          <aside class="instruction-box"><h3 class="box-title">Молитовне правило</h3><p><strong>Отче наш…</strong> (7 разів) · <strong>Богородице Діво…</strong> (7 разів) · <strong>Слава Отцю…</strong> (7 разів)</p><p>Молитву відмовляють <strong>кожного дня протягом дванадцяти років</strong>, без перерви.</p></aside>
-          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Божі обітниці</span></h3><p>Хто кожного дня протягом 12 років відмовлятиме цю молитву і буде молитися без перерви, той не попаде в чистилище.</p><p>Хто почав молитися і помер через півроку, отримає ті всі великі ласки: 5 душ з його родини будуть мати покликання до духовного стану, і до четвертого покоління з його родини не буде в пеклі.</p><p>Ця 12-річна молитва має силу очистити душу від усіх беззаконій. <em>Господи, благослови!</em></p></aside>
+          <p>Господи Ісусе Христе, Спасителю мій, заховай мене від підступів диявольських спокус Своєю Найсвятішою Кров’ю.</p>
+          <p>Господи Ісусе Христе, Спасителю мій, допоможи мені Своєю Найсвятішою Кров’ю подолати спокуси.</p>
+          <p>Господи Ісусе Христе, Спасителю мій, захорони мене і проведи за Собою заради Твоєї Найсвятішої Крові.</p>
+          <p>Господи Ісусе Христе, Спасителю мій, захорони від усяких небезпек Святішого Отця з усім духовенством і Святу Церкву заради Своєї Найсвятішої Крові. Амінь.</p>
+          <aside class="instruction-box"><h3 class="box-title">Молитовне правило</h3><p><strong>Отче наш…</strong> (7 разів) · <strong>Богородице Діво…</strong> (7 разів) · <strong>Слава Отцю…</strong> (7 разів)</p><p>Молитву промовляють <strong>щодня протягом дванадцяти років</strong>, без перерви.</p></aside>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Божі обітниці</span></h3><p>Хто щодня протягом 12 років промовлятиме цю молитву й молитиметься без перерви, той не потрапить до чистилища.</p><p>Хто почав молитися і помер через пів року, отримає всі ці великі ласки: п’ять душ з його родини матимуть покликання до духовного стану, і до четвертого покоління ніхто з його родини не буде в пеклі.</p><p>Ця 12-річна молитва має силу очистити душу від усіх беззаконь. <em>Господи, благослови!</em></p></aside>
         </div>
       </section>
 
@@ -719,10 +756,10 @@
           
         </header>
         <div class="prayer-text">
-          <p>У повному усвідомленні моєї нікчемності, а заодно Твоєї, о милосердний Спасителю, величі, припадаю до Твоїх стіп і дякую Тобі за так численні докази ласк, котрі Ти мені, невдячному сотворінню, виявив, а особливо, що Ти мене через Твою Найсвятішу Кров звільнив від сатанинської сили зіпсуття. В присутності моєї улюбленої Матері Марії, мого Ангела-Хоронителя, моїх святих Покровителів, цілого Небесного Двору посвячуюся, о наймиліший Ісусе, з цілою щирістю серця якнайдобровільніше Твоїй Найдорожчій Крові, через котру Ти цілий світ відкупив від гріха, смерті й пекла.</p>
-          <p>Я, <span class="user-name">(ім’я)</span>, обіцяю Тобі, надіючись на поміч Твоєї ласки, з усіх моїх сил і згідно моїх можливостей будити і поширювати набоженство до Твоєї Найсвятішої Крові, Ціни нашого Відкуплення, так щоби Твоя Кров, гідна найбільшого почитання, всіма була вшанована і люблена.</p>
-          <p>У такий спосіб хочу мою невірність супроти Твоєї Найдорожчої Крові та Любові винагородити і Тобі задосить учинити за так численні осквернення і зневаги, які люди Твоїй Найдорожчій Ціні нашого спасіння завдають. О! Якби можна було мої власні гріхи, мою остиглість і всі мої зневаги, якими Тебе, Найдорожча Крове, коли-небудь зневажив, вернути в небуття!</p>
-          <p>Дивись, Найдорожчий Ісусе, оце жертвую Тобі також любов, честь, благоговіння, котрі Твоя Пресвята Мати, Твої вірні учні та всі святі Твоїй Найдорожчій Крові віддали. Прошу Тебе, забажай не думати більше про мою попередню невірність і остиглість, а всім, зневажаючим Тебе, забажай усе пробачити. Покропи, о Божий Спасителю, Твоєю Найдорожчою Кров’ю мене, а також усіх людей, щоби ми Тебе, розп’ята Любове, відразу цілим серцем любили і Ціну нашого Відкуплення на всі часи якнайдостойніше почитати могли. Амінь.</p>
+          <p>У повному усвідомленні моєї нікчемності, а заразом і Твоєї величі, о милосердний Спасителю, припадаю до Твоїх стіп і дякую Тобі за такі численні докази ласк, які Ти мені, невдячному створінню, виявив, а особливо за те, що Ти через Твою Найсвятішу Кров звільнив мене від згубної влади сатани. У присутності моєї улюбленої Матері Марії, мого Ангела-Хоронителя, моїх святих Покровителів і всього Небесного Двору посвячуюся, о наймиліший Ісусе, з усією щирістю серця і цілком добровільно Твоїй Найдорожчій Крові, через яку Ти відкупив увесь світ від гріха, смерті й пекла.</p>
+          <p>Я, <span class="user-name">(ім’я)</span>, обіцяю Тобі, сподіваючись на поміч Твоєї ласки, з усіх моїх сил і відповідно до всіх моїх можливостей пробуджувати й поширювати набоженство до Твоєї Найсвятішої Крові, Ціни нашого Відкуплення, щоби Твою Кров, гідну найбільшого почитання, всі шанували й любили.</p>
+          <p>У такий спосіб хочу відшкодувати мою невірність щодо Твоєї Найдорожчої Крові та Любові і вчинити Тобі задосить за такі численні осквернення і зневаги, яких люди завдають Найдорожчій Ціні нашого спасіння. О, якби можна було мої власні гріхи, мою байдужість і всі зневаги, якими я коли-небудь зневажив Тебе, Найдорожча Крове, обернути в ніщо!</p>
+          <p>Ось, Найдорожчий Ісусе, жертвую Тобі також любов, честь і благоговіння, які Твоя Пресвята Мати, Твої вірні учні та всі святі віддали Твоїй Найдорожчій Крові. Прошу Тебе: зволь більше не згадувати моєї колишньої невірності й байдужості, а всім, хто Тебе зневажає, зволь усе пробачити. Покропи, о Божий Спасителю, Твоєю Найдорожчою Кров’ю мене, а також усіх людей, щоби ми відтепер цілим серцем любили Тебе, розп’ята Любове, і завжди якнайдостойніше почитали Ціну нашого Відкуплення. Амінь.</p>
         </div>
       </section>
 
@@ -730,11 +767,11 @@
         <header class="section-header">
           <p class="section-index" aria-hidden="true">03</p>
           <h2 class="section-title" id="gertrude-title">Молитва св. Ґертруди Великої</h2>
-          <p class="section-subtitle">Для звільнення душ із Чистилища</p>
+          <p class="section-subtitle">Для звільнення душ із чистилища</p>
         </header>
         <div class="prayer-text">
-          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Обітниця Господа Ісуса</span></h3><p>Господь Ісус об’явив св. Ґертруді Великій, що одноразове відмовлення цієї молитви звільняє <strong>1000 (тисячу) душ із Чистилища</strong>.</p></aside>
-          <p class="lead">«Отче Предвічний, жертвую Тобі Найдорогоціннішу Кров Божественного Сина Твого, Господа нашого Ісуса Христа, в злученні з усіма Службами Божими на цілому світі сьогодні відправленими; за душі, терплячі в чистилищі, за вмираючих, за грішників на світі, за грішників у Вселенській Церкві, за грішників у моїй родині, а також у моєму домі. Амінь.»</p>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Обітниця Господа Ісуса</span></h3><p>Господь Ісус об’явив св. Ґертруді Великій, що одне промовлення цієї молитви звільняє <strong>1000 (тисячу) душ із чистилища</strong>.</p></aside>
+          <p class="lead">«Отче Предвічний, жертвую Тобі Найдорогоціннішу Кров Божественного Сина Твого, Господа нашого Ісуса Христа, в єдності з усіма Службами Божими, які сьогодні відправляють у цілому світі, — за душі, що терплять у чистилищі, за вмираючих, за грішників у світі, за грішників у Вселенській Церкві, за грішників у моїй родині, а також у моєму домі. Амінь».</p>
           <p class="note">(500 днів відпусту; III р. в місяці липні; іпрм.)</p>
         </div>
       </section>
@@ -746,7 +783,17 @@
           <p class="section-subtitle">Прославлення Найсвятішого Імені Божого</p>
         </header>
         <div class="prayer-text">
-          <p class="poem">Нехай буде навіки прославлене,<br>Благословлене, почитаєме,<br>Обоготворене, найсвятіше,<br>Найдостойніше, найпрославленіше,<br>Незбагненне, невимовне Ім’я Боже в Небі,<br>На землі та пекельних безоднях<br>Через усі створіння,<br>Котрі вийшли з рук Божих<br>І через Найсвятіше Серце<br>Господа нашого Ісуса Христа<br>В Найсвятіших Тайнах вівтаря. Амінь.</p>
+          <p class="poem"><span class="line">Нехай буде навіки прославлене,</span>
+<span class="line">Благословенне, почитане,</span>
+<span class="line">Обожнюване, найсвятіше,</span>
+<span class="line">Найдостойніше, найпрославленіше,</span>
+<span class="line">Незбагненне, невимовне Ім’я Боже в Небі,</span>
+<span class="line">На землі та в пекельних безоднях</span>
+<span class="line">Через усі створіння,</span>
+<span class="line">Котрі вийшли з рук Божих,</span>
+<span class="line">І через Найсвятіше Серце</span>
+<span class="line">Господа нашого Ісуса Христа</span>
+<span class="line">В Найсвятіших Тайнах вівтаря. Амінь.</span></p>
           <p class="note">(Цей акт поклоніння належить до братства Найсвятішого Обличчя Ісуса.)</p>
         </div>
       </section>
@@ -758,10 +805,10 @@
           
         </header>
         <div class="prayer-text">
-          <p>О наймилостивіший Ісусе, мій Ти найтихіший Агнче Божий! Я, бідний(на) грішник(ця), вітаю і покланяюся цій Рані Твоїй Найсвятішій, котра завдала Тобі надто сильного болю, коли Ти двигав Хрест тяжкий на Своїх Божих Раменах. Цей біль тяжкий, прикріший, ніж інші Рани на Твоїм Святім Тілі. Люблю Тебе, віддаю честь і поклін з глибини серця.</p>
-          <p>Дякую Тобі за ту найглибшу Рану Твого Рамена. Покірно прошу в ім’я Твоєї муки, яку через Рану Рамена терпів, і в ім’я Хреста Твого тяжкого, котрий на тій святій Рані двигав: змилосердися наді мною, негідним(ою) грішником(цею). Прости мені усі гріхи і вчини, аби, ступаючи Твоїми кривавими слідами, осягнув(ла) щасливу вічність. Амінь.</p>
-          <aside class="instruction-box"><h3 class="box-title">Молитовне правило</h3><p><strong>Отче наш…</strong> (3 рази) · <strong>Богородице Діво…</strong> (3 рази)</p><p><em>Будь, Господи, благословенний в Найсвятіших Тайнах утаєний.</em> (3 рази)</p></aside>
-          <p class="lead">Найдорожча Крове, що проливаєшся зі Святої Голови нашого Господа Ісуса Христа, Храму Святої Мудрості і Божої Обителі, знання, Небесного і Земного світла, убережи мене тепер і навіки віків. Амінь.</p>
+          <p>О наймилостивіший Ісусе, мій найтихіший Агнче Божий! Я, бідний грішник (бідна грішниця), вітаю Твою Найсвятішу Рану і поклоняюся їй; вона завдала Тобі такого сильного болю, коли Ти ніс тяжкий Хрест на Своїх Божих Раменах. Цей біль був тяжчий і прикріший, ніж біль усіх інших Ран на Твоєму Святому Тілі. Люблю Тебе, віддаю Тобі честь і поклін із глибини серця.</p>
+          <p>Дякую Тобі за цю найглибшу Рану Твого Рамена. Покірно прошу в ім’я Твоєї муки, яку Ти терпів через Рану Рамена, і в ім’я Твого тяжкого Хреста, який Ти ніс на тій святій Рані: змилосердься наді мною, негідним грішником (негідною грішницею). Прости мені всі гріхи і вчини, щоб я, ступаючи Твоїми кривавими слідами, осягнув (осягнула) щасливу вічність. Амінь.</p>
+          <aside class="instruction-box"><h3 class="box-title">Молитовне правило</h3><p><strong>Отче наш…</strong> (3 рази) · <strong>Богородице Діво…</strong> (3 рази)</p><p><em>Будь благословенний, Господи, утаєний у Найсвятіших Тайнах.</em> (3 рази)</p></aside>
+          <p class="lead">Найдорожча Крове, що проливаєшся зі Святої Голови нашого Господа Ісуса Христа, Храму Святої Мудрості і Божої Обителі, знання, Небесного і Земного світла, убережи мене тепер і на віки віків. Амінь.</p>
         </div>
       </section>
 
@@ -769,29 +816,29 @@
         <header class="section-header">
           <p class="section-index" aria-hidden="true">06</p>
           <h2 class="section-title" id="eucharistic-heart-title">Молитва до Євхаристійного Серця Ісуса</h2>
-          <p class="section-subtitle">Набожество 33 днів</p>
+          <p class="section-subtitle">Набоженство 33 днів</p>
         </header>
         <div class="prayer-text">
-          <p class="lead">Ісусе, Маріє, люблю Вас — рятуйте душі. О Крове і Водо, котра вийшла з Найсвятішого Серця Христового, як Джерело Милосердя для нас, уповаємо на Тебе. Ісусе, уповаємо на Тебе і всю надію на Тебе покладаємо.</p>
+          <p class="lead">Ісусе, Маріє, люблю Вас — рятуйте душі. О Крове і Водо, що витекли з Найсвятішого Серця Христового як Джерело Милосердя для нас, уповаємо на Вас. Ісусе, уповаємо на Тебе і всю надію на Тебе покладаємо.</p>
           <p class="refrain">Євхаристійне Серце Ісуса, вірю Тобі.</p>
           <ol class="litany-group litany-numbered">
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — палаюче Любов’ю,</span> <span class="litany-response">розпали любов’ю наші серця.</span></li>
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса,</span> <span class="litany-response">помнож в нас віру і любов.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, що палаєш Любов’ю,</span> <span class="litany-response">розпали любов’ю наші серця.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса,</span> <span class="litany-response">помнож у нас віру й любов.</span></li>
             <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — Джерело правдивої волі,</span> <span class="litany-response">дай нам правдиву волю.</span></li>
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — Сотворителю світу, Котрий тримаєш світ у Своїй Долоні,</span> <span class="litany-response">не випускай нас зі Своєї Опіки.</span></li>
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — Божий лікарю, Котрий поніс смерть на Христі,</span> <span class="litany-response">вилікуй наші гріховні рани.</span></li>
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — на пам’ять через Твою гірку Муку,</span> <span class="litany-response">дай нам щирий жаль і відпущення гріхів.</span></li>
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — Дзеркало Вічного світла,</span> <span class="litany-response">дозволь нам оглядати Тебе у вічності.</span></li>
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса,</span> <span class="litany-response">об’яви Себе Милосердним для нас в годині нашої смерті.</span></li>
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса,</span> <span class="litany-response">згаси в нас цілковито жар світових пожадань.</span></li>
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — Доброто сердець,</span> <span class="litany-response">через Найдорожчу Кров прибудь до нас в годині нашої смерті.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — Творче світу, що тримаєш світ у Своїй долоні,</span> <span class="litany-response">не випускай нас зі Своєї опіки.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — Божий Лікарю, що зазнав смерті на хресті,</span> <span class="litany-response">вилікуй наші гріховні рани.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, на пам’ять про Твою гірку Муку,</span> <span class="litany-response">дай нам щирий жаль і відпущення гріхів.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — Дзеркало Вічного світла,</span> <span class="litany-response">дай нам споглядати Тебе у вічності.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса,</span> <span class="litany-response">яви Себе милосердним до нас у годину нашої смерті.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса,</span> <span class="litany-response">згаси в нас цілковито жар світських пожадань.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса — Доброто сердець,</span> <span class="litany-response">через Найдорожчу Кров прибудь до нас у годину нашої смерті.</span></li>
           </ol>
           <p class="refrain">Євхаристійне Серце Ісуса, вірю Тобі.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, невичерпне джерело життя і святості,</span> <span class="litany-response">освяти мене Твоєю Найдорожчою Кров’ю.</span></li>
             <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, вогнище невгасимої любові,</span> <span class="litany-response">запали моє серце любов’ю до Тебе.</span></li>
-            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, що терпеливо очікуєш нас у дарохранильниці,</span> <span class="litany-response">навчи мене вірності.</span></li>
+            <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, що терпляче очікуєш нас у дарохранильниці,</span> <span class="litany-response">навчи мене вірності.</span></li>
             <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, зневажене недостойними причастями,</span> <span class="litany-response">прийми моє відшкодування.</span></li>
             <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, Хлібе ангелів і поживо душ,</span> <span class="litany-response">насити мою вбогість.</span></li>
             <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, потіхо засмучених і сило слабких,</span> <span class="litany-response">підкріпи мене в дорозі.</span></li>
@@ -800,11 +847,11 @@
             <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, напутнику вмираючих,</span> <span class="litany-response">будь при мені в останню годину.</span></li>
             <li class="litany-item"><span class="litany-call">Євхаристійне Серце Ісуса, повне милосердя до нас,</span> <span class="litany-response">змилуйся наді мною.</span></li>
           </ul>
-          <p>О Євхаристійне Серце Ісуса, Ти, що з любові до нас залишилося з нами під видами хліба і вина аж до кінця віків, прийми мою вбогу молитву. Я вірю, що Ти є тут присутній, істинно, дійсно і суттєво; надіюся на Твоє милосердя і люблю Тебе понад усе. За всі зневаги, які Ти приймаєш у Найсвятіших Тайнах, приношу Тобі Найдорожчу Кров, яку Ти пролив за мене на хресті. Амінь.</p>
-          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Обітниця 33 днів</span></h3><p>Хто протягом <strong>33 днів</strong> — на пам’ять про тридцять три роки земного життя Спасителя — щоденно, без перерви, відмовлятиме цю молитву до Євхаристійного Серця Ісуса, той отримає <strong>цілковите відпущення кари і вини</strong>.</p><p><em>Відмовляється у стані освячуючої благодаті, з приступленням до святої Сповіді та Причастя.</em></p></aside>
+          <p>О Євхаристійне Серце Ісуса, Ти, що з любові до нас залишився з нами під видами хліба і вина аж до кінця віків, прийми мою вбогу молитву. Я вірю, що Ти тут присутній — істинно, дійсно і суттєво; надіюся на Твоє милосердя і люблю Тебе понад усе. За всі зневаги, яких Ти зазнаєш у Найсвятіших Тайнах, приношу Тобі Найдорожчу Кров, яку Ти пролив за мене на хресті. Амінь.</p>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Обітниця 33 днів</span></h3><p>Хто протягом <strong>33 днів</strong> — на пам’ять про тридцять три роки земного життя Спасителя — щодня, без перерви, промовлятиме цю молитву до Євхаристійного Серця Ісуса, той отримає <strong>цілковите відпущення кари і вини</strong>.</p><p><em>Молитву промовляють у стані освячувальної благодаті, приступивши до святої Сповіді та Причастя.</em></p></aside>
           <div class="tracker no-print" data-tracker="33d" data-total="33">
             <h3 class="tracker-title">Поступ 33 днів</h3>
-            <p class="tracker-lead">Позначайте кожен день, коли ви відмовили цю молитву.</p>
+            <p class="tracker-lead">Позначайте кожен день, коли ви промовили цю молитву.</p>
             <div class="tracker-bar" role="progressbar" aria-valuemin="0" aria-valuemax="33"
                  aria-valuenow="0" aria-label="Поступ 33 днів">
               <span class="tracker-fill" data-fill></span>
@@ -832,14 +879,14 @@
             <a href="../pt/" hreflang="pt" lang="pt">🇵🇹 Português</a>
             <a href="../es/" hreflang="es" lang="es">🇪🇸 Español</a>
         </nav>
-        <p class="footer-note">Приватне набожество. Обітниці, пов’язані з цими молитвами, походять із приватних об’явлень і не є догматами віри.</p>
+        <p class="footer-note">Приватне набоженство. Обітниці, пов’язані з цими молитвами, походять із приватних об’явлень і не є догматами віри.</p>
 
         <!-- Filled by app.js from the service worker's own count. Hidden until
              there is something true to say — an unregistered worker must not
              leave a promise of offline access standing on the page. -->
         <p class="footer-offline no-print" data-offline-status role="status" hidden></p>
 
-        <p class="footer-copy">&copy; 2026 Духовне набожество до Пресвятої Крові Христової</p>
+        <p class="footer-copy">&copy; 2026 Духовне набоженство до Пресвятої Крові Христової</p>
       </div>
     </footer>
 
@@ -861,7 +908,7 @@
   "statusIdle": "Ще не розпочато — позначте свій перший день.",
   "statusDay33": "День {n} з {total} · {pct}%",
   "statusMarked": "сьогодні позначено, поверніться завтра",
-  "statusDone33": "33 дні звершено. Слава Ісусу Христу!",
+  "statusDone33": "33 дні завершено. Слава Ісусу Христу!",
   "confirmReset": "Скинути весь записаний поступ?",
   "iconSound": "\u003csvg class=\"ico\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"currentColor\" d=\"M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z\"/\u003e\u003cpath class=\"wave\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" d=\"M15.6 8.6a4.6 4.6 0 0 1 0 6.8M18.4 6a8.2 8.2 0 0 1 0 12\"/\u003e\u003c/svg\u003e",
   "iconMute": "\u003csvg class=\"ico\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"\u003e\u003cpath fill=\"currentColor\" d=\"M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z\"/\u003e\u003cpath fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" d=\"m16 9.5 5 5m0-5-5 5\"/\u003e\u003c/svg\u003e",
@@ -874,8 +921,8 @@
   "voiceReading": "Читається: {section}",
   "voicePaused": "Читання призупинено.",
   "voiceDone": "Читання завершено.",
-  "voiceNoGender": "Голос «{gender}» для української недоступний у вашому браузері — вибрано наявний.",
-  "voiceNoVoice": "У вашому браузері немає українського голосу. Встановіть мовний пакет у системі.",
+  "voiceNoGender": "Голос «{gender}» для української мови недоступний на вашому пристрої — вибрано наявний.",
+  "voiceNoVoice": "На вашому пристрої немає українського голосу. Встановіть мовний пакет у налаштуваннях системи.",
   "voiceUnsupported": "Ваш браузер не підтримує синтез мовлення.",
   "installLabel": "Встановити застосунок",
   "installAction": "Встановити",

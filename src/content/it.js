@@ -26,12 +26,17 @@ module.exports = {
     audioOff: 'Disattiva la musica devozionale',
     toTop: 'Torna su',
 
+    textSizeLabel: 'Dimensione del testo',
+    textSmaller:   'Testo più piccolo',
+    textLarger:    'Testo più grande',
+    textSizeHint:  'La scelta viene ricordata su questo dispositivo.',
+
     /* Offline app — install prompt, cache state, update notice. */
     installLabel:  'Installa l’app',
     installTitle:  'Il libro di preghiere sul telefono',
     installBody:   'Installa l’app e tutte le preghiere restano con te, anche senza rete.',
     installAction: 'Installa',
-    installIos:    'In Safari tocca «Condividi», poi «Aggiungi a Home».',
+    installIos:    'In Safari tocca «Condividi», poi «Aggiungi alla schermata Home».',
     installedNote: 'L’app è installata. Le preghiere sono disponibili offline.',
     offlineReady:  'Tutte le preghiere salvate — puoi pregare senza rete.',
     offlineStored: 'Salvato su questo dispositivo: {done} di {total}',
@@ -55,7 +60,7 @@ module.exports = {
     voiceReading: 'In lettura: {section}',
     voicePaused: 'Lettura in pausa.',
     voiceDone: 'Lettura terminata.',
-    voiceNoGender: 'Nessuna voce {gender} disponibile per l’italiano nel tuo browser — si usa quella presente.',
+    voiceNoGender: 'La voce «{gender}» non è disponibile per l’italiano sul tuo dispositivo — si usa quella presente.',
     voiceNoVoice: 'Il tuo browser non ha una voce italiana installata. Aggiungi un pacchetto lingua nel sistema.',
     voiceUnsupported: 'Il tuo browser non supporta la sintesi vocale.',
 
@@ -75,7 +80,7 @@ module.exports = {
 
   hero: {
     title: 'L’Esaltazione del Preziosissimo Sangue di Nostro Signore Gesù Cristo',
-    quote: '«Tu mi hai redento, o Signore, con il Tuo Preziosissimo Sangue da ogni tribù, lingua, popolo e nazione.»',
+    quote: '«Tu ci hai redenti, o Signore, con il Tuo Preziosissimo Sangue, da ogni tribù, lingua, popolo e nazione.»',
     quoteRef: 'Apocalisse 5, 9',
     imageAlt: 'Gesù Cristo in croce; angeli raccolgono il Preziosissimo Sangue in calici d’oro',
     cta: 'Alle preghiere'
@@ -111,9 +116,9 @@ module.exports = {
           ['O Preziosissimo Sangue del Signore, versato nella flagellazione,', 'purificami dai miei peccati.'],
           ['O Preziosissimo Sangue del Signore, versato sotto la corona di spine,', 'purificami dai miei peccati.'],
           ['O Preziosissimo Sangue del Signore, versato sulla via della Croce,', 'purificami dai miei peccati.'],
-          ['O Preziosissimo Sangue del Signore, versato nella crocifissione delle Tue santissime mani,', 'purificami dai miei peccati.'],
-          ['O Preziosissimo Sangue del Signore, versato nella crocifissione dei Tuoi santissimi piedi,', 'purificami dai miei peccati.'],
-          ['O Preziosissimo Sangue del Signore, versato dal Tuo santissimo Cuore trafitto dalla lancia,', 'purificami dai miei peccati.'],
+          ['O Preziosissimo Sangue del Signore, versato quando le Sue santissime mani furono inchiodate alla Croce,', 'purificami dai miei peccati.'],
+          ['O Preziosissimo Sangue del Signore, versato quando i Suoi santissimi piedi furono inchiodati alla Croce,', 'purificami dai miei peccati.'],
+          ['O Preziosissimo Sangue del Signore, versato dal Suo santissimo Cuore trafitto dalla lancia,', 'purificami dai miei peccati.'],
           ['O Preziosissimo Sangue del Signore, versato per me, indegno peccatore,', 'purificami dai miei peccati.'],
           ['O Preziosissimo Sangue del Signore, versato fino all’ultima goccia per me e per i miei peccati,', 'abbi pietà di me.']
         ] },
@@ -163,7 +168,7 @@ module.exports = {
 
         { t: 'promise', title: 'Le promesse divine', x: [
           'Chi reciterà questa preghiera ogni giorno per dodici anni, pregando senza interruzione, non passerà per il purgatorio.',
-          'Chi ha cominciato a pregarla e muore dopo mezzo anno riceverà ugualmente tutte queste grandi grazie: cinque anime della sua famiglia riceveranno la vocazione allo stato religioso, e fino alla quarta generazione nessuno della sua famiglia sarà nell’inferno.',
+          'Chi ha cominciato a pregarla e muore dopo sei mesi riceverà ugualmente tutte queste grandi grazie: cinque anime della sua famiglia riceveranno la vocazione allo stato religioso, e fino alla quarta generazione nessuno della sua famiglia sarà nell’inferno.',
           'Questa preghiera dodicennale ha il potere di purificare l’anima da ogni iniquità. _Signore, dona la Tua benedizione!_'
         ] }
       ]
@@ -181,7 +186,7 @@ module.exports = {
 
         { t: 'p', x: 'In questo modo desidero riparare la mia infedeltà verso il Tuo Preziosissimo Sangue e verso il Tuo Amore, e darTi soddisfazione per le innumerevoli profanazioni e oltraggi che gli uomini infliggono a quel Prezzo carissimo della nostra salvezza. Oh, se i miei stessi peccati, la mia tiepidezza e tutti gli oltraggi con cui Ti ho mai disonorato, o Preziosissimo Sangue, potessero essere ridotti al nulla!' },
 
-        { t: 'p', x: 'Ecco, dolcissimo Gesù, Ti offro anche l’amore, l’onore e l’adorazione che la Tua santissima Madre, i Tuoi fedeli discepoli e tutti i santi hanno reso al Tuo Preziosissimo Sangue. Ti prego: non ricordare più la mia passata infedeltà e tiepidezza, e degnati di perdonare tutti coloro che Ti oltraggiano. Aspergi me, o divino Salvatore, con il Tuo Preziosissimo Sangue, e con esso tutti gli uomini, affinché Ti amiamo subito con tutto il cuore, o Amore crocifisso, e possiamo onorare degnamente per sempre il Prezzo della nostra Redenzione. Amen.' }
+        { t: 'p', x: 'Ecco, dolcissimo Gesù, Ti offro anche l’amore, l’onore e l’adorazione che la Tua santissima Madre, i Tuoi fedeli discepoli e tutti i santi hanno reso al Tuo Preziosissimo Sangue. Ti prego: non ricordare più la mia passata infedeltà e tiepidezza, e degnati di perdonare tutti coloro che Ti oltraggiano. Aspergi me, o divino Salvatore, con il Tuo Preziosissimo Sangue, e con esso tutti gli uomini, affinché d’ora in poi Ti amiamo con tutto il cuore, o Amore crocifisso, e possiamo onorare degnamente per sempre il Prezzo della nostra Redenzione. Amen.' }
       ]
     },
 
@@ -259,7 +264,7 @@ module.exports = {
           ['Cuore Eucaristico di Gesù,', 'accresci in noi la fede e l’amore.'],
           ['Cuore Eucaristico di Gesù, Fonte della retta volontà,', 'donaci una volontà retta.'],
           ['Cuore Eucaristico di Gesù, Creatore del mondo, che tieni il mondo nella Tua Mano,', 'non lasciarci uscire dalla Tua protezione.'],
-          ['Cuore Eucaristico di Gesù, Medico di Dio, che hai portato la morte in Cristo,', 'guarisci le ferite dei nostri peccati.'],
+          ['Cuore Eucaristico di Gesù, Medico di Dio, che hai subìto la morte sulla Croce,', 'guarisci le ferite dei nostri peccati.'],
           ['Cuore Eucaristico di Gesù, in memoria della Tua amara Passione,', 'donaci vero dolore e il perdono dei peccati.'],
           ['Cuore Eucaristico di Gesù, Specchio della Luce eterna,', 'concedici di contemplarTi nell’eternità.'],
           ['Cuore Eucaristico di Gesù,', 'mostrati misericordioso verso di noi nell’ora della nostra morte.'],
@@ -284,7 +289,7 @@ module.exports = {
           ['Cuore Eucaristico di Gesù, pieno di misericordia verso di noi,', 'abbi pietà di me.']
         ] },
 
-        { t: 'p', x: 'O Cuore Eucaristico di Gesù, che per amore nostro sei rimasto con noi sotto le specie del pane e del vino fino alla fine dei secoli, accogli questa mia povera preghiera. Credo che Tu sei qui presente, veramente, realmente e sostanzialmente; spero nella Tua misericordia e Ti amo sopra ogni cosa. Per tutti gli oltraggi che ricevi nel Santissimo Sacramento, Ti offro il Preziosissimo Sangue che hai versato per me sulla Croce. Amen.' },
+        { t: 'p', x: 'O Cuore Eucaristico di Gesù, che per amore nostro sei rimasto con noi sotto le specie del pane e del vino fino alla fine dei secoli, accogli questa mia povera preghiera. Credo che Tu sia qui presente, veramente, realmente e sostanzialmente; spero nella Tua misericordia e Ti amo sopra ogni cosa. Per tutti gli oltraggi che ricevi nel Santissimo Sacramento, Ti offro il Preziosissimo Sangue che hai versato per me sulla Croce. Amen.' },
 
         { t: 'promise', title: 'La promessa dei 33 giorni', x: [
           'Chi per **trentatré giorni** — in memoria dei trentatré anni della vita terrena del Salvatore — reciterà ogni giorno e senza interruzione questa preghiera al Cuore Eucaristico di Gesù, otterrà la **completa remissione della pena e della colpa**.',

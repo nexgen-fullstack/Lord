@@ -26,6 +26,11 @@ module.exports = {
     audioOff: 'Desligar a música devocional',
     toTop: 'Voltar ao topo',
 
+    textSizeLabel: 'Tamanho do texto',
+    textSmaller:   'Texto mais pequeno',
+    textLarger:    'Texto maior',
+    textSizeHint:  'A escolha fica guardada neste dispositivo.',
+
     /* Offline app — install prompt, cache state, update notice. */
     installLabel:  'Instalar a aplicação',
     installTitle:  'O livro de orações no telemóvel',
@@ -55,7 +60,7 @@ module.exports = {
     voiceReading: 'A ler: {section}',
     voicePaused: 'Leitura em pausa.',
     voiceDone: 'Leitura concluída.',
-    voiceNoGender: 'Não há voz {gender} disponível para português no seu navegador — foi usada a existente.',
+    voiceNoGender: 'A voz «{gender}» não está disponível para português no seu dispositivo — foi usada a existente.',
     voiceNoVoice: 'O seu navegador não tem uma voz portuguesa instalada. Adicione um pacote de idioma no sistema.',
     voiceUnsupported: 'O seu navegador não suporta síntese de voz.',
 
@@ -75,7 +80,7 @@ module.exports = {
 
   hero: {
     title: 'A Exaltação do Preciosíssimo Sangue de Nosso Senhor Jesus Cristo',
-    quote: '«Vós me remistes, ó Senhor, com o Vosso Preciosíssimo Sangue, de toda a tribo, língua, povo e nação.»',
+    quote: '«Vós nos remistes, ó Senhor, com o Vosso Preciosíssimo Sangue, de toda a tribo, língua, povo e nação.»',
     quoteRef: 'Apocalipse 5, 9',
     imageAlt: 'Jesus Cristo na Cruz; anjos recolhem o Preciosíssimo Sangue em cálices de ouro',
     cta: 'Às orações'
@@ -111,9 +116,9 @@ module.exports = {
           ['Ó Preciosíssimo Sangue do Senhor, derramado na flagelação,', 'purificai-me dos meus pecados.'],
           ['Ó Preciosíssimo Sangue do Senhor, derramado sob a coroa de espinhos,', 'purificai-me dos meus pecados.'],
           ['Ó Preciosíssimo Sangue do Senhor, derramado no caminho da Cruz,', 'purificai-me dos meus pecados.'],
-          ['Ó Preciosíssimo Sangue do Senhor, derramado ao serem cravadas na Cruz as Vossas santíssimas mãos,', 'purificai-me dos meus pecados.'],
-          ['Ó Preciosíssimo Sangue do Senhor, derramado ao serem cravados na Cruz os Vossos santíssimos pés,', 'purificai-me dos meus pecados.'],
-          ['Ó Preciosíssimo Sangue do Senhor, derramado do Vosso santíssimo Coração trespassado pela lança,', 'purificai-me dos meus pecados.'],
+          ['Ó Preciosíssimo Sangue do Senhor, derramado ao serem cravadas na Cruz as Suas santíssimas mãos,', 'purificai-me dos meus pecados.'],
+          ['Ó Preciosíssimo Sangue do Senhor, derramado ao serem cravados na Cruz os Seus santíssimos pés,', 'purificai-me dos meus pecados.'],
+          ['Ó Preciosíssimo Sangue do Senhor, derramado do Seu santíssimo Coração trespassado pela lança,', 'purificai-me dos meus pecados.'],
           ['Ó Preciosíssimo Sangue do Senhor, derramado por mim, indigno pecador,', 'purificai-me dos meus pecados.'],
           ['Ó Preciosíssimo Sangue do Senhor, derramado até à última gota por mim e pelos meus pecados,', 'tende piedade de mim.']
         ] },
@@ -143,7 +148,7 @@ module.exports = {
         { t: 'rule' },
 
         { t: 'p', x: 'Deus omnipotente, meu Salvador, com uma só gota do Vosso Preciosíssimo Sangue podíeis ter redimido milhões de mundos. Contudo, pelo Vosso amor sem limites por mim, pecador, derramastes a última gota do Vosso Preciosíssimo Sangue, oferecendo-a a Deus Pai pelos meus pecados.' },
-        { t: 'p', x: 'Ó Jesus, Vós o ofereceis diariamente também nos altares do mundo inteiro em cada santa Missa. Derramais o Vosso Sangue sob as espécies do vinho e ofereceis-o pela minha redenção. Derramastes-o para alimentar a minha alma para a vida eterna.' },
+        { t: 'p', x: 'Ó Jesus, Vós o ofereceis diariamente também nos altares do mundo inteiro em cada santa Missa. Derramais o Vosso Sangue sob as espécies do vinho e Vós o ofereceis pela minha redenção. Vós o derramastes para alimentar a minha alma para a vida eterna.' },
         { t: 'p', x: 'Eu, pecador, prostro-me em humildade diante da Vossa majestade e suplico-Vos, pela Vossa misericórdia sem limites: tende piedade de mim, pecador. Ó Salvador, peço-Vos que convertais os pecadores endurecidos, para que quanto antes se afastem desse estado terrível. Renovai a santa fé em todos os povos, para que regressem à unidade.' },
         { t: 'p', x: 'Senhor, este é o nosso grande desejo: que todos os homens do mundo sirvam somente a Vós e glorifiquem o Vosso Preciosíssimo Sangue.' },
         { t: 'p', x: 'Ó Deus, tende piedade das almas do purgatório, porque aguardam o Vosso perdão.' },
@@ -163,7 +168,7 @@ module.exports = {
 
         { t: 'promise', title: 'As promessas divinas', x: [
           'Quem rezar esta oração todos os dias durante doze anos, sem interrupção, não passará pelo purgatório.',
-          'Quem tiver começado a rezá-la e morrer ao fim de meio ano receberá igualmente todas estas grandes graças: cinco almas da sua família receberão a vocação ao estado religioso, e até à quarta geração ninguém da sua família estará no inferno.',
+          'Quem tiver começado a rezá-la e morrer ao fim de seis meses receberá igualmente todas estas grandes graças: cinco almas da sua família receberão a vocação ao estado religioso, e até à quarta geração ninguém da sua família estará no inferno.',
           'Esta oração de doze anos tem o poder de purificar a alma de todas as iniquidades. _Senhor, dai a Vossa bênção!_'
         ] }
       ]
@@ -181,7 +186,7 @@ module.exports = {
 
         { t: 'p', x: 'Deste modo desejo reparar a minha infidelidade para com o Vosso Preciosíssimo Sangue e o Vosso Amor, e dar-Vos satisfação pelas inúmeras profanações e ultrajes que os homens infligem a esse Preço caríssimo da nossa salvação. Oh, se os meus próprios pecados, a minha tibieza e todos os ultrajes com que alguma vez Vos desonrei, ó Preciosíssimo Sangue, pudessem ser reduzidos ao nada!' },
 
-        { t: 'p', x: 'Eis, dulcíssimo Jesus, que Vos ofereço também o amor, a honra e a adoração que a Vossa santíssima Mãe, os Vossos fiéis discípulos e todos os santos prestaram ao Vosso Preciosíssimo Sangue. Peço-Vos: não Vos lembreis mais da minha antiga infidelidade e tibieza, e dignai-Vos perdoar a todos os que Vos ultrajam. Aspergi-me, ó divino Salvador, com o Vosso Preciosíssimo Sangue, e com ele todos os homens, para que Vos amemos desde já de todo o coração, ó Amor crucificado, e possamos honrar dignamente para sempre o Preço da nossa Redenção. Amém.' }
+        { t: 'p', x: 'Eis, dulcíssimo Jesus, que Vos ofereço também o amor, a honra e a adoração que a Vossa santíssima Mãe, os Vossos fiéis discípulos e todos os santos prestaram ao Vosso Preciosíssimo Sangue. Peço-Vos: não Vos lembreis mais da minha antiga infidelidade e tibieza, e dignai-Vos perdoar a todos os que Vos ultrajam. Aspergi-me, ó divino Salvador, com o Vosso Preciosíssimo Sangue, e com ele todos os homens, para que doravante Vos amemos de todo o coração, ó Amor crucificado, e possamos honrar dignamente para sempre o Preço da nossa Redenção. Amém.' }
       ]
     },
 
@@ -240,7 +245,7 @@ module.exports = {
           '_Bendito sejais, ó Senhor, escondido no Santíssimo Sacramento._ (3 vezes)'
         ] },
 
-        { t: 'lead', x: 'Ó Preciosíssimo Sangue que corres da sagrada Cabeça de Nosso Senhor Jesus Cristo, Templo da divina Sabedoria e Morada de Deus, do conhecimento, da luz do céu e da terra: guardai-me agora e pelos séculos dos séculos. Amém.' }
+        { t: 'lead', x: 'Ó Preciosíssimo Sangue, que correis da sagrada Cabeça de Nosso Senhor Jesus Cristo, Templo da divina Sabedoria e Morada de Deus, do conhecimento, da luz do céu e da terra: guardai-me agora e pelos séculos dos séculos. Amém.' }
       ]
     },
 
@@ -259,7 +264,7 @@ module.exports = {
           ['Coração Eucarístico de Jesus,', 'aumentai em nós a fé e o amor.'],
           ['Coração Eucarístico de Jesus, Fonte da vontade reta,', 'dai-nos uma vontade reta.'],
           ['Coração Eucarístico de Jesus, Criador do mundo, que tendes o mundo na Vossa Mão,', 'não nos deixeis sair da Vossa proteção.'],
-          ['Coração Eucarístico de Jesus, Médico de Deus, que levastes a morte em Cristo,', 'curai as feridas dos nossos pecados.'],
+          ['Coração Eucarístico de Jesus, Médico de Deus, que sofrestes a morte na Cruz,', 'curai as feridas dos nossos pecados.'],
           ['Coração Eucarístico de Jesus, em memória da Vossa amarga Paixão,', 'dai-nos verdadeira contrição e o perdão dos pecados.'],
           ['Coração Eucarístico de Jesus, Espelho da Luz eterna,', 'concedei-nos contemplar-Vos na eternidade.'],
           ['Coração Eucarístico de Jesus,', 'mostrai-Vos misericordioso para connosco na hora da nossa morte.'],

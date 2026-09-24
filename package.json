@@ -1,12 +1,13 @@
 {
   "name": "sanguis-christi",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Devotion to the Most Precious Blood of Jesus Christ - a six-language, offline-capable liturgical web app.",
   "scripts": {
     "build": "node src/build.js",
     "check": "node src/check.js",
     "fonts": "node src/fetch-fonts.js",
+    "apk": "node android/build.js",
     "start": "node src/serve.js",
     "dev": "node src/build.js && node src/check.js && node src/serve.js"
   },

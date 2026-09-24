@@ -26,6 +26,11 @@ module.exports = {
     audioOff: 'Stop the devotional music',
     toTop: 'Back to top',
 
+    textSizeLabel: 'Text size',
+    textSmaller:   'Smaller text',
+    textLarger:    'Larger text',
+    textSizeHint:  'Your choice is remembered on this device.',
+
     /* Offline app — install prompt, cache state, update notice. */
     installLabel:  'Install the app',
     installTitle:  'The prayer book on your phone',
@@ -55,7 +60,7 @@ module.exports = {
     voiceReading: 'Reading: {section}',
     voicePaused: 'Reading paused.',
     voiceDone: 'Reading complete.',
-    voiceNoGender: 'No {gender} voice is available for English in your browser — using the one that is.',
+    voiceNoGender: 'The “{gender}” voice is not available for English on your device — using the one that is.',
     voiceNoVoice: 'Your browser has no English voice installed. Add a language pack in your system settings.',
     voiceUnsupported: 'Your browser does not support speech synthesis.',
 
@@ -75,7 +80,7 @@ module.exports = {
 
   hero: {
     title: 'The Exaltation of the Most Precious Blood of Our Lord Jesus Christ',
-    quote: '“Thou hast redeemed me, O Lord, by Thy Most Precious Blood, out of every tribe and tongue and people and nation.”',
+    quote: '“Thou hast redeemed us, O Lord, by Thy Most Precious Blood, out of every tribe and tongue and people and nation.”',
     quoteRef: 'Revelation 5:9',
     imageAlt: 'Jesus Christ upon the Cross, angels gathering the Most Precious Blood into golden chalices',
     cta: 'To the prayers'
@@ -111,9 +116,9 @@ module.exports = {
           ['O Most Precious Blood of the Lord, shed in the scourging,', 'cleanse me of my sins.'],
           ['O Most Precious Blood of the Lord, shed beneath the crown of thorns,', 'cleanse me of my sins.'],
           ['O Most Precious Blood of the Lord, shed upon the way of the Cross,', 'cleanse me of my sins.'],
-          ['O Most Precious Blood of the Lord, shed at the nailing of Thy most holy hands to the Cross,', 'cleanse me of my sins.'],
-          ['O Most Precious Blood of the Lord, shed at the nailing of Thy most holy feet to the Cross,', 'cleanse me of my sins.'],
-          ['O Most Precious Blood of the Lord, shed from Thy most Sacred Heart pierced by the lance,', 'cleanse me of my sins.'],
+          ['O Most Precious Blood of the Lord, shed at the nailing of His most holy hands to the Cross,', 'cleanse me of my sins.'],
+          ['O Most Precious Blood of the Lord, shed at the nailing of His most holy feet to the Cross,', 'cleanse me of my sins.'],
+          ['O Most Precious Blood of the Lord, shed from His most Sacred Heart pierced by the lance,', 'cleanse me of my sins.'],
           ['O Most Precious Blood of the Lord, shed for me, an unworthy sinner,', 'cleanse me of my sins.'],
           ['O Most Precious Blood of the Lord, shed to the last drop for me and for my sins,', 'have mercy on me.']
         ] },
@@ -181,7 +186,7 @@ module.exports = {
 
         { t: 'p', x: 'In this way I wish to make amends for my own unfaithfulness towards Thy Most Precious Blood and Thy Love, and to make satisfaction to Thee for the countless profanations and outrages which men inflict upon that Most Precious Price of our salvation. Oh, if only my own sins, my lukewarmness and every outrage by which I have ever dishonoured Thee, O Most Precious Blood, could be returned to nothingness!' },
 
-        { t: 'p', x: 'Behold, dearest Jesus, I offer Thee also the love, the honour and the adoration which Thy most holy Mother, Thy faithful disciples and all the saints have rendered to Thy Most Precious Blood. I beseech Thee, deign to think no more upon my former unfaithfulness and lukewarmness, and deign to forgive all who dishonour Thee. Sprinkle me, O Divine Saviour, with Thy Most Precious Blood, and with it all mankind, that we may love Thee at once with our whole heart, O crucified Love, and may honour most worthily for all time the Price of our Redemption. Amen.' }
+        { t: 'p', x: 'Behold, dearest Jesus, I offer Thee also the love, the honour and the adoration which Thy most holy Mother, Thy faithful disciples and all the saints have rendered to Thy Most Precious Blood. I beseech Thee, deign to think no more upon my former unfaithfulness and lukewarmness, and deign to forgive all who dishonour Thee. Sprinkle me, O Divine Saviour, with Thy Most Precious Blood, and with it all mankind, that we may henceforth love Thee with our whole heart, O crucified Love, and may honour most worthily for all time the Price of our Redemption. Amen.' }
       ]
     },
 
@@ -259,7 +264,7 @@ module.exports = {
           ['Eucharistic Heart of Jesus,', 'increase in us faith and love.'],
           ['Eucharistic Heart of Jesus, Fount of the true will,', 'grant us a right will.'],
           ['Eucharistic Heart of Jesus, Creator of the world, who holdest the world in Thy Hand,', 'let us never fall away from Thy protection.'],
-          ['Eucharistic Heart of Jesus, Physician of God, who didst bear death in Christ,', 'heal the wounds of our sins.'],
+          ['Eucharistic Heart of Jesus, Physician of God, who didst suffer death upon the Cross,', 'heal the wounds of our sins.'],
           ['Eucharistic Heart of Jesus, in memory of Thy bitter Passion,', 'grant us true sorrow and the forgiveness of our sins.'],
           ['Eucharistic Heart of Jesus, Mirror of the Eternal Light,', 'grant that we may behold Thee in eternity.'],
           ['Eucharistic Heart of Jesus,', 'show Thyself merciful to us in the hour of our death.'],

@@ -1,7 +1,8 @@
 /* ============================================================================
    SANGUIS CHRISTI — application script
-   Ambient canvas · navigation · i18n switcher · prayer trackers · ambient
-   chant · voice reader · print · offline app (install, cache, updates).
+   Ambient canvas · navigation · i18n switcher · text size · prayer trackers ·
+   ambient chant · voice reader · print · offline app (install, cache,
+   updates) · the Android app's bridge to the device's own speech engine.
    No dependencies, no build step.
    ========================================================================== */
 (function () {
@@ -12,6 +13,11 @@
 
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var LANG = document.body.getAttribute('data-lang') || 'en';
+
+  /* The Android app (android/) loads these same pages from inside its APK and
+     says so in its user agent. There the prayers are already on the device:
+     no service worker, no install prompt, no cache to report. */
+  var NATIVE = /SanguisApp/.test(navigator.userAgent);
 
   /* Localised UI strings emitted by the page. */
   var UI = (function () {
@@ -59,6 +65,11 @@
   function closeInstallPanel() {
     var p = document.getElementById('installPanel');
     var t = document.querySelector('[data-install-toggle]');
+    if (p && !p.hidden) { p.hidden = true; if (t) t.setAttribute('aria-expanded', 'false'); }
+  }
+  function closeTextPanel() {
+    var p = document.getElementById('textsizePanel');
+    var t = document.querySelector('[data-textsize-toggle]');
     if (p && !p.hidden) { p.hidden = true; if (t) t.setAttribute('aria-expanded', 'false'); }
   }
 
@@ -283,6 +294,7 @@
     function open() {
       closeLangMenu();
       closeVoicePanel();
+      closeTextPanel();
       lastFocus = document.activeElement;
       drawer.hidden = false;
       toggle.setAttribute('aria-expanded', 'true');
@@ -306,8 +318,10 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !drawer.hidden) close();
     });
+    /* Past the width where the header rail returns (main.css, 1340px) the
+       drawer has nothing left to offer. */
     window.addEventListener('resize', onFrame(function () {
-      if (window.innerWidth > 900 && !drawer.hidden) close();
+      if (window.innerWidth >= 1340 && !drawer.hidden) close();
     }), { passive: true });
   }
 
@@ -322,6 +336,7 @@
 
     function open() {
       closeVoicePanel();
+      closeTextPanel();
       /* Carry the reader's place in the page across to the other language. */
       var hash = location.hash || '';
       options.forEach(function (a) {
@@ -362,6 +377,93 @@
 
     /* Remember the language actually being read. */
     store.set('pb.lang', LANG);
+  }
+
+  /* ═══════════════════════════ 4b. TEXT SIZE ═══════════════════════════ */
+
+  /* Multipliers on the reading type (the CSS --zoom). 1 is already large
+     print; the steps above it are for readers who need more still. */
+  var ZOOM_STEPS = [0.85, 1, 1.15, 1.3, 1.5, 1.75];
+
+  function initTextSize() {
+    var wrap = document.querySelector('[data-textsize]');
+    if (!wrap) return;
+    var toggle = wrap.querySelector('[data-textsize-toggle]');
+    var panel = wrap.querySelector('.textsize-panel');
+    var valueEl = wrap.querySelector('[data-textsize-value]');
+    var minus = wrap.querySelector('[data-textsize-step="-1"]');
+    var plus = wrap.querySelector('[data-textsize-step="1"]');
+
+    /* The stored choice, or else whatever the boot script started from (in
+       the app, the phone's own font size). */
+    var saved = parseFloat(store.get('pb.textZoom', '')) ||
+                parseFloat(root.style.getPropertyValue('--zoom')) || 1;
+    var idx = 1;
+    ZOOM_STEPS.forEach(function (z, i) {
+      if (Math.abs(z - saved) < Math.abs(ZOOM_STEPS[idx] - saved)) idx = i;
+    });
+
+    function reflect() {
+      valueEl.textContent = Math.round(ZOOM_STEPS[idx] * 100) + '%';
+      minus.disabled = idx === 0;
+      plus.disabled = idx === ZOOM_STEPS.length - 1;
+    }
+
+    /* The line the reader was on stays where it was on the screen: without
+       this, every step would reflow the page and carry them somewhere else. */
+    function anchor() {
+      var headerH = (document.querySelector('.site-header') || {}).offsetHeight || 64;
+      var nodes = document.querySelectorAll('.prayer-text > *, .litany-item, .section-header');
+      for (var i = 0; i < nodes.length; i++) {
+        var r = nodes[i].getBoundingClientRect();
+        if (r.bottom > headerH + 4) return { el: nodes[i], top: r.top };
+      }
+      return null;
+    }
+
+    function apply(next) {
+      if (next < 0 || next >= ZOOM_STEPS.length || next === idx) return;
+      var keep = (window.scrollY || window.pageYOffset) > 40 ? anchor() : null;
+      idx = next;
+      root.style.setProperty('--zoom', String(ZOOM_STEPS[idx]));
+      store.set('pb.textZoom', String(ZOOM_STEPS[idx]));
+      reflect();
+      if (keep) {
+        /* Instant, not the page's smooth scrolling: an animated correction
+           would still be under way when the next tap measures again. */
+        var drift = keep.el.getBoundingClientRect().top - keep.top;
+        if (drift) {
+          var y = (window.scrollY || window.pageYOffset) + drift;
+          try { window.scrollTo({ top: y, left: 0, behavior: 'instant' }); }
+          catch (e) { window.scrollTo(0, y); }
+        }
+      }
+    }
+
+    function openPanel() {
+      closeLangMenu(); closeVoicePanel(); closeInstallPanel();
+      panel.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+    function closePanel() {
+      panel.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      panel.hidden ? openPanel() : closePanel();
+    });
+    minus.addEventListener('click', function () { apply(idx - 1); });
+    plus.addEventListener('click', function () { apply(idx + 1); });
+    document.addEventListener('click', function (e) {
+      if (!panel.hidden && !wrap.contains(e.target)) closePanel();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.hidden) { closePanel(); toggle.focus(); }
+    });
+
+    reflect();
   }
 
   /* ═════════════════════ 5. 33-DAY PRAYER TRACKER ═════════════════════ */
@@ -716,6 +818,88 @@
     return out;
   }
 
+  /* Android's web view has no Web Speech synthesis at all. Inside the app,
+     window.SanguisTTS (android/…/MainActivity.java) hands the text to the
+     device's own TextToSpeech engine instead, and this shim puts the standard
+     speechSynthesis face on it, so initVoice below runs unchanged.
+     The engine has no pause, so pause() stops and resume() re-reads the
+     current sentence from its beginning — at prayer pace, the natural place
+     to pick up again anyway. */
+  function installNativeSpeech() {
+    var bridge = window.SanguisTTS;
+    if (!bridge || (window.speechSynthesis && window.SpeechSynthesisUtterance)) return;
+
+    var pending = {}, seq = 0, current = null, paused = false, listeners = [];
+
+    function Utterance(text) {
+      this.text = String(text || '');
+      this.lang = ''; this.voice = null;
+      this.rate = 1; this.pitch = 1; this.volume = 1;
+      this.onend = null; this.onerror = null; this.onstart = null;
+    }
+
+    function voices() {
+      try {
+        return JSON.parse(bridge.voices() || '[]').map(function (v) {
+          return { name: v.name, voiceURI: v.name, lang: v.lang,
+                   localService: !!v.local, 'default': false };
+        });
+      } catch (e) { return []; }
+    }
+
+    function send(u) {
+      var id = String(++seq);
+      pending[id] = u;
+      current = { id: id, u: u };
+      bridge.speak(id, u.text, u.lang || '', u.voice ? u.voice.name : '',
+                   Number(u.rate) || 1, Number(u.pitch) || 1);
+    }
+
+    /* Called back by the app when an utterance finishes or fails. */
+    window.__sanguisTTS = function (id, type) {
+      var u = pending[id];
+      if (!u) return;
+      delete pending[id];
+      if (current && current.id === id) current = null;
+      if (type === 'end' && u.onend) u.onend({ type: 'end' });
+      if (type === 'error' && u.onerror) u.onerror({ type: 'error', error: 'synthesis-failed' });
+    };
+
+    window.SpeechSynthesisUtterance = Utterance;
+    window.speechSynthesis = {
+      speak: function (u) { paused = false; send(u); },
+      /* Pending utterances are dropped without firing onend, as the spec's
+         cancel does — initVoice relies on that to stop the queue. */
+      cancel: function () {
+        paused = false; current = null;
+        pending = {};
+        bridge.stop();
+      },
+      pause: function () {
+        if (!current) return;
+        paused = true;
+        var held = current;
+        delete pending[held.id];
+        current = held;
+        bridge.stop();
+      },
+      resume: function () {
+        if (!paused || !current) return;
+        paused = false;
+        send(current.u);
+      },
+      getVoices: voices,
+      addEventListener: function (type, fn) { if (type === 'voiceschanged') listeners.push(fn); },
+      onvoiceschanged: null
+    };
+
+    /* The engine binds asynchronously; the app announces when its voices are
+       ready, exactly as a browser fires voiceschanged. */
+    window.__sanguisVoices = function () {
+      listeners.forEach(function (fn) { try { fn(); } catch (e) {} });
+    };
+  }
+
   function initVoice() {
     var root = document.querySelector('[data-voice]');
     if (!root) return;
@@ -736,7 +920,7 @@
 
     /* Panel open/close — shared by both the supported and unsupported paths so
        the reason for an unavailable reader is always visible. */
-    function openPanel() { closeLangMenu(); closeInstallPanel(); panel.hidden = false; toggle.setAttribute('aria-expanded', 'true'); }
+    function openPanel() { closeLangMenu(); closeInstallPanel(); closeTextPanel(); panel.hidden = false; toggle.setAttribute('aria-expanded', 'true'); }
     function closePanel() { panel.hidden = true; toggle.setAttribute('aria-expanded', 'false'); }
 
     toggle.addEventListener('click', function (e) {
@@ -778,16 +962,23 @@
 
       if (!pool.length) { chosen = null; genderMatched = false; return; }
 
-      /* Prefer the higher-quality neural/online voices where present. */
+      /* Prefer the higher-quality neural/online voices where present — but in
+         the app, voices on the device: it is meant to work with no signal. */
       pool.sort(function (a, b) {
         var score = function (v) {
-          return (/natural|neural|online|enhanced|premium/i.test(v.name) ? 2 : 0) + (v.localService ? 0 : 1);
+          return (/natural|neural|online|enhanced|premium/i.test(v.name) ? 2 : 0) +
+                 (NATIVE ? (v.localService ? 1 : 0) : (v.localService ? 0 : 1));
         };
         return score(b) - score(a);
       });
 
+      /* Android names its voices by code ("uk-ua-x-hfd-local"), which says
+         nothing about gender. When no voice at all can be told apart, a
+         warning that the other gender is missing would be a guess, so none is
+         shown. */
       var byGender = pool.filter(function (v) { return guessGender(v) === gender; });
-      genderMatched = byGender.length > 0;
+      var knowable = pool.some(function (v) { return guessGender(v) !== null; });
+      genderMatched = byGender.length > 0 || !knowable;
       chosen = byGender[0] || pool[0];
     }
 
@@ -887,6 +1078,7 @@
         state = 'speaking';
         synth.resume();
         duck(true);
+        if (lastTitle) setStatus(fmt(UI.voiceReading, { section: lastTitle }));
         reflect();
         return;
       }
@@ -1074,7 +1266,7 @@
     var deferred = null;
 
     function openPanel() {
-      closeLangMenu(); closeVoicePanel();
+      closeLangMenu(); closeVoicePanel(); closeTextPanel();
       panel.hidden = false;
       toggle.setAttribute('aria-expanded', 'true');
     }
@@ -1095,7 +1287,7 @@
     });
 
     /* Already installed — nothing to offer. */
-    if (isStandalone()) return;
+    if (NATIVE || isStandalone()) return;
 
     if (isIOS()) {
       iosHint.hidden = false;
@@ -1134,7 +1326,7 @@
   }
 
   function initServiceWorker(toast) {
-    if (!('serviceWorker' in navigator)) return;
+    if (NATIVE || !('serviceWorker' in navigator)) return;
     /* file:// and any non-secure origin cannot register one. */
     if (location.protocol !== 'https:' && location.hostname !== 'localhost' &&
         location.hostname !== '127.0.0.1') return;
@@ -1213,7 +1405,16 @@
      standing on the page. */
   function initOfflineStatus() {
     var el = document.querySelector('[data-offline-status]');
-    if (!el || !('serviceWorker' in navigator)) return;
+    if (!el) return;
+
+    /* Inside the app this is simply true: every page ships in the APK. */
+    if (NATIVE) {
+      el.textContent = UI.offlineComplete;
+      el.classList.add('is-complete');
+      el.hidden = false;
+      return;
+    }
+    if (!('serviceWorker' in navigator)) return;
 
     function render(info) {
       if (!info || !info.total) return;
@@ -1251,6 +1452,8 @@
   }
 
   function initNetworkState(toast) {
+    /* The app never needs the network, so losing it is not news. */
+    if (NATIVE) return;
     window.addEventListener('offline', function () {
       document.body.classList.add('is-offline');
       toast.show(UI.offlineNow, { icon: UI.iconOffline, sticky: true });
@@ -1277,8 +1480,10 @@
     initHeader();
     initDrawer();
     initLangSwitcher();
+    initTextSize();
     initTrackers();
     initAudio();
+    if (NATIVE) installNativeSpeech();
     initVoice();
     initPrint();
     initReveal();

@@ -26,6 +26,11 @@ module.exports = {
     audioOff: 'Desactivar la música devocional',
     toTop: 'Volver arriba',
 
+    textSizeLabel: 'Tamaño del texto',
+    textSmaller:   'Texto más pequeño',
+    textLarger:    'Texto más grande',
+    textSizeHint:  'Tu elección se recuerda en este dispositivo.',
+
     /* Offline app — install prompt, cache state, update notice. */
     installLabel:  'Instalar la aplicación',
     installTitle:  'El libro de oraciones en el móvil',
@@ -55,7 +60,7 @@ module.exports = {
     voiceReading: 'Leyendo: {section}',
     voicePaused: 'Lectura en pausa.',
     voiceDone: 'Lectura terminada.',
-    voiceNoGender: 'No hay voz {gender} disponible para el español en tu navegador — se usa la existente.',
+    voiceNoGender: 'La voz «{gender}» no está disponible para el español en tu dispositivo — se usa la existente.',
     voiceNoVoice: 'Tu navegador no tiene una voz española instalada. Añade un paquete de idioma en el sistema.',
     voiceUnsupported: 'Tu navegador no admite la síntesis de voz.',
 
@@ -75,7 +80,7 @@ module.exports = {
 
   hero: {
     title: 'La Exaltación de la Preciosísima Sangre de Nuestro Señor Jesucristo',
-    quote: '«Tú me has redimido, oh Señor, con Tu Preciosísima Sangre de toda tribu, lengua, pueblo y nación.»',
+    quote: '«Tú nos has redimido, oh Señor, con Tu Preciosísima Sangre, de toda tribu, lengua, pueblo y nación.»',
     quoteRef: 'Apocalipsis 5, 9',
     imageAlt: 'Jesucristo en la Cruz; los ángeles recogen la Preciosísima Sangre en cálices de oro',
     cta: 'A las oraciones'
@@ -111,9 +116,9 @@ module.exports = {
           ['Oh Preciosísima Sangre del Señor, derramada en la flagelación,', 'purifícame de mis pecados.'],
           ['Oh Preciosísima Sangre del Señor, derramada bajo la corona de espinas,', 'purifícame de mis pecados.'],
           ['Oh Preciosísima Sangre del Señor, derramada en el camino de la Cruz,', 'purifícame de mis pecados.'],
-          ['Oh Preciosísima Sangre del Señor, derramada al ser clavadas en la Cruz Tus santísimas manos,', 'purifícame de mis pecados.'],
-          ['Oh Preciosísima Sangre del Señor, derramada al ser clavados en la Cruz Tus santísimos pies,', 'purifícame de mis pecados.'],
-          ['Oh Preciosísima Sangre del Señor, derramada de Tu santísimo Corazón traspasado por la lanza,', 'purifícame de mis pecados.'],
+          ['Oh Preciosísima Sangre del Señor, derramada al ser clavadas en la Cruz Sus santísimas manos,', 'purifícame de mis pecados.'],
+          ['Oh Preciosísima Sangre del Señor, derramada al ser clavados en la Cruz Sus santísimos pies,', 'purifícame de mis pecados.'],
+          ['Oh Preciosísima Sangre del Señor, derramada de Su santísimo Corazón traspasado por la lanza,', 'purifícame de mis pecados.'],
           ['Oh Preciosísima Sangre del Señor, derramada por mí, indigno pecador,', 'purifícame de mis pecados.'],
           ['Oh Preciosísima Sangre del Señor, derramada hasta la última gota por mí y por mis pecados,', 'ten piedad de mí.']
         ] },
@@ -163,7 +168,7 @@ module.exports = {
 
         { t: 'promise', title: 'Las promesas divinas', x: [
           'Quien rece esta oración cada día durante doce años, orando sin interrupción, no pasará por el purgatorio.',
-          'Quien haya comenzado a rezarla y muera al cabo de medio año recibirá igualmente todas estas grandes gracias: cinco almas de su familia recibirán la vocación al estado religioso, y hasta la cuarta generación nadie de su familia estará en el infierno.',
+          'Quien haya comenzado a rezarla y muera al cabo de seis meses recibirá igualmente todas estas grandes gracias: cinco almas de su familia recibirán la vocación al estado religioso, y hasta la cuarta generación nadie de su familia estará en el infierno.',
           'Esta oración de doce años tiene el poder de purificar el alma de todas sus iniquidades. _¡Señor, da Tu bendición!_'
         ] }
       ]
@@ -231,7 +236,7 @@ module.exports = {
       title: 'Oración a la santa Llaga del Hombro de Cristo',
       subtitle: '',
       blocks: [
-        { t: 'p', x: 'Oh amabilísimo Jesús, mansísimo Cordero de Dios mío. Yo, pobre pecador, saludo y adoro esa santísima Llaga Tuya, que te causó un dolor tan intenso cuando llevaste la pesada Cruz sobre Tu divino Hombro. Aquel dolor fue más grave y más amargo que las demás Llagas de Tu santo Cuerpo. Te amo, te doy honor y me postro ante Ti desde lo profundo del corazón.' },
+        { t: 'p', x: '¡Oh amabilísimo Jesús, mansísimo Cordero de Dios mío! Yo, pobre pecador, saludo y adoro esa santísima Llaga Tuya, que te causó un dolor tan intenso cuando llevaste la pesada Cruz sobre Tu divino Hombro. Aquel dolor fue más grave y más amargo que las demás Llagas de Tu santo Cuerpo. Te amo, te doy honor y me postro ante Ti desde lo profundo del corazón.' },
 
         { t: 'p', x: 'Te doy gracias por esa profundísima Llaga de Tu Hombro. Humildemente te ruego, en nombre del sufrimiento que padeciste por la Llaga del Hombro y en nombre de Tu pesada Cruz, que llevaste sobre esa santa Llaga: ten misericordia de mí, indigno pecador. Perdóname todos mis pecados y concédeme que, caminando sobre Tus huellas ensangrentadas, alcance la bienaventurada eternidad. Amén.' },
 
@@ -250,7 +255,7 @@ module.exports = {
       title: 'Oración al Corazón Eucarístico de Jesús',
       subtitle: 'La devoción de los treinta y tres días',
       blocks: [
-        { t: 'lead', x: '«Jesús, María, os amo — salvad las almas. Oh Sangre y Agua, que brotasteis del santísimo Corazón de Cristo como Fuente de Misericordia para nosotros, en Ti confiamos. Jesús, en Ti confiamos y en Ti ponemos toda nuestra esperanza.»' },
+        { t: 'lead', x: '«Jesús, María, os amo — salvad las almas. Oh Sangre y Agua, que brotaste del santísimo Corazón de Cristo como Fuente de Misericordia para nosotros, en Ti confiamos. Jesús, en Ti confiamos y en Ti ponemos toda nuestra esperanza.»' },
 
         { t: 'refrain', x: 'Corazón Eucarístico de Jesús, confío en Ti.' },
 
@@ -259,7 +264,7 @@ module.exports = {
           ['Corazón Eucarístico de Jesús,', 'acrecienta en nosotros la fe y el amor.'],
           ['Corazón Eucarístico de Jesús, Fuente de la recta voluntad,', 'danos una voluntad recta.'],
           ['Corazón Eucarístico de Jesús, Creador del mundo, que sostienes el mundo en Tu Mano,', 'no nos dejes salir de Tu amparo.'],
-          ['Corazón Eucarístico de Jesús, Médico de Dios, que llevaste la muerte en Cristo,', 'sana las heridas de nuestros pecados.'],
+          ['Corazón Eucarístico de Jesús, Médico de Dios, que padeciste la muerte en la Cruz,', 'sana las heridas de nuestros pecados.'],
           ['Corazón Eucarístico de Jesús, en memoria de Tu amarga Pasión,', 'danos verdadero dolor y el perdón de los pecados.'],
           ['Corazón Eucarístico de Jesús, Espejo de la Luz eterna,', 'concédenos contemplarte en la eternidad.'],
           ['Corazón Eucarístico de Jesús,', 'muéstrate misericordioso con nosotros en la hora de nuestra muerte.'],

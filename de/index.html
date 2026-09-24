@@ -22,6 +22,22 @@
        prayer on its own before the reader has touched anything. */
     html.className += (html.className ? ' ' : '') + 'js-boot';
 
+    /* The Android app identifies itself in its user agent. Marked here, before
+       the stylesheet, so its print and install controls never flash up. */
+    if (/SanguisApp/.test(navigator.userAgent)) html.className += ' is-app';
+
+    /* The reader's own text size, restored before the first paint — applied
+       any later and every prayer would visibly jump to its new size. */
+    try {
+      var zoom = parseFloat(localStorage.getItem('pb.textZoom'));
+      /* No choice made yet: inside the Android app, start from the font size
+         set in the phone's own accessibility settings. */
+      if (!(zoom > 0) && window.SanguisApp && SanguisApp.fontScale) {
+        zoom = Math.min(1.75, Math.max(1, Math.round(SanguisApp.fontScale() * 20) / 20));
+      }
+      if (zoom >= 0.8 && zoom <= 2) html.style.setProperty('--zoom', String(zoom));
+    } catch (e) { /* storage blocked — the default large print stands */ }
+
     var fresh = true;
     try {
       fresh = !sessionStorage.getItem('pb.session');
@@ -143,8 +159,8 @@
 
   <!-- Self-hosted fonts. No third-party stylesheet in the critical path, and
        the faces are ordinary same-origin files, so they cache for offline. -->
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/cormorant-garamond-400-latin.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/lora-400-700-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-700-latin.woff2" crossorigin>
   <link rel="stylesheet" href="../assets/css/fonts.css">
 
   <link rel="preload" as="image" href="../assets/img/Jesus.jpeg" fetchpriority="high">
@@ -359,7 +375,7 @@
       "keywords": "Kostbares Blut, Kostbarstes Blut Jesu, zwölfjähriges Gebet, Andacht zum kostbaren Blut, hl. Gertrud die Große Gebet, Goldener Pfeil, heilige Schulterwunde, eucharistisches Herz Jesu, katholische Gebete, Arme Seelen",
       "genre": "Gebet",
       "datePublished": "2026-01-01",
-      "dateModified": "2026-09-04",
+      "dateModified": "2026-09-24",
       "isAccessibleForFree": true,
       "hasPart": [
         {
@@ -482,6 +498,25 @@
         </nav>
 
         <div class="header-tools">
+          <div class="textsize" data-textsize>
+          <button type="button" class="btn btn-icon" data-textsize-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="textsizePanel"
+                  aria-label="Schriftgröße" title="Schriftgröße">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2.5 19 8 5l5.5 14M4.5 14h7M14 19l3.8-9.5L21.6 19M15.3 15.8h5"/></svg>
+          </button>
+          <div class="textsize-panel" id="textsizePanel" role="dialog"
+               aria-label="Schriftgröße" hidden>
+            <p class="voice-panel-title">Schriftgröße</p>
+            <div class="textsize-row">
+              <button type="button" class="btn textsize-step" data-textsize-step="-1"
+                      aria-label="Schrift verkleinern" title="Schrift verkleinern">A−</button>
+              <output class="textsize-value" data-textsize-value aria-live="polite">100%</output>
+              <button type="button" class="btn textsize-step" data-textsize-step="1"
+                      aria-label="Schrift vergrößern" title="Schrift vergrößern">A+</button>
+            </div>
+            <p class="textsize-hint">Ihre Wahl wird auf diesem Gerät gespeichert.</p>
+          </div>
+        </div>
           <button type="button" class="btn btn-icon" data-audio-toggle
                   aria-pressed="false" aria-label="Leise Andachtsmusik einschalten" title="Leise Andachtsmusik einschalten">
             <span data-audio-icon><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m16 9.5 5 5m0-5-5 5"/></svg></span>
@@ -631,7 +666,7 @@
           <div class="hero-body">
             <h1 class="hero-title" id="heroTitle">Die Verherrlichung des kostbarsten Blutes unseres Herrn Jesus Christus</h1>
             <blockquote class="hero-quote">
-              <p>„Du hast mich, o Herr, durch dein kostbarstes Blut erkauft aus jedem Stamm und jeder Sprache, aus jedem Volk und jeder Nation.“</p>
+              <p>„Du hast uns, o Herr, durch dein kostbarstes Blut erkauft aus jedem Stamm und jeder Sprache, aus jedem Volk und jeder Nation.“</p>
               <cite>Offenbarung 5, 9</cite>
             </blockquote>
 
@@ -656,7 +691,9 @@
           <p class="section-subtitle">Das Gebet, das zwölf Jahre lang täglich gebetet wird</p>
         </header>
         <div class="prayer-text">
-          <p class="chant">Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison.</p>
+          <p class="chant"><span class="line">Kyrie eleison, Christe eleison,</span>
+<span class="line">Kyrie eleison, Christe eleison,</span>
+<span class="line">Kyrie eleison, Christe eleison.</span></p>
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">O Christus,</span> <span class="litany-response">höre mich.</span></li>
             <li class="litany-item"><span class="litany-call">O Christus,</span> <span class="litany-response">erhöre mich.</span></li>
@@ -672,9 +709,9 @@
             <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bei der Geißelung vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
             <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, unter der Dornenkrone vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
             <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, auf dem Kreuzweg vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
-            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bei der Annagelung deiner heiligsten Hände an das Kreuz vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
-            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bei der Annagelung deiner heiligsten Füße an das Kreuz vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
-            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, aus deinem von der Lanze durchbohrten heiligsten Herzen vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bei der Annagelung seiner heiligsten Hände an das Kreuz vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bei der Annagelung seiner heiligsten Füße an das Kreuz vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, aus seinem von der Lanze durchbohrten heiligsten Herzen vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
             <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, für mich unwürdigen Sünder vergossen,</span> <span class="litany-response">reinige mich von meinen Sünden.</span></li>
             <li class="litany-item"><span class="litany-call">O kostbarstes Blut des Herrn, bis zum letzten Tropfen für mich und meine Sünden vergossen,</span> <span class="litany-response">erbarme dich meiner.</span></li>
           </ul>
@@ -693,12 +730,12 @@
             <li class="litany-item"><span class="litany-call">Lamm Gottes, du nimmst hinweg die Sünden der Welt,</span> <span class="litany-response">verzeihe mir, o Herr.</span></li>
             <li class="litany-item"><span class="litany-call">Lamm Gottes, du nimmst hinweg die Sünden der Welt,</span> <span class="litany-response">erbarme dich meiner, o Herr.</span></li>
           </ul>
-          <p class="chant">Kyrie eleison, Christe eleison (dreimal)</p>
+          <p class="chant"><span class="line">Kyrie eleison, Christe eleison (dreimal)</span></p>
           <p class="lead">O kostbarstes Blut unseres Herrn Jesus Christus, sei erhoben und verherrlicht von uns allen, jetzt und immerdar und in alle Ewigkeit. Amen.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <p>Allmächtiger Gott, mein Erlöser! Mit einem einzigen Tropfen deines kostbarsten Blutes hättest du Millionen von Welten erlösen können. Doch aus deiner grenzenlosen Liebe zu mir Sünder hast du den letzten Tropfen deines kostbarsten Blutes vergossen und ihn Gott dem Vater für meine Sünden aufgeopfert.</p>
           <p>O Jesus, du opferst es täglich auch auf den Altären der ganzen Welt in jeder heiligen Messe. Du gießt dein Blut unter der Gestalt des Weines aus und opferst es für meine Erlösung. Du hast es vergossen zur Speise meiner Seele für das ewige Leben.</p>
-          <p>Ich, ein Sünder, falle in Demut vor deiner Majestät nieder und flehe dich an um deiner grenzenlosen Barmherzigkeit willen: erbarme dich meiner, des Sünders. Erlöser, ich bitte dich, die verstockten Sünder umzuwenden, damit sie sich möglichst bald aus jenem schrecklichen Zustand bekehren. Erneuere den heiligen Glauben in allen Völkern, damit sie zur Einheit zurückkehren.</p>
+          <p>Ich, ein Sünder, falle in Demut vor deiner Majestät nieder und flehe dich an um deiner grenzenlosen Barmherzigkeit willen: erbarme dich meiner, des Sünders. Erlöser, ich bitte dich, die verstockten Sünder zur Umkehr zu führen, damit sie sich möglichst bald aus jenem schrecklichen Zustand bekehren. Erneuere den heiligen Glauben in allen Völkern, damit sie zur Einheit zurückkehren.</p>
           <p>Herr, dies ist unser großes Verlangen: dass alle Menschen der Welt dir allein dienen und dein kostbarstes Blut verherrlichen.</p>
           <p>O Gott, erbarme dich der Seelen im Fegefeuer, denn sie harren deiner Begnadigung.</p>
           <p>Möge dein kostbarstes Blut, für unsere Sünden vergossen, ihnen beim himmlischen Vater Verzeihung erwirken und sie zur ewigen Seligkeit führen. Amen.</p>
@@ -707,7 +744,7 @@
           <p>Herr Jesus Christus, mein Erlöser, hilf mir durch dein kostbarstes Blut, die Versuchungen zu überwinden.</p>
           <p>Herr Jesus Christus, mein Erlöser, behüte mich und führe mich dir nach um deines kostbarsten Blutes willen.</p>
           <p>Herr Jesus Christus, mein Erlöser, bewahre uns den Heiligen Vater mit der ganzen Geistlichkeit und der heiligen Kirche vor allen Gefahren um deines kostbarsten Blutes willen. Amen.</p>
-          <aside class="instruction-box"><h3 class="box-title">Die Gebetsregel</h3><p><strong>Vater unser…</strong> (7 mal) · <strong>Gegrüßet seist du, Maria…</strong> (7 mal) · <strong>Ehre sei dem Vater…</strong> (7 mal)</p><p>Das Gebet wird <strong>täglich zwölf Jahre lang</strong> ohne Unterbrechung verrichtet.</p></aside>
+          <aside class="instruction-box"><h3 class="box-title">Die Gebetsregel</h3><p><strong>Vater unser…</strong> (7-mal) · <strong>Gegrüßet seist du, Maria…</strong> (7-mal) · <strong>Ehre sei dem Vater…</strong> (7-mal)</p><p>Das Gebet wird <strong>täglich zwölf Jahre lang</strong> ohne Unterbrechung verrichtet.</p></aside>
           <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Die göttlichen Verheißungen</span></h3><p>Wer dieses Gebet zwölf Jahre lang täglich und ohne Unterbrechung verrichtet, wird nicht durch das Fegefeuer gehen.</p><p>Wer zu beten begonnen hat und nach einem halben Jahr stirbt, empfängt dennoch all diese großen Gnaden: fünf Seelen aus seiner Familie erhalten den Ruf zum geistlichen Stand, und bis in die vierte Generation wird niemand aus seiner Familie in der Hölle sein.</p><p>Dieses zwölfjährige Gebet hat die Kraft, die Seele von allen Ungerechtigkeiten zu reinigen. <em>Herr, gib deinen Segen!</em></p></aside>
         </div>
       </section>
@@ -722,7 +759,7 @@
           <p>In vollem Bewusstsein meiner Nichtigkeit und zugleich deiner Größe, o barmherziger Erlöser, falle ich zu deinen Füßen nieder und danke dir für die zahllosen Beweise der Gnade, die du mir, dem undankbaren Geschöpf, erwiesen hast, und vor allem dafür, dass du mich durch dein kostbarstes Blut von der verderbenden Macht Satans befreit hast. In Gegenwart meiner geliebten Mutter Maria, meines Schutzengels, meiner heiligen Patrone und des ganzen himmlischen Hofes weihe ich mich, o liebster Jesus, mit ganzer Aufrichtigkeit des Herzens und aus freiestem Willen deinem kostbarsten Blute, durch das du die ganze Welt von Sünde, Tod und Hölle erlöst hast.</p>
           <p>Ich, <span class="user-name">(Name)</span>, verspreche dir, auf die Hilfe deiner Gnade vertrauend, mit allen meinen Kräften und nach allen meinen Möglichkeiten die Andacht zu deinem kostbarsten Blute, dem Preis unserer Erlösung, zu wecken und zu verbreiten, damit dein Blut, der höchsten Verehrung würdig, von allen geehrt und geliebt werde.</p>
           <p>Auf diese Weise will ich meine Untreue gegen dein kostbarstes Blut und deine Liebe wiedergutmachen und dir Genugtuung leisten für die zahllosen Entweihungen und Schmähungen, welche die Menschen jenem kostbarsten Preis unseres Heiles zufügen. Oh, könnten doch meine eigenen Sünden, meine Lauheit und alle Schmähungen, mit denen ich dich, o kostbarstes Blut, jemals entehrt habe, ins Nichts zurückgenommen werden!</p>
-          <p>Siehe, liebster Jesus, ich opfere dir auch die Liebe, die Ehre und die Anbetung auf, welche deine heiligste Mutter, deine treuen Jünger und alle Heiligen deinem kostbarsten Blute dargebracht haben. Ich bitte dich: gedenke nicht mehr meiner früheren Untreue und Lauheit, und verzeihe allen, die dich schmähen. Besprenge mich, o göttlicher Erlöser, mit deinem kostbarsten Blute, und mit ihm alle Menschen, damit wir dich, gekreuzigte Liebe, sogleich von ganzem Herzen lieben und den Preis unserer Erlösung allezeit aufs würdigste verehren können. Amen.</p>
+          <p>Siehe, liebster Jesus, ich opfere dir auch die Liebe, die Ehre und die Anbetung auf, welche deine heiligste Mutter, deine treuen Jünger und alle Heiligen deinem kostbarsten Blute dargebracht haben. Ich bitte dich: gedenke nicht mehr meiner früheren Untreue und Lauheit, und verzeihe allen, die dich schmähen. Besprenge mich, o göttlicher Erlöser, mit deinem kostbarsten Blute, und mit ihm alle Menschen, damit wir dich, gekreuzigte Liebe, fortan von ganzem Herzen lieben und den Preis unserer Erlösung allezeit aufs würdigste verehren können. Amen.</p>
         </div>
       </section>
 
@@ -746,7 +783,17 @@
           <p class="section-subtitle">Zum Lobe des heiligsten Namens Gottes</p>
         </header>
         <div class="prayer-text">
-          <p class="poem">Gepriesen, gelobt, verehrt,<br>Angebetet und verherrlicht<br>Sei in Ewigkeit<br>Der allerheiligste, hochheiligste,<br>Anbetungswürdigste, unbegreifliche<br>Und unaussprechliche Name Gottes<br>Im Himmel, auf Erden und in den Abgründen,<br>Durch alle Geschöpfe,<br>Die aus den Händen Gottes hervorgegangen sind,<br>Und durch das heiligste Herz unseres Herrn Jesus Christus<br>Im allerheiligsten Sakrament des Altares. Amen.</p>
+          <p class="poem"><span class="line">Gepriesen, gelobt, verehrt,</span>
+<span class="line">Angebetet und verherrlicht</span>
+<span class="line">Sei in Ewigkeit</span>
+<span class="line">Der allerheiligste, hochheiligste,</span>
+<span class="line">Anbetungswürdigste, unbegreifliche</span>
+<span class="line">Und unaussprechliche Name Gottes</span>
+<span class="line">Im Himmel, auf Erden und in den Abgründen,</span>
+<span class="line">Durch alle Geschöpfe,</span>
+<span class="line">Die aus den Händen Gottes hervorgegangen sind,</span>
+<span class="line">Und durch das heiligste Herz unseres Herrn Jesus Christus</span>
+<span class="line">Im allerheiligsten Sakrament des Altares. Amen.</span></p>
           <p class="note">(Dieser Anbetungsakt gehört zur Bruderschaft vom heiligsten Antlitz Jesu.)</p>
         </div>
       </section>
@@ -760,7 +807,7 @@
         <div class="prayer-text">
           <p>O liebreichster Jesus, du mein sanftestes Lamm Gottes! Ich, ein armer Sünder, grüße und verehre jene deine heiligste Wunde, die dir einen überaus heftigen Schmerz bereitete, als du das schwere Kreuz auf deiner göttlichen Schulter trugst. Dieser Schmerz war schwerer und bitterer als die übrigen Wunden an deinem heiligen Leibe. Ich liebe dich, ich gebe dir Ehre und beuge mich vor dir aus der Tiefe meines Herzens.</p>
           <p>Ich danke dir für jene tiefste Wunde deiner Schulter. Demütig bitte ich dich im Namen des Leidens, das du durch die Wunde deiner Schulter ertragen hast, und im Namen deines schweren Kreuzes, das du auf jener heiligen Wunde getragen hast: erbarme dich meiner, des unwürdigen Sünders. Vergib mir alle meine Sünden und gewähre, dass ich, in deinen blutigen Spuren wandelnd, die selige Ewigkeit erlange. Amen.</p>
-          <aside class="instruction-box"><h3 class="box-title">Die Gebetsregel</h3><p><strong>Vater unser…</strong> (3 mal) · <strong>Gegrüßet seist du, Maria…</strong> (3 mal)</p><p><em>Gelobt seist du, o Herr, im allerheiligsten Sakramente verborgen.</em> (3 mal)</p></aside>
+          <aside class="instruction-box"><h3 class="box-title">Die Gebetsregel</h3><p><strong>Vater unser…</strong> (3-mal) · <strong>Gegrüßet seist du, Maria…</strong> (3-mal)</p><p><em>Gelobt seist du, o Herr, im allerheiligsten Sakramente verborgen.</em> (3-mal)</p></aside>
           <p class="lead">O kostbarstes Blut, das aus dem heiligen Haupte unseres Herrn Jesus Christus fließt, dem Tempel der göttlichen Weisheit und der Wohnung Gottes, der Erkenntnis, des himmlischen und des irdischen Lichtes: bewahre mich jetzt und in alle Ewigkeit. Amen.</p>
         </div>
       </section>
@@ -776,10 +823,10 @@
           <p class="refrain">Eucharistisches Herz Jesu, ich vertraue dir.</p>
           <ol class="litany-group litany-numbered">
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, das du in Liebe brennst,</span> <span class="litany-response">entzünde unsere Herzen in Liebe.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">mehre in uns Glaube und Liebe.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">mehre in uns Glauben und Liebe.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Quell des rechten Willens,</span> <span class="litany-response">gib uns einen rechten Willen.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Schöpfer der Welt, der du die Welt in deiner Hand hältst,</span> <span class="litany-response">lass uns niemals aus deinem Schutze fallen.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Arzt Gottes, der du in Christus den Tod getragen hast,</span> <span class="litany-response">heile die Wunden unserer Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Arzt Gottes, der du am Kreuz den Tod erlitten hast,</span> <span class="litany-response">heile die Wunden unserer Sünden.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, zum Gedächtnis deines bitteren Leidens,</span> <span class="litany-response">gib uns wahre Reue und die Vergebung der Sünden.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Spiegel des ewigen Lichtes,</span> <span class="litany-response">lass uns dich in der Ewigkeit schauen.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">erweise dich uns barmherzig in der Stunde unseres Todes.</span></li>
@@ -874,7 +921,7 @@
   "voiceReading": "Es wird gelesen: {section}",
   "voicePaused": "Vorlesen angehalten.",
   "voiceDone": "Vorlesen beendet.",
-  "voiceNoGender": "Keine {gender} Stimme für Deutsch in Ihrem Browser verfügbar — es wird die vorhandene verwendet.",
+  "voiceNoGender": "Die Stimme „{gender}“ ist für Deutsch auf Ihrem Gerät nicht verfügbar — es wird die vorhandene verwendet.",
   "voiceNoVoice": "In Ihrem Browser ist keine deutsche Stimme installiert. Bitte fügen Sie ein Sprachpaket hinzu.",
   "voiceUnsupported": "Ihr Browser unterstützt keine Sprachsynthese.",
   "installLabel": "App installieren",

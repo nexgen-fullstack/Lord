@@ -1,12 +1,15 @@
 # Sanguis Christi
 
-**Возвеличення Найсвятішої Крови Господа нашого Ісуса Христа**
+**Возвеличення Найсвятішої Крові Господа нашого Ісуса Христа**
 A six-language liturgical web application for the devotion to the Most Precious Blood of Jesus Christ.
 
 Static HTML/CSS/JS. No framework, no runtime dependencies, no build toolchain beyond Node itself.
 Every localized page ships as **fully rendered static HTML** — crawlers see the complete prayer
 text, not a JavaScript shell — and the whole devotion **installs to a phone and works with no
-network at all**.
+network at all**, either as the installable web app or as the **Android app** in `android/`.
+
+Everything a reader reads is set in **large print**: Lora at about 22px on a phone and 28px on a
+desktop, bright ink on a still, dark card, and an **A− / A+** control for anyone who needs more.
 
 ---
 
@@ -25,6 +28,7 @@ npm run build   # regenerate the locales + sitemap, icons, manifests, sw.js, _he
 npm run check   # validate JSON-LD, hreflang, prayers, offline bundle, icons, fonts
 npm start       # preview server only
 npm run fonts   # re-download the self-hosted woff2 subsets (needs network)
+npm run apk     # build the Android app → android/dist/SanguisChristi.apk
 ```
 
 `npm run fonts` is the **only** command that touches the network, and it is deliberately outside
@@ -41,13 +45,17 @@ You only need it when a family, weight or language changes.
 /it/  /pt/  /es/
 /assets/css/main.css     the whole design system
 /assets/css/fonts.css    self-hosted @font-face declarations      (generated)
-/assets/fonts/*.woff2    19 subsetted faces, 547 kB               (generated)
+/assets/fonts/*.woff2    7 variable-font subsets, 206 kB           (generated)
 /assets/icons/*.png      app icons, incl. maskable + apple-touch  (generated)
-/assets/js/app.js        canvas, nav, drawer, switcher, tracker, audio, voice,
-                         print, and the offline app (install, cache, updates)
+/assets/js/app.js        canvas, nav, drawer, switcher, text size, tracker, audio,
+                         voice, print, the offline app (install, cache, updates)
+                         and the Android app's speech bridge
 /assets/img/Jesus.jpeg   the crucifixion image
 /assets/audio/           drop chant.mp3 here (see “Ambient chant” below)
 /functions/_middleware.js  Cloudflare Pages country routing            (generated)
+/android/                the Android app (see “Android app” below)
+  build.js               ► builds and signs the APK from the built site
+  src/…/MainActivity.java  the web view, the asset server, the speech bridge
 /src/                    build sources — edit these, not the generated output
   site.config.js         ► domain, languages, geo targeting, publisher entity
   content/<lang>.js      ► all prayer text and UI strings for one language
@@ -177,6 +185,7 @@ honour them, so they behave identically in development and production.
 
 | Feature | Notes |
 | --- | --- |
+| **Text size** | The “Aa” button: A− / A+ in six steps, 85 % to 175 % of the default large print. Moves only the reading type, never the chrome, keeps the line the reader was on in place, and is restored before the first paint. In the Android app the starting size follows the phone's own font-size setting. |
 | **Language switcher** | Flag badge + native name, keyboard navigable, **preserves the current `#section`** so the reader keeps their place across languages. Choice persisted in `localStorage`. |
 | **Voice prayer** | Reads the prayers aloud via the Web Speech API — male/female voice, play / pause / stop. See below. |
 | **33-day tracker** | 33 dots, progress bar, completion message. One mark per calendar day, kept in `localStorage`. |
@@ -320,7 +329,13 @@ check on some Android builds. `/uk/app.webmanifest` starts the app in Ukrainian,
 
 ## Fonts
 
-The three families are **self-hosted** (`npm run fonts`), not linked from Google:
+Three families, all **variable fonts**, requested as weight ranges so each subset is a single
+file: **Lora** (every word that is read — a sturdy book serif with a tall x-height and full
+Cyrillic), **Cinzel** (brand and hero title; Latin only, so Ukrainian falls through to Lora) and
+**Montserrat** (menu, buttons, labels). Lora replaced Cormorant Garamond, whose hairline strokes
+and small x-height read thin on a phone even at 25px.
+
+They are **self-hosted** (`npm run fonts`), not linked from Google:
 
 1. **Offline.** A service worker cannot reliably precache an opaque cross-origin response.
    Self-hosted faces are ordinary same-origin files and cache with everything else.
@@ -329,8 +344,7 @@ The three families are **self-hosted** (`npm run fonts`), not linked from Google
 3. **Privacy.** No visitor IP reaches a third party — which for an EU-facing devotional site is
    the difference between a GDPR question and no question at all.
 
-Only what is actually rendered is downloaded. The old Google Fonts URL pulled Cinzel 900 and
-Montserrat 300, which no rule in the stylesheet uses, and four subsets. Scanning every character
+Only what is actually rendered is downloaded: 7 files, 206 kB. Scanning every character
 of all six content files against each subset's `unicode-range` showed that **only `latin` and
 `cyrillic` are ever needed** — Ukrainian resolves to `cyrillic`, which includes U+0490–0491
 (Ґ, ґ), and nothing lands in `latin-ext` or `cyrillic-ext`. Dropping those two saved 610 kB.
@@ -346,17 +360,23 @@ Verified in-browser against the rendered colours:
 
 | Element | Contrast on `#0a0304` |
 | --- | --- |
-| Body prayer text, litany calls | **18.5 : 1** |
-| Secondary text, nav, hero quote | **13.5 : 1** |
-| Gold headings, litany responses | **9.7 : 1** |
-| Muted notes | **8.4 : 1** |
-| Section subtitles | **7.3 : 1** |
+| Body prayer text, litany calls | **19.7 : 1** |
+| Secondary text, nav | **16.8 : 1** |
+| Opening prayers (pale gold) | **16.7 : 1** |
+| Gold headings, litany responses | **12.6 : 1** |
+| Muted notes | **12.9 : 1** |
+| Section subtitles | **10.5 : 1** |
 
-All exceed the WCAG **AAA** threshold of 7:1 for normal text.
+All are at least 10 : 1, well past the WCAG **AAA** threshold of 7 : 1. The prayers sit on a
+near-opaque card (`--card-bg`), not over the animated canvas, so the contrast holds everywhere.
 
-> Note: the original palette used `#a71d2a` (Passion Red) for subtitle text, which measures
-> 2.8 : 1 and fails even AA. It is kept for borders and glows, and a light tint
-> `--accent-rose: #e8798a` carries the same colour identity in text at 7.3 : 1.
+Large-print choices, all in `main.css`: ragged-right text with no indent and no hyphenation;
+litany responses in bold gold rather than italic; the opening prayers upright rather than in
+italic; `text-wrap: pretty` so a response never leaves one word alone on a line; chant and poem
+lines wrap in balanced halves on a phone.
+
+> Note: `#a71d2a` (Passion Red) measures 2.8 : 1 as text. It is kept for borders and glows, and
+> the tint `--accent-rose: #ff9fae` carries the same colour identity in text.
 
 Also: skip link, single `h1` with a clean `h1 → h2 → h3` outline, labelled landmarks and
 navigations, `aria-expanded` / `aria-pressed` on all toggles, focus moved into and restored from
@@ -380,26 +400,67 @@ and the quote in turn.
 shrunk or overlapped by the navigation, and a long translation clips at the nav's own edge
 rather than painting across the language switcher.
 
-Sizing the rail is a **six-language** problem, not a Ukrainian one. At the compact size the links
-measure 759px (uk) up to 812px (es) — Ukrainian is the *narrowest*, so calibrating against it
-alone under-sizes the header by ~50px. Two consequences are baked into the CSS:
+Sizing the rail is a **six-language** problem, not a Ukrainian one: Ukrainian is the
+*narrowest* locale, so calibrating against it alone under-sizes the header by ~60px. Two
+consequences are baked into the CSS:
 
-- `.header-inner` is capped at **1560px**, wider than the reading column. At the old 1360px cap
+- `.header-inner` is capped at **1760px**, wider than the reading column. At the old 1360px cap
   Spanish could not fit at *any* viewport width.
-- Between 1200px and 1500px `.brand-text` is hidden, handing its ~230px to the navigation; the
-  cross keeps the brand mark and the full title heads the page immediately below.
+- Below 1800px `.brand-text` is hidden, handing its ~240px to the navigation; the cross keeps
+  the brand mark and the full title heads the page immediately below.
 
-The rail therefore appears at **≥ 1200px**, always at the compact size, with 44px (es) to 96px
-(uk) of headroom at the threshold and 105–227px at 1500px. Below 1200px the drawer takes over.
-If you add an item or a longer translation, re-measure every locale at exactly 1200px — the
-worst case is Spanish or Italian, never Ukrainian.
+At weight 600 the links measure 861px (uk) to 920px (es/it) at 0.8rem, and up to ~985px at
+0.86rem; the controls take ~290px. The rail therefore appears at **≥ 1340px** at 0.8rem and
+grows to 0.86rem from 1440px; below 1340px the drawer, with its large full-width links, takes
+over. If you add an item or a longer translation, re-measure every locale at exactly 1340px —
+the worst case is Spanish or Italian, never Ukrainian.
+
+---
+
+## Android app
+
+`npm run apk` builds **`android/dist/SanguisChristi.apk`** (~680 kB): a signed app that carries
+all six languages, the fonts and the artwork, and works with no network from the very first
+launch. It asks for **no permissions at all** — not even the internet.
+
+It is a single web view showing the very pages the site serves. `android/build.js` rebuilds the
+site, copies the pages into the APK, and serves them to the web view from
+`https://appassets.androidplatform.net`, a host Android reserves for app assets and never
+resolves on the network — so the pages keep a real https origin (the tracker and the text size
+persist) while nothing can leave the device. Inside the app (`html.is-app`, from its user agent)
+the service worker, the install button and the print button are switched off.
+
+Android's web view has no Web Speech synthesis, so the app passes the page a bridge to the
+phone's own text-to-speech engine, and `app.js` wraps it in a standard `speechSynthesis`: the
+voice prayer works unchanged. Only voices installed on the phone are offered, so reading aloud
+also works offline. A Ukrainian voice may need installing once in Android's text-to-speech
+settings.
+
+**Building** needs the Android SDK and a JDK 17+ — exactly what Android Studio installs (the
+script finds both on its own; `ANDROID_HOME` / `JAVA_HOME` override). No Gradle and no downloads:
+it runs `aapt2`, `javac`, `d8`, `zipalign` and `apksigner` directly.
+
+```bash
+npm run apk                     # release APK
+node android/build.js --debug   # page inspectable from chrome://inspect
+```
+
+**The signing key** is created on the first build in `android/keystore/` (ignored by git). Back
+that folder up: Android installs an update over an existing app only when it carries the same
+signature, so losing the key means readers would have to uninstall before updating.
+
+**Installing** on a phone: copy the APK over and open it, allowing installation from that source
+when asked — or `adb install android/dist/SanguisChristi.apk`. For Google Play the same project
+would need an app bundle (`.aab`) and a Play signing setup; the APK is for direct distribution.
+
+On iPhone, the site itself is the app: Safari → Share → *На екран «Домівка»*.
 
 ---
 
 ## Adding a language
 
 1. Copy `src/content/en.js` to `src/content/<code>.js` and translate it — including the
-   `ui.install*` / `ui.offline*` strings the offline app speaks in.
+   `ui.install*` / `ui.offline*` strings the offline app speaks in and the text-size labels (`ui.textSizeLabel`, `textSmaller`, `textLarger`, `textSizeHint`).
 2. Add an entry to `LANGS` in `src/site.config.js` (code, hreflang, og locale, flag, geo,
    countries, `speechLang`, `fontSubset`).
 3. List the countries in that entry's `countries` array — `build.js` compiles them into the

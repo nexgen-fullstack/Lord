@@ -32,13 +32,21 @@ const ROOT = path.resolve(__dirname, '..');
 const FONT_DIR = path.join(ROOT, 'assets', 'fonts');
 const CSS_OUT = path.join(ROOT, 'assets', 'css', 'fonts.css');
 
-/* Only the families, weights and styles main.css actually asks for. The old
-   Google Fonts URL also pulled Cinzel 900 and Montserrat 300, which no rule
-   in the stylesheet ever used. */
+/* Only the families and styles main.css actually asks for, each requested as
+   a weight *range*. All three are variable fonts, so a range comes back as a
+   single file per subset carrying every weight in between — seven files in
+   all, where discrete weights used to cost nineteen.
+
+     Lora        the reading face. A sturdy book serif with a tall x-height
+                 and full Cyrillic, chosen over Cormorant Garamond, whose
+                 hairline strokes and small x-height read thin on a phone.
+     Cinzel      Roman capitals for the brand and the hero title (Latin only —
+                 Cyrillic falls back to Lora through the font stack).
+     Montserrat  the interface: menu, buttons, labels. */
 const FAMILIES = [
-  'Cinzel:wght@400;600;700',
-  'Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600',
-  'Montserrat:wght@400;500;600'
+  'Cinzel:wght@400..700',
+  'Lora:ital,wght@0,400..700;1,400..700',
+  'Montserrat:wght@400..700'
 ];
 
 /* Exactly the two subsets the six locales need — verified by scanning every
@@ -99,8 +107,10 @@ function parseFaces(css) {
   return faces;
 }
 
+/* A variable face reports its weight as a range ("400 700"); the space has
+   no place in a file name. */
 const slug = (f) =>
-  `${f.family.toLowerCase().replace(/\s+/g, '-')}-${f.weight}${f.style === 'italic' ? '-italic' : ''}-${f.subset}.woff2`;
+  `${f.family.toLowerCase().replace(/\s+/g, '-')}-${f.weight.replace(/\s+/g, '-')}${f.style === 'italic' ? '-italic' : ''}-${f.subset}.woff2`;
 
 (async function main() {
   console.log('\nSanguis Christi — fonts\n────────────────────────────────────────────');
@@ -123,6 +133,14 @@ const slug = (f) =>
     fs.writeFileSync(dest, data);
     bytes += data.length;
     f.file = name;
+  }
+
+  /* Faces from a previous run that are no longer asked for must go: build.js
+     precaches every woff2 in the folder, so a stale file would be shipped to
+     every reader's device for nothing. */
+  const keep = new Set(all.map((f) => f.file));
+  for (const old of fs.readdirSync(FONT_DIR)) {
+    if (old.endsWith('.woff2') && !keep.has(old)) fs.unlinkSync(path.join(FONT_DIR, old));
   }
 
   /* `font-display: swap` keeps text readable during the (now local, so very

@@ -22,6 +22,22 @@
        prayer on its own before the reader has touched anything. */
     html.className += (html.className ? ' ' : '') + 'js-boot';
 
+    /* The Android app identifies itself in its user agent. Marked here, before
+       the stylesheet, so its print and install controls never flash up. */
+    if (/SanguisApp/.test(navigator.userAgent)) html.className += ' is-app';
+
+    /* The reader's own text size, restored before the first paint — applied
+       any later and every prayer would visibly jump to its new size. */
+    try {
+      var zoom = parseFloat(localStorage.getItem('pb.textZoom'));
+      /* No choice made yet: inside the Android app, start from the font size
+         set in the phone's own accessibility settings. */
+      if (!(zoom > 0) && window.SanguisApp && SanguisApp.fontScale) {
+        zoom = Math.min(1.75, Math.max(1, Math.round(SanguisApp.fontScale() * 20) / 20));
+      }
+      if (zoom >= 0.8 && zoom <= 2) html.style.setProperty('--zoom', String(zoom));
+    } catch (e) { /* storage blocked — the default large print stands */ }
+
     var fresh = true;
     try {
       fresh = !sessionStorage.getItem('pb.session');
@@ -143,8 +159,8 @@
 
   <!-- Self-hosted fonts. No third-party stylesheet in the critical path, and
        the faces are ordinary same-origin files, so they cache for offline. -->
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/cormorant-garamond-400-latin.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/lora-400-700-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/montserrat-400-700-latin.woff2" crossorigin>
   <link rel="stylesheet" href="../assets/css/fonts.css">
 
   <link rel="preload" as="image" href="../assets/img/Jesus.jpeg" fetchpriority="high">
@@ -359,7 +375,7 @@
       "keywords": "Preziosissimo Sangue, devozione al Preziosissimo Sangue, preghiera dodicennale, preghiera di santa Geltrude, Freccia d’Oro, sacra Piaga della Spalla, Cuore Eucaristico di Gesù, preghiere cattoliche, anime del purgatorio",
       "genre": "Preghiera",
       "datePublished": "2026-01-01",
-      "dateModified": "2026-09-04",
+      "dateModified": "2026-09-24",
       "isAccessibleForFree": true,
       "hasPart": [
         {
@@ -482,6 +498,25 @@
         </nav>
 
         <div class="header-tools">
+          <div class="textsize" data-textsize>
+          <button type="button" class="btn btn-icon" data-textsize-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="textsizePanel"
+                  aria-label="Dimensione del testo" title="Dimensione del testo">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2.5 19 8 5l5.5 14M4.5 14h7M14 19l3.8-9.5L21.6 19M15.3 15.8h5"/></svg>
+          </button>
+          <div class="textsize-panel" id="textsizePanel" role="dialog"
+               aria-label="Dimensione del testo" hidden>
+            <p class="voice-panel-title">Dimensione del testo</p>
+            <div class="textsize-row">
+              <button type="button" class="btn textsize-step" data-textsize-step="-1"
+                      aria-label="Testo più piccolo" title="Testo più piccolo">A−</button>
+              <output class="textsize-value" data-textsize-value aria-live="polite">100%</output>
+              <button type="button" class="btn textsize-step" data-textsize-step="1"
+                      aria-label="Testo più grande" title="Testo più grande">A+</button>
+            </div>
+            <p class="textsize-hint">La scelta viene ricordata su questo dispositivo.</p>
+          </div>
+        </div>
           <button type="button" class="btn btn-icon" data-audio-toggle
                   aria-pressed="false" aria-label="Attiva la musica devozionale" title="Attiva la musica devozionale">
             <span data-audio-icon><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9h3.2L12 4.8v14.4L7.2 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m16 9.5 5 5m0-5-5 5"/></svg></span>
@@ -531,7 +566,7 @@
                aria-label="Il libro di preghiere sul telefono" hidden>
             <p class="install-title">Il libro di preghiere sul telefono</p>
             <p class="install-body">Installa l’app e tutte le preghiere restano con te, anche senza rete.</p>
-            <p class="install-ios" data-install-ios hidden>In Safari tocca «Condividi», poi «Aggiungi a Home».</p>
+            <p class="install-ios" data-install-ios hidden>In Safari tocca «Condividi», poi «Aggiungi alla schermata Home».</p>
             <button type="button" class="btn btn-primary install-go" data-install-go hidden>
               <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="2.6" width="12" height="18.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 7.4v6.4m0 0 2.4-2.4M12 13.8l-2.4-2.4M10.4 18h3.2"/></svg><span>Installa</span>
             </button>
@@ -631,7 +666,7 @@
           <div class="hero-body">
             <h1 class="hero-title" id="heroTitle">L’Esaltazione del Preziosissimo Sangue di Nostro Signore Gesù Cristo</h1>
             <blockquote class="hero-quote">
-              <p>«Tu mi hai redento, o Signore, con il Tuo Preziosissimo Sangue da ogni tribù, lingua, popolo e nazione.»</p>
+              <p>«Tu ci hai redenti, o Signore, con il Tuo Preziosissimo Sangue, da ogni tribù, lingua, popolo e nazione.»</p>
               <cite>Apocalisse 5, 9</cite>
             </blockquote>
 
@@ -656,7 +691,9 @@
           <p class="section-subtitle">La preghiera da recitarsi ogni giorno per dodici anni</p>
         </header>
         <div class="prayer-text">
-          <p class="chant">Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison,<br>Kyrie eleison, Christe eleison.</p>
+          <p class="chant"><span class="line">Kyrie eleison, Christe eleison,</span>
+<span class="line">Kyrie eleison, Christe eleison,</span>
+<span class="line">Kyrie eleison, Christe eleison.</span></p>
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">O Cristo,</span> <span class="litany-response">ascoltami.</span></li>
             <li class="litany-item"><span class="litany-call">O Cristo,</span> <span class="litany-response">esaudiscimi.</span></li>
@@ -672,9 +709,9 @@
             <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato nella flagellazione,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
             <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato sotto la corona di spine,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
             <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato sulla via della Croce,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
-            <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato nella crocifissione delle Tue santissime mani,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
-            <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato nella crocifissione dei Tuoi santissimi piedi,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
-            <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato dal Tuo santissimo Cuore trafitto dalla lancia,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
+            <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato quando le Sue santissime mani furono inchiodate alla Croce,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
+            <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato quando i Suoi santissimi piedi furono inchiodati alla Croce,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
+            <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato dal Suo santissimo Cuore trafitto dalla lancia,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
             <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato per me, indegno peccatore,</span> <span class="litany-response">purificami dai miei peccati.</span></li>
             <li class="litany-item"><span class="litany-call">O Preziosissimo Sangue del Signore, versato fino all’ultima goccia per me e per i miei peccati,</span> <span class="litany-response">abbi pietà di me.</span></li>
           </ul>
@@ -693,7 +730,7 @@
             <li class="litany-item"><span class="litany-call">Agnello di Dio, che togli i peccati del mondo,</span> <span class="litany-response">perdonami, o Signore.</span></li>
             <li class="litany-item"><span class="litany-call">Agnello di Dio, che togli i peccati del mondo,</span> <span class="litany-response">abbi pietà di me, o Signore.</span></li>
           </ul>
-          <p class="chant">Kyrie eleison, Christe eleison (tre volte)</p>
+          <p class="chant"><span class="line">Kyrie eleison, Christe eleison (tre volte)</span></p>
           <p class="lead">O Preziosissimo Sangue di Nostro Signore Gesù Cristo, sii esaltato e glorificato da tutti noi, ora e sempre e nei secoli dei secoli. Amen.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <p>Dio onnipotente, mio Salvatore, con una sola goccia del Tuo Preziosissimo Sangue avresti potuto redimere milioni di mondi. Eppure, per il Tuo amore senza limiti verso di me peccatore, hai versato l’ultima goccia del Tuo Preziosissimo Sangue, offrendola a Dio Padre per i miei peccati.</p>
@@ -708,7 +745,7 @@
           <p>Signore Gesù Cristo, mio Salvatore, custodiscimi e guidami dietro a Te per il Tuo Preziosissimo Sangue.</p>
           <p>Signore Gesù Cristo, mio Salvatore, custodisci da ogni pericolo il Santo Padre con tutto il clero e la santa Chiesa per il Tuo Preziosissimo Sangue. Amen.</p>
           <aside class="instruction-box"><h3 class="box-title">La regola di preghiera</h3><p><strong>Padre nostro…</strong> (7 volte) · <strong>Ave Maria…</strong> (7 volte) · <strong>Gloria al Padre…</strong> (7 volte)</p><p>La preghiera si recita <strong>ogni giorno per dodici anni</strong>, senza interruzione.</p></aside>
-          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Le promesse divine</span></h3><p>Chi reciterà questa preghiera ogni giorno per dodici anni, pregando senza interruzione, non passerà per il purgatorio.</p><p>Chi ha cominciato a pregarla e muore dopo mezzo anno riceverà ugualmente tutte queste grandi grazie: cinque anime della sua famiglia riceveranno la vocazione allo stato religioso, e fino alla quarta generazione nessuno della sua famiglia sarà nell’inferno.</p><p>Questa preghiera dodicennale ha il potere di purificare l’anima da ogni iniquità. <em>Signore, dona la Tua benedizione!</em></p></aside>
+          <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Le promesse divine</span></h3><p>Chi reciterà questa preghiera ogni giorno per dodici anni, pregando senza interruzione, non passerà per il purgatorio.</p><p>Chi ha cominciato a pregarla e muore dopo sei mesi riceverà ugualmente tutte queste grandi grazie: cinque anime della sua famiglia riceveranno la vocazione allo stato religioso, e fino alla quarta generazione nessuno della sua famiglia sarà nell’inferno.</p><p>Questa preghiera dodicennale ha il potere di purificare l’anima da ogni iniquità. <em>Signore, dona la Tua benedizione!</em></p></aside>
         </div>
       </section>
 
@@ -722,7 +759,7 @@
           <p>Nella piena consapevolezza del mio nulla e insieme della Tua grandezza, o misericordioso Salvatore, mi prostro ai Tuoi piedi e Ti ringrazio per le innumerevoli prove di grazia che hai concesso a me, creatura ingrata, e soprattutto per avermi liberato, mediante il Tuo Preziosissimo Sangue, dal potere corruttore di satana. Alla presenza della mia amata Madre Maria, del mio Angelo custode, dei miei santi patroni e di tutta la corte celeste, mi consacro, o dolcissimo Gesù, con tutta la sincerità del cuore e nel modo più libero, al Tuo Preziosissimo Sangue, con il quale hai redento il mondo intero dal peccato, dalla morte e dall’inferno.</p>
           <p>Io, <span class="user-name">(nome)</span>, Ti prometto, confidando nell’aiuto della Tua grazia, di risvegliare e diffondere con tutte le mie forze e secondo tutte le mie possibilità la devozione al Tuo Preziosissimo Sangue, Prezzo della nostra Redenzione, affinché il Tuo Sangue, degno della più alta venerazione, sia da tutti onorato e amato.</p>
           <p>In questo modo desidero riparare la mia infedeltà verso il Tuo Preziosissimo Sangue e verso il Tuo Amore, e darTi soddisfazione per le innumerevoli profanazioni e oltraggi che gli uomini infliggono a quel Prezzo carissimo della nostra salvezza. Oh, se i miei stessi peccati, la mia tiepidezza e tutti gli oltraggi con cui Ti ho mai disonorato, o Preziosissimo Sangue, potessero essere ridotti al nulla!</p>
-          <p>Ecco, dolcissimo Gesù, Ti offro anche l’amore, l’onore e l’adorazione che la Tua santissima Madre, i Tuoi fedeli discepoli e tutti i santi hanno reso al Tuo Preziosissimo Sangue. Ti prego: non ricordare più la mia passata infedeltà e tiepidezza, e degnati di perdonare tutti coloro che Ti oltraggiano. Aspergi me, o divino Salvatore, con il Tuo Preziosissimo Sangue, e con esso tutti gli uomini, affinché Ti amiamo subito con tutto il cuore, o Amore crocifisso, e possiamo onorare degnamente per sempre il Prezzo della nostra Redenzione. Amen.</p>
+          <p>Ecco, dolcissimo Gesù, Ti offro anche l’amore, l’onore e l’adorazione che la Tua santissima Madre, i Tuoi fedeli discepoli e tutti i santi hanno reso al Tuo Preziosissimo Sangue. Ti prego: non ricordare più la mia passata infedeltà e tiepidezza, e degnati di perdonare tutti coloro che Ti oltraggiano. Aspergi me, o divino Salvatore, con il Tuo Preziosissimo Sangue, e con esso tutti gli uomini, affinché d’ora in poi Ti amiamo con tutto il cuore, o Amore crocifisso, e possiamo onorare degnamente per sempre il Prezzo della nostra Redenzione. Amen.</p>
         </div>
       </section>
 
@@ -746,7 +783,17 @@
           <p class="section-subtitle">In lode del santissimo Nome di Dio</p>
         </header>
         <div class="prayer-text">
-          <p class="poem">Sia per sempre lodato,<br>Benedetto, amato,<br>Adorato e glorificato<br>Il santissimo, sacratissimo,<br>Adorabilissimo, incomprensibile<br>E ineffabile Nome di Dio<br>In cielo, in terra e negli abissi,<br>Da tutte le creature<br>Uscite dalle mani di Dio,<br>E dal santissimo Cuore di Nostro Signore Gesù Cristo<br>Nel Santissimo Sacramento dell’altare. Amen.</p>
+          <p class="poem"><span class="line">Sia per sempre lodato,</span>
+<span class="line">Benedetto, amato,</span>
+<span class="line">Adorato e glorificato</span>
+<span class="line">Il santissimo, sacratissimo,</span>
+<span class="line">Adorabilissimo, incomprensibile</span>
+<span class="line">E ineffabile Nome di Dio</span>
+<span class="line">In cielo, in terra e negli abissi,</span>
+<span class="line">Da tutte le creature</span>
+<span class="line">Uscite dalle mani di Dio,</span>
+<span class="line">E dal santissimo Cuore di Nostro Signore Gesù Cristo</span>
+<span class="line">Nel Santissimo Sacramento dell’altare. Amen.</span></p>
           <p class="note">(Questo atto di adorazione appartiene alla confraternita del Santo Volto di Gesù.)</p>
         </div>
       </section>
@@ -779,7 +826,7 @@
             <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù,</span> <span class="litany-response">accresci in noi la fede e l’amore.</span></li>
             <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù, Fonte della retta volontà,</span> <span class="litany-response">donaci una volontà retta.</span></li>
             <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù, Creatore del mondo, che tieni il mondo nella Tua Mano,</span> <span class="litany-response">non lasciarci uscire dalla Tua protezione.</span></li>
-            <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù, Medico di Dio, che hai portato la morte in Cristo,</span> <span class="litany-response">guarisci le ferite dei nostri peccati.</span></li>
+            <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù, Medico di Dio, che hai subìto la morte sulla Croce,</span> <span class="litany-response">guarisci le ferite dei nostri peccati.</span></li>
             <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù, in memoria della Tua amara Passione,</span> <span class="litany-response">donaci vero dolore e il perdono dei peccati.</span></li>
             <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù, Specchio della Luce eterna,</span> <span class="litany-response">concedici di contemplarTi nell’eternità.</span></li>
             <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù,</span> <span class="litany-response">mostrati misericordioso verso di noi nell’ora della nostra morte.</span></li>
@@ -800,7 +847,7 @@
             <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù, Viatico dei morenti,</span> <span class="litany-response">assistimi nella mia ultima ora.</span></li>
             <li class="litany-item"><span class="litany-call">Cuore Eucaristico di Gesù, pieno di misericordia verso di noi,</span> <span class="litany-response">abbi pietà di me.</span></li>
           </ul>
-          <p>O Cuore Eucaristico di Gesù, che per amore nostro sei rimasto con noi sotto le specie del pane e del vino fino alla fine dei secoli, accogli questa mia povera preghiera. Credo che Tu sei qui presente, veramente, realmente e sostanzialmente; spero nella Tua misericordia e Ti amo sopra ogni cosa. Per tutti gli oltraggi che ricevi nel Santissimo Sacramento, Ti offro il Preziosissimo Sangue che hai versato per me sulla Croce. Amen.</p>
+          <p>O Cuore Eucaristico di Gesù, che per amore nostro sei rimasto con noi sotto le specie del pane e del vino fino alla fine dei secoli, accogli questa mia povera preghiera. Credo che Tu sia qui presente, veramente, realmente e sostanzialmente; spero nella Tua misericordia e Ti amo sopra ogni cosa. Per tutti gli oltraggi che ricevi nel Santissimo Sacramento, Ti offro il Preziosissimo Sangue che hai versato per me sulla Croce. Amen.</p>
           <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>La promessa dei 33 giorni</span></h3><p>Chi per <strong>trentatré giorni</strong> — in memoria dei trentatré anni della vita terrena del Salvatore — reciterà ogni giorno e senza interruzione questa preghiera al Cuore Eucaristico di Gesù, otterrà la <strong>completa remissione della pena e della colpa</strong>.</p><p><em>Si recita in stato di grazia santificante, accostandosi alla santa Confessione e alla Comunione.</em></p></aside>
           <div class="tracker no-print" data-tracker="33d" data-total="33">
             <h3 class="tracker-title">Cammino dei 33 giorni</h3>
@@ -874,7 +921,7 @@
   "voiceReading": "In lettura: {section}",
   "voicePaused": "Lettura in pausa.",
   "voiceDone": "Lettura terminata.",
-  "voiceNoGender": "Nessuna voce {gender} disponibile per l’italiano nel tuo browser — si usa quella presente.",
+  "voiceNoGender": "La voce «{gender}» non è disponibile per l’italiano sul tuo dispositivo — si usa quella presente.",
   "voiceNoVoice": "Il tuo browser non ha una voce italiana installata. Aggiungi un pacchetto lingua nel sistema.",
   "voiceUnsupported": "Il tuo browser non supporta la sintesi vocale.",
   "installLabel": "Installa l’app",

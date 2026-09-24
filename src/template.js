@@ -43,6 +43,7 @@ const ICON = {
   pause: '<svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 5h3.4v14H7zm6.6 0H17v14h-3.4z"/></svg>',
   stop: '<svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.6" fill="currentColor"/></svg>',
   install: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="2.6" width="12" height="18.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 7.4v6.4m0 0 2.4-2.4M12 13.8l-2.4-2.4M10.4 18h3.2"/></svg>',
+  textsize: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2.5 19 8 5l5.5 14M4.5 14h7M14 19l3.8-9.5L21.6 19M15.3 15.8h5"/></svg>',
   offline: '<svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M4 4l16 16M7.8 8.2A5.6 5.6 0 0 0 6.4 19h10.2M8.6 5.4A6.4 6.4 0 0 1 18.4 11a4 4 0 0 1 2.2 6.6"/></svg>'
 };
 
@@ -75,11 +76,15 @@ function renderBlock(b, c) {
     case 'lead':
       return `<p class="lead">${withName(b.x, c)}</p>`;
 
+    /* One block per line, so a line too long for a phone wraps in balanced
+       halves ("Киріє елейсон, / Христе елейсон,") instead of leaving a lone
+       word behind. The newline between them is what the voice reader splits
+       on; the layout ignores it. */
     case 'chant':
-      return `<p class="chant">${b.lines.map(esc).join('<br>')}</p>`;
+      return `<p class="chant">${b.lines.map((l) => `<span class="line">${esc(l)}</span>`).join('\n')}</p>`;
 
     case 'poem':
-      return `<p class="poem">${b.lines.map(esc).join('<br>')}</p>`;
+      return `<p class="poem">${b.lines.map((l) => `<span class="line">${esc(l)}</span>`).join('\n')}</p>`;
 
     /* A repeated antiphon — said before and after a litany. */
     case 'refrain':
@@ -162,8 +167,8 @@ function renderSection(s, c, index) {
 function preloadFonts(c) {
   const sub = c.fontSubset || 'latin';
   return [
-    `cormorant-garamond-400-${sub}.woff2`,
-    `montserrat-400-${sub}.woff2`
+    `lora-400-700-${sub}.woff2`,
+    `montserrat-400-700-${sub}.woff2`
   ].map((f) =>
     `<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/${f}" crossorigin>`
   ).join('\n  ');
@@ -354,6 +359,22 @@ function renderBootScript() {
        the very first jump is animated: the app appears to sail down into a
        prayer on its own before the reader has touched anything. */
     html.className += (html.className ? ' ' : '') + 'js-boot';
+
+    /* The Android app identifies itself in its user agent. Marked here, before
+       the stylesheet, so its print and install controls never flash up. */
+    if (/SanguisApp/.test(navigator.userAgent)) html.className += ' is-app';
+
+    /* The reader's own text size, restored before the first paint — applied
+       any later and every prayer would visibly jump to its new size. */
+    try {
+      var zoom = parseFloat(localStorage.getItem('pb.textZoom'));
+      /* No choice made yet: inside the Android app, start from the font size
+         set in the phone's own accessibility settings. */
+      if (!(zoom > 0) && window.SanguisApp && SanguisApp.fontScale) {
+        zoom = Math.min(1.75, Math.max(1, Math.round(SanguisApp.fontScale() * 20) / 20));
+      }
+      if (zoom >= 0.8 && zoom <= 2) html.style.setProperty('--zoom', String(zoom));
+    } catch (e) { /* storage blocked — the default large print stands */ }
 
     var fresh = true;
     try {
@@ -569,6 +590,30 @@ function renderVoiceControl(c) {
         </div>`;
 }
 
+/* Text size: A− / A+ over the reading type only. The steps and the stored
+   choice live in app.js; the boot script re-applies it before first paint. */
+function renderTextSizeControl(c) {
+  return `<div class="textsize" data-textsize>
+          <button type="button" class="btn btn-icon" data-textsize-toggle
+                  aria-expanded="false" aria-haspopup="dialog" aria-controls="textsizePanel"
+                  aria-label="${esc(c.ui.textSizeLabel)}" title="${esc(c.ui.textSizeLabel)}">
+            ${ICON.textsize}
+          </button>
+          <div class="textsize-panel" id="textsizePanel" role="dialog"
+               aria-label="${esc(c.ui.textSizeLabel)}" hidden>
+            <p class="voice-panel-title">${esc(c.ui.textSizeLabel)}</p>
+            <div class="textsize-row">
+              <button type="button" class="btn textsize-step" data-textsize-step="-1"
+                      aria-label="${esc(c.ui.textSmaller)}" title="${esc(c.ui.textSmaller)}">A−</button>
+              <output class="textsize-value" data-textsize-value aria-live="polite">100%</output>
+              <button type="button" class="btn textsize-step" data-textsize-step="1"
+                      aria-label="${esc(c.ui.textLarger)}" title="${esc(c.ui.textLarger)}">A+</button>
+            </div>
+            <p class="textsize-hint">${esc(c.ui.textSizeHint)}</p>
+          </div>
+        </div>`;
+}
+
 /* Install control. Rendered hidden; app.js reveals it when the browser fires
    `beforeinstallprompt`, or on iOS Safari — which never fires that event and
    needs the Share-sheet instructions spelled out instead. */
@@ -625,6 +670,7 @@ function renderHeader(c) {
         ${renderNav(c, 'main-nav')}
 
         <div class="header-tools">
+          ${renderTextSizeControl(c)}
           <button type="button" class="btn btn-icon" data-audio-toggle${c.hasChant ? ' data-chant-src="../assets/audio/chant.mp3"' : ''}
                   aria-pressed="false" aria-label="${esc(c.ui.audioOn)}" title="${esc(c.ui.audioOn)}">
             <span data-audio-icon>${ICON.mute}</span>
