@@ -373,10 +373,10 @@
     });
 
     /* Only a language the reader picks — here or in the footer — is
-       remembered, and the root then opens in it. Merely landing on another
-       locale (a shared link, a search result) is not a choice: the root keeps
-       opening in Ukrainian. The cookie is the same choice for the Cloudflare
-       edge router, which cannot read localStorage. */
+       remembered, and from then on every link to the site opens in it,
+       whatever the phone is set to. Merely landing on another locale (a
+       shared link, a search result) is not a choice. The cookie is the same
+       choice for the Cloudflare edge router, which cannot read localStorage. */
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('.lang-menu a, .footer-langs a');
       if (!a) return;

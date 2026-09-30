@@ -60,11 +60,11 @@
   </style>
   <noscript><meta http-equiv="refresh" content="0; url=./uk/"></noscript>
   <script>
-    /* The root always opens in Ukrainian, the site's own language, whatever
-       language the phone or browser happens to be set to. Another language
-       only when the reader has picked one in the switcher (remembered as
-       pb.langChoice), or when the link says so with ?lang=xx. Edge routing
-       (Cloudflare Pages) in /functions/_middleware.js follows the same rule.
+    /* The root opens in the reader's own language: the one they picked in
+       the switcher, else Ukrainian for a Ukrainian phone (or one on Kyiv
+       time), else the phone's language, else English. The rules live in
+       renderLangPicker (src/template.js) and every locale page runs the same
+       ones, so a shared link to /uk/ opens in Spanish for a Spaniard too.
        Visit /?choose to reach the language chooser below instead.
 
        The redirect deliberately drops any fragment. A hash arriving at the bare
@@ -74,23 +74,39 @@
        instead of at the beginning. Deep links keep working: they point at
        /<lang>/#section directly and never pass through here. */
     (function () {
-      var supported = {"uk":true,"en":true,"de":true,"it":true,"pt":true,"es":true};
-      var primary = "uk";
-      var go = function (code) { location.replace('./' + code + '/'); };
+      function pbPickLang() {
+      var has = {"uk":1,"en":1,"de":1,"it":1,"pt":1,"es":1}, alias = {"ru":"uk","be":"uk"}, zone = {"Europe/Kyiv":"uk","Europe/Kiev":"uk","Europe/Uzhgorod":"uk","Europe/Zaporozhye":"uk","Europe/Simferopol":"uk"};
+      var primary = "uk", fallback = "en";
+      function base(tag) { return String(tag || '').toLowerCase().split(/[-_]/)[0]; }
       try {
-        var params = new URLSearchParams(location.search);
-        if (params.has('choose')) return;
-
-        var forced = params.get('lang');
-        if (forced && supported[String(forced).toLowerCase().split('-')[0]]) {
-          return go(String(forced).toLowerCase().split('-')[0]);
+        var forced = base(new URLSearchParams(location.search).get('lang'));
+        if (has[forced]) {
+          try { localStorage.setItem('pb.langChoice', forced); } catch (e) {}
+          return forced;
         }
-
-        var chosen = null;
-        try { chosen = localStorage.getItem('pb.langChoice'); } catch (e) {}
-        if (chosen && supported[chosen]) return go(chosen);
-      } catch (e) { /* no storage or no URLSearchParams — Ukrainian */ }
-      go(primary);
+      } catch (e) {}
+      try {
+        var chosen = localStorage.getItem('pb.langChoice');
+        if (has[chosen]) return chosen;
+      } catch (e) {}
+      var list = navigator.languages && navigator.languages.length
+        ? navigator.languages : [navigator.language || ''];
+      for (var i = 0; i < list.length; i++) if (base(list[i]) === primary) return primary;
+      try {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (zone[tz]) return zone[tz];
+      } catch (e) {}
+      for (var j = 0; j < list.length; j++) {
+        var code = base(list[j]);
+        code = alias[code] || code;
+        if (has[code]) return code;
+      }
+      return base(list[0]) ? fallback : primary;
+    }
+      try {
+        if (new URLSearchParams(location.search).has('choose')) return;
+      } catch (e) {}
+      location.replace('./' + pbPickLang() + '/');
     })();
   </script>
 </head>

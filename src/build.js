@@ -5,7 +5,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const { SITE_URL, BASE_PATH, LANGS, DEFAULT_LANG, ORG, IMAGE, THEME_COLOR } = require('./site.config');
-const { renderPage, esc, langHome, FAVICON } = require('./template');
+const { renderPage, renderLangPicker, esc, langHome, FAVICON } = require('./template');
 const { renderIcon } = require('./icons');
 
 /* Every absolute URL the app hands to the browser at runtime — manifest
@@ -61,8 +61,6 @@ const gateCards = LANGS.map((l) => {
         <span class="gate-sub">${esc(c.hero.cta)}</span>
       </a>`;
 }).join('\n');
-
-const langMapJs = JSON.stringify(LANGS.reduce((m, l) => { m[l.code] = true; return m; }, {}));
 
 write('index.html', `<!DOCTYPE html>
 <html lang="${DEFAULT_LANG}" dir="ltr">
@@ -120,11 +118,11 @@ ${hreflangs}
   </style>
   <noscript><meta http-equiv="refresh" content="0; url=./${DEFAULT_LANG}/"></noscript>
   <script>
-    /* The root always opens in Ukrainian, the site's own language, whatever
-       language the phone or browser happens to be set to. Another language
-       only when the reader has picked one in the switcher (remembered as
-       pb.langChoice), or when the link says so with ?lang=xx. Edge routing
-       (Cloudflare Pages) in /functions/_middleware.js follows the same rule.
+    /* The root opens in the reader's own language: the one they picked in
+       the switcher, else Ukrainian for a Ukrainian phone (or one on Kyiv
+       time), else the phone's language, else English. The rules live in
+       renderLangPicker (src/template.js) and every locale page runs the same
+       ones, so a shared link to /uk/ opens in Spanish for a Spaniard too.
        Visit /?choose to reach the language chooser below instead.
 
        The redirect deliberately drops any fragment. A hash arriving at the bare
@@ -134,23 +132,11 @@ ${hreflangs}
        instead of at the beginning. Deep links keep working: they point at
        /<lang>/#section directly and never pass through here. */
     (function () {
-      var supported = ${langMapJs};
-      var primary = ${JSON.stringify(DEFAULT_LANG)};
-      var go = function (code) { location.replace('./' + code + '/'); };
+      ${renderLangPicker()}
       try {
-        var params = new URLSearchParams(location.search);
-        if (params.has('choose')) return;
-
-        var forced = params.get('lang');
-        if (forced && supported[String(forced).toLowerCase().split('-')[0]]) {
-          return go(String(forced).toLowerCase().split('-')[0]);
-        }
-
-        var chosen = null;
-        try { chosen = localStorage.getItem('pb.langChoice'); } catch (e) {}
-        if (chosen && supported[chosen]) return go(chosen);
-      } catch (e) { /* no storage or no URLSearchParams — Ukrainian */ }
-      go(primary);
+        if (new URLSearchParams(location.search).has('choose')) return;
+      } catch (e) {}
+      location.replace('./' + pbPickLang() + '/');
     })();
   </script>
 </head>

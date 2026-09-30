@@ -5,13 +5,16 @@
    /functions/_middleware.js, which Cloudflare Pages picks up automatically.
    Edit this file, never the generated one.
 
-   The root always opens in Ukrainian, the site's own language — not in
-   whatever language the browser or the visitor's country suggests.
    Precedence:
 
      1. ?lang=xx           explicit override in the URL (and remembered)
      2. pb_lang cookie     a language the reader picked in the switcher
      3. PRIMARY            Ukrainian
+
+   The edge knows no more than that. The page it lands on then reads the
+   device itself — its language list and its clock — and moves a Spaniard on
+   to /es/ (pbPickLang in src/template.js), so the device rules live in one
+   place only.
 
    Only the bare root path "/" is redirected, so every localized URL stays
    stable and indexable exactly as its canonical + hreflang tags declare.

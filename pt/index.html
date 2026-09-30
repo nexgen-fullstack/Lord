@@ -17,6 +17,57 @@
   (function () {
     var html = document.documentElement;
 
+    /* Open in the reader's own language (pbPickLang above), whichever
+       language the shared link happened to point at. Crawlers are left where
+       they are: each locale has to stay indexable exactly as its canonical
+       says. The hop keeps the #prayer the link asked for. */
+    function pbPickLang() {
+      var has = {"uk":1,"en":1,"de":1,"it":1,"pt":1,"es":1}, alias = {"ru":"uk","be":"uk"}, zone = {"Europe/Kyiv":"uk","Europe/Kiev":"uk","Europe/Uzhgorod":"uk","Europe/Zaporozhye":"uk","Europe/Simferopol":"uk"};
+      var primary = "uk", fallback = "en";
+      function base(tag) { return String(tag || '').toLowerCase().split(/[-_]/)[0]; }
+      try {
+        var forced = base(new URLSearchParams(location.search).get('lang'));
+        if (has[forced]) {
+          try { localStorage.setItem('pb.langChoice', forced); } catch (e) {}
+          return forced;
+        }
+      } catch (e) {}
+      try {
+        var chosen = localStorage.getItem('pb.langChoice');
+        if (has[chosen]) return chosen;
+      } catch (e) {}
+      var list = navigator.languages && navigator.languages.length
+        ? navigator.languages : [navigator.language || ''];
+      for (var i = 0; i < list.length; i++) if (base(list[i]) === primary) return primary;
+      try {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (zone[tz]) return zone[tz];
+      } catch (e) {}
+      for (var j = 0; j < list.length; j++) {
+        var code = base(list[j]);
+        code = alias[code] || code;
+        if (has[code]) return code;
+      }
+      return base(list[0]) ? fallback : primary;
+    }
+    var here = "pt";
+    var bot = navigator.webdriver ||
+      /googlebot|googleother|google-inspectiontool|google-pagerenderer|adsbot|mediapartners|storebot|bingbot|yandexbot|yandexrender|baiduspider|duckduckbot|applebot|petalbot|slurp|crawler|spider|lighthouse|headlesschrome/i.test(navigator.userAgent);
+    if (!bot) {
+      var want = pbPickLang();
+      var hopped = 0;
+      try { hopped = Number(sessionStorage.getItem('pb.langHop')) || 0; } catch (e) {}
+      /* The timestamp guards against two pages sending the reader back and
+         forth if storage ever answers differently between them. */
+      if (want !== here && Date.now() - hopped > 5000) {
+        try { sessionStorage.setItem('pb.langHop', String(Date.now())); } catch (e) {}
+        html.style.visibility = 'hidden';
+        setTimeout(function () { html.style.visibility = ''; }, 3000);
+        location.replace('../' + want + '/' + location.hash);
+        return;
+      }
+    }
+
     /* Suspends `scroll-behavior: smooth` for the opening moments. Without it
        the very first jump is animated: the app appears to sail down into a
        prayer on its own before the reader has touched anything. */
@@ -375,7 +426,7 @@
       "keywords": "Preciosíssimo Sangue, devoção ao Preciosíssimo Sangue, oração de doze anos, oração de santa Gertrudes Magna, Flecha de Ouro, santa Chaga do Ombro, Coração Eucarístico de Jesus, orações católicas, almas do purgatório",
       "genre": "Oração",
       "datePublished": "2026-01-01",
-      "dateModified": "2026-09-24",
+      "dateModified": "2026-09-30",
       "isAccessibleForFree": true,
       "hasPart": [
         {
@@ -731,12 +782,12 @@
             <li class="litany-item"><span class="litany-call">Cordeiro de Deus, que tirais os pecados do mundo,</span> <span class="litany-response">tende piedade de mim, ó Senhor.</span></li>
           </ul>
           <p class="chant"><span class="line">Kyrie eleison, Christe eleison (três vezes)</span></p>
-          <p class="lead">Ó Preciosíssimo Sangue de Nosso Senhor Jesus Cristo, sede exaltado e glorificado por todos nós, agora e sempre e pelos séculos dos séculos. Amém.</p>
+          <p class="lead">Ó Preciosíssimo Sangue de Nosso Senhor Jesus Cristo, sede exaltado e glorificado por mim, agora e sempre e pelos séculos dos séculos. Amém.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <p>Deus omnipotente, meu Salvador, com uma só gota do Vosso Preciosíssimo Sangue podíeis ter redimido milhões de mundos. Contudo, pelo Vosso amor sem limites por mim, pecador, derramastes a última gota do Vosso Preciosíssimo Sangue, oferecendo-a a Deus Pai pelos meus pecados.</p>
           <p>Ó Jesus, Vós o ofereceis diariamente também nos altares do mundo inteiro em cada santa Missa. Derramais o Vosso Sangue sob as espécies do vinho e Vós o ofereceis pela minha redenção. Vós o derramastes para alimentar a minha alma para a vida eterna.</p>
           <p>Eu, pecador, prostro-me em humildade diante da Vossa majestade e suplico-Vos, pela Vossa misericórdia sem limites: tende piedade de mim, pecador. Ó Salvador, peço-Vos que convertais os pecadores endurecidos, para que quanto antes se afastem desse estado terrível. Renovai a santa fé em todos os povos, para que regressem à unidade.</p>
-          <p>Senhor, este é o nosso grande desejo: que todos os homens do mundo sirvam somente a Vós e glorifiquem o Vosso Preciosíssimo Sangue.</p>
+          <p>Senhor, este é o meu grande desejo: que todos os homens do mundo sirvam somente a Vós e glorifiquem o Vosso Preciosíssimo Sangue.</p>
           <p>Ó Deus, tende piedade das almas do purgatório, porque aguardam o Vosso perdão.</p>
           <p>Que o Vosso Preciosíssimo Sangue, derramado pelos nossos pecados, lhes alcance o perdão do Pai celeste e as conduza à felicidade eterna. Amém.</p>
           <hr class="sacred-rule" aria-hidden="true">
@@ -757,9 +808,9 @@
         </header>
         <div class="prayer-text">
           <p>Na plena consciência do meu nada e, ao mesmo tempo, da Vossa grandeza, ó misericordioso Salvador, prostro-me a Vossos pés e agradeço-Vos as inúmeras provas de graça que concedestes a mim, criatura ingrata, e sobretudo por me terdes libertado, pelo Vosso Preciosíssimo Sangue, do poder corruptor de satanás. Na presença da minha amada Mãe Maria, do meu Anjo da Guarda, dos meus santos Padroeiros e de toda a corte celeste, consagro-me, ó dulcíssimo Jesus, com toda a sinceridade do coração e do modo mais livre, ao Vosso Preciosíssimo Sangue, pelo qual redimistes o mundo inteiro do pecado, da morte e do inferno.</p>
-          <p>Eu, <span class="user-name">(nome)</span>, prometo-Vos, confiando no auxílio da Vossa graça, despertar e difundir com todas as minhas forças e segundo todas as minhas possibilidades a devoção ao Vosso Preciosíssimo Sangue, Preço da nossa Redenção, para que o Vosso Sangue, digno da maior veneração, seja por todos honrado e amado.</p>
-          <p>Deste modo desejo reparar a minha infidelidade para com o Vosso Preciosíssimo Sangue e o Vosso Amor, e dar-Vos satisfação pelas inúmeras profanações e ultrajes que os homens infligem a esse Preço caríssimo da nossa salvação. Oh, se os meus próprios pecados, a minha tibieza e todos os ultrajes com que alguma vez Vos desonrei, ó Preciosíssimo Sangue, pudessem ser reduzidos ao nada!</p>
-          <p>Eis, dulcíssimo Jesus, que Vos ofereço também o amor, a honra e a adoração que a Vossa santíssima Mãe, os Vossos fiéis discípulos e todos os santos prestaram ao Vosso Preciosíssimo Sangue. Peço-Vos: não Vos lembreis mais da minha antiga infidelidade e tibieza, e dignai-Vos perdoar a todos os que Vos ultrajam. Aspergi-me, ó divino Salvador, com o Vosso Preciosíssimo Sangue, e com ele todos os homens, para que doravante Vos amemos de todo o coração, ó Amor crucificado, e possamos honrar dignamente para sempre o Preço da nossa Redenção. Amém.</p>
+          <p>Eu, <span class="user-name">(nome)</span>, prometo-Vos, confiando no auxílio da Vossa graça, despertar e difundir com todas as minhas forças e segundo todas as minhas possibilidades a devoção ao Vosso Preciosíssimo Sangue, Preço da minha Redenção, para que o Vosso Sangue, digno da maior veneração, seja por todos honrado e amado.</p>
+          <p>Deste modo desejo reparar a minha infidelidade para com o Vosso Preciosíssimo Sangue e o Vosso Amor, e dar-Vos satisfação pelas inúmeras profanações e ultrajes que os homens infligem a esse Preço caríssimo da minha salvação. Oh, se os meus próprios pecados, a minha tibieza e todos os ultrajes com que alguma vez Vos desonrei, ó Preciosíssimo Sangue, pudessem ser reduzidos ao nada!</p>
+          <p>Eis, dulcíssimo Jesus, que Vos ofereço também o amor, a honra e a adoração que a Vossa santíssima Mãe, os Vossos fiéis discípulos e todos os santos prestaram ao Vosso Preciosíssimo Sangue. Peço-Vos: não Vos lembreis mais da minha antiga infidelidade e tibieza, e dignai-Vos perdoar a todos os que Vos ultrajam. Aspergi-me, ó divino Salvador, com o Vosso Preciosíssimo Sangue, e com ele todos os homens, e concedei-me amar-Vos doravante de todo o coração, ó Amor crucificado, e honrar dignamente para sempre o Preço da minha Redenção. Amém.</p>
         </div>
       </section>
 
@@ -819,35 +870,35 @@
           <p class="section-subtitle">A devoção dos trinta e três dias</p>
         </header>
         <div class="prayer-text">
-          <p class="lead">«Jesus, Maria, amo-Vos — salvai as almas. Ó Sangue e Água, que jorrastes do santíssimo Coração de Cristo como Fonte de Misericórdia para nós, confiamos em Vós. Jesus, confiamos em Vós e em Vós depositamos toda a nossa esperança.»</p>
+          <p class="lead">«Jesus, Maria, amo-Vos — salvai as almas. Ó Sangue e Água, que jorrastes do santíssimo Coração de Cristo como Fonte de Misericórdia para mim, confio em Vós. Jesus, confio em Vós e em Vós deposito toda a minha esperança.»</p>
           <p class="refrain">Coração Eucarístico de Jesus, confio em Vós.</p>
           <ol class="litany-group litany-numbered">
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, ardente de Amor,</span> <span class="litany-response">inflamai de amor os nossos corações.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus,</span> <span class="litany-response">aumentai em nós a fé e o amor.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Fonte da vontade reta,</span> <span class="litany-response">dai-nos uma vontade reta.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Criador do mundo, que tendes o mundo na Vossa Mão,</span> <span class="litany-response">não nos deixeis sair da Vossa proteção.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Médico de Deus, que sofrestes a morte na Cruz,</span> <span class="litany-response">curai as feridas dos nossos pecados.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, em memória da Vossa amarga Paixão,</span> <span class="litany-response">dai-nos verdadeira contrição e o perdão dos pecados.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Espelho da Luz eterna,</span> <span class="litany-response">concedei-nos contemplar-Vos na eternidade.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus,</span> <span class="litany-response">mostrai-Vos misericordioso para connosco na hora da nossa morte.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus,</span> <span class="litany-response">apagai em nós inteiramente o ardor das cobiças do mundo.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Bondade dos corações,</span> <span class="litany-response">pelo Vosso Preciosíssimo Sangue vinde a nós na hora da nossa morte.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, ardente de Amor,</span> <span class="litany-response">inflamai de amor o meu coração.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus,</span> <span class="litany-response">aumentai em mim a fé e o amor.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Fonte da vontade reta,</span> <span class="litany-response">dai-me uma vontade reta.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Criador do mundo, que tendes o mundo na Vossa Mão,</span> <span class="litany-response">não me deixeis sair da Vossa proteção.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Médico de Deus, que sofrestes a morte na Cruz,</span> <span class="litany-response">curai as feridas dos meus pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, em memória da Vossa amarga Paixão,</span> <span class="litany-response">dai-me verdadeira contrição e o perdão dos pecados.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Espelho da Luz eterna,</span> <span class="litany-response">concedei-me contemplar-Vos na eternidade.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus,</span> <span class="litany-response">mostrai-Vos misericordioso para comigo na hora da minha morte.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus,</span> <span class="litany-response">apagai em mim inteiramente o ardor das cobiças do mundo.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Bondade dos corações,</span> <span class="litany-response">pelo Vosso Preciosíssimo Sangue vinde a mim na hora da minha morte.</span></li>
           </ol>
           <p class="refrain">Coração Eucarístico de Jesus, confio em Vós.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, fonte inesgotável de vida e de santidade,</span> <span class="litany-response">santificai-me com o Vosso Preciosíssimo Sangue.</span></li>
             <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, fornalha de amor inextinguível,</span> <span class="litany-response">inflamai o meu coração no amor por Vós.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, que nos esperais pacientemente no sacrário,</span> <span class="litany-response">ensinai-me a fidelidade.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, que me esperais pacientemente no sacrário,</span> <span class="litany-response">ensinai-me a fidelidade.</span></li>
             <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, ultrajado por comunhões indignas,</span> <span class="litany-response">aceitai a minha reparação.</span></li>
             <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Pão dos anjos e alimento das almas,</span> <span class="litany-response">saciai a minha pobreza.</span></li>
             <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, consolo dos aflitos e força dos fracos,</span> <span class="litany-response">amparai-me no caminho.</span></li>
             <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, refúgio dos pecadores,</span> <span class="litany-response">não me rejeiteis.</span></li>
             <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, consolação das almas do purgatório,</span> <span class="litany-response">libertai-as com o Vosso Preciosíssimo Sangue.</span></li>
             <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, Viático dos moribundos,</span> <span class="litany-response">assisti-me na minha última hora.</span></li>
-            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, cheio de misericórdia para connosco,</span> <span class="litany-response">tende piedade de mim.</span></li>
+            <li class="litany-item"><span class="litany-call">Coração Eucarístico de Jesus, cheio de misericórdia para comigo,</span> <span class="litany-response">tende piedade de mim.</span></li>
           </ul>
-          <p>Ó Coração Eucarístico de Jesus, que por amor de nós permanecestes connosco sob as espécies do pão e do vinho até ao fim dos séculos, acolhei esta minha pobre oração. Creio que estais aqui presente, verdadeira, real e substancialmente; espero na Vossa misericórdia e amo-Vos acima de todas as coisas. Por todos os ultrajes que recebeis no Santíssimo Sacramento, ofereço-Vos o Preciosíssimo Sangue que derramastes por mim na Cruz. Amém.</p>
+          <p>Ó Coração Eucarístico de Jesus, que por amor de mim permanecestes comigo sob as espécies do pão e do vinho até ao fim dos séculos, acolhei esta minha pobre oração. Creio que estais aqui presente, verdadeira, real e substancialmente; espero na Vossa misericórdia e amo-Vos acima de todas as coisas. Por todos os ultrajes que recebeis no Santíssimo Sacramento, ofereço-Vos o Preciosíssimo Sangue que derramastes por mim na Cruz. Amém.</p>
           <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>A promessa dos 33 dias</span></h3><p>Quem durante <strong>trinta e três dias</strong> — em memória dos trinta e três anos da vida terrena do Salvador — rezar todos os dias, sem interrupção, esta oração ao Coração Eucarístico de Jesus, obterá a <strong>completa remissão da pena e da culpa</strong>.</p><p><em>Reza-se em estado de graça santificante, tendo-se aproximado da santa Confissão e da Comunhão.</em></p></aside>
           <div class="tracker no-print" data-tracker="33d" data-total="33">
             <h3 class="tracker-title">Caminho dos 33 dias</h3>

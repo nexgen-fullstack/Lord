@@ -143,14 +143,14 @@ module.exports = {
 
         { t: 'chant', lines: ['Kyrie eleison, Christe eleison (tres veces)'] },
 
-        { t: 'lead', x: 'Oh Preciosísima Sangre de Nuestro Señor Jesucristo, sé exaltada y glorificada por todos nosotros, ahora y siempre y por los siglos de los siglos. Amén.' },
+        { t: 'lead', x: 'Oh Preciosísima Sangre de Nuestro Señor Jesucristo, sé exaltada y glorificada por mí, ahora y siempre y por los siglos de los siglos. Amén.' },
 
         { t: 'rule' },
 
         { t: 'p', x: 'Dios omnipotente, Salvador mío, con una sola gota de Tu Preciosísima Sangre habrías podido redimir millones de mundos. Sin embargo, por Tu amor sin límites hacia mí, pecador, derramaste la última gota de Tu Preciosísima Sangre, ofreciéndola a Dios Padre por mis pecados.' },
         { t: 'p', x: 'Oh Jesús, Tú la ofreces cada día también en los altares del mundo entero en cada santa Misa. Derramas Tu Sangre bajo las especies del vino y la ofreces por mi redención. La derramaste para alimentar mi alma para la vida eterna.' },
         { t: 'p', x: 'Yo, pecador, caigo con humildad ante Tu majestad y te suplico, por Tu misericordia sin límites: ten piedad de mí, pecador. Oh Salvador, te ruego que hagas volver a los pecadores endurecidos, para que cuanto antes se conviertan de aquel estado terrible. Renueva la santa fe en todos los pueblos, para que regresen a la unidad.' },
-        { t: 'p', x: 'Señor, este es nuestro gran deseo: que todos los hombres del mundo te sirvan solo a Ti y glorifiquen Tu Preciosísima Sangre.' },
+        { t: 'p', x: 'Señor, este es mi gran deseo: que todos los hombres del mundo te sirvan solo a Ti y glorifiquen Tu Preciosísima Sangre.' },
         { t: 'p', x: 'Oh Dios, ten piedad de las almas del purgatorio, porque aguardan Tu perdón.' },
         { t: 'p', x: 'Que Tu Preciosísima Sangre, derramada por nuestros pecados, les alcance el perdón del Padre celestial y las conduzca a la felicidad eterna. Amén.' },
 
@@ -182,11 +182,11 @@ module.exports = {
       blocks: [
         { t: 'p', x: 'Con plena conciencia de mi nada y, al mismo tiempo, de Tu grandeza, oh misericordioso Salvador, me postro a Tus pies y te doy gracias por las innumerables pruebas de gracia que me has concedido a mí, criatura ingrata, y sobre todo por haberme librado, mediante Tu Preciosísima Sangre, del poder corruptor de satanás. En presencia de mi amada Madre María, de mi Ángel de la Guarda, de mis santos Patronos y de toda la corte celestial, me consagro, oh dulcísimo Jesús, con toda la sinceridad del corazón y del modo más libre, a Tu Preciosísima Sangre, con la cual redimiste al mundo entero del pecado, de la muerte y del infierno.' },
 
-        { t: 'p', x: 'Yo, {{name}}, te prometo, confiando en la ayuda de Tu gracia, despertar y difundir con todas mis fuerzas y según todas mis posibilidades la devoción a Tu Preciosísima Sangre, Precio de nuestra Redención, para que Tu Sangre, digna de la más alta veneración, sea honrada y amada por todos.' },
+        { t: 'p', x: 'Yo, {{name}}, te prometo, confiando en la ayuda de Tu gracia, despertar y difundir con todas mis fuerzas y según todas mis posibilidades la devoción a Tu Preciosísima Sangre, Precio de mi Redención, para que Tu Sangre, digna de la más alta veneración, sea honrada y amada por todos.' },
 
-        { t: 'p', x: 'De este modo deseo reparar mi infidelidad hacia Tu Preciosísima Sangre y hacia Tu Amor, y darte satisfacción por las innumerables profanaciones y ultrajes que los hombres infligen a ese Precio carísimo de nuestra salvación. ¡Oh, si mis propios pecados, mi tibieza y todos los ultrajes con los que alguna vez te he deshonrado, oh Preciosísima Sangre, pudieran ser reducidos a la nada!' },
+        { t: 'p', x: 'De este modo deseo reparar mi infidelidad hacia Tu Preciosísima Sangre y hacia Tu Amor, y darte satisfacción por las innumerables profanaciones y ultrajes que los hombres infligen a ese Precio carísimo de mi salvación. ¡Oh, si mis propios pecados, mi tibieza y todos los ultrajes con los que alguna vez te he deshonrado, oh Preciosísima Sangre, pudieran ser reducidos a la nada!' },
 
-        { t: 'p', x: 'He aquí, dulcísimo Jesús, que te ofrezco también el amor, el honor y la adoración que Tu santísima Madre, Tus fieles discípulos y todos los santos han rendido a Tu Preciosísima Sangre. Te ruego: no recuerdes más mi antigua infidelidad y tibieza, y dígnate perdonar a todos los que te ultrajan. Rocíame, oh divino Salvador, con Tu Preciosísima Sangre, y con ella a todos los hombres, para que te amemos desde ahora con todo el corazón, oh Amor crucificado, y podamos honrar dignamente para siempre el Precio de nuestra Redención. Amén.' }
+        { t: 'p', x: 'He aquí, dulcísimo Jesús, que te ofrezco también el amor, el honor y la adoración que Tu santísima Madre, Tus fieles discípulos y todos los santos han rendido a Tu Preciosísima Sangre. Te ruego: no recuerdes más mi antigua infidelidad y tibieza, y dígnate perdonar a todos los que te ultrajan. Rocíame, oh divino Salvador, con Tu Preciosísima Sangre, y con ella a todos los hombres, y concédeme amarte desde ahora con todo el corazón, oh Amor crucificado, y honrar dignamente para siempre el Precio de mi Redención. Amén.' }
       ]
     },
 
@@ -255,21 +255,21 @@ module.exports = {
       title: 'Oración al Corazón Eucarístico de Jesús',
       subtitle: 'La devoción de los treinta y tres días',
       blocks: [
-        { t: 'lead', x: '«Jesús, María, os amo — salvad las almas. Oh Sangre y Agua, que brotaste del santísimo Corazón de Cristo como Fuente de Misericordia para nosotros, en Ti confiamos. Jesús, en Ti confiamos y en Ti ponemos toda nuestra esperanza.»' },
+        { t: 'lead', x: '«Jesús, María, os amo — salvad las almas. Oh Sangre y Agua, que brotaste del santísimo Corazón de Cristo como Fuente de Misericordia para mí, en Ti confío. Jesús, en Ti confío y en Ti pongo toda mi esperanza.»' },
 
         { t: 'refrain', x: 'Corazón Eucarístico de Jesús, confío en Ti.' },
 
         { t: 'litany', ordered: true, items: [
-          ['Corazón Eucarístico de Jesús, ardiente de Amor,', 'enciende de amor nuestros corazones.'],
-          ['Corazón Eucarístico de Jesús,', 'acrecienta en nosotros la fe y el amor.'],
-          ['Corazón Eucarístico de Jesús, Fuente de la recta voluntad,', 'danos una voluntad recta.'],
-          ['Corazón Eucarístico de Jesús, Creador del mundo, que sostienes el mundo en Tu Mano,', 'no nos dejes salir de Tu amparo.'],
-          ['Corazón Eucarístico de Jesús, Médico de Dios, que padeciste la muerte en la Cruz,', 'sana las heridas de nuestros pecados.'],
-          ['Corazón Eucarístico de Jesús, en memoria de Tu amarga Pasión,', 'danos verdadero dolor y el perdón de los pecados.'],
-          ['Corazón Eucarístico de Jesús, Espejo de la Luz eterna,', 'concédenos contemplarte en la eternidad.'],
-          ['Corazón Eucarístico de Jesús,', 'muéstrate misericordioso con nosotros en la hora de nuestra muerte.'],
-          ['Corazón Eucarístico de Jesús,', 'apaga en nosotros por completo el ardor de las codicias del mundo.'],
-          ['Corazón Eucarístico de Jesús, Bondad de los corazones,', 'por Tu Preciosísima Sangre ven a nosotros en la hora de nuestra muerte.']
+          ['Corazón Eucarístico de Jesús, ardiente de Amor,', 'enciende de amor mi corazón.'],
+          ['Corazón Eucarístico de Jesús,', 'acrecienta en mí la fe y el amor.'],
+          ['Corazón Eucarístico de Jesús, Fuente de la recta voluntad,', 'dame una voluntad recta.'],
+          ['Corazón Eucarístico de Jesús, Creador del mundo, que sostienes el mundo en Tu Mano,', 'no me dejes salir de Tu amparo.'],
+          ['Corazón Eucarístico de Jesús, Médico de Dios, que padeciste la muerte en la Cruz,', 'sana las heridas de mis pecados.'],
+          ['Corazón Eucarístico de Jesús, en memoria de Tu amarga Pasión,', 'dame verdadero dolor y el perdón de los pecados.'],
+          ['Corazón Eucarístico de Jesús, Espejo de la Luz eterna,', 'concédeme contemplarte en la eternidad.'],
+          ['Corazón Eucarístico de Jesús,', 'muéstrate misericordioso conmigo en la hora de mi muerte.'],
+          ['Corazón Eucarístico de Jesús,', 'apaga en mí por completo el ardor de las codicias del mundo.'],
+          ['Corazón Eucarístico de Jesús, Bondad de los corazones,', 'por Tu Preciosísima Sangre ven a mí en la hora de mi muerte.']
         ] },
 
         { t: 'refrain', x: 'Corazón Eucarístico de Jesús, confío en Ti.' },
@@ -279,17 +279,17 @@ module.exports = {
         { t: 'litany', items: [
           ['Corazón Eucarístico de Jesús, fuente inagotable de vida y de santidad,', 'santifícame con Tu Preciosísima Sangre.'],
           ['Corazón Eucarístico de Jesús, hoguera de amor inextinguible,', 'enciende mi corazón en amor por Ti.'],
-          ['Corazón Eucarístico de Jesús, que nos aguardas con paciencia en el sagrario,', 'enséñame la fidelidad.'],
+          ['Corazón Eucarístico de Jesús, que me aguardas con paciencia en el sagrario,', 'enséñame la fidelidad.'],
           ['Corazón Eucarístico de Jesús, ultrajado por comuniones indignas,', 'acepta mi reparación.'],
           ['Corazón Eucarístico de Jesús, Pan de los ángeles y alimento de las almas,', 'sacia mi pobreza.'],
           ['Corazón Eucarístico de Jesús, consuelo de los afligidos y fuerza de los débiles,', 'sostenme en el camino.'],
           ['Corazón Eucarístico de Jesús, refugio de los pecadores,', 'no me rechaces.'],
           ['Corazón Eucarístico de Jesús, consuelo de las almas del purgatorio,', 'líbralas con Tu Preciosísima Sangre.'],
           ['Corazón Eucarístico de Jesús, Viático de los moribundos,', 'asísteme en mi última hora.'],
-          ['Corazón Eucarístico de Jesús, lleno de misericordia para con nosotros,', 'ten piedad de mí.']
+          ['Corazón Eucarístico de Jesús, lleno de misericordia para conmigo,', 'ten piedad de mí.']
         ] },
 
-        { t: 'p', x: 'Oh Corazón Eucarístico de Jesús, que por amor a nosotros has permanecido con nosotros bajo las especies del pan y del vino hasta el fin de los siglos, acoge esta pobre oración mía. Creo que estás aquí presente, verdadera, real y sustancialmente; espero en Tu misericordia y te amo sobre todas las cosas. Por todos los ultrajes que recibes en el Santísimo Sacramento, te ofrezco la Preciosísima Sangre que derramaste por mí en la Cruz. Amén.' },
+        { t: 'p', x: 'Oh Corazón Eucarístico de Jesús, que por amor a mí has permanecido conmigo bajo las especies del pan y del vino hasta el fin de los siglos, acoge esta pobre oración mía. Creo que estás aquí presente, verdadera, real y sustancialmente; espero en Tu misericordia y te amo sobre todas las cosas. Por todos los ultrajes que recibes en el Santísimo Sacramento, te ofrezco la Preciosísima Sangre que derramaste por mí en la Cruz. Amén.' },
 
         { t: 'promise', title: 'La promesa de los 33 días', x: [
           'Quien durante **treinta y tres días** — en memoria de los treinta y tres años de la vida terrena del Salvador — rece cada día y sin interrupción esta oración al Corazón Eucarístico de Jesús, obtendrá la **completa remisión de la pena y de la culpa**.',

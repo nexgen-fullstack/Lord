@@ -1,6 +1,6 @@
 'use strict';
 
-const { SITE_URL, LANGS, DEFAULT_LANG, ORG, CHURCH, IMAGE, THEME_COLOR } = require('./site.config');
+const { SITE_URL, LANGS, DEFAULT_LANG, FALLBACK_LANG, ORG, CHURCH, IMAGE, THEME_COLOR } = require('./site.config');
 
 /* ────────────────────────────── helpers ────────────────────────────── */
 
@@ -350,10 +350,83 @@ function renderStructuredData(c) {
    question before the first paint rather than correcting it afterwards.
    A deep link opened in a browser tab still honours its fragment — that is
    how a search result or a shared prayer link is supposed to arrive. */
-function renderBootScript() {
+/* The language a visitor should read in, as the source of one browser-side
+   function, pbPickLang(). The root gateway and every locale page share it, so
+   a link to any of them opens in the same language:
+
+     1. ?lang=xx in the link — and remembered, like a pick in the switcher;
+     2. a language the reader picked (pb.langChoice) — always wins;
+     3. Ukrainian, when the device lists Ukrainian anywhere, or its clock is
+        on Ukrainian time;
+     4. the first device language the site has (Russian/Belarusian → Ukrainian);
+     5. English for any other language; Ukrainian when the device says nothing.
+
+   ES5 on purpose: it runs in the <head> of old phones before anything else. */
+function renderLangPicker() {
+  const has = {}, alias = {}, zone = {};
+  for (const l of LANGS) {
+    has[l.code] = 1;
+    for (const a of l.aliases || []) alias[a] = l.code;
+    for (const z of l.timeZones || []) zone[z] = l.code;
+  }
+  return `function pbPickLang() {
+      var has = ${JSON.stringify(has)}, alias = ${JSON.stringify(alias)}, zone = ${JSON.stringify(zone)};
+      var primary = ${JSON.stringify(DEFAULT_LANG)}, fallback = ${JSON.stringify(FALLBACK_LANG)};
+      function base(tag) { return String(tag || '').toLowerCase().split(/[-_]/)[0]; }
+      try {
+        var forced = base(new URLSearchParams(location.search).get('lang'));
+        if (has[forced]) {
+          try { localStorage.setItem('pb.langChoice', forced); } catch (e) {}
+          return forced;
+        }
+      } catch (e) {}
+      try {
+        var chosen = localStorage.getItem('pb.langChoice');
+        if (has[chosen]) return chosen;
+      } catch (e) {}
+      var list = navigator.languages && navigator.languages.length
+        ? navigator.languages : [navigator.language || ''];
+      for (var i = 0; i < list.length; i++) if (base(list[i]) === primary) return primary;
+      try {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (zone[tz]) return zone[tz];
+      } catch (e) {}
+      for (var j = 0; j < list.length; j++) {
+        var code = base(list[j]);
+        code = alias[code] || code;
+        if (has[code]) return code;
+      }
+      return base(list[0]) ? fallback : primary;
+    }`;
+}
+
+function renderBootScript(c) {
   return `<script>
   (function () {
     var html = document.documentElement;
+
+    /* Open in the reader's own language (pbPickLang above), whichever
+       language the shared link happened to point at. Crawlers are left where
+       they are: each locale has to stay indexable exactly as its canonical
+       says. The hop keeps the #prayer the link asked for. */
+    ${renderLangPicker()}
+    var here = ${JSON.stringify(c.code)};
+    var bot = navigator.webdriver ||
+      /googlebot|googleother|google-inspectiontool|google-pagerenderer|adsbot|mediapartners|storebot|bingbot|yandexbot|yandexrender|baiduspider|duckduckbot|applebot|petalbot|slurp|crawler|spider|lighthouse|headlesschrome/i.test(navigator.userAgent);
+    if (!bot) {
+      var want = pbPickLang();
+      var hopped = 0;
+      try { hopped = Number(sessionStorage.getItem('pb.langHop')) || 0; } catch (e) {}
+      /* The timestamp guards against two pages sending the reader back and
+         forth if storage ever answers differently between them. */
+      if (want !== here && Date.now() - hopped > 5000) {
+        try { sessionStorage.setItem('pb.langHop', String(Date.now())); } catch (e) {}
+        html.style.visibility = 'hidden';
+        setTimeout(function () { html.style.visibility = ''; }, 3000);
+        location.replace('../' + want + '/' + location.hash);
+        return;
+      }
+    }
 
     /* Suspends \`scroll-behavior: smooth\` for the opening moments. Without it
        the very first jump is animated: the app appears to sail down into a
@@ -453,7 +526,7 @@ function renderHead(c) {
   <meta name="format-detection" content="telephone=no">
 
   <!-- Runs before the stylesheets: a prayer always opens at its beginning. -->
-  ${renderBootScript()}
+  ${renderBootScript(c)}
 
   <!-- Canonical + language targeting -->
   <link rel="canonical" href="${url}">
@@ -833,4 +906,4 @@ ${renderUiStrings(c)}
 `;
 }
 
-module.exports = { renderPage, esc, jsonld, langHome, ICON, FAVICON };
+module.exports = { renderPage, renderLangPicker, esc, jsonld, langHome, ICON, FAVICON };

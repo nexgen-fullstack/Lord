@@ -143,14 +143,14 @@ module.exports = {
 
         { t: 'chant', lines: ['Kyrie eleison, Christe eleison (dreimal)'] },
 
-        { t: 'lead', x: 'O kostbarstes Blut unseres Herrn Jesus Christus, sei erhoben und verherrlicht von uns allen, jetzt und immerdar und in alle Ewigkeit. Amen.' },
+        { t: 'lead', x: 'O kostbarstes Blut unseres Herrn Jesus Christus, sei erhoben und verherrlicht von mir, jetzt und immerdar und in alle Ewigkeit. Amen.' },
 
         { t: 'rule' },
 
         { t: 'p', x: 'Allmächtiger Gott, mein Erlöser! Mit einem einzigen Tropfen deines kostbarsten Blutes hättest du Millionen von Welten erlösen können. Doch aus deiner grenzenlosen Liebe zu mir Sünder hast du den letzten Tropfen deines kostbarsten Blutes vergossen und ihn Gott dem Vater für meine Sünden aufgeopfert.' },
         { t: 'p', x: 'O Jesus, du opferst es täglich auch auf den Altären der ganzen Welt in jeder heiligen Messe. Du gießt dein Blut unter der Gestalt des Weines aus und opferst es für meine Erlösung. Du hast es vergossen zur Speise meiner Seele für das ewige Leben.' },
         { t: 'p', x: 'Ich, ein Sünder, falle in Demut vor deiner Majestät nieder und flehe dich an um deiner grenzenlosen Barmherzigkeit willen: erbarme dich meiner, des Sünders. Erlöser, ich bitte dich, die verstockten Sünder zur Umkehr zu führen, damit sie sich möglichst bald aus jenem schrecklichen Zustand bekehren. Erneuere den heiligen Glauben in allen Völkern, damit sie zur Einheit zurückkehren.' },
-        { t: 'p', x: 'Herr, dies ist unser großes Verlangen: dass alle Menschen der Welt dir allein dienen und dein kostbarstes Blut verherrlichen.' },
+        { t: 'p', x: 'Herr, dies ist mein großes Verlangen: dass alle Menschen der Welt dir allein dienen und dein kostbarstes Blut verherrlichen.' },
         { t: 'p', x: 'O Gott, erbarme dich der Seelen im Fegefeuer, denn sie harren deiner Begnadigung.' },
         { t: 'p', x: 'Möge dein kostbarstes Blut, für unsere Sünden vergossen, ihnen beim himmlischen Vater Verzeihung erwirken und sie zur ewigen Seligkeit führen. Amen.' },
 
@@ -159,7 +159,7 @@ module.exports = {
         { t: 'p', x: 'Herr Jesus Christus, mein Erlöser, bewahre mich durch dein kostbarstes Blut vor den Nachstellungen teuflischer Versuchungen.' },
         { t: 'p', x: 'Herr Jesus Christus, mein Erlöser, hilf mir durch dein kostbarstes Blut, die Versuchungen zu überwinden.' },
         { t: 'p', x: 'Herr Jesus Christus, mein Erlöser, behüte mich und führe mich dir nach um deines kostbarsten Blutes willen.' },
-        { t: 'p', x: 'Herr Jesus Christus, mein Erlöser, bewahre uns den Heiligen Vater mit der ganzen Geistlichkeit und der heiligen Kirche vor allen Gefahren um deines kostbarsten Blutes willen. Amen.' },
+        { t: 'p', x: 'Herr Jesus Christus, mein Erlöser, bewahre den Heiligen Vater mit der ganzen Geistlichkeit und der heiligen Kirche vor allen Gefahren um deines kostbarsten Blutes willen. Amen.' },
 
         { t: 'box', title: 'Die Gebetsregel', x: [
           '**Vater unser…** (7-mal) · **Gegrüßet seist du, Maria…** (7-mal) · **Ehre sei dem Vater…** (7-mal)',
@@ -182,11 +182,11 @@ module.exports = {
       blocks: [
         { t: 'p', x: 'In vollem Bewusstsein meiner Nichtigkeit und zugleich deiner Größe, o barmherziger Erlöser, falle ich zu deinen Füßen nieder und danke dir für die zahllosen Beweise der Gnade, die du mir, dem undankbaren Geschöpf, erwiesen hast, und vor allem dafür, dass du mich durch dein kostbarstes Blut von der verderbenden Macht Satans befreit hast. In Gegenwart meiner geliebten Mutter Maria, meines Schutzengels, meiner heiligen Patrone und des ganzen himmlischen Hofes weihe ich mich, o liebster Jesus, mit ganzer Aufrichtigkeit des Herzens und aus freiestem Willen deinem kostbarsten Blute, durch das du die ganze Welt von Sünde, Tod und Hölle erlöst hast.' },
 
-        { t: 'p', x: 'Ich, {{name}}, verspreche dir, auf die Hilfe deiner Gnade vertrauend, mit allen meinen Kräften und nach allen meinen Möglichkeiten die Andacht zu deinem kostbarsten Blute, dem Preis unserer Erlösung, zu wecken und zu verbreiten, damit dein Blut, der höchsten Verehrung würdig, von allen geehrt und geliebt werde.' },
+        { t: 'p', x: 'Ich, {{name}}, verspreche dir, auf die Hilfe deiner Gnade vertrauend, mit allen meinen Kräften und nach allen meinen Möglichkeiten die Andacht zu deinem kostbarsten Blute, dem Preis meiner Erlösung, zu wecken und zu verbreiten, damit dein Blut, der höchsten Verehrung würdig, von allen geehrt und geliebt werde.' },
 
-        { t: 'p', x: 'Auf diese Weise will ich meine Untreue gegen dein kostbarstes Blut und deine Liebe wiedergutmachen und dir Genugtuung leisten für die zahllosen Entweihungen und Schmähungen, welche die Menschen jenem kostbarsten Preis unseres Heiles zufügen. Oh, könnten doch meine eigenen Sünden, meine Lauheit und alle Schmähungen, mit denen ich dich, o kostbarstes Blut, jemals entehrt habe, ins Nichts zurückgenommen werden!' },
+        { t: 'p', x: 'Auf diese Weise will ich meine Untreue gegen dein kostbarstes Blut und deine Liebe wiedergutmachen und dir Genugtuung leisten für die zahllosen Entweihungen und Schmähungen, welche die Menschen jenem kostbarsten Preis meines Heiles zufügen. Oh, könnten doch meine eigenen Sünden, meine Lauheit und alle Schmähungen, mit denen ich dich, o kostbarstes Blut, jemals entehrt habe, ins Nichts zurückgenommen werden!' },
 
-        { t: 'p', x: 'Siehe, liebster Jesus, ich opfere dir auch die Liebe, die Ehre und die Anbetung auf, welche deine heiligste Mutter, deine treuen Jünger und alle Heiligen deinem kostbarsten Blute dargebracht haben. Ich bitte dich: gedenke nicht mehr meiner früheren Untreue und Lauheit, und verzeihe allen, die dich schmähen. Besprenge mich, o göttlicher Erlöser, mit deinem kostbarsten Blute, und mit ihm alle Menschen, damit wir dich, gekreuzigte Liebe, fortan von ganzem Herzen lieben und den Preis unserer Erlösung allezeit aufs würdigste verehren können. Amen.' }
+        { t: 'p', x: 'Siehe, liebster Jesus, ich opfere dir auch die Liebe, die Ehre und die Anbetung auf, welche deine heiligste Mutter, deine treuen Jünger und alle Heiligen deinem kostbarsten Blute dargebracht haben. Ich bitte dich: gedenke nicht mehr meiner früheren Untreue und Lauheit, und verzeihe allen, die dich schmähen. Besprenge mich, o göttlicher Erlöser, mit deinem kostbarsten Blute, und mit ihm alle Menschen, und gib, dass ich dich, gekreuzigte Liebe, fortan von ganzem Herzen liebe und den Preis meiner Erlösung allezeit aufs würdigste verehre. Amen.' }
       ]
     },
 
@@ -255,21 +255,21 @@ module.exports = {
       title: 'Gebet zum eucharistischen Herzen Jesu',
       subtitle: 'Die Andacht der dreiunddreißig Tage',
       blocks: [
-        { t: 'lead', x: '„Jesus, Maria, ich liebe euch — rettet die Seelen. O Blut und Wasser, das aus dem heiligsten Herzen Christi als Quell der Barmherzigkeit für uns hervorgeströmt ist, wir vertrauen auf dich. Jesus, wir vertrauen auf dich und setzen alle unsere Hoffnung auf dich.“' },
+        { t: 'lead', x: '„Jesus, Maria, ich liebe euch — rettet die Seelen. O Blut und Wasser, das aus dem heiligsten Herzen Christi als Quell der Barmherzigkeit für mich hervorgeströmt ist, ich vertraue auf dich. Jesus, ich vertraue auf dich und setze alle meine Hoffnung auf dich.“' },
 
         { t: 'refrain', x: 'Eucharistisches Herz Jesu, ich vertraue dir.' },
 
         { t: 'litany', ordered: true, items: [
-          ['Eucharistisches Herz Jesu, das du in Liebe brennst,', 'entzünde unsere Herzen in Liebe.'],
-          ['Eucharistisches Herz Jesu,', 'mehre in uns Glauben und Liebe.'],
-          ['Eucharistisches Herz Jesu, Quell des rechten Willens,', 'gib uns einen rechten Willen.'],
-          ['Eucharistisches Herz Jesu, Schöpfer der Welt, der du die Welt in deiner Hand hältst,', 'lass uns niemals aus deinem Schutze fallen.'],
-          ['Eucharistisches Herz Jesu, Arzt Gottes, der du am Kreuz den Tod erlitten hast,', 'heile die Wunden unserer Sünden.'],
-          ['Eucharistisches Herz Jesu, zum Gedächtnis deines bitteren Leidens,', 'gib uns wahre Reue und die Vergebung der Sünden.'],
-          ['Eucharistisches Herz Jesu, Spiegel des ewigen Lichtes,', 'lass uns dich in der Ewigkeit schauen.'],
-          ['Eucharistisches Herz Jesu,', 'erweise dich uns barmherzig in der Stunde unseres Todes.'],
-          ['Eucharistisches Herz Jesu,', 'lösche in uns gänzlich die Glut der weltlichen Begierden.'],
-          ['Eucharistisches Herz Jesu, Güte der Herzen,', 'komm durch dein kostbarstes Blut zu uns in der Stunde unseres Todes.']
+          ['Eucharistisches Herz Jesu, das du in Liebe brennst,', 'entzünde mein Herz in Liebe.'],
+          ['Eucharistisches Herz Jesu,', 'mehre in mir Glauben und Liebe.'],
+          ['Eucharistisches Herz Jesu, Quell des rechten Willens,', 'gib mir einen rechten Willen.'],
+          ['Eucharistisches Herz Jesu, Schöpfer der Welt, der du die Welt in deiner Hand hältst,', 'lass mich niemals aus deinem Schutze fallen.'],
+          ['Eucharistisches Herz Jesu, Arzt Gottes, der du am Kreuz den Tod erlitten hast,', 'heile die Wunden meiner Sünden.'],
+          ['Eucharistisches Herz Jesu, zum Gedächtnis deines bitteren Leidens,', 'gib mir wahre Reue und die Vergebung der Sünden.'],
+          ['Eucharistisches Herz Jesu, Spiegel des ewigen Lichtes,', 'lass mich dich in der Ewigkeit schauen.'],
+          ['Eucharistisches Herz Jesu,', 'erweise dich mir barmherzig in der Stunde meines Todes.'],
+          ['Eucharistisches Herz Jesu,', 'lösche in mir gänzlich die Glut der weltlichen Begierden.'],
+          ['Eucharistisches Herz Jesu, Güte der Herzen,', 'komm durch dein kostbarstes Blut zu mir in der Stunde meines Todes.']
         ] },
 
         { t: 'refrain', x: 'Eucharistisches Herz Jesu, ich vertraue dir.' },
@@ -279,17 +279,17 @@ module.exports = {
         { t: 'litany', items: [
           ['Eucharistisches Herz Jesu, unerschöpflicher Quell des Lebens und der Heiligkeit,', 'heilige mich durch dein kostbarstes Blut.'],
           ['Eucharistisches Herz Jesu, Feuerherd unauslöschlicher Liebe,', 'entzünde mein Herz in Liebe zu dir.'],
-          ['Eucharistisches Herz Jesu, das du uns geduldig im Tabernakel erwartest,', 'lehre mich die Treue.'],
+          ['Eucharistisches Herz Jesu, das du mich geduldig im Tabernakel erwartest,', 'lehre mich die Treue.'],
           ['Eucharistisches Herz Jesu, durch unwürdige Kommunionen geschmäht,', 'nimm meine Sühne an.'],
           ['Eucharistisches Herz Jesu, Brot der Engel und Speise der Seelen,', 'sättige meine Armut.'],
           ['Eucharistisches Herz Jesu, Trost der Betrübten und Stärke der Schwachen,', 'stütze mich auf meinem Wege.'],
           ['Eucharistisches Herz Jesu, Zuflucht der Sünder,', 'verwirf mich nicht.'],
           ['Eucharistisches Herz Jesu, Trost der Seelen im Fegefeuer,', 'befreie sie durch dein kostbarstes Blut.'],
           ['Eucharistisches Herz Jesu, Wegzehrung der Sterbenden,', 'sei bei mir in meiner letzten Stunde.'],
-          ['Eucharistisches Herz Jesu, voll der Barmherzigkeit gegen uns,', 'erbarme dich meiner.']
+          ['Eucharistisches Herz Jesu, voll der Barmherzigkeit gegen mich,', 'erbarme dich meiner.']
         ] },
 
-        { t: 'p', x: 'O eucharistisches Herz Jesu, das du aus Liebe zu uns unter den Gestalten von Brot und Wein bis ans Ende der Zeiten bei uns geblieben bist, nimm dieses mein armes Gebet an. Ich glaube, dass du hier wahrhaft, wirklich und wesentlich gegenwärtig bist; ich hoffe auf deine Barmherzigkeit und liebe dich über alles. Für alle Schmähungen, die du im allerheiligsten Sakramente empfängst, bringe ich dir das kostbarste Blut dar, das du für mich am Kreuze vergossen hast. Amen.' },
+        { t: 'p', x: 'O eucharistisches Herz Jesu, das du aus Liebe zu mir unter den Gestalten von Brot und Wein bis ans Ende der Zeiten bei mir geblieben bist, nimm dieses mein armes Gebet an. Ich glaube, dass du hier wahrhaft, wirklich und wesentlich gegenwärtig bist; ich hoffe auf deine Barmherzigkeit und liebe dich über alles. Für alle Schmähungen, die du im allerheiligsten Sakramente empfängst, bringe ich dir das kostbarste Blut dar, das du für mich am Kreuze vergossen hast. Amen.' },
 
         { t: 'promise', title: 'Die Verheißung der 33 Tage', x: [
           'Wer **dreiunddreißig Tage** hindurch — zum Gedächtnis der dreiunddreißig Jahre des irdischen Lebens des Erlösers — dieses Gebet zum eucharistischen Herzen Jesu täglich und ohne Unterbrechung verrichtet, erlangt den **vollkommenen Nachlass von Strafe und Schuld**.',

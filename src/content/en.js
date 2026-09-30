@@ -143,14 +143,14 @@ module.exports = {
 
         { t: 'chant', lines: ['Kyrie eleison, Christe eleison (three times)'] },
 
-        { t: 'lead', x: 'O Most Precious Blood of our Lord Jesus Christ, be exalted and glorified by us all, now and always and unto the ages of ages. Amen.' },
+        { t: 'lead', x: 'O Most Precious Blood of our Lord Jesus Christ, be exalted and glorified by me, now and always and unto the ages of ages. Amen.' },
 
         { t: 'rule' },
 
         { t: 'p', x: 'Almighty God, my Saviour: with one single drop of Thy Most Precious Blood Thou couldst have redeemed a million worlds. Yet out of Thy boundless love for me, a sinner, Thou didst pour out the very last drop of Thy Most Precious Blood, offering it to God the Father for my sins.' },
         { t: 'p', x: 'O Jesus, Thou dost offer it daily upon the altars of the whole world at every Holy Mass. Thou dost pour out Thy Blood under the appearance of wine and offer it for my redemption. Thou hast shed it to nourish my soul unto everlasting life.' },
         { t: 'p', x: 'I, a sinner, fall down in humility before Thy majesty and implore Thee, for the sake of Thy boundless mercy: have mercy on me, a sinner. O Saviour, I beg Thee to turn back hardened sinners, that they may be converted with all speed from that dreadful state. Renew the holy faith among all nations, that they may return to unity.' },
-        { t: 'p', x: 'O Lord, this is our great desire: that all the peoples of the world should serve Thee alone and glorify Thy Most Precious Blood.' },
+        { t: 'p', x: 'O Lord, this is my great desire: that all the peoples of the world should serve Thee alone and glorify Thy Most Precious Blood.' },
         { t: 'p', x: 'O God, have mercy upon the souls in purgatory, for they await Thy pardon.' },
         { t: 'p', x: 'May Thy Most Precious Blood, poured out for our sins, obtain their forgiveness from the Heavenly Father and lead them into everlasting happiness. Amen.' },
 
@@ -159,7 +159,7 @@ module.exports = {
         { t: 'p', x: 'Lord Jesus Christ, my Saviour, shelter me from the snares of diabolical temptation by Thy Most Precious Blood.' },
         { t: 'p', x: 'Lord Jesus Christ, my Saviour, help me by Thy Most Precious Blood to overcome temptation.' },
         { t: 'p', x: 'Lord Jesus Christ, my Saviour, guard me and lead me after Thee for the sake of Thy Most Precious Blood.' },
-        { t: 'p', x: 'Lord Jesus Christ, my Saviour, guard for us from every danger the Holy Father with all the clergy and Holy Church, for the sake of Thy Most Precious Blood. Amen.' },
+        { t: 'p', x: 'Lord Jesus Christ, my Saviour, guard from every danger the Holy Father with all the clergy and Holy Church, for the sake of Thy Most Precious Blood. Amen.' },
 
         { t: 'box', title: 'The rule of prayer', x: [
           '**Our Father…** (7 times) · **Hail Mary…** (7 times) · **Glory be to the Father…** (7 times)',
@@ -182,11 +182,11 @@ module.exports = {
       blocks: [
         { t: 'p', x: 'In full awareness of my own nothingness and of Thy greatness, O merciful Saviour, I fall down at Thy feet and thank Thee for the countless proofs of grace which Thou hast shown to me, an ungrateful creature, and above all that Thou hast freed me by Thy Most Precious Blood from the corrupting power of Satan. In the presence of my beloved Mother Mary, of my Guardian Angel, of my holy Patrons and of the whole Court of Heaven, I consecrate myself, O most loving Jesus, with all the sincerity of my heart and most freely, to Thy Most Precious Blood, by which Thou hast redeemed the whole world from sin, from death and from hell.' },
 
-        { t: 'p', x: 'I, {{name}}, promise Thee, trusting in the help of Thy grace, to awaken and to spread with all my strength and according to all my means the devotion to Thy Most Precious Blood, the Price of our Redemption, so that Thy Blood, worthy of the highest veneration, may be honoured and loved by all.' },
+        { t: 'p', x: 'I, {{name}}, promise Thee, trusting in the help of Thy grace, to awaken and to spread with all my strength and according to all my means the devotion to Thy Most Precious Blood, the Price of my Redemption, so that Thy Blood, worthy of the highest veneration, may be honoured and loved by all.' },
 
-        { t: 'p', x: 'In this way I wish to make amends for my own unfaithfulness towards Thy Most Precious Blood and Thy Love, and to make satisfaction to Thee for the countless profanations and outrages which men inflict upon that Most Precious Price of our salvation. Oh, if only my own sins, my lukewarmness and every outrage by which I have ever dishonoured Thee, O Most Precious Blood, could be returned to nothingness!' },
+        { t: 'p', x: 'In this way I wish to make amends for my own unfaithfulness towards Thy Most Precious Blood and Thy Love, and to make satisfaction to Thee for the countless profanations and outrages which men inflict upon that Most Precious Price of my salvation. Oh, if only my own sins, my lukewarmness and every outrage by which I have ever dishonoured Thee, O Most Precious Blood, could be returned to nothingness!' },
 
-        { t: 'p', x: 'Behold, dearest Jesus, I offer Thee also the love, the honour and the adoration which Thy most holy Mother, Thy faithful disciples and all the saints have rendered to Thy Most Precious Blood. I beseech Thee, deign to think no more upon my former unfaithfulness and lukewarmness, and deign to forgive all who dishonour Thee. Sprinkle me, O Divine Saviour, with Thy Most Precious Blood, and with it all mankind, that we may henceforth love Thee with our whole heart, O crucified Love, and may honour most worthily for all time the Price of our Redemption. Amen.' }
+        { t: 'p', x: 'Behold, dearest Jesus, I offer Thee also the love, the honour and the adoration which Thy most holy Mother, Thy faithful disciples and all the saints have rendered to Thy Most Precious Blood. I beseech Thee, deign to think no more upon my former unfaithfulness and lukewarmness, and deign to forgive all who dishonour Thee. Sprinkle me, O Divine Saviour, with Thy Most Precious Blood, and with it all mankind, and grant that I may henceforth love Thee with my whole heart, O crucified Love, and honour most worthily for all time the Price of my Redemption. Amen.' }
       ]
     },
 
@@ -255,21 +255,21 @@ module.exports = {
       title: 'Prayer to the Eucharistic Heart of Jesus',
       subtitle: 'The devotion of thirty-three days',
       blocks: [
-        { t: 'lead', x: '“Jesus, Mary, I love You — save souls. O Blood and Water, which gushed forth from the Most Sacred Heart of Christ as a Fount of Mercy for us, we trust in Thee. Jesus, we trust in Thee, and in Thee we place all our hope.”' },
+        { t: 'lead', x: '“Jesus, Mary, I love You — save souls. O Blood and Water, which gushed forth from the Most Sacred Heart of Christ as a Fount of Mercy for me, I trust in Thee. Jesus, I trust in Thee, and in Thee I place all my hope.”' },
 
         { t: 'refrain', x: 'Eucharistic Heart of Jesus, I trust in Thee.' },
 
         { t: 'litany', ordered: true, items: [
-          ['Eucharistic Heart of Jesus, burning with Love,', 'kindle our hearts with love.'],
-          ['Eucharistic Heart of Jesus,', 'increase in us faith and love.'],
-          ['Eucharistic Heart of Jesus, Fount of the true will,', 'grant us a right will.'],
-          ['Eucharistic Heart of Jesus, Creator of the world, who holdest the world in Thy Hand,', 'let us never fall away from Thy protection.'],
-          ['Eucharistic Heart of Jesus, Physician of God, who didst suffer death upon the Cross,', 'heal the wounds of our sins.'],
-          ['Eucharistic Heart of Jesus, in memory of Thy bitter Passion,', 'grant us true sorrow and the forgiveness of our sins.'],
-          ['Eucharistic Heart of Jesus, Mirror of the Eternal Light,', 'grant that we may behold Thee in eternity.'],
-          ['Eucharistic Heart of Jesus,', 'show Thyself merciful to us in the hour of our death.'],
-          ['Eucharistic Heart of Jesus,', 'quench in us utterly the fever of worldly desires.'],
-          ['Eucharistic Heart of Jesus, Goodness of hearts,', 'through Thy Most Precious Blood come to us in the hour of our death.']
+          ['Eucharistic Heart of Jesus, burning with Love,', 'kindle my heart with love.'],
+          ['Eucharistic Heart of Jesus,', 'increase in me faith and love.'],
+          ['Eucharistic Heart of Jesus, Fount of the true will,', 'grant me a right will.'],
+          ['Eucharistic Heart of Jesus, Creator of the world, who holdest the world in Thy Hand,', 'let me never fall away from Thy protection.'],
+          ['Eucharistic Heart of Jesus, Physician of God, who didst suffer death upon the Cross,', 'heal the wounds of my sins.'],
+          ['Eucharistic Heart of Jesus, in memory of Thy bitter Passion,', 'grant me true sorrow and the forgiveness of my sins.'],
+          ['Eucharistic Heart of Jesus, Mirror of the Eternal Light,', 'grant that I may behold Thee in eternity.'],
+          ['Eucharistic Heart of Jesus,', 'show Thyself merciful to me in the hour of my death.'],
+          ['Eucharistic Heart of Jesus,', 'quench in me utterly the fever of worldly desires.'],
+          ['Eucharistic Heart of Jesus, Goodness of hearts,', 'through Thy Most Precious Blood come to me in the hour of my death.']
         ] },
 
         { t: 'refrain', x: 'Eucharistic Heart of Jesus, I trust in Thee.' },
@@ -279,17 +279,17 @@ module.exports = {
         { t: 'litany', items: [
           ['Eucharistic Heart of Jesus, inexhaustible fountain of life and holiness,', 'sanctify me by Thy Most Precious Blood.'],
           ['Eucharistic Heart of Jesus, furnace of unquenchable love,', 'set my heart on fire with love of Thee.'],
-          ['Eucharistic Heart of Jesus, patiently awaiting us in the tabernacle,', 'teach me faithfulness.'],
+          ['Eucharistic Heart of Jesus, patiently awaiting me in the tabernacle,', 'teach me faithfulness.'],
           ['Eucharistic Heart of Jesus, dishonoured by unworthy Communions,', 'accept my reparation.'],
           ['Eucharistic Heart of Jesus, Bread of Angels and food of souls,', 'satisfy my poverty.'],
           ['Eucharistic Heart of Jesus, comfort of the sorrowful and strength of the weak,', 'sustain me upon my way.'],
           ['Eucharistic Heart of Jesus, refuge of sinners,', 'cast me not away.'],
           ['Eucharistic Heart of Jesus, consolation of the souls in purgatory,', 'deliver them by Thy Most Precious Blood.'],
           ['Eucharistic Heart of Jesus, Viaticum of the dying,', 'be with me in my last hour.'],
-          ['Eucharistic Heart of Jesus, full of mercy towards us,', 'have mercy upon me.']
+          ['Eucharistic Heart of Jesus, full of mercy towards me,', 'have mercy upon me.']
         ] },
 
-        { t: 'p', x: 'O Eucharistic Heart of Jesus, who out of love for us hast remained with us under the appearances of bread and wine until the end of the ages, receive this poor prayer of mine. I believe that Thou art here present, truly, really and substantially; I hope in Thy mercy and I love Thee above all things. For all the outrages Thou dost receive in the Most Holy Sacrament, I offer Thee the Most Precious Blood which Thou didst shed for me upon the Cross. Amen.' },
+        { t: 'p', x: 'O Eucharistic Heart of Jesus, who out of love for me hast remained with me under the appearances of bread and wine until the end of the ages, receive this poor prayer of mine. I believe that Thou art here present, truly, really and substantially; I hope in Thy mercy and I love Thee above all things. For all the outrages Thou dost receive in the Most Holy Sacrament, I offer Thee the Most Precious Blood which Thou didst shed for me upon the Cross. Amen.' },
 
         { t: 'promise', title: 'The promise of thirty-three days', x: [
           'Whoever, for **thirty-three days** — in memory of the thirty-three years of the Saviour’s earthly life — shall say this prayer to the Eucharistic Heart of Jesus daily and without interruption, shall obtain the **complete remission of both punishment and guilt**.',

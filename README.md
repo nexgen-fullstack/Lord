@@ -160,13 +160,21 @@ Each locale page carries:
 entry. The bare `/` is deliberately absent: it answers 302 everywhere, and a redirecting URL in a
 sitemap is a Search Console warning, never an indexable target.
 
-**Language routing precedence** (`functions/_middleware.js`, generated from `src/middleware.js`):
-`?lang=` → a language the reader **picked** in the switcher → **Ukrainian**. The root always opens
-in Ukrainian, the site's own language, whatever the phone, the browser or the visitor's country
-is set to; landing on another locale through a shared link is not a choice and changes nothing.
-The root gateway (`localStorage` `pb.langChoice`) and the edge (`pb_lang` cookie) follow the same
-rule, and so does the Android app, which starts at the gateway. Only the bare `/` is ever redirected,
-so every localized URL stays stable and indexable exactly as its canonical declares.
+**Every link opens in the reader's own language.** One browser-side function, `pbPickLang()`
+(`renderLangPicker` in `src/template.js`), runs in the `<head>` of the root gateway and of every
+locale page, so a link to `/uk/` opens in Spanish on a Spanish phone, and keeps its `#prayer`:
+
+1. `?lang=xx` in the link — remembered, like a pick in the switcher;
+2. a language the reader **picked** in the switcher, footer or chooser (`pb.langChoice`) — always wins;
+3. **Ukrainian** when the device lists Ukrainian anywhere, or its clock is on Ukrainian time
+   (`timeZones` in `site.config.js`) — a Ukrainian phone is often set to English;
+4. the first device language the site has, with Russian and Belarusian read as Ukrainian (`aliases`);
+5. `FALLBACK_LANG` (English) for any other language; Ukrainian when the device says nothing.
+
+Crawlers (Googlebot, Bingbot, Lighthouse, headless browsers) are never moved, so each locale stays
+indexable exactly as its canonical declares. The edge (`functions/_middleware.js`, from
+`src/middleware.js`) only honours `?lang=` and the `pb_lang` cookie, then leaves the device rules to
+the page. The Android app starts at the gateway and follows the phone's languages the same way.
 
 Neither the edge nor the root gateway forwards a fragment. A hash arriving at `/` is always a
 leftover from a previous session, and forwarding it is what used to reopen the app part-way into
@@ -469,8 +477,9 @@ On iPhone, the site itself is the app: Safari → Share → *На екран «�
    `ui.install*` / `ui.offline*` strings the offline app speaks in and the text-size labels (`ui.textSizeLabel`, `textSmaller`, `textLarger`, `textSizeHint`).
 2. Add an entry to `LANGS` in `src/site.config.js` (code, hreflang, og locale, flag, geo,
    countries, `speechLang`, `fontSubset`).
-3. Fill in that entry's `countries` array for the record. Routing no longer uses it: the root
-   opens in Ukrainian unless the reader has picked a language.
+3. Fill in that entry's `countries` array for the record; routing does not use it. Phones set to
+   the new language open it on their own. Add `aliases` / `timeZones` only if its readers'
+   phones are often set to another language.
 4. If the language needs glyphs outside `latin`/`cyrillic`, add its subset to `KEEP_SUBSETS` in
    `src/fetch-fonts.js` and run `npm run fonts`.
 5. `npm run build && npm run check`.
@@ -487,6 +496,13 @@ antiphon *“Eucharistic Heart of Jesus, I trust in Thee”* said before and aft
 litany of ten, the ten invocations, and the closing prayer. The site previously held only the
 second half. Both litanies render from the same `litany` block — `ordered: true` gives the
 numbered form used in the printed devotional.
+
+Every petition is said **in the first person singular**, in all six languages: *«розпали любов’ю
+моє серце»*, *«помнож у мені віру й любов»* — the reader prays for themselves, not for a
+congregation. Left as they are: fixed titles (*Господа нашого Ісуса Христа*), the *Our Father*,
+the verse from Revelation, St Gertrude's prayer as revealed, and *«пролита за наші гріхи»* in the
+prayer for the holy souls, where “our” includes the souls being prayed for. Where the singular
+would force a gendered verb, the text uses an infinitive instead (*«дай мені … любити Тебе»*).
 
 
 These are traditional Catholic devotional prayers. The promises attached to several of them

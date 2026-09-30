@@ -25,10 +25,16 @@ const BASE_PATH = '/Lord';
    voice-prayer reader.
    `fontSubset` names the self-hosted woff2 subset this locale actually renders
    in (see src/fetch-fonts.js); it drives the <link rel=preload> so the first
-   paint does not wait on a font the page will never use. */
+   paint does not wait on a font the page will never use.
+   `aliases` are device languages read as this one, and `timeZones` are clocks
+   that place the reader in this language's country. Both only steer which page
+   a visitor lands on (renderLangPicker in src/template.js): a Ukrainian phone is
+   very often set to Russian, or to English. */
 const LANGS = [
   { code: 'uk', hreflang: 'uk', ogLocale: 'uk_UA', name: 'Українська', flag: '🇺🇦', speechLang: 'uk-UA', fontSubset: 'cyrillic',
-    geo: { region: 'UA',    placename: 'Україна' },       countries: ['UA'] },
+    geo: { region: 'UA',    placename: 'Україна' },       countries: ['UA'],
+    aliases: ['ru', 'be'],
+    timeZones: ['Europe/Kyiv', 'Europe/Kiev', 'Europe/Uzhgorod', 'Europe/Zaporozhye', 'Europe/Simferopol'] },
   { code: 'en', hreflang: 'en', ogLocale: 'en_US', name: 'English',    flag: '🇬🇧', speechLang: 'en-US', fontSubset: 'latin',
     geo: { region: 'US',    placename: 'United States' },  countries: ['US','GB','IE','CA','AU','NZ','PH','IN','ZA','NG','KE','SG','MT'] },
   { code: 'de', hreflang: 'de', ogLocale: 'de_DE', name: 'Deutsch',    flag: '🇩🇪', speechLang: 'de-DE', fontSubset: 'latin',
@@ -45,6 +51,10 @@ const LANGS = [
    bare "/" falls back to, the one the root gateway is written in, and the
    locale the offline fallback page is served from. */
 const DEFAULT_LANG = 'uk';
+
+/* A visitor whose device speaks none of the six languages (French, Polish…)
+   reads English sooner than Ukrainian. */
+const FALLBACK_LANG = 'en';
 
 /* Publisher entity used for schema.org/Organization + OpenGraph. */
 const ORG = {
@@ -79,4 +89,4 @@ const IMAGE = {
 /* Theme tokens mirrored into <meta name="theme-color"> and the JSON-LD. */
 const THEME_COLOR = '#0a0304';
 
-module.exports = { SITE_URL, BASE_PATH, LANGS, DEFAULT_LANG, ORG, CHURCH, IMAGE, THEME_COLOR };
+module.exports = { SITE_URL, BASE_PATH, LANGS, DEFAULT_LANG, FALLBACK_LANG, ORG, CHURCH, IMAGE, THEME_COLOR };

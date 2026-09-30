@@ -17,6 +17,57 @@
   (function () {
     var html = document.documentElement;
 
+    /* Open in the reader's own language (pbPickLang above), whichever
+       language the shared link happened to point at. Crawlers are left where
+       they are: each locale has to stay indexable exactly as its canonical
+       says. The hop keeps the #prayer the link asked for. */
+    function pbPickLang() {
+      var has = {"uk":1,"en":1,"de":1,"it":1,"pt":1,"es":1}, alias = {"ru":"uk","be":"uk"}, zone = {"Europe/Kyiv":"uk","Europe/Kiev":"uk","Europe/Uzhgorod":"uk","Europe/Zaporozhye":"uk","Europe/Simferopol":"uk"};
+      var primary = "uk", fallback = "en";
+      function base(tag) { return String(tag || '').toLowerCase().split(/[-_]/)[0]; }
+      try {
+        var forced = base(new URLSearchParams(location.search).get('lang'));
+        if (has[forced]) {
+          try { localStorage.setItem('pb.langChoice', forced); } catch (e) {}
+          return forced;
+        }
+      } catch (e) {}
+      try {
+        var chosen = localStorage.getItem('pb.langChoice');
+        if (has[chosen]) return chosen;
+      } catch (e) {}
+      var list = navigator.languages && navigator.languages.length
+        ? navigator.languages : [navigator.language || ''];
+      for (var i = 0; i < list.length; i++) if (base(list[i]) === primary) return primary;
+      try {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (zone[tz]) return zone[tz];
+      } catch (e) {}
+      for (var j = 0; j < list.length; j++) {
+        var code = base(list[j]);
+        code = alias[code] || code;
+        if (has[code]) return code;
+      }
+      return base(list[0]) ? fallback : primary;
+    }
+    var here = "de";
+    var bot = navigator.webdriver ||
+      /googlebot|googleother|google-inspectiontool|google-pagerenderer|adsbot|mediapartners|storebot|bingbot|yandexbot|yandexrender|baiduspider|duckduckbot|applebot|petalbot|slurp|crawler|spider|lighthouse|headlesschrome/i.test(navigator.userAgent);
+    if (!bot) {
+      var want = pbPickLang();
+      var hopped = 0;
+      try { hopped = Number(sessionStorage.getItem('pb.langHop')) || 0; } catch (e) {}
+      /* The timestamp guards against two pages sending the reader back and
+         forth if storage ever answers differently between them. */
+      if (want !== here && Date.now() - hopped > 5000) {
+        try { sessionStorage.setItem('pb.langHop', String(Date.now())); } catch (e) {}
+        html.style.visibility = 'hidden';
+        setTimeout(function () { html.style.visibility = ''; }, 3000);
+        location.replace('../' + want + '/' + location.hash);
+        return;
+      }
+    }
+
     /* Suspends `scroll-behavior: smooth` for the opening moments. Without it
        the very first jump is animated: the app appears to sail down into a
        prayer on its own before the reader has touched anything. */
@@ -375,7 +426,7 @@
       "keywords": "Kostbares Blut, Kostbarstes Blut Jesu, zwölfjähriges Gebet, Andacht zum kostbaren Blut, hl. Gertrud die Große Gebet, Goldener Pfeil, heilige Schulterwunde, eucharistisches Herz Jesu, katholische Gebete, Arme Seelen",
       "genre": "Gebet",
       "datePublished": "2026-01-01",
-      "dateModified": "2026-09-24",
+      "dateModified": "2026-09-30",
       "isAccessibleForFree": true,
       "hasPart": [
         {
@@ -731,19 +782,19 @@
             <li class="litany-item"><span class="litany-call">Lamm Gottes, du nimmst hinweg die Sünden der Welt,</span> <span class="litany-response">erbarme dich meiner, o Herr.</span></li>
           </ul>
           <p class="chant"><span class="line">Kyrie eleison, Christe eleison (dreimal)</span></p>
-          <p class="lead">O kostbarstes Blut unseres Herrn Jesus Christus, sei erhoben und verherrlicht von uns allen, jetzt und immerdar und in alle Ewigkeit. Amen.</p>
+          <p class="lead">O kostbarstes Blut unseres Herrn Jesus Christus, sei erhoben und verherrlicht von mir, jetzt und immerdar und in alle Ewigkeit. Amen.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <p>Allmächtiger Gott, mein Erlöser! Mit einem einzigen Tropfen deines kostbarsten Blutes hättest du Millionen von Welten erlösen können. Doch aus deiner grenzenlosen Liebe zu mir Sünder hast du den letzten Tropfen deines kostbarsten Blutes vergossen und ihn Gott dem Vater für meine Sünden aufgeopfert.</p>
           <p>O Jesus, du opferst es täglich auch auf den Altären der ganzen Welt in jeder heiligen Messe. Du gießt dein Blut unter der Gestalt des Weines aus und opferst es für meine Erlösung. Du hast es vergossen zur Speise meiner Seele für das ewige Leben.</p>
           <p>Ich, ein Sünder, falle in Demut vor deiner Majestät nieder und flehe dich an um deiner grenzenlosen Barmherzigkeit willen: erbarme dich meiner, des Sünders. Erlöser, ich bitte dich, die verstockten Sünder zur Umkehr zu führen, damit sie sich möglichst bald aus jenem schrecklichen Zustand bekehren. Erneuere den heiligen Glauben in allen Völkern, damit sie zur Einheit zurückkehren.</p>
-          <p>Herr, dies ist unser großes Verlangen: dass alle Menschen der Welt dir allein dienen und dein kostbarstes Blut verherrlichen.</p>
+          <p>Herr, dies ist mein großes Verlangen: dass alle Menschen der Welt dir allein dienen und dein kostbarstes Blut verherrlichen.</p>
           <p>O Gott, erbarme dich der Seelen im Fegefeuer, denn sie harren deiner Begnadigung.</p>
           <p>Möge dein kostbarstes Blut, für unsere Sünden vergossen, ihnen beim himmlischen Vater Verzeihung erwirken und sie zur ewigen Seligkeit führen. Amen.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <p>Herr Jesus Christus, mein Erlöser, bewahre mich durch dein kostbarstes Blut vor den Nachstellungen teuflischer Versuchungen.</p>
           <p>Herr Jesus Christus, mein Erlöser, hilf mir durch dein kostbarstes Blut, die Versuchungen zu überwinden.</p>
           <p>Herr Jesus Christus, mein Erlöser, behüte mich und führe mich dir nach um deines kostbarsten Blutes willen.</p>
-          <p>Herr Jesus Christus, mein Erlöser, bewahre uns den Heiligen Vater mit der ganzen Geistlichkeit und der heiligen Kirche vor allen Gefahren um deines kostbarsten Blutes willen. Amen.</p>
+          <p>Herr Jesus Christus, mein Erlöser, bewahre den Heiligen Vater mit der ganzen Geistlichkeit und der heiligen Kirche vor allen Gefahren um deines kostbarsten Blutes willen. Amen.</p>
           <aside class="instruction-box"><h3 class="box-title">Die Gebetsregel</h3><p><strong>Vater unser…</strong> (7-mal) · <strong>Gegrüßet seist du, Maria…</strong> (7-mal) · <strong>Ehre sei dem Vater…</strong> (7-mal)</p><p>Das Gebet wird <strong>täglich zwölf Jahre lang</strong> ohne Unterbrechung verrichtet.</p></aside>
           <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Die göttlichen Verheißungen</span></h3><p>Wer dieses Gebet zwölf Jahre lang täglich und ohne Unterbrechung verrichtet, wird nicht durch das Fegefeuer gehen.</p><p>Wer zu beten begonnen hat und nach einem halben Jahr stirbt, empfängt dennoch all diese großen Gnaden: fünf Seelen aus seiner Familie erhalten den Ruf zum geistlichen Stand, und bis in die vierte Generation wird niemand aus seiner Familie in der Hölle sein.</p><p>Dieses zwölfjährige Gebet hat die Kraft, die Seele von allen Ungerechtigkeiten zu reinigen. <em>Herr, gib deinen Segen!</em></p></aside>
         </div>
@@ -757,9 +808,9 @@
         </header>
         <div class="prayer-text">
           <p>In vollem Bewusstsein meiner Nichtigkeit und zugleich deiner Größe, o barmherziger Erlöser, falle ich zu deinen Füßen nieder und danke dir für die zahllosen Beweise der Gnade, die du mir, dem undankbaren Geschöpf, erwiesen hast, und vor allem dafür, dass du mich durch dein kostbarstes Blut von der verderbenden Macht Satans befreit hast. In Gegenwart meiner geliebten Mutter Maria, meines Schutzengels, meiner heiligen Patrone und des ganzen himmlischen Hofes weihe ich mich, o liebster Jesus, mit ganzer Aufrichtigkeit des Herzens und aus freiestem Willen deinem kostbarsten Blute, durch das du die ganze Welt von Sünde, Tod und Hölle erlöst hast.</p>
-          <p>Ich, <span class="user-name">(Name)</span>, verspreche dir, auf die Hilfe deiner Gnade vertrauend, mit allen meinen Kräften und nach allen meinen Möglichkeiten die Andacht zu deinem kostbarsten Blute, dem Preis unserer Erlösung, zu wecken und zu verbreiten, damit dein Blut, der höchsten Verehrung würdig, von allen geehrt und geliebt werde.</p>
-          <p>Auf diese Weise will ich meine Untreue gegen dein kostbarstes Blut und deine Liebe wiedergutmachen und dir Genugtuung leisten für die zahllosen Entweihungen und Schmähungen, welche die Menschen jenem kostbarsten Preis unseres Heiles zufügen. Oh, könnten doch meine eigenen Sünden, meine Lauheit und alle Schmähungen, mit denen ich dich, o kostbarstes Blut, jemals entehrt habe, ins Nichts zurückgenommen werden!</p>
-          <p>Siehe, liebster Jesus, ich opfere dir auch die Liebe, die Ehre und die Anbetung auf, welche deine heiligste Mutter, deine treuen Jünger und alle Heiligen deinem kostbarsten Blute dargebracht haben. Ich bitte dich: gedenke nicht mehr meiner früheren Untreue und Lauheit, und verzeihe allen, die dich schmähen. Besprenge mich, o göttlicher Erlöser, mit deinem kostbarsten Blute, und mit ihm alle Menschen, damit wir dich, gekreuzigte Liebe, fortan von ganzem Herzen lieben und den Preis unserer Erlösung allezeit aufs würdigste verehren können. Amen.</p>
+          <p>Ich, <span class="user-name">(Name)</span>, verspreche dir, auf die Hilfe deiner Gnade vertrauend, mit allen meinen Kräften und nach allen meinen Möglichkeiten die Andacht zu deinem kostbarsten Blute, dem Preis meiner Erlösung, zu wecken und zu verbreiten, damit dein Blut, der höchsten Verehrung würdig, von allen geehrt und geliebt werde.</p>
+          <p>Auf diese Weise will ich meine Untreue gegen dein kostbarstes Blut und deine Liebe wiedergutmachen und dir Genugtuung leisten für die zahllosen Entweihungen und Schmähungen, welche die Menschen jenem kostbarsten Preis meines Heiles zufügen. Oh, könnten doch meine eigenen Sünden, meine Lauheit und alle Schmähungen, mit denen ich dich, o kostbarstes Blut, jemals entehrt habe, ins Nichts zurückgenommen werden!</p>
+          <p>Siehe, liebster Jesus, ich opfere dir auch die Liebe, die Ehre und die Anbetung auf, welche deine heiligste Mutter, deine treuen Jünger und alle Heiligen deinem kostbarsten Blute dargebracht haben. Ich bitte dich: gedenke nicht mehr meiner früheren Untreue und Lauheit, und verzeihe allen, die dich schmähen. Besprenge mich, o göttlicher Erlöser, mit deinem kostbarsten Blute, und mit ihm alle Menschen, und gib, dass ich dich, gekreuzigte Liebe, fortan von ganzem Herzen liebe und den Preis meiner Erlösung allezeit aufs würdigste verehre. Amen.</p>
         </div>
       </section>
 
@@ -819,35 +870,35 @@
           <p class="section-subtitle">Die Andacht der dreiunddreißig Tage</p>
         </header>
         <div class="prayer-text">
-          <p class="lead">„Jesus, Maria, ich liebe euch — rettet die Seelen. O Blut und Wasser, das aus dem heiligsten Herzen Christi als Quell der Barmherzigkeit für uns hervorgeströmt ist, wir vertrauen auf dich. Jesus, wir vertrauen auf dich und setzen alle unsere Hoffnung auf dich.“</p>
+          <p class="lead">„Jesus, Maria, ich liebe euch — rettet die Seelen. O Blut und Wasser, das aus dem heiligsten Herzen Christi als Quell der Barmherzigkeit für mich hervorgeströmt ist, ich vertraue auf dich. Jesus, ich vertraue auf dich und setze alle meine Hoffnung auf dich.“</p>
           <p class="refrain">Eucharistisches Herz Jesu, ich vertraue dir.</p>
           <ol class="litany-group litany-numbered">
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, das du in Liebe brennst,</span> <span class="litany-response">entzünde unsere Herzen in Liebe.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">mehre in uns Glauben und Liebe.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Quell des rechten Willens,</span> <span class="litany-response">gib uns einen rechten Willen.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Schöpfer der Welt, der du die Welt in deiner Hand hältst,</span> <span class="litany-response">lass uns niemals aus deinem Schutze fallen.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Arzt Gottes, der du am Kreuz den Tod erlitten hast,</span> <span class="litany-response">heile die Wunden unserer Sünden.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, zum Gedächtnis deines bitteren Leidens,</span> <span class="litany-response">gib uns wahre Reue und die Vergebung der Sünden.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Spiegel des ewigen Lichtes,</span> <span class="litany-response">lass uns dich in der Ewigkeit schauen.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">erweise dich uns barmherzig in der Stunde unseres Todes.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">lösche in uns gänzlich die Glut der weltlichen Begierden.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Güte der Herzen,</span> <span class="litany-response">komm durch dein kostbarstes Blut zu uns in der Stunde unseres Todes.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, das du in Liebe brennst,</span> <span class="litany-response">entzünde mein Herz in Liebe.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">mehre in mir Glauben und Liebe.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Quell des rechten Willens,</span> <span class="litany-response">gib mir einen rechten Willen.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Schöpfer der Welt, der du die Welt in deiner Hand hältst,</span> <span class="litany-response">lass mich niemals aus deinem Schutze fallen.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Arzt Gottes, der du am Kreuz den Tod erlitten hast,</span> <span class="litany-response">heile die Wunden meiner Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, zum Gedächtnis deines bitteren Leidens,</span> <span class="litany-response">gib mir wahre Reue und die Vergebung der Sünden.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Spiegel des ewigen Lichtes,</span> <span class="litany-response">lass mich dich in der Ewigkeit schauen.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">erweise dich mir barmherzig in der Stunde meines Todes.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu,</span> <span class="litany-response">lösche in mir gänzlich die Glut der weltlichen Begierden.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Güte der Herzen,</span> <span class="litany-response">komm durch dein kostbarstes Blut zu mir in der Stunde meines Todes.</span></li>
           </ol>
           <p class="refrain">Eucharistisches Herz Jesu, ich vertraue dir.</p>
           <hr class="sacred-rule" aria-hidden="true">
           <ul class="litany-group">
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, unerschöpflicher Quell des Lebens und der Heiligkeit,</span> <span class="litany-response">heilige mich durch dein kostbarstes Blut.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Feuerherd unauslöschlicher Liebe,</span> <span class="litany-response">entzünde mein Herz in Liebe zu dir.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, das du uns geduldig im Tabernakel erwartest,</span> <span class="litany-response">lehre mich die Treue.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, das du mich geduldig im Tabernakel erwartest,</span> <span class="litany-response">lehre mich die Treue.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, durch unwürdige Kommunionen geschmäht,</span> <span class="litany-response">nimm meine Sühne an.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Brot der Engel und Speise der Seelen,</span> <span class="litany-response">sättige meine Armut.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Trost der Betrübten und Stärke der Schwachen,</span> <span class="litany-response">stütze mich auf meinem Wege.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Zuflucht der Sünder,</span> <span class="litany-response">verwirf mich nicht.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Trost der Seelen im Fegefeuer,</span> <span class="litany-response">befreie sie durch dein kostbarstes Blut.</span></li>
             <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, Wegzehrung der Sterbenden,</span> <span class="litany-response">sei bei mir in meiner letzten Stunde.</span></li>
-            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, voll der Barmherzigkeit gegen uns,</span> <span class="litany-response">erbarme dich meiner.</span></li>
+            <li class="litany-item"><span class="litany-call">Eucharistisches Herz Jesu, voll der Barmherzigkeit gegen mich,</span> <span class="litany-response">erbarme dich meiner.</span></li>
           </ul>
-          <p>O eucharistisches Herz Jesu, das du aus Liebe zu uns unter den Gestalten von Brot und Wein bis ans Ende der Zeiten bei uns geblieben bist, nimm dieses mein armes Gebet an. Ich glaube, dass du hier wahrhaft, wirklich und wesentlich gegenwärtig bist; ich hoffe auf deine Barmherzigkeit und liebe dich über alles. Für alle Schmähungen, die du im allerheiligsten Sakramente empfängst, bringe ich dir das kostbarste Blut dar, das du für mich am Kreuze vergossen hast. Amen.</p>
+          <p>O eucharistisches Herz Jesu, das du aus Liebe zu mir unter den Gestalten von Brot und Wein bis ans Ende der Zeiten bei mir geblieben bist, nimm dieses mein armes Gebet an. Ich glaube, dass du hier wahrhaft, wirklich und wesentlich gegenwärtig bist; ich hoffe auf deine Barmherzigkeit und liebe dich über alles. Für alle Schmähungen, die du im allerheiligsten Sakramente empfängst, bringe ich dir das kostbarste Blut dar, das du für mich am Kreuze vergossen hast. Amen.</p>
           <aside class="promise-box"><h3 class="box-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.2 2h3.6v5.6H19v3.6h-5.2V22h-3.6V11.2H5V7.6h5.2z" fill="currentColor"/></svg><span>Die Verheißung der 33 Tage</span></h3><p>Wer <strong>dreiunddreißig Tage</strong> hindurch — zum Gedächtnis der dreiunddreißig Jahre des irdischen Lebens des Erlösers — dieses Gebet zum eucharistischen Herzen Jesu täglich und ohne Unterbrechung verrichtet, erlangt den <strong>vollkommenen Nachlass von Strafe und Schuld</strong>.</p><p><em>Es wird im Stande der heiligmachenden Gnade gebetet, nach Empfang der heiligen Beichte und Kommunion.</em></p></aside>
           <div class="tracker no-print" data-tracker="33d" data-total="33">
             <h3 class="tracker-title">Fortschritt der 33 Tage</h3>
